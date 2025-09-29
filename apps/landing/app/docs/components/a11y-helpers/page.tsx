@@ -111,20 +111,21 @@ export default function A11yHelpersPage() {
             Des composants utilitaires pour améliorer l'accessibilité de vos
             applications web et rendre votre interface utilisable par tous.
           </p>
-          
+
           {/* What is A11y? */}
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
             <h2 className="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3">
               Qu'est-ce que l'accessibilité (A11y) ?
             </h2>
             <p className="text-blue-800 dark:text-blue-200 mb-4">
-              L'accessibilité web garantit que votre site peut être utilisé par <strong>tous les utilisateurs</strong>, 
-              y compris ceux qui utilisent des technologies d'assistance comme les lecteurs d'écran, 
-              la navigation au clavier, ou des outils de zoom.
+              L'accessibilité web garantit que votre site peut être utilisé par{' '}
+              <strong>tous les utilisateurs</strong>, y compris ceux qui utilisent des technologies d'assistance comme les lecteurs d'écran, la navigation au clavier, ou des outils de zoom.
             </p>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Qui en bénéficie ?</h3>
+                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
+                  Qui en bénéficie ?
+                </h3>
                 <ul className="space-y-1 text-blue-800 dark:text-blue-200">
                   <li>• Utilisateurs malvoyants ou aveugles</li>
                   <li>• Personnes avec des troubles moteurs</li>
@@ -133,7 +134,9 @@ export default function A11yHelpersPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Pourquoi c'est important ?</h3>
+                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
+                  Pourquoi c'est important ?
+                </h3>
                 <ul className="space-y-1 text-blue-800 dark:text-blue-200">
                   <li>• Conformité légale (RGAA, WCAG)</li>
                   <li>• Meilleure expérience utilisateur</li>
@@ -158,8 +161,7 @@ export default function A11yHelpersPage() {
                   </span>
                 </h3>
                 <p className="text-sm">
-                  Masque visuellement du contenu tout en le gardant accessible aux lecteurs d'écran. 
-                  Parfait pour les labels, descriptions, ou instructions cachées visuellement mais importantes pour l'accessibilité.
+                  Masque visuellement du contenu tout en le gardant accessible aux lecteurs d'écran. Parfait pour les labels, descriptions, ou instructions cachées visuellement mais importantes pour l'accessibilité.
                 </p>
               </div>
               <div>
@@ -170,8 +172,7 @@ export default function A11yHelpersPage() {
                   </span>
                 </h3>
                 <p className="text-sm">
-                  Permet aux utilisateurs de clavier de sauter directement au contenu principal, 
-                  évitant de naviguer à travers tous les liens de navigation. Essentiel pour une navigation efficace.
+                  Permet aux utilisateurs de clavier de sauter directement au contenu principal, évitant de naviguer à travers tous les liens de navigation. Essentiel pour une navigation efficace.
                 </p>
               </div>
             </div>
@@ -415,15 +416,19 @@ export function MyA11yHelpers() {
 
         {/* Real-world examples */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Exemples concrets d'utilisation</h2>
-          
+          <h2 className="text-2xl font-bold mb-4">
+            Exemples concrets d'utilisation
+          </h2>
+
           <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6 mb-8">
             <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mb-4">
               Cas d'usage courants
             </h3>
             <div className="grid md:grid-cols-2 gap-6 text-sm">
               <div>
-                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">SkipLink - Navigation</h4>
+                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">
+                  SkipLink - Navigation
+                </h4>
                 <ul className="space-y-1 text-amber-800 dark:text-amber-200">
                   <li>• Sauter au contenu principal</li>
                   <li>• Aller directement à la recherche</li>
@@ -432,7 +437,9 @@ export function MyA11yHelpers() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">VisuallyHidden - Labels</h4>
+                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">
+                  VisuallyHidden - Labels
+                </h4>
                 <ul className="space-y-1 text-amber-800 dark:text-amber-200">
                   <li>• Descriptions d'icônes</li>
                   <li>• Instructions de formulaire</li>
@@ -449,19 +456,34 @@ export function MyA11yHelpers() {
             </h3>
             <div className="space-y-3 text-sm text-purple-800 dark:text-purple-200">
               <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
-                <span>Toujours ajouter un SkipLink en haut de page pour le contenu principal</span>
+                <span className="text-green-600 dark:text-green-400 font-bold">
+                  ✓
+                </span>
+                <span>
+                  Toujours ajouter un SkipLink en haut de page pour le contenu
+                  principal
+                </span>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
-                <span>Utiliser VisuallyHidden pour décrire les icônes sans texte</span>
+                <span className="text-green-600 dark:text-green-400 font-bold">
+                  ✓
+                </span>
+                <span>
+                  Utiliser VisuallyHidden pour décrire les icônes sans texte
+                </span>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">✓</span>
-                <span>Ajouter des descriptions pour les actions importantes</span>
+                <span className="text-green-600 dark:text-green-400 font-bold">
+                  ✓
+                </span>
+                <span>
+                  Ajouter des descriptions pour les actions importantes
+                </span>
               </div>
               <div className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">✗</span>
+                <span className="text-red-600 dark:text-red-400 font-bold">
+                  ✗
+                </span>
                 <span>Ne pas masquer du contenu important visuellement</span>
               </div>
             </div>
