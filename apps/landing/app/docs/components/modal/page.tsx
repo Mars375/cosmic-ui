@@ -90,7 +90,7 @@ export default function ModalPage() {
             </div>
           </div>
 
-          <div className="w-[500px] h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+          <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
             {!showCode ? (
               <div className="p-4">
                 <Button onClick={() => setIsOpen(true)}>Ouvrir la modale</Button>
@@ -115,7 +115,7 @@ export default function ModalPage() {
                 </Modal>
               </div>
             ) : (
-              <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
+              <div className="w-full bg-white dark:bg-black p-2 rounded">
                 <CodeBlock onCopy={() => copyToClipboard(`import { 
   Modal, 
   ModalHeader, 
@@ -302,7 +302,7 @@ export default function MyComponent() {
               </div>
             </div>
 
-            <div className="w-[500px] h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+            <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
               {!showCode ? (
                 <div className="p-4">
                   <Button onClick={() => setIsOpen(true)}>Modale simple</Button>
@@ -313,7 +313,7 @@ export default function MyComponent() {
                   </Modal>
                 </div>
               ) : (
-                <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
+                <div className="w-full bg-white dark:bg-black p-2 rounded">
                   <CodeBlock onCopy={() => copyToClipboard(`import { Modal, ModalContent } from '@cosmic-ui/ui';
 import { Button } from '@cosmic-ui/ui';
 

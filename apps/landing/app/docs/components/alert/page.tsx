@@ -84,7 +84,7 @@ export default function AlertPage() {
                   Code
                 </button>
               </div>
-              <div className="p-2 h-[450px] flex items-center justify-start">
+              <div className="p-2 min-h-[450px] flex items-center justify-start">
                 {!showCode ? (
                   <Alert>
                     <AlertTitle>Information</AlertTitle>
@@ -94,7 +94,7 @@ export default function AlertPage() {
                     </AlertDescription>
                   </Alert>
                 ) : (
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full">
                     <div className="absolute top-4 right-4 z-10">
                       <button
                         onClick={async () => {
@@ -158,7 +158,7 @@ export function AlertDemo() {
                         )}
                       </button>
                     </div>
-                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
                           1
@@ -352,7 +352,7 @@ export function AlertDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-start">
+                <div className="p-2 min-h-[450px] flex items-center justify-start">
                   <Alert className="border-green-500 bg-green-50 dark:bg-green-950">
                     <AlertTitle className="text-green-800 dark:text-green-200">
                       Succès
@@ -381,7 +381,7 @@ export function AlertDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-start">
+                <div className="p-2 min-h-[450px] flex items-center justify-start">
                   <Alert className="border-yellow-500 bg-yellow-50 dark:bg-yellow-950">
                     <AlertTitle className="text-yellow-800 dark:text-yellow-200">
                       Attention
@@ -408,7 +408,7 @@ export function AlertDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-start">
+                <div className="p-2 min-h-[450px] flex items-center justify-start">
                   <Alert className="border-red-500 bg-red-50 dark:bg-red-950">
                     <AlertTitle className="text-red-800 dark:text-red-200">
                       Erreur

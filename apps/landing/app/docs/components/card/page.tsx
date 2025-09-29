@@ -89,7 +89,7 @@ export default function CardPage() {
                   Code
                 </button>
               </div>
-              <div className="p-2 h-[450px] flex items-center justify-start">
+              <div className="p-2 min-min-h-[450px] flex items-center justify-start">
                 {!showCode ? (
                   <Card>
                     <CardHeader>
@@ -104,7 +104,7 @@ export default function CardPage() {
                     </CardFooter>
                   </Card>
                 ) : (
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full">
                     <div className="absolute top-4 right-4 z-10">
                       <button
                         onClick={async () => {
@@ -174,7 +174,7 @@ export function CardDemo() {
                         )}
                       </button>
                     </div>
-                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
                           1
@@ -449,7 +449,7 @@ export function CardDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-start">
+                <div className="p-2 min-min-h-[450px] flex items-center justify-start">
                   <div className="space-y-4">
                     <Card variant="default">
                       <CardHeader>

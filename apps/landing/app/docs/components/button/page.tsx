@@ -174,11 +174,11 @@ export default function ButtonPage() {
               Code
             </button>
           </div>
-          <div className="p-2 h-[450px] flex items-center justify-center">
+          <div className="p-2 min-h-[450px] flex items-center justify-center">
             {!showCode ? (
               <Button>Button</Button>
             ) : (
-              <div className="relative w-full h-full">
+              <div className="relative w-full">
                 <div className="absolute top-4 right-4 z-10">
                   <button
                     onClick={async () => {
@@ -234,7 +234,7 @@ export function ButtonDemo() {
                     )}
                   </button>
                 </div>
-                <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                   <div className="flex" data-line>
                     <div className="select-none pr-4 text-right text-gray-400 w-8">
                       1
@@ -475,11 +475,11 @@ export function ButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center">
+                <div className="p-2 min-h-[450px] flex items-center justify-center">
                   {!showSecondaryCode ? (
                     <Button variant="secondary">Secondary Button</Button>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -541,7 +541,7 @@ export function SecondaryButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1
@@ -671,11 +671,11 @@ export function SecondaryButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center">
+                <div className="p-2 min-h-[450px] flex items-center justify-center">
                   {!showOutlineCode ? (
                     <Button variant="outline">Outline Button</Button>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -737,7 +737,7 @@ export function OutlineButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1
@@ -863,11 +863,11 @@ export function OutlineButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center">
+                <div className="p-2 min-h-[450px] flex items-center justify-center">
                   {!showGhostCode ? (
                     <Button variant="ghost">Ghost Button</Button>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -929,7 +929,7 @@ export function GhostButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1
@@ -1057,11 +1057,11 @@ export function GhostButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center">
+                <div className="p-2 min-h-[450px] flex items-center justify-center">
                   {!showDestructiveCode ? (
                     <Button variant="destructive">Delete</Button>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -1123,7 +1123,7 @@ export function DestructiveButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1
@@ -1253,7 +1253,7 @@ export function DestructiveButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center gap-4">
+                <div className="p-2 min-h-[450px] flex items-center justify-center gap-4">
                   {!showSizesCode ? (
                     <>
                       <Button size="sm">Small</Button>
@@ -1261,7 +1261,7 @@ export function DestructiveButtonDemo() {
                       <Button size="lg">Large</Button>
                     </>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -1325,7 +1325,7 @@ export function SizesButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1
@@ -1482,11 +1482,11 @@ export function SizesButtonDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-center">
+                <div className="p-2 min-h-[450px] flex items-center justify-center">
                   {!showDisabledCode ? (
                     <Button disabled>Disabled Button</Button>
                   ) : (
-                    <div className="relative w-full h-full">
+                    <div className="relative w-full">
                       <div className="absolute top-4 right-4 z-10">
                         <button
                           onClick={async () => {
@@ -1548,7 +1548,7 @@ export function DisabledButtonDemo() {
                           )}
                         </button>
                       </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                         <div className="flex" data-line>
                           <div className="select-none pr-4 text-right text-gray-400 w-8">
                             1

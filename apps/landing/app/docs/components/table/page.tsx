@@ -88,7 +88,7 @@ export default function TablePage() {
             </div>
           </div>
 
-          <div className="w-[500px] h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+          <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <Table>
@@ -114,7 +114,7 @@ export default function TablePage() {
                 </Table>
               </div>
             ) : (
-              <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
+              <div className="w-full bg-white dark:bg-black p-2 rounded">
                 <CodeBlock onCopy={() => copyToClipboard(`import { 
   Table, 
   Thead, 
@@ -309,7 +309,7 @@ export default function MyComponent() {
               </div>
             </div>
 
-            <div className="w-[500px] h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+            <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
               {!showCode ? (
                 <div className="p-4 w-full">
                   <Table>
@@ -344,7 +344,7 @@ export default function MyComponent() {
                   </Table>
                 </div>
               ) : (
-                <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
+                <div className="w-full bg-white dark:bg-black p-2 rounded">
                   <CodeBlock onCopy={() => copyToClipboard(`import { 
   Table, 
   Thead, 

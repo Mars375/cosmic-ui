@@ -82,11 +82,11 @@ export default function BadgePage() {
                   Code
                 </button>
               </div>
-              <div className="p-2 h-[450px] flex items-center justify-start">
+              <div className="p-2 min-h-[450px] flex items-center justify-start">
                 {!showCode ? (
                   <Badge>Badge</Badge>
                 ) : (
-                  <div className="relative w-full h-full">
+                  <div className="relative w-full">
                     <div className="absolute top-4 right-4 z-10">
                       <button
                         onClick={async () => {
@@ -145,7 +145,7 @@ export function BadgeDemo() {
                         )}
                       </button>
                     </div>
-                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
+                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
                           1
@@ -280,7 +280,7 @@ export function BadgeDemo() {
                     Code
                   </button>
                 </div>
-                <div className="p-2 h-[450px] flex items-center justify-start">
+                <div className="p-2 min-h-[450px] flex items-center justify-start">
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="default">Default</Badge>
                     <Badge variant="secondary">Secondary</Badge>

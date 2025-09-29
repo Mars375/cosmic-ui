@@ -140,7 +140,7 @@ export default function FormRHFPage() {
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -185,7 +185,7 @@ export default function FormRHFPage() {
                 </form>
               </div>
             ) : (
-              <div className="w-full h-full">
+              <div className="w-full">
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
@@ -414,7 +414,7 @@ const { register, handleSubmit } = useForm();
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-6">
                   <div>
@@ -446,7 +446,7 @@ const { register, handleSubmit } = useForm();
                   </div>
                 </div>
               ) : (
-                <div className="w-full h-full">
+                <div className="w-full">
                   <CodeBlock
                     onCopy={() =>
                       handleCopy(

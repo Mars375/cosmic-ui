@@ -225,7 +225,7 @@ const createUser = (userData: Omit<User, 'id'>): User => {
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full overflow-y-auto">
                 <MarkdownRenderer
@@ -234,7 +234,7 @@ const createUser = (userData: Omit<User, 'id'>): User => {
                 />
               </div>
             ) : (
-              <div className="w-full h-full">
+              <div className="w-full">
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
@@ -417,7 +417,7 @@ Ceci est du **texte en gras** et du *texte en italique*.\`;
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4 overflow-y-auto">
                   <div>
@@ -444,7 +444,7 @@ Ceci est du **texte en gras** et du *texte en italique*.\`;
                   </div>
                 </div>
               ) : (
-                <div className="w-full h-full">
+                <div className="w-full">
                   <CodeBlock
                     onCopy={() =>
                       handleCopy(
