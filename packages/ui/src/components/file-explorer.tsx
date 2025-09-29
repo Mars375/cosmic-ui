@@ -289,8 +289,8 @@ export function FileExplorer({
                 📁 Nouveau dossier
               </Button>
               <label className="cursor-pointer">
-                <Button variant="outline" size="sm" className="text-xs" asChild>
-                  <span>📤 Upload</span>
+                <Button variant="outline" size="sm" className="text-xs">
+                  📤 Upload
                 </Button>
                 <input type="file" onChange={handleFileUpload} className="hidden" />
               </label>

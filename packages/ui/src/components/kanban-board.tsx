@@ -145,8 +145,6 @@ export function KanbanBoard({
         title: newTaskTitle.trim(),
         status: columnId,
         priority: 'medium',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       });
       setNewTaskTitle('');
       setShowCreateTask(null);
@@ -157,7 +155,6 @@ export function KanbanBoard({
     if (newColumnTitle.trim() && onColumnCreate) {
       onColumnCreate({
         title: newColumnTitle.trim(),
-        tasks: [],
       });
       setNewColumnTitle('');
       setShowCreateColumn(false);

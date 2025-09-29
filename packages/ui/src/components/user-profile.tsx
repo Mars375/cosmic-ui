@@ -66,7 +66,7 @@ export function UserProfile({
     setFormData((prev) => ({
       ...prev,
       [section]: {
-        ...prev[section],
+        ...(prev[section] as any),
         [field]: value,
       },
     }));
@@ -422,7 +422,7 @@ export function UserProfile({
                         </div>
                         <input
                           type="checkbox"
-                          checked={value}
+                          checked={typeof value === 'boolean' ? value : false}
                           onChange={(e) => handleNestedChange('privacy', key, e.target.checked)}
                           disabled={!isEditing || readOnly}
                           className="rounded border-cosmic-border"

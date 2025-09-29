@@ -7,7 +7,7 @@ import { Input } from './input';
 import { Avatar } from './avatar';
 import { Badge } from './badge';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
-import { Modal } from './modal';
+import { Modal, ModalHeader, ModalTitle, ModalFooter } from './modal';
 
 export interface TeamMember {
   id: string;
@@ -352,10 +352,12 @@ export function TeamManagement({
 
       {/* Invite Modal */}
       <Modal
-        isOpen={showInviteModal}
-        onClose={() => setShowInviteModal(false)}
-        title="Inviter un membre"
+        open={showInviteModal}
+        onOpenChange={(open) => setShowInviteModal(open)}
       >
+        <ModalHeader>
+          <ModalTitle>Inviter un membre</ModalTitle>
+        </ModalHeader>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-white mb-2">Adresse email</label>
@@ -380,15 +382,15 @@ export function TeamManagement({
             </select>
           </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
-            <Button variant="outline" onClick={() => setShowInviteModal(false)}>
-              Annuler
-            </Button>
-            <Button onClick={handleInvite} disabled={!inviteEmail}>
-              Envoyer l'invitation
-            </Button>
-          </div>
         </div>
+        <ModalFooter>
+          <Button variant="outline" onClick={() => setShowInviteModal(false)}>
+            Annuler
+          </Button>
+          <Button onClick={handleInvite} disabled={!inviteEmail}>
+            Envoyer l'invitation
+          </Button>
+        </ModalFooter>
       </Modal>
     </div>
   );

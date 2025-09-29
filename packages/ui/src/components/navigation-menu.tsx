@@ -70,40 +70,31 @@ export function NavigationMenu({
 
     const baseClasses = twMerge(
       'flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors',
-      {
-        // Size variants
-        'px-2 py-1 text-xs': size === 'sm',
-        'px-3 py-2 text-sm': size === 'md',
-        'px-4 py-3 text-base': size === 'lg',
-
-        // Orientation
-        'w-full': orientation === 'vertical',
-
-        // Disabled state
-        'opacity-50 cursor-not-allowed': item.disabled,
-        'cursor-pointer': !item.disabled,
-      },
+      size === 'sm' && 'px-2 py-1 text-xs',
+      size === 'md' && 'px-3 py-2 text-sm',
+      size === 'lg' && 'px-4 py-3 text-base',
+      orientation === 'vertical' && 'w-full',
+      item.disabled && 'opacity-50 cursor-not-allowed',
+      !item.disabled && 'cursor-pointer'
     );
 
-    const variantClasses = twMerge({
+    const variantClasses = twMerge(
       // Default variant
-      'text-white/70 hover:text-white hover:bg-cosmic-border/50':
-        variant === 'default' && !isActive,
-      'text-white bg-cosmic-primary': variant === 'default' && isActive,
+      variant === 'default' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/50',
+      variant === 'default' && isActive && 'text-white bg-cosmic-primary',
 
       // Pills variant
-      'text-white/70 hover:text-white hover:bg-cosmic-border/50': variant === 'pills' && !isActive,
-      'text-white bg-cosmic-primary': variant === 'pills' && isActive,
+      variant === 'pills' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/50',
+      variant === 'pills' && isActive && 'text-white bg-cosmic-primary',
 
       // Underline variant
-      'text-white/70 hover:text-white border-b-2 border-transparent hover:border-cosmic-primary':
-        variant === 'underline' && !isActive,
-      'text-white border-b-2 border-cosmic-primary': variant === 'underline' && isActive,
+      variant === 'underline' && !isActive && 'text-white/70 hover:text-white border-b-2 border-transparent hover:border-cosmic-primary',
+      variant === 'underline' && isActive && 'text-white border-b-2 border-cosmic-primary',
 
       // Ghost variant
-      'text-white/70 hover:text-white hover:bg-cosmic-border/30': variant === 'ghost' && !isActive,
-      'text-white bg-cosmic-border/20': variant === 'ghost' && isActive,
-    });
+      variant === 'ghost' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/30',
+      variant === 'ghost' && isActive && 'text-white bg-cosmic-border/20'
+    );
 
     return (
       <div key={item.id} className={twMerge('relative', level > 0 && 'ml-4')}>
@@ -154,10 +145,8 @@ export function NavigationMenu({
     <nav
       className={twMerge(
         'flex',
-        {
-          'flex-row space-x-1': orientation === 'horizontal',
-          'flex-col space-y-1': orientation === 'vertical',
-        },
+        orientation === 'horizontal' && 'flex-row space-x-1',
+        orientation === 'vertical' && 'flex-col space-y-1',
         className,
       )}
     >

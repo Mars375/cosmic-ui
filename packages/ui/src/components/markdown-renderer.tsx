@@ -60,14 +60,15 @@ function parseMarkdown(content: string): React.ReactNode[] {
           {
             key: `header-${i}`,
             id,
-            className: twMerge('font-bold text-white', {
-              'text-3xl mb-4': level === 1,
-              'text-2xl mb-3': level === 2,
-              'text-xl mb-2': level === 3,
-              'text-lg mb-2': level === 4,
-              'text-base mb-1': level === 5,
-              'text-sm mb-1': level === 6,
-            }),
+            className: twMerge(
+              'font-bold text-white',
+              level === 1 && 'text-3xl mb-4',
+              level === 2 && 'text-2xl mb-3',
+              level === 3 && 'text-xl mb-2',
+              level === 4 && 'text-lg mb-2',
+              level === 5 && 'text-base mb-1',
+              level === 6 && 'text-sm mb-1'
+            ),
           },
           text,
         ),

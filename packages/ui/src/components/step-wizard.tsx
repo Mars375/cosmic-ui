@@ -52,22 +52,17 @@ export function StepWizard({
     const isClickable =
       allowNavigation && !step.disabled && (status === 'completed' || status === 'current');
 
-    const baseClasses = twMerge('flex items-center justify-center rounded-full transition-colors', {
-      // Size variants
-      'w-6 h-6 text-xs': size === 'sm',
-      'w-8 h-8 text-sm': size === 'md',
-      'w-10 h-10 text-base': size === 'lg',
-
-      // Status variants
-      'bg-cosmic-primary text-white': status === 'completed',
-      'bg-cosmic-primary text-white ring-2 ring-cosmic-primary ring-offset-2 ring-offset-cosmic-background':
-        status === 'current',
-      'bg-cosmic-border text-white/50': status === 'upcoming',
-
-      // Interactive
-      'cursor-pointer hover:bg-cosmic-primary/80': isClickable,
-      'cursor-not-allowed opacity-50': step.disabled,
-    });
+    const baseClasses = twMerge(
+      'flex items-center justify-center rounded-full transition-colors',
+      size === 'sm' && 'w-6 h-6 text-xs',
+      size === 'md' && 'w-8 h-8 text-sm',
+      size === 'lg' && 'w-10 h-10 text-base',
+      status === 'completed' && 'bg-cosmic-primary text-white',
+      status === 'current' && 'bg-cosmic-primary text-white ring-2 ring-cosmic-primary ring-offset-2 ring-offset-cosmic-background',
+      status === 'upcoming' && 'bg-cosmic-border text-white/50',
+      isClickable && 'cursor-pointer hover:bg-cosmic-primary/80',
+      step.disabled && 'cursor-not-allowed opacity-50'
+    );
 
     const content = (() => {
       switch (variant) {

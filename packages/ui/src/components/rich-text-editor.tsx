@@ -285,7 +285,7 @@ export function RichTextEditor({
       )}
 
       {/* Styles */}
-      <style jsx>{`
+      <style>{`
         [contenteditable]:empty:before {
           content: attr(data-placeholder);
           color: rgba(255, 255, 255, 0.5);
