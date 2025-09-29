@@ -12,11 +12,18 @@ export interface AccordionProps {
   items: AccordionItem[];
   type?: 'single' | 'multiple';
   className?: string;
+  collapsible?: boolean;
+  [key: string]: unknown;
 }
 
-export const Accordion = ({ className, items, type = 'single' }: AccordionProps) => {
+export const Accordion = ({ className, items, type = 'single', collapsible = true, ...props }: AccordionProps) => {
   return (
-    <RadixAccordion.Root type={type as any} className="w-full">
+    <RadixAccordion.Root 
+      type={type} 
+      collapsible={collapsible}
+      className={twMerge('w-full', className)}
+      {...props}
+    >
       {items.map((it) => (
         <RadixAccordion.Item
           key={it.value}
