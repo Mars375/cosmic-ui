@@ -15,7 +15,7 @@ export const SkipLink = ({
 }) => (
   <a
     href={href}
-    className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:rounded-md focus:bg-cosmic-primary focus:px-3 focus:py-2 focus:text-white"
+    className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:rounded-md focus:bg-cosmic-primary focus:px-3 focus:py-2 focus:text-cosmic-primaryForeground"
   >
     {children}
   </a>
