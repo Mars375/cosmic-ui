@@ -51,11 +51,11 @@ export default function A11yHelpersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
             <svg
               width="20"
               height="20"
@@ -68,7 +68,7 @@ export default function A11yHelpersPage() {
             </svg>
           </button>
           <h1 className="text-4xl font-bold">A11y Helpers</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
             <svg
               width="20"
               height="20"
@@ -83,7 +83,7 @@ export default function A11yHelpersPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
           Des composants utilitaires pour améliorer l'accessibilité de vos
           applications.
         </p>
@@ -95,8 +95,8 @@ export default function A11yHelpersPage() {
               onClick={() => setShowCode(false)}
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
               }`}
             >
               Preview
@@ -105,21 +105,21 @@ export default function A11yHelpersPage() {
               onClick={() => setShowCode(true)}
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-sm font-medium mb-2">SkipLink</h3>
-                    <p className="text-xs text-cosmic-muted-foreground mb-2">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
                       Appuyez sur Tab pour voir le lien de saut
                     </p>
                     <SkipLink href="#main">
@@ -129,7 +129,7 @@ export default function A11yHelpersPage() {
                   
                   <div>
                     <h3 className="text-sm font-medium mb-2">VisuallyHidden</h3>
-                    <p className="text-xs text-cosmic-muted-foreground mb-2">
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
                       Texte caché visuellement mais accessible aux lecteurs d'écran
                     </p>
                     <Button>
@@ -232,8 +232,8 @@ export function MyA11yHelpers() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               Les composants A11y Helpers sont déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -250,8 +250,8 @@ export function MyA11yHelpers() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
               Utilisez ces composants pour améliorer l'accessibilité de votre application.
             </p>
             <CodeBlock
@@ -300,8 +300,8 @@ export function MyA11yHelpers() {
                 onClick={() => setShowCodeVariants(false)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
                 Preview
@@ -310,15 +310,15 @@ export function MyA11yHelpers() {
                 onClick={() => setShowCodeVariants(true)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4">
                   <div>
