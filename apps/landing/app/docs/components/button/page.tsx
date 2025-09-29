@@ -931,7 +931,9 @@ export function GhostButtonDemo() {
                       </div>
                       <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Button <span>&#125;</span>{' '}
@@ -940,11 +942,15 @@ export function GhostButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
                           <div className="flex-1"></div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">export function</span>{' '}
                             <span className="function">GhostButtonDemo</span>
@@ -952,14 +958,18 @@ export function GhostButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;</span>
                             <span className="keyword">return</span> (
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">div</span> className=
@@ -970,7 +980,9 @@ export function GhostButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -983,7 +995,9 @@ export function GhostButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
                             <span className="tag">div</span>
@@ -991,13 +1005,17 @@ export function GhostButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;);</span>
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
                           <div className="flex-1">
                             <span>&#125;</span>
                           </div>
@@ -1107,7 +1125,9 @@ export function DestructiveButtonDemo() {
                       </div>
                       <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Button <span>&#125;</span>{' '}
@@ -1116,26 +1136,36 @@ export function DestructiveButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
                           <div className="flex-1"></div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">export function</span>{' '}
-                            <span className="function">DestructiveButtonDemo</span>
+                            <span className="function">
+                              DestructiveButtonDemo
+                            </span>
                             () <span>&#123;</span>
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;</span>
                             <span className="keyword">return</span> (
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">div</span> className=
@@ -1146,7 +1176,9 @@ export function DestructiveButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -1159,7 +1191,9 @@ export function DestructiveButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
                             <span className="tag">div</span>
@@ -1167,13 +1201,17 @@ export function DestructiveButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;);</span>
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
                           <div className="flex-1">
                             <span>&#125;</span>
                           </div>
@@ -1289,7 +1327,9 @@ export function SizesButtonDemo() {
                       </div>
                       <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Button <span>&#125;</span>{' '}
@@ -1298,11 +1338,15 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
                           <div className="flex-1"></div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">export function</span>{' '}
                             <span className="function">SizesButtonDemo</span>
@@ -1310,14 +1354,18 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;</span>
                             <span className="keyword">return</span> (
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">div</span> className=
@@ -1328,7 +1376,9 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -1341,7 +1391,9 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -1353,7 +1405,9 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -1366,7 +1420,9 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
                             <span className="tag">div</span>
@@ -1374,13 +1430,17 @@ export function SizesButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">10</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            10
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;);</span>
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">11</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            11
+                          </div>
                           <div className="flex-1">
                             <span>&#125;</span>
                           </div>
@@ -1490,7 +1550,9 @@ export function DisabledButtonDemo() {
                       </div>
                       <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full h-full">
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Button <span>&#125;</span>{' '}
@@ -1499,11 +1561,15 @@ export function DisabledButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
                           <div className="flex-1"></div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
                           <div className="flex-1">
                             <span className="keyword">export function</span>{' '}
                             <span className="function">DisabledButtonDemo</span>
@@ -1511,14 +1577,18 @@ export function DisabledButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;</span>
                             <span className="keyword">return</span> (
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">div</span> className=
@@ -1529,7 +1599,9 @@ export function DisabledButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
                           <div className="flex-1">
                             <span>
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
@@ -1541,7 +1613,9 @@ export function DisabledButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
                             <span className="tag">div</span>
@@ -1549,13 +1623,17 @@ export function DisabledButtonDemo() {
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;);</span>
                           </div>
                         </div>
                         <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
                           <div className="flex-1">
                             <span>&#125;</span>
                           </div>
