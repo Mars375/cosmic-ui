@@ -45,8 +45,8 @@ const CodeBlock = ({
             </svg>
           </button>
         </div>
-        <div className="px-4 py-3.5 bg-white dark:bg-black">
-          <pre className="font-mono text-sm leading-relaxed" data-line>
+        <div className="px-4 py-3.5 bg-white dark:bg-black overflow-x-auto">
+          <pre className="font-mono text-sm leading-relaxed whitespace-pre-wrap" data-line>
             <code>{children}</code>
           </pre>
         </div>
@@ -131,7 +131,7 @@ export default function A11yHelpersPage() {
             </button>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <div className="space-y-4">
@@ -171,7 +171,7 @@ export default function A11yHelpersPage() {
                 </div>
               </div>
             ) : (
-              <div className="w-full h-full">
+              <div className="w-full">
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
@@ -360,7 +360,7 @@ export function MyA11yHelpers() {
               </button>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 h-[450px] w-[500px] flex justify-start">
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4">
                   <div>
@@ -382,7 +382,7 @@ export function MyA11yHelpers() {
                   </div>
                 </div>
               ) : (
-                <div className="w-full h-full">
+                <div className="w-full">
                   <CodeBlock
                     onCopy={() =>
                       handleCopy(
