@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { InputOTP } from '@cosmic-ui/components';
+import { InputOTP } from '@cosmic-ui/ui';
 
 const CodeBlock = ({
   children,
@@ -136,7 +136,7 @@ export default function InputOTPPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { InputOTP } from '@cosmic-ui/components';
+                      `import { InputOTP } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyInputOTP() {
@@ -162,7 +162,7 @@ export function MyInputOTP() {
                     )
                   }
                 >
-                  {`import { InputOTP } from '@cosmic-ui/components';
+                  {`import { InputOTP } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyInputOTP() {
@@ -196,14 +196,14 @@ export function MyInputOTP() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant InputOTP est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -219,7 +219,7 @@ export function MyInputOTP() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { InputOTP } from '@cosmic-ui/components';
+                  `import { InputOTP } from '@cosmic-ui/ui';
 
 <InputOTP
   length={6}
@@ -230,7 +230,7 @@ export function MyInputOTP() {
                 )
               }
             >
-              {`import { InputOTP } from '@cosmic-ui/components';
+              {`import { InputOTP } from '@cosmic-ui/ui';
 
 <InputOTP
   length={6}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ProgressBar } from '@cosmic-ui/components';
+import { ProgressBar } from '@cosmic-ui/ui';
 
 const CodeBlock = ({ children, onCopy }: { children: string; onCopy: () => void }) => {
   return (
@@ -93,7 +93,7 @@ export default function ProgressBarPage() {
               </div>
             ) : (
               <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
-                <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/components';
+                <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   return (
@@ -105,7 +105,7 @@ export default function MyComponent() {
     </div>
   );
 }`, 'main')}>
-{`import { ProgressBar } from '@cosmic-ui/components';
+{`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   return (
@@ -127,8 +127,8 @@ export default function MyComponent() {
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Installation</h2>
           <div className="bg-cosmic-surface p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/components', 'install')}>
-{`npm install @cosmic-ui/components`}
+            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
+{`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function MyComponent() {
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Utilisation</h2>
           <div className="bg-cosmic-surface p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/components';
+            <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const progress = 75; // Valeur entre 0 et 100
@@ -149,7 +149,7 @@ export default function MyComponent() {
     />
   );
 }`, 'usage')}>
-{`import { ProgressBar } from '@cosmic-ui/components';
+{`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const progress = 75; // Valeur entre 0 et 100
@@ -217,7 +217,7 @@ export default function MyComponent() {
                 </div>
               ) : (
                 <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
-                  <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/components';
+                  <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   return (
@@ -241,7 +241,7 @@ export default function MyComponent() {
     </div>
   );
 }`, 'different-values')}>
-{`import { ProgressBar } from '@cosmic-ui/components';
+{`import { ProgressBar } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   return (

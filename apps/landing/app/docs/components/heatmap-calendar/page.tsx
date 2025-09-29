@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { HeatmapCalendar } from '@cosmic-ui/components';
+import { HeatmapCalendar } from '@cosmic-ui/ui';
 
 const CodeBlock = ({
   children,
@@ -149,7 +149,7 @@ export default function HeatmapCalendarPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { HeatmapCalendar } from '@cosmic-ui/components';
+                      `import { HeatmapCalendar } from '@cosmic-ui/ui';
 
 // Génération de données d'exemple
 const generateSampleData = () => {
@@ -188,7 +188,7 @@ export function MyHeatmapCalendar() {
                     )
                   }
                 >
-                  {`import { HeatmapCalendar } from '@cosmic-ui/components';
+                  {`import { HeatmapCalendar } from '@cosmic-ui/ui';
 
 // Génération de données d'exemple
 const generateSampleData = () => {
@@ -235,14 +235,14 @@ export function MyHeatmapCalendar() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant HeatmapCalendar est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -257,7 +257,7 @@ export function MyHeatmapCalendar() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { HeatmapCalendar } from '@cosmic-ui/components';
+                  `import { HeatmapCalendar } from '@cosmic-ui/ui';
 
 const data = [
   { date: '2024-01-01', value: 3, level: 3 },
@@ -275,7 +275,7 @@ const data = [
                 )
               }
             >
-              {`import { HeatmapCalendar } from '@cosmic-ui/components';
+              {`import { HeatmapCalendar } from '@cosmic-ui/ui';
 
 const data = [
   { date: '2024-01-01', value: 3, level: 3 },

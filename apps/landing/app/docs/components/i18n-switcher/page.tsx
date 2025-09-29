@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { I18nSwitcher } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { I18nSwitcher } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Globe, Languages } from 'lucide-react';
 
 const CodeBlock = ({
@@ -247,7 +247,7 @@ export default function I18nSwitcherPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { I18nSwitcher } from '@cosmic-ui/components';
+                      `import { I18nSwitcher } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyI18nSwitcher() {
@@ -318,7 +318,7 @@ export function MyI18nSwitcher() {
                     )
                   }
                 >
-                  {`import { I18nSwitcher } from '@cosmic-ui/components';
+                  {`import { I18nSwitcher } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyI18nSwitcher() {
@@ -397,14 +397,14 @@ export function MyI18nSwitcher() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant I18nSwitcher est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -419,7 +419,7 @@ export function MyI18nSwitcher() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { I18nSwitcher } from '@cosmic-ui/components';
+                  `import { I18nSwitcher } from '@cosmic-ui/ui';
 
 const languages = [
   {
@@ -449,7 +449,7 @@ const languages = [
                 )
               }
             >
-              {`import { I18nSwitcher } from '@cosmic-ui/components';
+              {`import { I18nSwitcher } from '@cosmic-ui/ui';
 
 const languages = [
   {

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { UserProfile } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { UserProfile } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { User, Mail, MapPin, Globe, Building, Phone, Clock, Globe2, Bell, Shield, Eye } from 'lucide-react';
 
 const CodeBlock = ({
@@ -207,7 +207,7 @@ export default function UserProfilePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { UserProfile } from '@cosmic-ui/components';
+                      `import { UserProfile } from '@cosmic-ui/ui';
 
 export function MyUserProfile() {
   const user = {
@@ -257,7 +257,7 @@ export function MyUserProfile() {
                     )
                   }
                 >
-                  {`import { UserProfile } from '@cosmic-ui/components';
+                  {`import { UserProfile } from '@cosmic-ui/ui';
 
 export function MyUserProfile() {
   const user = {
@@ -315,14 +315,14 @@ export function MyUserProfile() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant UserProfile est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -337,7 +337,7 @@ export function MyUserProfile() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { UserProfile } from '@cosmic-ui/components';
+                  `import { UserProfile } from '@cosmic-ui/ui';
 
 const user = {
   id: '1',
@@ -366,7 +366,7 @@ const user = {
                 )
               }
             >
-              {`import { UserProfile } from '@cosmic-ui/components';
+              {`import { UserProfile } from '@cosmic-ui/ui';
 
 const user = {
   id: '1',

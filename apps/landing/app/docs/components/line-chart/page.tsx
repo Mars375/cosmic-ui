@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LineChart } from '@cosmic-ui/components';
+import { LineChart } from '@cosmic-ui/ui';
 
 const CodeBlock = ({
   children,
@@ -167,7 +167,7 @@ export default function LineChartPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { LineChart } from '@cosmic-ui/components';
+                      `import { LineChart } from '@cosmic-ui/ui';
 
 const data = [
   { month: 'Jan', sales: 120, users: 80, revenue: 1500 },
@@ -203,7 +203,7 @@ export function MyLineChart() {
                     )
                   }
                 >
-                  {`import { LineChart } from '@cosmic-ui/components';
+                  {`import { LineChart } from '@cosmic-ui/ui';
 
 const data = [
   { month: 'Jan', sales: 120, users: 80, revenue: 1500 },
@@ -247,14 +247,14 @@ export function MyLineChart() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant LineChart est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -269,7 +269,7 @@ export function MyLineChart() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { LineChart } from '@cosmic-ui/components';
+                  `import { LineChart } from '@cosmic-ui/ui';
 
 const data = [
   { month: 'Jan', value: 100 },
@@ -295,7 +295,7 @@ const series = [
                 )
               }
             >
-              {`import { LineChart } from '@cosmic-ui/components';
+              {`import { LineChart } from '@cosmic-ui/ui';
 
 const data = [
   { month: 'Jan', value: 100 },

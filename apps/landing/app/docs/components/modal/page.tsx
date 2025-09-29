@@ -8,8 +8,8 @@ import {
   ModalDescription, 
   ModalContent, 
   ModalFooter 
-} from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 const CodeBlock = ({ children, onCopy }: { children: string; onCopy: () => void }) => {
   return (
@@ -123,8 +123,8 @@ export default function ModalPage() {
   ModalDescription, 
   ModalContent, 
   ModalFooter 
-} from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -161,8 +161,8 @@ export default function MyComponent() {
   ModalDescription, 
   ModalContent, 
   ModalFooter 
-} from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -202,8 +202,8 @@ export default function MyComponent() {
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Installation</h2>
           <div className="bg-cosmic-surface p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/components', 'install')}>
-{`npm install @cosmic-ui/components`}
+            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
+{`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -219,7 +219,7 @@ export default function MyComponent() {
   ModalDescription, 
   ModalContent, 
   ModalFooter 
-} from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -248,7 +248,7 @@ export default function MyComponent() {
   ModalDescription, 
   ModalContent, 
   ModalFooter 
-} from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -314,8 +314,8 @@ export default function MyComponent() {
                 </div>
               ) : (
                 <div className="w-full h-full bg-white dark:bg-black p-2 rounded">
-                  <CodeBlock onCopy={() => copyToClipboard(`import { Modal, ModalContent } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+                  <CodeBlock onCopy={() => copyToClipboard(`import { Modal, ModalContent } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -331,8 +331,8 @@ export default function MyComponent() {
     </>
   );
 }`, 'simple')}>
-{`import { Modal, ModalContent } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+{`import { Modal, ModalContent } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 export default function MyComponent() {
   const [isOpen, setIsOpen] = useState(false);

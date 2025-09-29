@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { LoginPage, RegisterPage } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { LogIn, UserPlus, Mail, Lock, User } from 'lucide-react';
 
 const CodeBlock = ({
@@ -153,7 +153,7 @@ export default function AuthPagesPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { LoginPage, RegisterPage } from '@cosmic-ui/components';
+                      `import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyAuthPages() {
@@ -196,7 +196,7 @@ export function MyAuthPages() {
                     )
                   }
                 >
-                  {`import { LoginPage, RegisterPage } from '@cosmic-ui/components';
+                  {`import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyAuthPages() {
@@ -247,14 +247,14 @@ export function MyAuthPages() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Les composants Auth Pages sont déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -269,7 +269,7 @@ export function MyAuthPages() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { LoginPage, RegisterPage } from '@cosmic-ui/components';
+                  `import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
 
 // Page de connexion
 <LoginPage />
@@ -280,7 +280,7 @@ export function MyAuthPages() {
                 )
               }
             >
-              {`import { LoginPage, RegisterPage } from '@cosmic-ui/components';
+              {`import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
 
 // Page de connexion
 <LoginPage />

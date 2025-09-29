@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { CommandPalette } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { CommandPalette } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Search, Settings, User, FileText, Home, Mail } from 'lucide-react';
 
 const CodeBlock = ({
@@ -197,8 +197,8 @@ export default function CommandPalettePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { CommandPalette } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+                      `import { CommandPalette } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Home, User, Settings, Search, FileText, Mail } from 'lucide-react';
 import { useState } from 'react';
 
@@ -286,8 +286,8 @@ export function MyCommandPalette() {
                     )
                   }
                 >
-                  {`import { CommandPalette } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+                  {`import { CommandPalette } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Home, User, Settings, Search, FileText, Mail } from 'lucide-react';
 import { useState } from 'react';
 
@@ -383,14 +383,14 @@ export function MyCommandPalette() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant CommandPalette est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -405,7 +405,7 @@ export function MyCommandPalette() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { CommandPalette } from '@cosmic-ui/components';
+                  `import { CommandPalette } from '@cosmic-ui/ui';
 
 const groups = [
   {
@@ -433,7 +433,7 @@ const groups = [
                 )
               }
             >
-              {`import { CommandPalette } from '@cosmic-ui/components';
+              {`import { CommandPalette } from '@cosmic-ui/ui';
 
 const groups = [
   {

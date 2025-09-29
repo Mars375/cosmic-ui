@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { VisuallyHidden, SkipLink } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Eye, EyeOff, SkipForward } from 'lucide-react';
 
 const CodeBlock = ({
@@ -157,8 +157,8 @@ export default function A11yHelpersPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { VisuallyHidden, SkipLink } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+                      `import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Eye, EyeOff } from 'lucide-react';
 
 export function MyA11yHelpers() {
@@ -192,8 +192,8 @@ export function MyA11yHelpers() {
                     )
                   }
                 >
-                  {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+                  {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Eye, EyeOff } from 'lucide-react';
 
 export function MyA11yHelpers() {
@@ -235,14 +235,14 @@ export function MyA11yHelpers() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Les composants A11y Helpers sont déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -257,7 +257,7 @@ export function MyA11yHelpers() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { VisuallyHidden, SkipLink } from '@cosmic-ui/components';
+                  `import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
 
 // SkipLink pour la navigation
 <SkipLink href="#main">
@@ -273,7 +273,7 @@ export function MyA11yHelpers() {
                 )
               }
             >
-              {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/components';
+              {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
 
 // SkipLink pour la navigation
 <SkipLink href="#main">

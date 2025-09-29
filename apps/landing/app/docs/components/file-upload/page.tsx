@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { FileUpload } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { FileUpload } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 import { Upload, File, X, Check } from 'lucide-react';
 
 const CodeBlock = ({
@@ -183,7 +183,7 @@ export default function FileUploadPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { FileUpload } from '@cosmic-ui/components';
+                      `import { FileUpload } from '@cosmic-ui/ui';
 import { Upload } from 'lucide-react';
 import { useState } from 'react';
 
@@ -218,7 +218,7 @@ export function MyFileUpload() {
                     )
                   }
                 >
-                  {`import { FileUpload } from '@cosmic-ui/components';
+                  {`import { FileUpload } from '@cosmic-ui/ui';
 import { Upload } from 'lucide-react';
 import { useState } from 'react';
 
@@ -261,14 +261,14 @@ export function MyFileUpload() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant FileUpload est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -283,7 +283,7 @@ export function MyFileUpload() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { FileUpload } from '@cosmic-ui/components';
+                  `import { FileUpload } from '@cosmic-ui/ui';
 
 <FileUpload
   accept=".pdf,.doc,.docx"
@@ -296,7 +296,7 @@ export function MyFileUpload() {
                 )
               }
             >
-              {`import { FileUpload } from '@cosmic-ui/components';
+              {`import { FileUpload } from '@cosmic-ui/ui';
 
 <FileUpload
   accept=".pdf,.doc,.docx"

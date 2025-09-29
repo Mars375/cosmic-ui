@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@cosmic-ui/components';
-import { NavigationMenu } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/ui';
+import { NavigationMenu } from '@cosmic-ui/ui';
 import { Home, Settings, User, Bell, ChevronDown } from 'lucide-react';
 
 const CodeBlock = ({
@@ -196,7 +196,7 @@ export default function NavigationMenuPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { NavigationMenu } from '@cosmic-ui/components';
+                      `import { NavigationMenu } from '@cosmic-ui/ui';
 import { Home, Settings, User, Bell } from 'lucide-react';
 
 const navigationItems = [
@@ -241,7 +241,7 @@ export function MyNavigation() {
                     )
                   }
                 >
-                  {`import { NavigationMenu } from '@cosmic-ui/components';
+                  {`import { NavigationMenu } from '@cosmic-ui/ui';
 import { Home, Settings, User, Bell } from 'lucide-react';
 
 const navigationItems = [
@@ -294,14 +294,14 @@ export function MyNavigation() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant NavigationMenu est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -317,7 +317,7 @@ export function MyNavigation() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { NavigationMenu } from '@cosmic-ui/components';
+                  `import { NavigationMenu } from '@cosmic-ui/ui';
 
 const items = [
   { id: 'home', label: 'Accueil', href: '/' },
@@ -329,7 +329,7 @@ const items = [
                 )
               }
             >
-              {`import { NavigationMenu } from '@cosmic-ui/components';
+              {`import { NavigationMenu } from '@cosmic-ui/ui';
 
 const items = [
   { id: 'home', label: 'Accueil', href: '/' },

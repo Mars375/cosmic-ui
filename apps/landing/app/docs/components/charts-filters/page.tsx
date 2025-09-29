@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ChartsFilters } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { ChartsFilters } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 const CodeBlock = ({
   children,
@@ -205,7 +205,7 @@ export default function ChartsFiltersPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { ChartsFilters } from '@cosmic-ui/components';
+                      `import { ChartsFilters } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyChartsFilters() {
@@ -301,7 +301,7 @@ export function MyChartsFilters() {
                     )
                   }
                 >
-                  {`import { ChartsFilters } from '@cosmic-ui/components';
+                  {`import { ChartsFilters } from '@cosmic-ui/ui';
 import { useState } from 'react';
 
 export function MyChartsFilters() {
@@ -405,14 +405,14 @@ export function MyChartsFilters() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant ChartsFilters est déjà inclus dans le package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/components`, 'install')
+                handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/components`}
+              {`npm install @cosmic-ui/ui`}
             </CodeBlock>
           </div>
         </div>
@@ -427,7 +427,7 @@ export function MyChartsFilters() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { ChartsFilters } from '@cosmic-ui/components';
+                  `import { ChartsFilters } from '@cosmic-ui/ui';
 
 const charts = [
   {
@@ -463,7 +463,7 @@ const filters = [
                 )
               }
             >
-              {`import { ChartsFilters } from '@cosmic-ui/components';
+              {`import { ChartsFilters } from '@cosmic-ui/ui';
 
 const charts = [
   {

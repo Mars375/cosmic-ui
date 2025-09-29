@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { FormWithReactHookForm } from '@cosmic-ui/components';
+import { FormWithReactHookForm } from '@cosmic-ui/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input } from '@cosmic-ui/components';
+import { Input } from '@cosmic-ui/ui';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@cosmic-ui/components';
-import { Checkbox } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+} from '@cosmic-ui/ui';
+import { Checkbox } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 const CodeBlock = ({
   children,
@@ -190,10 +190,10 @@ export default function FormRHFPage() {
                   onCopy={() =>
                     handleCopy(
                       `import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input } from '@cosmic-ui/components';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@cosmic-ui/components';
-import { Checkbox } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { Input } from '@cosmic-ui/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@cosmic-ui/ui';
+import { Checkbox } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 interface FormValues {
   name: string;
@@ -258,10 +258,10 @@ export function MyForm() {
                   }
                 >
                   {`import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input } from '@cosmic-ui/components';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@cosmic-ui/components';
-import { Checkbox } from '@cosmic-ui/components';
-import { Button } from '@cosmic-ui/components';
+import { Input } from '@cosmic-ui/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@cosmic-ui/ui';
+import { Checkbox } from '@cosmic-ui/ui';
+import { Button } from '@cosmic-ui/ui';
 
 interface FormValues {
   name: string;
@@ -333,17 +333,17 @@ export function MyForm() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant FormRHF nécessite React Hook Form en plus du package
-              @cosmic-ui/components.
+              @cosmic-ui/ui.
             </p>
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `npm install @cosmic-ui/components react-hook-form`,
+                  `npm install @cosmic-ui/ui react-hook-form`,
                   'install'
                 )
               }
             >
-              {`npm install @cosmic-ui/components react-hook-form`}
+              {`npm install @cosmic-ui/ui react-hook-form`}
             </CodeBlock>
           </div>
         </div>
@@ -360,7 +360,7 @@ export function MyForm() {
               onCopy={() =>
                 handleCopy(
                   `import { useForm } from 'react-hook-form';
-import { Input, Button } from '@cosmic-ui/components';
+import { Input, Button } from '@cosmic-ui/ui';
 
 const { register, handleSubmit } = useForm();
 
@@ -373,7 +373,7 @@ const { register, handleSubmit } = useForm();
               }
             >
               {`import { useForm } from 'react-hook-form';
-import { Input, Button } from '@cosmic-ui/components';
+import { Input, Button } from '@cosmic-ui/ui';
 
 const { register, handleSubmit } = useForm();
 
