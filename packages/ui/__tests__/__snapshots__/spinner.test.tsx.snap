@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Loading"
+    class="inline-block animate-spin rounded-full border-solid border-t-current"
+    role="status"
+    style="width: 16px; height: 16px; border-width: 2px; border-top-color: currentcolor;"
+  />
+</DocumentFragment>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="animate-pulse bg-white/10 rounded-md h-6 w-40"
+  />
+</DocumentFragment>
+`;

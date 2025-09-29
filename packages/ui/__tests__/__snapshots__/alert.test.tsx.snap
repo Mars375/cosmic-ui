@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="rounded-lg border px-4 py-3 bg-red-500/10 text-red-300 border-red-500/30"
+    role="status"
+  >
+    <div
+      class="flex items-start gap-3"
+    >
+      <div
+        class="flex-1"
+      >
+        <div
+          class="font-semibold text-white"
+        >
+          Error
+        </div>
+        <div
+          class="text-sm text-white/80"
+        >
+          Oops
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

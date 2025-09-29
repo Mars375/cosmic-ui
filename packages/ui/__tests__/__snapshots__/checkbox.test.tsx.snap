@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="inline-flex items-start gap-3 text-white"
+  >
+    <button
+      aria-checked="false"
+      aria-labelledby="snap-label"
+      class="peer flex h-5 w-5 items-center justify-center rounded-md border border-cosmic-border bg-cosmic-surface outline-none transition-colors focus-visible:ring-2 focus-visible:ring-cosmic-primary data-[state=checked]:bg-cosmic-primary data-[state=checked]:border-cosmic-primary"
+      data-state="unchecked"
+      id="snap"
+      role="checkbox"
+      type="button"
+      value="on"
+    />
+    <div>
+      <label
+        class="cursor-pointer select-none text-sm"
+        for="snap"
+        id="snap-label"
+      >
+        Snap
+      </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;

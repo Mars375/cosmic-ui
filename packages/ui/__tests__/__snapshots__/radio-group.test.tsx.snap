@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Choice"
+    aria-required="false"
+    class="grid gap-3 text-white"
+    dir="ltr"
+    role="radiogroup"
+    style="outline: none;"
+    tabindex="0"
+  >
+    <label
+      class="flex cursor-pointer items-start gap-3"
+    >
+      <button
+        aria-checked="false"
+        aria-label="Option A"
+        class="relative mt-0.5 h-5 w-5 rounded-full border border-cosmic-border outline-none transition-colors focus-visible:ring-2 focus-visible:ring-cosmic-primary data-[state=checked]:border-cosmic-primary"
+        data-radix-collection-item=""
+        data-state="unchecked"
+        role="radio"
+        tabindex="-1"
+        type="button"
+        value="a"
+      />
+      <span>
+        <span
+          class="text-sm"
+        >
+          Option A
+        </span>
+      </span>
+    </label>
+    <label
+      class="flex cursor-pointer items-start gap-3"
+    >
+      <button
+        aria-checked="false"
+        aria-label="Option B"
+        class="relative mt-0.5 h-5 w-5 rounded-full border border-cosmic-border outline-none transition-colors focus-visible:ring-2 focus-visible:ring-cosmic-primary data-[state=checked]:border-cosmic-primary"
+        data-radix-collection-item=""
+        data-state="unchecked"
+        role="radio"
+        tabindex="-1"
+        type="button"
+        value="b"
+      />
+      <span>
+        <span
+          class="text-sm"
+        >
+          Option B
+        </span>
+      </span>
+    </label>
+  </div>
+</DocumentFragment>
+`;

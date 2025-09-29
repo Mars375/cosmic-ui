@@ -1,0 +1,37 @@
+{
+  "name": "cosmic-ui",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.10.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "storybook": "turbo run storybook",
+    "storybook:build": "turbo run storybook:build",
+    "dev:ui": "turbo run dev --filter=@cosmic-ui/ui",
+    "dev:landing": "turbo run dev --filter=@cosmic-ui/landing",
+    "build:ui": "turbo run build --filter=@cosmic-ui/ui",
+    "build:landing": "turbo run build --filter=@cosmic-ui/landing",
+    "test:ui": "turbo run test --filter=@cosmic-ui/ui",
+    "lint:ui": "turbo run lint --filter=@cosmic-ui/ui"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.12.4",
+    "prettier": "^3.3.3",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

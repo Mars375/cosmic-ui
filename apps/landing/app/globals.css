@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Thème light-first complet pour CosmicUI
+  - Utilise des variables CSS (HSL) compatibles Tailwind
+  - Le mode sombre est activé par la classe .dark sur <html>
+  - Inspiré des bonnes pratiques shadcn/ui
+*/
+
+/* Couleurs et tokens - Light (par défaut) */
+:root {
+  /* Surfaces & texte */
+  /* Palette beige claire */
+  --background: 40 35% 97%;
+  --foreground: 222.2 47.4% 11.2%; /* #0f172a approx */
+  /* Couleurs associées pour contraste du switch */
+  --background-light: 0 0% 100%;
+  --background-dark: 222.2 48% 5%;
+  --background-opposite: var(--background-dark);
+
+  /* Légère teinte de fond pour les cards en light (évite blanc sur blanc) */
+  --card: 41 40% 96%; /* beige doux */
+  --card-foreground: 222.2 47.4% 11.2%;
+
+  --popover: 40 35% 96%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+
+  /* Marque */
+  --primary: 239 84% 67%; /* indigo-500 (#6366f1) */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 40 30% 93%; /* beige plus marqué */
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  /* États */
+  --muted: 40 30% 95%; /* beige très léger */
+  --muted-foreground: 28 20% 40%; /* brun/gris chaud */
+
+  --accent: 40 30% 94%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84% 60%; /* red-500 */
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 142 71% 45%; /* green-500 */
+  --warning: 45 93% 47%; /* amber-500 */
+  --info: 217 91% 60%; /* blue-500 */
+
+  /* Bordures, inputs, focus */
+  --border: 40 22% 85%; /* beige border */
+  --input: 40 22% 85%;
+  --ring: 239 84% 67%; /* = primary */
+
+  /* Rayons */
+  --radius: 0.5rem;
+
+  /* Code */
+  --code-bg: 222.2 32% 10%; /* ~ #0b1220 */
+  --code-fg: 210 40% 98%;
+}
+
+/* Couleurs et tokens - Dark */
+.dark {
+  --background: 222.2 48% 5%; /* ~ slate-950 */
+  --foreground: 210 40% 98%; /* white-ish */
+  --background-light: 0 0% 100%;
+  --background-dark: 222.2 48% 5%;
+  --background-opposite: var(--background-light);
+
+  /* Légère teinte en dark pour bien détacher les cards du fond */
+  --card: 222.2 47% 8%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222.2 48% 6.5%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 239 84% 67%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 217.2 32.6% 17.5%; /* slate-800 */
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20% 65%; /* slate-400 */
+
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 72% 51%; /* red-600 */
+  --destructive-foreground: 210 40% 98%;
+
+  --success: 142 76% 36%; /* green-600 */
+  --warning: 45 93% 47%;
+  --info: 217 91% 60%;
+
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 239 84% 67%;
+
+  --code-bg: 222.2 32% 10%;
+  --code-fg: 210 40% 98%;
+}
+
+/* Application globale */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  :root {
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+/* Utilitaires couleurs pour Tailwind */
+.bg-background {
+  background-color: hsl(var(--background));
+}
+.bg-background-opposite {
+  background-color: hsl(var(--background-opposite));
+}
+.bg-foreground {
+  background-color: hsl(var(--foreground));
+}
+.bg-card {
+  background-color: hsl(var(--card));
+}
+.bg-popover {
+  background-color: hsl(var(--popover));
+}
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+.bg-secondary {
+  background-color: hsl(var(--secondary));
+}
+.bg-muted {
+  background-color: hsl(var(--muted));
+}
+.bg-accent {
+  background-color: hsl(var(--accent));
+}
+.bg-destructive {
+  background-color: hsl(var(--destructive));
+}
+.bg-success {
+  background-color: hsl(var(--success));
+}
+.bg-warning {
+  background-color: hsl(var(--warning));
+}
+.bg-info {
+  background-color: hsl(var(--info));
+}
+
+.text-foreground {
+  color: hsl(var(--foreground));
+}
+.text-card-foreground {
+  color: hsl(var(--card-foreground));
+}
+.text-popover-foreground {
+  color: hsl(var(--popover-foreground));
+}
+.text-primary-foreground {
+  color: hsl(var(--primary-foreground));
+}
+.text-secondary-foreground {
+  color: hsl(var(--secondary-foreground));
+}
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+.text-accent-foreground {
+  color: hsl(var(--accent-foreground));
+}
+.text-destructive-foreground {
+  color: hsl(var(--destructive-foreground));
+}
+
+.border-border {
+  border-color: hsl(var(--border));
+}
+.border-input {
+  border-color: hsl(var(--input));
+}
+
+/* Composants communs */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Blocs de code: look constant (sombre) dans les docs */
+.bg-code {
+  background-color: hsl(var(--code-bg));
+}
+.text-code {
+  color: hsl(var(--code-fg));
+}
+
+/* Aide: radius utilitaire pour composants */
+.rounded-app {
+  border-radius: var(--radius);
+}
+
+/* Masquer la scrollbar (utilisé pour le menu de doc) */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Documentation styles - using Tailwind classes in components instead */

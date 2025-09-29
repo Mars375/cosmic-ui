@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="inline-flex items-center justify-center gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-transparent select-none bg-cosmic-primary text-cosmic-primaryForeground hover:brightness-110 h-10 px-4 text-sm rounded-lg"
+    data-state="closed"
+  >
+    Trigger
+  </button>
+</DocumentFragment>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <span
+    class="inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium bg-red-600 text-white"
+  >
+    Removed
+  </span>
+</DocumentFragment>
+`;
