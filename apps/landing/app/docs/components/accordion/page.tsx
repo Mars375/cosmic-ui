@@ -1,10 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@cosmic-ui/ui';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@cosmic-ui/ui';
 
 export default function AccordionPage() {
   const [showCode, setShowCode] = useState(false);
+  const [showSingleCode, setShowSingleCode] = useState(false);
+  const [showMultipleCode, setShowMultipleCode] = useState(false);
   const [copiedStates, setCopiedStates] = useState({
     main: false,
     single: false,
@@ -109,21 +116,31 @@ export default function AccordionPage() {
                 {!showCode ? (
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
-                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+                      <AccordionTrigger>
+                        Qu'est-ce que CosmicUI ?
+                      </AccordionTrigger>
                       <AccordionContent>
-                        CosmicUI est une bibliothèque de composants React moderne et accessible, conçue pour créer des interfaces utilisateur élégantes et performantes.
+                        CosmicUI est une bibliothèque de composants React
+                        moderne et accessible, conçue pour créer des interfaces
+                        utilisateur élégantes et performantes.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
-                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+                      <AccordionTrigger>
+                        Comment installer CosmicUI ?
+                      </AccordionTrigger>
                       <AccordionContent>
-                        Vous pouvez installer CosmicUI via npm, pnpm ou yarn : npm install @cosmic-ui/ui
+                        Vous pouvez installer CosmicUI via npm, pnpm ou yarn :
+                        npm install @cosmic-ui/ui
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
-                      <AccordionTrigger>CosmicUI est-il gratuit ?</AccordionTrigger>
+                      <AccordionTrigger>
+                        CosmicUI est-il gratuit ?
+                      </AccordionTrigger>
                       <AccordionContent>
-                        Oui, CosmicUI est entièrement gratuit et open source sous licence MIT.
+                        Oui, CosmicUI est entièrement gratuit et open source
+                        sous licence MIT.
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -205,7 +222,8 @@ export function AccordionDemo() {
                         </div>
                         <div className="flex-1">
                           <span className="keyword">import</span>{' '}
-                          <span>&#123;</span> Accordion, AccordionItem, AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                          <span>&#123;</span> Accordion, AccordionItem,
+                          AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
                           <span className="keyword">from</span>{' '}
                           <span className="string">"@cosmic-ui/ui"</span>;
                         </div>
@@ -242,7 +260,8 @@ export function AccordionDemo() {
                         <div className="flex-1">
                           <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                           <span className="tag">Accordion</span> type=
-                          <span className="string">"single"</span> collapsible className=
+                          <span className="string">"single"</span> collapsible
+                          className=
                           <span className="string">"w-full"</span>
                           <span>&gt;</span>
                         </div>
@@ -263,7 +282,9 @@ export function AccordionDemo() {
                           7
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                          </span>
                           <span className="tag">AccordionTrigger</span>
                           <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
                           <span className="tag">AccordionTrigger</span>
@@ -275,7 +296,9 @@ export function AccordionDemo() {
                           8
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                          </span>
                           <span className="tag">AccordionContent</span>
                           <span>&gt;</span>
                         </div>
@@ -285,7 +308,9 @@ export function AccordionDemo() {
                           9
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          <span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          </span>
                           CosmicUI est une bibliothèque de composants React...
                         </div>
                       </div>
@@ -294,7 +319,9 @@ export function AccordionDemo() {
                           10
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                          <span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                          </span>
                           <span className="tag">AccordionContent</span>
                           <span>&gt;</span>
                         </div>
@@ -421,7 +448,9 @@ export function AccordionDemo() {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-foreground">Usage</h2>
           <p className="text-muted-foreground mb-4">
-            L'Accordion utilise une structure composée de 4 composants principaux : Accordion (conteneur), AccordionItem (élément), AccordionTrigger (déclencheur) et AccordionContent (contenu).
+            L'Accordion utilise une structure composée de 4 composants
+            principaux : Accordion (conteneur), AccordionItem (élément),
+            AccordionTrigger (déclencheur) et AccordionContent (contenu).
           </p>
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
             <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 px-3 py-1 mb-3">
@@ -447,7 +476,8 @@ export function AccordionDemo() {
                     </div>
                     <div className="flex-1">
                       <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> Accordion, AccordionItem, AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                      <span>&#123;</span> Accordion, AccordionItem,
+                      AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
                       <span className="keyword">from</span>{' '}
                       <span className="string">"@cosmic-ui/ui"</span>;
                     </div>
@@ -504,7 +534,9 @@ export function AccordionDemo() {
                       7
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
                       <span className="tag">AccordionTrigger</span>
                       <span>&gt;</span>Question 1&lt;/
                       <span className="tag">AccordionTrigger</span>
@@ -516,7 +548,9 @@ export function AccordionDemo() {
                       8
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
                       <span className="tag">AccordionContent</span>
                       <span>&gt;</span>Réponse 1&lt;/
                       <span className="tag">AccordionContent</span>
@@ -578,33 +612,331 @@ export function AccordionDemo() {
             </h3>
             <p className="text-muted-foreground mb-4 text-sm">
               Un seul élément peut être ouvert à la fois. Parfait pour les FAQ
-              ou les menus de navigation. L'élément ouvert peut être refermé en cliquant dessus.
+              ou les menus de navigation. L'élément ouvert peut être refermé en
+              cliquant dessus.
             </p>
             <div className="flex justify-start">
               <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
                 <div className="flex items-center gap-0 border-b border-border">
-                  <button className="px-4 py-3 text-sm font-medium text-foreground border-b-2 border-foreground">
+                  <button
+                    onClick={() => setShowSingleCode(false)}
+                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
+                      !showSingleCode
+                        ? 'text-foreground border-foreground'
+                        : 'text-muted-foreground border-transparent hover:text-foreground'
+                    }`}
+                  >
                     Preview
                   </button>
-                  <button className="px-4 py-3 text-sm font-medium text-muted-foreground border-b-2 border-transparent">
+                  <button
+                    onClick={() => setShowSingleCode(true)}
+                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
+                      showSingleCode
+                        ? 'text-foreground border-foreground'
+                        : 'text-muted-foreground border-transparent hover:text-foreground'
+                    }`}
+                  >
                     Code
                   </button>
+                  {showSingleCode && (
+                    <div className="ml-auto pr-4">
+                      <button
+                        onClick={async () => {
+                          const code = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@cosmic-ui/ui";
+
+export function SingleAccordion() {
+  return (
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          CosmicUI est une bibliothèque de composants React moderne et accessible.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}`;
+                          try {
+                            await navigator.clipboard.writeText(code);
+                            setCopiedStates(prev => ({ ...prev, single: true }));
+                            setTimeout(() => {
+                              setCopiedStates(prev => ({
+                                ...prev,
+                                single: false,
+                              }));
+                            }, 2000);
+                          } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                          }
+                        }}
+                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {copiedStates.single ? (
+                          <svg
+                            className="h-4 w-4 text-green-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="p-2 min-h-[450px] flex items-center justify-start">
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
-                      <AccordionContent>
-                        CosmicUI est une bibliothèque de composants React moderne et accessible.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
-                      <AccordionContent>
-                        Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  {!showSingleCode ? (
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>
+                          Qu'est-ce que CosmicUI ?
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          CosmicUI est une bibliothèque de composants React
+                          moderne et accessible.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger>
+                          Comment installer CosmicUI ?
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          Vous pouvez installer CosmicUI via npm : npm install
+                          @cosmic-ui/ui
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ) : (
+                    <div className="relative w-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
+                          <div className="flex-1">
+                            <span className="keyword">import</span>{' '}
+                            <span>&#123;</span> Accordion, AccordionItem,
+                            AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                            <span className="keyword">from</span>{' '}
+                            <span className="string">"@cosmic-ui/ui"</span>;
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
+                          <div className="flex-1"></div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
+                          <div className="flex-1">
+                            <span className="keyword">export function</span>{' '}
+                            <span className="function">SingleAccordion</span>
+                            () <span>&#123;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;</span>
+                            <span className="keyword">return</span> (
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">Accordion</span> type=
+                            <span className="string">"single"</span> collapsible className=
+                            <span className="string">"w-full"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionItem</span> value=
+                            <span className="string">"item-1"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            CosmicUI est une bibliothèque de composants React...
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            10
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            11
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionItem</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            12
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionItem</span> value=
+                            <span className="string">"item-2"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            13
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>Comment installer CosmicUI ?&lt;/
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            14
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            15
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            Vous pouvez installer CosmicUI via npm...
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            16
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            17
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionItem</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            18
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">Accordion</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            19
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;);</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            20
+                          </div>
+                          <div className="flex-1">
+                            <span>&#125;</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -622,28 +954,325 @@ export function AccordionDemo() {
             <div className="flex justify-start">
               <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
                 <div className="flex items-center gap-0 border-b border-border">
-                  <button className="px-4 py-3 text-sm font-medium text-foreground border-b-2 border-foreground">
+                  <button
+                    onClick={() => setShowMultipleCode(false)}
+                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
+                      !showMultipleCode
+                        ? 'text-foreground border-foreground'
+                        : 'text-muted-foreground border-transparent hover:text-foreground'
+                    }`}
+                  >
                     Preview
                   </button>
-                  <button className="px-4 py-3 text-sm font-medium text-muted-foreground border-b-2 border-transparent">
+                  <button
+                    onClick={() => setShowMultipleCode(true)}
+                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
+                      showMultipleCode
+                        ? 'text-foreground border-foreground'
+                        : 'text-muted-foreground border-transparent hover:text-foreground'
+                    }`}
+                  >
                     Code
                   </button>
+                  {showMultipleCode && (
+                    <div className="ml-auto pr-4">
+                      <button
+                        onClick={async () => {
+                          const code = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@cosmic-ui/ui";
+
+export function MultipleAccordion() {
+  return (
+    <Accordion type="multiple" className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          CosmicUI est une bibliothèque de composants React moderne et accessible.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}`;
+                          try {
+                            await navigator.clipboard.writeText(code);
+                            setCopiedStates(prev => ({ ...prev, multiple: true }));
+                            setTimeout(() => {
+                              setCopiedStates(prev => ({
+                                ...prev,
+                                multiple: false,
+                              }));
+                            }, 2000);
+                          } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                          }
+                        }}
+                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {copiedStates.multiple ? (
+                          <svg
+                            className="h-4 w-4 text-green-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="p-2 min-h-[450px] flex items-center justify-start">
-                  <Accordion type="multiple" className="w-full">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
-                      <AccordionContent>
-                        CosmicUI est une bibliothèque de composants React moderne et accessible.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
-                      <AccordionContent>
-                        Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  {!showMultipleCode ? (
+                    <Accordion type="multiple" className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>
+                          Qu'est-ce que CosmicUI ?
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          CosmicUI est une bibliothèque de composants React
+                          moderne et accessible.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger>
+                          Comment installer CosmicUI ?
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          Vous pouvez installer CosmicUI via npm : npm install
+                          @cosmic-ui/ui
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ) : (
+                    <div className="relative w-full">
+                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            1
+                          </div>
+                          <div className="flex-1">
+                            <span className="keyword">import</span>{' '}
+                            <span>&#123;</span> Accordion, AccordionItem,
+                            AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                            <span className="keyword">from</span>{' '}
+                            <span className="string">"@cosmic-ui/ui"</span>;
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            2
+                          </div>
+                          <div className="flex-1"></div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            3
+                          </div>
+                          <div className="flex-1">
+                            <span className="keyword">export function</span>{' '}
+                            <span className="function">MultipleAccordion</span>
+                            () <span>&#123;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            4
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;</span>
+                            <span className="keyword">return</span> (
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            5
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">Accordion</span> type=
+                            <span className="string">"multiple"</span> className=
+                            <span className="string">"w-full"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            6
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionItem</span> value=
+                            <span className="string">"item-1"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            7
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            8
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            9
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            CosmicUI est une bibliothèque de composants React...
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            10
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            11
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionItem</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            12
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionItem</span> value=
+                            <span className="string">"item-2"</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            13
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>Comment installer CosmicUI ?&lt;/
+                            <span className="tag">AccordionTrigger</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            14
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            15
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            Vous pouvez installer CosmicUI via npm...
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            16
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionContent</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            17
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">AccordionItem</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            18
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span className="tag">Accordion</span>
+                            <span>&gt;</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            19
+                          </div>
+                          <div className="flex-1">
+                            <span>&nbsp;&nbsp;);</span>
+                          </div>
+                        </div>
+                        <div className="flex" data-line>
+                          <div className="select-none pr-4 text-right text-gray-400 w-8">
+                            20
+                          </div>
+                          <div className="flex-1">
+                            <span>&#125;</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
