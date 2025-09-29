@@ -16,7 +16,7 @@ export interface AccordionProps {
 
 export const Accordion = ({ className, items, type = 'single' }: AccordionProps) => {
   return (
-    <RadixAccordion.Root type={type as any} className={twMerge('w-full', className)}>
+    <RadixAccordion.Root type={type as any} collapsible className={twMerge('w-full', className)}>
       {items.map((it) => (
         <RadixAccordion.Item
           key={it.value}
@@ -26,7 +26,9 @@ export const Accordion = ({ className, items, type = 'single' }: AccordionProps)
           <RadixAccordion.Header>
             <RadixAccordion.Trigger className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none transition-colors">
               <span>{it.header}</span>
-              <span aria-hidden className="text-gray-500 dark:text-gray-400">▾</span>
+              <span aria-hidden className="text-gray-500 dark:text-gray-400">
+                ▾
+              </span>
             </RadixAccordion.Trigger>
           </RadixAccordion.Header>
           <RadixAccordion.Content className="px-3 py-3 text-sm text-gray-700 dark:text-gray-300">
