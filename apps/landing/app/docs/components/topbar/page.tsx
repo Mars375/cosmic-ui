@@ -51,7 +51,7 @@ export default function TopbarPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -83,7 +83,7 @@ export default function TopbarPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
           Un composant de barre de navigation supérieure avec logo, recherche et
           actions.
         </p>
@@ -96,7 +96,7 @@ export default function TopbarPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Preview
@@ -106,14 +106,14 @@ export default function TopbarPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <Topbar
@@ -124,7 +124,7 @@ export default function TopbarPage() {
                       <input
                         type="text"
                         placeholder="Rechercher..."
-                        className="w-full pl-10 pr-4 py-2 bg-cosmic-background border border-cosmic-border rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
+                        className="w-full pl-10 pr-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
                       />
                     </div>
                   }
@@ -142,11 +142,11 @@ export default function TopbarPage() {
                     </div>
                   }
                 />
-                <div className="mt-4 p-4 bg-cosmic-background rounded-lg">
+                <div className="mt-4 p-4 bg-white dark:bg-gray-900 rounded-lg">
                   <h3 className="text-lg font-medium mb-2">
                     Contenu principal
                   </h3>
-                  <p className="text-cosmic-muted-foreground">
+                  <p className="text-gray-600 dark:text-gray-400-foreground">
                     Le contenu de votre application apparaît ici, sous la
                     topbar.
                   </p>
@@ -171,7 +171,7 @@ export function MyTopbar() {
           <input
             type="text"
             placeholder="Rechercher..."
-            className="w-full pl-10 pr-4 py-2 bg-cosmic-background border border-cosmic-border rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
+            className="w-full pl-10 pr-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
           />
         </div>
       }
@@ -209,7 +209,7 @@ export function MyTopbar() {
           <input
             type="text"
             placeholder="Rechercher..."
-            className="w-full pl-10 pr-4 py-2 bg-cosmic-background border border-cosmic-border rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
+            className="w-full pl-10 pr-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-primary"
           />
         </div>
       }
@@ -238,8 +238,8 @@ export function MyTopbar() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant Topbar est déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -256,8 +256,8 @@ export function MyTopbar() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Importez le composant et utilisez-le avec votre logo, recherche et
               actions.
             </p>
@@ -298,7 +298,7 @@ export function MyTopbar() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Preview
@@ -308,14 +308,14 @@ export function MyTopbar() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-6">
                   <div>
@@ -339,7 +339,7 @@ export function MyTopbar() {
                         <input
                           type="text"
                           placeholder="Rechercher..."
-                          className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+                          className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
                         />
                       }
                       actions={
@@ -359,7 +359,7 @@ export function MyTopbar() {
                         <input
                           type="text"
                           placeholder="Rechercher..."
-                          className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+                          className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
                         />
                       }
                       actions={
@@ -397,7 +397,7 @@ export function MyTopbar() {
     <input
       type="text"
       placeholder="Rechercher..."
-      className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+      className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
     />
   }
   actions={
@@ -414,7 +414,7 @@ export function MyTopbar() {
     <input
       type="text"
       placeholder="Rechercher..."
-      className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+      className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
     />
   }
   actions={
@@ -449,7 +449,7 @@ export function MyTopbar() {
     <input
       type="text"
       placeholder="Rechercher..."
-      className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+      className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
     />
   }
   actions={
@@ -466,7 +466,7 @@ export function MyTopbar() {
     <input
       type="text"
       placeholder="Rechercher..."
-      className="px-3 py-1 bg-cosmic-background border border-cosmic-border rounded text-sm"
+      className="px-3 py-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded text-sm"
     />
   }
   actions={

@@ -53,7 +53,7 @@ export default function SparklinePage() {
   const userData = [80, 95, 110, 125, 105, 140, 120, 160, 135, 180, 150, 200];
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -85,7 +85,7 @@ export default function SparklinePage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
           Un composant de graphique sparkline pour afficher des tendances
           compactes dans des tableaux ou des cartes.
         </p>
@@ -98,7 +98,7 @@ export default function SparklinePage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Preview
@@ -108,20 +108,20 @@ export default function SparklinePage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Ventes</span>
-                    <span className="text-sm text-cosmic-muted-foreground">
+                    <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
                       +12.5%
                     </span>
                   </div>
@@ -150,7 +150,7 @@ export function MySparkline() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <span className="text-sm font-medium">Ventes</span>
-        <span className="text-sm text-cosmic-muted-foreground">
+        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
           +12.5%
         </span>
       </div>
@@ -179,7 +179,7 @@ export function MySparkline() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <span className="text-sm font-medium">Ventes</span>
-        <span className="text-sm text-cosmic-muted-foreground">
+        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
           +12.5%
         </span>
       </div>
@@ -204,8 +204,8 @@ export function MySparkline() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant Sparkline est déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -222,8 +222,8 @@ export function MySparkline() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Utilisez le composant pour afficher des tendances compactes.
             </p>
             <CodeBlock
@@ -273,7 +273,7 @@ const data = [10, 25, 15, 30, 20, 35, 25, 40];
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Preview
@@ -283,14 +283,14 @@ const data = [10, 25, 15, 30, 20, 35, 25, 40];
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4">
                   <div>

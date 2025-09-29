@@ -69,7 +69,7 @@ export default function FileUploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -101,7 +101,7 @@ export default function FileUploadPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
           Un composant de téléchargement de fichiers avec glisser-déposer et
           prévisualisation.
         </p>
@@ -114,7 +114,7 @@ export default function FileUploadPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Preview
@@ -124,14 +124,14 @@ export default function FileUploadPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <div className="space-y-4">
@@ -142,11 +142,11 @@ export default function FileUploadPage() {
                     className="min-h-[120px]"
                   >
                     <div className="flex flex-col items-center gap-2">
-                      <Upload className="w-8 h-8 text-cosmic-muted-foreground" />
-                      <span className="text-sm text-cosmic-muted-foreground">
+                      <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
+                      <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
                         Glissez vos fichiers ici ou cliquez pour sélectionner
                       </span>
-                      <span className="text-xs text-cosmic-muted-foreground">
+                      <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
                         PDF, DOC, DOCX, TXT (max 10MB)
                       </span>
                     </div>
@@ -156,12 +156,12 @@ export default function FileUploadPage() {
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium">Fichiers sélectionnés :</h4>
                       {uploadedFiles.map((file, index) => (
-                        <div key={index} className="flex items-center justify-between p-2 bg-cosmic-background rounded border">
+                        <div key={index} className="flex items-center justify-between p-2 bg-white dark:bg-gray-900 rounded border">
                           <div className="flex items-center gap-2">
-                            <File className="w-4 h-4 text-cosmic-muted-foreground" />
+                            <File className="w-4 h-4 text-gray-600 dark:text-gray-400-foreground" />
                             <div>
                               <p className="text-sm font-medium">{file.name}</p>
-                              <p className="text-xs text-cosmic-muted-foreground">
+                              <p className="text-xs text-gray-600 dark:text-gray-400-foreground">
                                 {formatFileSize(file.size)}
                               </p>
                             </div>
@@ -170,7 +170,7 @@ export default function FileUploadPage() {
                             onClick={() => removeFile(index)}
                             className="p-1 hover:bg-cosmic-border rounded"
                           >
-                            <X className="w-4 h-4 text-cosmic-muted-foreground" />
+                            <X className="w-4 h-4 text-gray-600 dark:text-gray-400-foreground" />
                           </button>
                         </div>
                       ))}
@@ -203,11 +203,11 @@ export function MyFileUpload() {
       className="min-h-[120px]"
     >
       <div className="flex flex-col items-center gap-2">
-        <Upload className="w-8 h-8 text-cosmic-muted-foreground" />
-        <span className="text-sm text-cosmic-muted-foreground">
+        <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
+        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
           Glissez vos fichiers ici ou cliquez pour sélectionner
         </span>
-        <span className="text-xs text-cosmic-muted-foreground">
+        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
           PDF, DOC, DOCX, TXT (max 10MB)
         </span>
       </div>
@@ -238,11 +238,11 @@ export function MyFileUpload() {
       className="min-h-[120px]"
     >
       <div className="flex flex-col items-center gap-2">
-        <Upload className="w-8 h-8 text-cosmic-muted-foreground" />
-        <span className="text-sm text-cosmic-muted-foreground">
+        <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
+        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
           Glissez vos fichiers ici ou cliquez pour sélectionner
         </span>
-        <span className="text-xs text-cosmic-muted-foreground">
+        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
           PDF, DOC, DOCX, TXT (max 10MB)
         </span>
       </div>
@@ -258,8 +258,8 @@ export function MyFileUpload() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant FileUpload est déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -276,8 +276,8 @@ export function MyFileUpload() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Utilisez le composant pour créer une zone de téléchargement de fichiers.
             </p>
             <CodeBlock
@@ -321,7 +321,7 @@ export function MyFileUpload() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Preview
@@ -331,14 +331,14 @@ export function MyFileUpload() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4">
                   <div>
@@ -352,8 +352,8 @@ export function MyFileUpload() {
                       className="min-h-[80px]"
                     >
                       <div className="flex flex-col items-center gap-1">
-                        <Upload className="w-6 h-6 text-cosmic-muted-foreground" />
-                        <span className="text-xs text-cosmic-muted-foreground">
+                        <Upload className="w-6 h-6 text-gray-600 dark:text-gray-400-foreground" />
+                        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
                           Sélectionner une image
                         </span>
                       </div>
@@ -369,8 +369,8 @@ export function MyFileUpload() {
                       className="min-h-[80px]"
                     >
                       <div className="flex flex-col items-center gap-1">
-                        <Upload className="w-6 h-6 text-cosmic-muted-foreground" />
-                        <span className="text-xs text-cosmic-muted-foreground">
+                        <Upload className="w-6 h-6 text-gray-600 dark:text-gray-400-foreground" />
+                        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
                           Tous types de fichiers
                         </span>
                       </div>

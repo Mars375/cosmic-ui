@@ -63,7 +63,7 @@ export default function StepWizardPage() {
             <label className="block text-sm font-medium mb-1">Nom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre nom"
             />
           </div>
@@ -71,7 +71,7 @@ export default function StepWizardPage() {
             <label className="block text-sm font-medium mb-1">Prénom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre prénom"
             />
           </div>
@@ -89,7 +89,7 @@ export default function StepWizardPage() {
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="votre@email.com"
             />
           </div>
@@ -97,7 +97,7 @@ export default function StepWizardPage() {
             <label className="block text-sm font-medium mb-1">Téléphone</label>
             <input
               type="tel"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="06 12 34 56 78"
             />
           </div>
@@ -117,7 +117,7 @@ export default function StepWizardPage() {
             </label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Mot de passe"
             />
           </div>
@@ -127,7 +127,7 @@ export default function StepWizardPage() {
             </label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Confirmer le mot de passe"
             />
           </div>
@@ -145,7 +145,7 @@ export default function StepWizardPage() {
             <Check className="w-8 h-8 text-white" />
           </div>
           <h3 className="text-lg font-medium">Félicitations !</h3>
-          <p className="text-cosmic-muted-foreground">
+          <p className="text-gray-600 dark:text-gray-400-foreground">
             Votre compte a été créé avec succès.
           </p>
         </div>
@@ -154,7 +154,7 @@ export default function StepWizardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -186,7 +186,7 @@ export default function StepWizardPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
           Un composant d'assistant étape par étape pour guider les utilisateurs
           dans un processus.
         </p>
@@ -199,7 +199,7 @@ export default function StepWizardPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Preview
@@ -209,14 +209,14 @@ export default function StepWizardPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full">
                 <StepWizard
@@ -274,7 +274,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Nom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre nom"
             />
           </div>
@@ -282,7 +282,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Prénom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre prénom"
             />
           </div>
@@ -300,7 +300,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="votre@email.com"
             />
           </div>
@@ -308,7 +308,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Téléphone</label>
             <input
               type="tel"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="06 12 34 56 78"
             />
           </div>
@@ -326,7 +326,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Mot de passe</label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Mot de passe"
             />
           </div>
@@ -336,7 +336,7 @@ export function MyStepWizard() {
             </label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Confirmer le mot de passe"
             />
           </div>
@@ -354,7 +354,7 @@ export function MyStepWizard() {
             <Check className="w-8 h-8 text-white" />
           </div>
           <h3 className="text-lg font-medium">Félicitations !</h3>
-          <p className="text-cosmic-muted-foreground">
+          <p className="text-gray-600 dark:text-gray-400-foreground">
             Votre compte a été créé avec succès.
           </p>
         </div>
@@ -418,7 +418,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Nom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre nom"
             />
           </div>
@@ -426,7 +426,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Prénom</label>
             <input
               type="text"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Votre prénom"
             />
           </div>
@@ -444,7 +444,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="votre@email.com"
             />
           </div>
@@ -452,7 +452,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Téléphone</label>
             <input
               type="tel"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="06 12 34 56 78"
             />
           </div>
@@ -470,7 +470,7 @@ export function MyStepWizard() {
             <label className="block text-sm font-medium mb-1">Mot de passe</label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Mot de passe"
             />
           </div>
@@ -480,7 +480,7 @@ export function MyStepWizard() {
             </label>
             <input
               type="password"
-              className="w-full px-3 py-2 border border-cosmic-border rounded-lg bg-cosmic-background"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900"
               placeholder="Confirmer le mot de passe"
             />
           </div>
@@ -498,7 +498,7 @@ export function MyStepWizard() {
             <Check className="w-8 h-8 text-white" />
           </div>
           <h3 className="text-lg font-medium">Félicitations !</h3>
-          <p className="text-cosmic-muted-foreground">
+          <p className="text-gray-600 dark:text-gray-400-foreground">
             Votre compte a été créé avec succès.
           </p>
         </div>
@@ -547,8 +547,8 @@ export function MyStepWizard() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant StepWizard est déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -565,8 +565,8 @@ export function MyStepWizard() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Utilisez le composant pour créer des assistants étape par étape.
             </p>
             <CodeBlock
@@ -630,7 +630,7 @@ const steps = [
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Preview
@@ -640,14 +640,14 @@ const steps = [
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-4">
                   <div>

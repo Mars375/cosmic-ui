@@ -52,7 +52,7 @@ export default function CalendarDatePickerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
@@ -84,7 +84,7 @@ export default function CalendarDatePickerPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted-foreground mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
           Un composant de sélection de date avec calendrier interactif et
           navigation par mois.
         </p>
@@ -97,7 +97,7 @@ export default function CalendarDatePickerPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Preview
@@ -107,14 +107,14 @@ export default function CalendarDatePickerPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
               }`}
             >
               Code
             </button>
           </div>
 
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
             {!showCode ? (
               <div className="p-4 w-full flex items-center justify-center">
                 <div className="text-center">
@@ -126,7 +126,7 @@ export default function CalendarDatePickerPage() {
                     onChange={setSelectedDate}
                   />
                   {selectedDate && (
-                    <p className="text-xs text-cosmic-muted-foreground mt-2">
+                    <p className="text-xs text-gray-600 dark:text-gray-400-foreground mt-2">
                       Date sélectionnée :{' '}
                       {selectedDate.toLocaleDateString('fr-FR')}
                     </p>
@@ -154,7 +154,7 @@ export function MyCalendarDatePicker() {
         onChange={setSelectedDate}
       />
       {selectedDate && (
-        <p className="text-xs text-cosmic-muted-foreground mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400-foreground mt-2">
           Date sélectionnée : {selectedDate.toLocaleDateString('fr-FR')}
         </p>
       )}
@@ -181,7 +181,7 @@ export function MyCalendarDatePicker() {
         onChange={setSelectedDate}
       />
       {selectedDate && (
-        <p className="text-xs text-cosmic-muted-foreground mt-2">
+        <p className="text-xs text-gray-600 dark:text-gray-400-foreground mt-2">
           Date sélectionnée : {selectedDate.toLocaleDateString('fr-FR')}
         </p>
       )}
@@ -197,8 +197,8 @@ export function MyCalendarDatePicker() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant CalendarDatePicker est déjà inclus dans le package
               @cosmic-ui/ui.
             </p>
@@ -215,8 +215,8 @@ export function MyCalendarDatePicker() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
-            <p className="text-cosmic-muted-foreground mb-4">
+          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Utilisez le composant pour permettre la sélection de dates.
             </p>
             <CodeBlock
@@ -254,7 +254,7 @@ export function MyCalendarDatePicker() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Preview
@@ -264,14 +264,14 @@ export function MyCalendarDatePicker() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-cosmic-foreground hover:bg-cosmic-border/80'
+                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
                 }`}
               >
                 Code
               </button>
             </div>
 
-            <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
+            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
               {!showCodeVariants ? (
                 <div className="p-4 w-full space-y-6">
                   <div className="text-center">
@@ -281,7 +281,7 @@ export function MyCalendarDatePicker() {
                       onChange={setStartDate}
                     />
                     {startDate && (
-                      <p className="text-xs text-cosmic-muted-foreground mt-1">
+                      <p className="text-xs text-gray-600 dark:text-gray-400-foreground mt-1">
                         {startDate.toLocaleDateString('fr-FR')}
                       </p>
                     )}
@@ -290,7 +290,7 @@ export function MyCalendarDatePicker() {
                     <h3 className="text-sm font-medium mb-2">Date de fin</h3>
                     <CalendarDatePicker value={endDate} onChange={setEndDate} />
                     {endDate && (
-                      <p className="text-xs text-cosmic-muted-foreground mt-1">
+                      <p className="text-xs text-gray-600 dark:text-gray-400-foreground mt-1">
                         {endDate.toLocaleDateString('fr-FR')}
                       </p>
                     )}

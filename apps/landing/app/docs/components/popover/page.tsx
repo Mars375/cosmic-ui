@@ -39,17 +39,17 @@ export default function PopoverPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cosmic-background text-cosmic-foreground">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-surface rounded-lg">
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
           <h1 className="text-3xl font-bold">Popover</h1>
-          <button className="p-2 hover:bg-cosmic-surface rounded-lg">
+          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -57,7 +57,7 @@ export default function PopoverPage() {
         </div>
 
         {/* Summary */}
-        <p className="text-lg text-cosmic-muted mb-8">
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
           Le composant Popover affiche du contenu contextuel dans une bulle flottante, 
           idéal pour les informations supplémentaires et les actions rapides.
         </p>
@@ -66,11 +66,11 @@ export default function PopoverPage() {
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-4">
             <h2 className="text-xl font-semibold">Aperçu</h2>
-            <div className="flex bg-cosmic-surface rounded-lg p-1">
+            <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
               <button
                 onClick={() => setShowCode(false)}
                 className={`px-3 py-1 rounded text-sm transition-colors ${
-                  !showCode ? 'bg-cosmic-primary text-cosmic-primaryForeground' : 'text-cosmic-muted hover:text-cosmic-foreground'
+                  !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
                 }`}
               >
                 Aperçu
@@ -78,7 +78,7 @@ export default function PopoverPage() {
               <button
                 onClick={() => setShowCode(true)}
                 className={`px-3 py-1 rounded text-sm transition-colors ${
-                  showCode ? 'bg-cosmic-primary text-cosmic-primaryForeground' : 'text-cosmic-muted hover:text-cosmic-foreground'
+                  showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
                 }`}
               >
                 Code
@@ -86,7 +86,7 @@ export default function PopoverPage() {
             </div>
           </div>
 
-          <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+          <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
             {!showCode ? (
               <div className="p-4">
                 <Popover>
@@ -96,7 +96,7 @@ export default function PopoverPage() {
                   <PopoverContent>
                     <div className="space-y-2">
                       <h4 className="font-medium">Titre du popover</h4>
-                      <p className="text-sm text-cosmic-muted">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         Ceci est un exemple de contenu dans un popover.
                       </p>
                     </div>
@@ -121,7 +121,7 @@ export default function MyComponent() {
       <PopoverContent>
         <div className="space-y-2">
           <h4 className="font-medium">Titre du popover</h4>
-          <p className="text-sm text-cosmic-muted">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Ceci est un exemple de contenu dans un popover.
           </p>
         </div>
@@ -145,7 +145,7 @@ export default function MyComponent() {
       <PopoverContent>
         <div className="space-y-2">
           <h4 className="font-medium">Titre du popover</h4>
-          <p className="text-sm text-cosmic-muted">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Ceci est un exemple de contenu dans un popover.
           </p>
         </div>
@@ -162,7 +162,7 @@ export default function MyComponent() {
         {/* Installation */}
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Installation</h2>
-          <div className="bg-cosmic-surface p-4 rounded-lg">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
             <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
 {`npm install @cosmic-ui/ui`}
             </CodeBlock>
@@ -172,7 +172,7 @@ export default function MyComponent() {
         {/* Usage */}
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-surface p-4 rounded-lg">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
             <CodeBlock onCopy={() => copyToClipboard(`import { 
   Popover, 
   PopoverTrigger, 
@@ -221,11 +221,11 @@ export default function MyComponent() {
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-4">
               <h3 className="text-lg font-medium">Avec formulaire</h3>
-              <div className="flex bg-cosmic-surface rounded-lg p-1">
+              <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
                 <button
                   onClick={() => setShowCode(false)}
                   className={`px-3 py-1 rounded text-sm transition-colors ${
-                    !showCode ? 'bg-cosmic-primary text-cosmic-primaryForeground' : 'text-cosmic-muted hover:text-cosmic-foreground'
+                    !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
                   }`}
                 >
                   Aperçu
@@ -233,7 +233,7 @@ export default function MyComponent() {
                 <button
                   onClick={() => setShowCode(true)}
                   className={`px-3 py-1 rounded text-sm transition-colors ${
-                    showCode ? 'bg-cosmic-primary text-cosmic-primaryForeground' : 'text-cosmic-muted hover:text-cosmic-foreground'
+                    showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
                   }`}
                 >
                   Code
@@ -241,7 +241,7 @@ export default function MyComponent() {
               </div>
             </div>
 
-            <div className="w-[500px] min-h-[450px] border border-cosmic-border rounded-lg bg-cosmic-surface p-2 flex justify-start">
+            <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
               {!showCode ? (
                 <div className="p-4">
                   <Popover>
@@ -253,7 +253,7 @@ export default function MyComponent() {
                         <h4 className="font-medium">Nouveau commentaire</h4>
                         <textarea 
                           placeholder="Tapez votre commentaire..."
-                          className="w-full p-2 border border-cosmic-border rounded bg-cosmic-surface text-white"
+                          className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-white"
                           rows={3}
                         />
                         <div className="flex gap-2">
@@ -284,7 +284,7 @@ export default function MyComponent() {
           <h4 className="font-medium">Nouveau commentaire</h4>
           <textarea 
             placeholder="Tapez votre commentaire..."
-            className="w-full p-2 border border-cosmic-border rounded bg-cosmic-surface text-white"
+            className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-white"
             rows={3}
           />
           <div className="flex gap-2">
@@ -314,7 +314,7 @@ export default function MyComponent() {
           <h4 className="font-medium">Nouveau commentaire</h4>
           <textarea 
             placeholder="Tapez votre commentaire..."
-            className="w-full p-2 border border-cosmic-border rounded bg-cosmic-surface text-white"
+            className="w-full p-2 border border-gray-200 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-white"
             rows={3}
           />
           <div className="flex gap-2">
