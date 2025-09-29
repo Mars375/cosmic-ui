@@ -4,7 +4,15 @@
   "private": false,
   "type": "module",
   "description": "A modern, accessible React component library with dark mode support",
-  "keywords": ["react", "components", "ui", "tailwind", "typescript", "dark-mode", "accessible"],
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "tailwind",
+    "typescript",
+    "dark-mode",
+    "accessible"
+  ],
   "author": "Cosmic UI Team",
   "license": "MIT",
   "repository": {
@@ -62,6 +70,7 @@
     "@radix-ui/react-toast": "^1.2.15",
     "@radix-ui/react-tooltip": "^1.2.8",
     "class-variance-authority": "^0.7.0",
+    "lucide-react": "^0.418.0",
     "react-hook-form": "^7.63.0",
     "recharts": "^3.2.1",
     "tailwind-merge": "^2.5.2"

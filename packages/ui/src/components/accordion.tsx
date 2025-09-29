@@ -1,50 +1,66 @@
-import * as React from 'react';
-import * as RadixAccordion from '@radix-ui/react-accordion';
-import { twMerge } from 'tailwind-merge';
+"use client"
+import * as React from "react"
+import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import { ChevronDownIcon } from "lucide-react"
+import { twMerge } from "tailwind-merge"
 
-export interface AccordionItem {
-  value: string;
-  header: React.ReactNode;
-  content: React.ReactNode;
-}
+const Accordion = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Root
+    ref={ref}
+    className={twMerge("w-full", className)}
+    {...props}
+  />
+))
+Accordion.displayName = "Accordion"
 
-export interface AccordionProps {
-  items: AccordionItem[];
-  type?: 'single' | 'multiple';
-  className?: string;
-  collapsible?: boolean;
-  [key: string]: unknown;
-}
+const AccordionItem = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={twMerge("border-b border-gray-200 dark:border-gray-700 last:border-b-0", className)}
+    {...props}
+  />
+))
+AccordionItem.displayName = "AccordionItem"
 
-export const Accordion = ({ className, items, type = 'single', collapsible = true, ...props }: AccordionProps) => {
-  return (
-    <RadixAccordion.Root 
-      type={type} 
-      collapsible={collapsible}
-      className={twMerge('w-full', className)}
+const AccordionTrigger = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={twMerge(
+        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+        className
+      )}
       {...props}
     >
-      {items.map((it) => (
-        <RadixAccordion.Item
-          key={it.value}
-          value={it.value}
-          className="border-b border-gray-200 dark:border-gray-700"
-        >
-          <RadixAccordion.Header>
-            <RadixAccordion.Trigger className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none transition-colors">
-              <span>{it.header}</span>
-              <span aria-hidden className="text-gray-500 dark:text-gray-400">
-                ▾
-              </span>
-            </RadixAccordion.Trigger>
-          </RadixAccordion.Header>
-          <RadixAccordion.Content className="px-3 py-3 text-sm text-gray-700 dark:text-gray-300">
-            {it.content}
-          </RadixAccordion.Content>
-        </RadixAccordion.Item>
-      ))}
-    </RadixAccordion.Root>
-  );
-};
+      {children}
+      <ChevronDownIcon className="h-4 w-4 shrink-0 transition-transform duration-200" />
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+))
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
 
-Accordion.displayName = 'Accordion';
+const AccordionContent = React.forwardRef<
+  React.ElementRef<typeof AccordionPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    {...props}
+  >
+    <div className={twMerge("pb-4 pt-0", className)}>{children}</div>
+  </AccordionPrimitive.Content>
+))
+
+AccordionContent.displayName = AccordionPrimitive.Content.displayName
+
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
