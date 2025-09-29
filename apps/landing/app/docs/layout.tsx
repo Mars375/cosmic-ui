@@ -120,6 +120,7 @@ const docsNavigation: NavSection[] = [
     label: 'Composants',
     items: [
       { href: '/docs/components/accordion', label: 'Accordion' },
+      { href: '/docs/components/ai-assistant', label: 'AIAssistant' },
       { href: '/docs/components/alert', label: 'Alert' },
       { href: '/docs/components/avatar', label: 'Avatar' },
       { href: '/docs/components/badge', label: 'Badge' },
@@ -131,6 +132,7 @@ const docsNavigation: NavSection[] = [
       { href: '/docs/components/card', label: 'Card' },
       { href: '/docs/components/chat-widget', label: 'ChatWidget' },
       { href: '/docs/components/charts-filters', label: 'ChartsFilters' },
+      { href: '/docs/components/command-palette', label: 'CommandPalette' },
       { href: '/docs/components/dashboard-layout', label: 'DashboardLayout' },
       { href: '/docs/components/data-table', label: 'DataTable' },
       { href: '/docs/components/drawer', label: 'Drawer' },
