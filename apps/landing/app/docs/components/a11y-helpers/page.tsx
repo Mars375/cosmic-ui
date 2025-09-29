@@ -279,181 +279,329 @@ export default function A11yHelpersPage() {
               <div className="w-full">
                 <CodeBlock fileName="a11y-example.tsx">
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      1
+                    </div>
                     <div className="flex-1">
-                      <span className="keyword">import</span> <span>&#123;</span> VisuallyHidden, SkipLink <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                      <span className="keyword">import</span>{' '}
+                      <span>&#123;</span> VisuallyHidden, SkipLink{' '}
+                      <span>&#125;</span> <span className="keyword">from</span>{' '}
+                      <span className="string">'@cosmic-ui/ui'</span>;
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      2
+                    </div>
                     <div className="flex-1">
-                      <span className="keyword">import</span> <span>&#123;</span> Button <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                      <span className="keyword">import</span>{' '}
+                      <span>&#123;</span> Button <span>&#125;</span>{' '}
+                      <span className="keyword">from</span>{' '}
+                      <span className="string">'@cosmic-ui/ui'</span>;
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      3
+                    </div>
                     <div className="flex-1">
-                      <span className="keyword">import</span> <span>&#123;</span> Eye, EyeOff <span>&#125;</span> <span className="keyword">from</span> <span className="string">'lucide-react'</span>;
+                      <span className="keyword">import</span>{' '}
+                      <span>&#123;</span> Eye, EyeOff <span>&#125;</span>{' '}
+                      <span className="keyword">from</span>{' '}
+                      <span className="string">'lucide-react'</span>;
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      4
+                    </div>
                     <div className="flex-1"></div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      5
+                    </div>
                     <div className="flex-1">
-                      <span className="keyword">export function</span> <span className="function">MyA11yHelpers</span>() <span>&#123;</span>
+                      <span className="keyword">export function</span>{' '}
+                      <span className="function">MyA11yHelpers</span>(){' '}
+                      <span>&#123;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      6
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;</span><span className="keyword">return</span> (
+                      <span>&nbsp;&nbsp;</span>
+                      <span className="keyword">return</span> (
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      7
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">div</span> className=<span className="string">"space-y-4"</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">div</span> className=
+                      <span className="string">"space-y-4"</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      8
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span className="comment">&#123;/* SkipLink pour la navigation */&#125;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="comment">
+                        &#123;/* SkipLink pour la navigation */&#125;
+                      </span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      9
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">SkipLink</span> href=<span className="string">"#main"</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">SkipLink</span> href=
+                      <span className="string">"#main"</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">10</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      10
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller au contenu principal</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller au
+                        contenu principal
+                      </span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">11</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      11
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">SkipLink</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">SkipLink</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">12</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      12
+                    </div>
                     <div className="flex-1"></div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">13</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      13
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span className="comment">&#123;/* VisuallyHidden pour les lecteurs d'écran */&#125;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="comment">
+                        &#123;/* VisuallyHidden pour les lecteurs d'écran
+                        */&#125;
+                      </span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">14</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      14
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">Button</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">Button</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">15</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      15
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">Eye</span> className=<span className="string">"w-4 h-4"</span> /<span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">Eye</span> className=
+                      <span className="string">"w-4 h-4"</span> /
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">16</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      16
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">VisuallyHidden</span><span>&gt;</span>Voir le contenu<span>&lt;/</span><span className="tag">VisuallyHidden</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">VisuallyHidden</span>
+                      <span>&gt;</span>Voir le contenu<span>&lt;/</span>
+                      <span className="tag">VisuallyHidden</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">17</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      17
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">Button</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">Button</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">18</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      18
+                    </div>
                     <div className="flex-1"></div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">19</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      19
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span className="comment">&#123;/* Exemple combiné */&#125;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span className="comment">
+                        &#123;/* Exemple combiné */&#125;
+                      </span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">20</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      20
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">div</span> className=<span className="string">"space-y-2"</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">div</span> className=
+                      <span className="string">"space-y-2"</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">21</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      21
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">SkipLink</span> href=<span className="string">"#navigation"</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">SkipLink</span> href=
+                      <span className="string">"#navigation"</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">22</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      22
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller à la navigation</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller
+                        à la navigation
+                      </span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">23</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      23
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">SkipLink</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                      </span>
+                      <span className="tag">SkipLink</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">24</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      24
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">Button</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">Button</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">25</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      25
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">EyeOff</span> className=<span className="string">"w-4 h-4"</span> /<span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">EyeOff</span> className=
+                      <span className="string">"w-4 h-4"</span> /
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">26</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      26
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span><span className="tag">VisuallyHidden</span><span>&gt;</span>Masquer le contenu<span>&lt;/</span><span className="tag">VisuallyHidden</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                      </span>
+                      <span className="tag">VisuallyHidden</span>
+                      <span>&gt;</span>Masquer le contenu<span>&lt;/</span>
+                      <span className="tag">VisuallyHidden</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">27</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      27
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">Button</span><span>&gt;</span>
+                      <span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                      </span>
+                      <span className="tag">Button</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">28</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      28
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">div</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">div</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">29</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      29
+                    </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span><span className="tag">div</span><span>&gt;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">div</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">30</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      30
+                    </div>
                     <div className="flex-1">
                       <span>&nbsp;&nbsp;);</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">31</div>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      31
+                    </div>
                     <div className="flex-1">
                       <span>&#125;</span>
                     </div>
@@ -474,9 +622,13 @@ export default function A11yHelpersPage() {
             </p>
             <CodeBlock fileName="Terminal">
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  1
+                </div>
                 <div className="flex-1">
-                  <span className="keyword">npm</span> <span className="function">install</span> <span className="string">@cosmic-ui/ui</span>
+                  <span className="keyword">npm</span>{' '}
+                  <span className="function">install</span>{' '}
+                  <span className="string">@cosmic-ui/ui</span>
                 </div>
               </div>
             </CodeBlock>
@@ -493,71 +645,116 @@ export default function A11yHelpersPage() {
             </p>
             <CodeBlock fileName="usage.tsx">
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  1
+                </div>
                 <div className="flex-1">
-                  <span className="keyword">import</span> <span>&#123;</span> VisuallyHidden, SkipLink <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                  <span className="keyword">import</span> <span>&#123;</span>{' '}
+                  VisuallyHidden, SkipLink <span>&#125;</span>{' '}
+                  <span className="keyword">from</span>{' '}
+                  <span className="string">'@cosmic-ui/ui'</span>;
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  2
+                </div>
                 <div className="flex-1"></div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  3
+                </div>
                 <div className="flex-1">
-                  <span className="comment">// SkipLink pour la navigation</span>
+                  <span className="comment">
+                    // SkipLink pour la navigation
+                  </span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  4
+                </div>
                 <div className="flex-1">
-                  <span>&lt;</span><span className="tag">SkipLink</span> href=<span className="string">"#main"</span><span>&gt;</span>
+                  <span>&lt;</span>
+                  <span className="tag">SkipLink</span> href=
+                  <span className="string">"#main"</span>
+                  <span>&gt;</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  5
+                </div>
                 <div className="flex-1">
                   <span>&nbsp;&nbsp;Aller au contenu principal</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  6
+                </div>
                 <div className="flex-1">
-                  <span>&lt;/</span><span className="tag">SkipLink</span><span>&gt;</span>
+                  <span>&lt;/</span>
+                  <span className="tag">SkipLink</span>
+                  <span>&gt;</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  7
+                </div>
                 <div className="flex-1"></div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  8
+                </div>
                 <div className="flex-1">
-                  <span className="comment">// VisuallyHidden pour les lecteurs d'écran</span>
+                  <span className="comment">
+                    // VisuallyHidden pour les lecteurs d'écran
+                  </span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  9
+                </div>
                 <div className="flex-1">
-                  <span>&lt;</span><span className="tag">Button</span><span>&gt;</span>
+                  <span>&lt;</span>
+                  <span className="tag">Button</span>
+                  <span>&gt;</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">10</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  10
+                </div>
                 <div className="flex-1">
-                  <span>&nbsp;&nbsp;&lt;</span><span className="tag">Icon</span> /<span>&gt;</span>
+                  <span>&nbsp;&nbsp;&lt;</span>
+                  <span className="tag">Icon</span> /<span>&gt;</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">11</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  11
+                </div>
                 <div className="flex-1">
-                  <span>&nbsp;&nbsp;&lt;</span><span className="tag">VisuallyHidden</span><span>&gt;</span>Description de l'action<span>&lt;/</span><span className="tag">VisuallyHidden</span><span>&gt;</span>
+                  <span>&nbsp;&nbsp;&lt;</span>
+                  <span className="tag">VisuallyHidden</span>
+                  <span>&gt;</span>Description de l'action<span>&lt;/</span>
+                  <span className="tag">VisuallyHidden</span>
+                  <span>&gt;</span>
                 </div>
               </div>
               <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">12</div>
+                <div className="select-none pr-4 text-right text-gray-400 w-8">
+                  12
+                </div>
                 <div className="flex-1">
-                  <span>&lt;/</span><span className="tag">Button</span><span>&gt;</span>
+                  <span>&lt;/</span>
+                  <span className="tag">Button</span>
+                  <span>&gt;</span>
                 </div>
               </div>
             </CodeBlock>
@@ -692,65 +889,136 @@ export default function A11yHelpersPage() {
                 </div>
               ) : (
                 <div className="w-full">
-                <CodeBlock fileName="variants.tsx">
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
-                    <div className="flex-1">
-                      <span className="comment">// SkipLink personnalisé</span>
+                  <CodeBlock fileName="variants.tsx">
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        1
+                      </div>
+                      <div className="flex-1">
+                        <span className="keyword">import</span> <span>&#123;</span> VisuallyHidden, SkipLink <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
-                    <div className="flex-1">
-                      <span>&lt;</span><span className="tag">SkipLink</span> href=<span className="string">"#footer"</span><span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        2
+                      </div>
+                      <div className="flex-1">
+                        <span className="keyword">import</span> <span>&#123;</span> Button <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;Aller au pied de page</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        3
+                      </div>
+                      <div className="flex-1">
+                        <span className="keyword">import</span> <span>&#123;</span> SkipForward <span>&#125;</span> <span className="keyword">from</span> <span className="string">'lucide-react'</span>;
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
-                    <div className="flex-1">
-                      <span>&lt;/</span><span className="tag">SkipLink</span><span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        4
+                      </div>
+                      <div className="flex-1"></div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
-                    <div className="flex-1"></div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
-                    <div className="flex-1">
-                      <span className="comment">// VisuallyHidden avec texte descriptif</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        5
+                      </div>
+                      <div className="flex-1">
+                        <span className="comment">
+                          // SkipLink personnalisé
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
-                    <div className="flex-1">
-                      <span>&lt;</span><span className="tag">Button</span><span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        6
+                      </div>
+                      <div className="flex-1">
+                        <span>&lt;</span>
+                        <span className="tag">SkipLink</span> href=
+                        <span className="string">"#footer"</span>
+                        <span>&gt;</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&lt;</span><span className="tag">SkipForward</span> className=<span className="string">"w-4 h-4"</span> /<span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        7
+                      </div>
+                      <div className="flex-1">
+                        <span>&nbsp;&nbsp;Aller au pied de page</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&lt;</span><span className="tag">VisuallyHidden</span><span>&gt;</span>Passer à la section suivante<span>&lt;/</span><span className="tag">VisuallyHidden</span><span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        8
+                      </div>
+                      <div className="flex-1">
+                        <span>&lt;/</span>
+                        <span className="tag">SkipLink</span>
+                        <span>&gt;</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">10</div>
-                    <div className="flex-1">
-                      <span>&lt;/</span><span className="tag">Button</span><span>&gt;</span>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        9
+                      </div>
+                      <div className="flex-1"></div>
                     </div>
-                  </div>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        10
+                      </div>
+                      <div className="flex-1">
+                        <span className="comment">
+                          // VisuallyHidden avec texte descriptif
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        11
+                      </div>
+                      <div className="flex-1">
+                        <span>&lt;</span>
+                        <span className="tag">Button</span>
+                        <span>&gt;</span>
+                      </div>
+                    </div>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        12
+                      </div>
+                      <div className="flex-1">
+                        <span>&nbsp;&nbsp;&lt;</span>
+                        <span className="tag">SkipForward</span> className=
+                        <span className="string">"w-4 h-4"</span> /
+                        <span>&gt;</span>
+                      </div>
+                    </div>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        13
+                      </div>
+                      <div className="flex-1">
+                        <span>&nbsp;&nbsp;&lt;</span>
+                        <span className="tag">VisuallyHidden</span>
+                        <span>&gt;</span>Passer à la section suivante
+                        <span>&lt;/</span>
+                        <span className="tag">VisuallyHidden</span>
+                        <span>&gt;</span>
+                      </div>
+                    </div>
+                    <div className="flex" data-line>
+                      <div className="select-none pr-4 text-right text-gray-400 w-8">
+                        14
+                      </div>
+                      <div className="flex-1">
+                        <span>&lt;/</span>
+                        <span className="tag">Button</span>
+                        <span>&gt;</span>
+                      </div>
+                    </div>
                   </CodeBlock>
                 </div>
               )}
