@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Accordion } from '@cosmic-ui/ui';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@cosmic-ui/ui';
 
 export default function AccordionPage() {
   const [showCode, setShowCode] = useState(false);
   const [copiedStates, setCopiedStates] = useState({
     main: false,
+    single: false,
+    multiple: false,
   });
   const [packageManager, setPackageManager] = useState('pnpm');
 
@@ -15,27 +17,6 @@ export default function AccordionPage() {
     npm: 'npm install @cosmic-ui/ui',
     yarn: 'yarn add @cosmic-ui/ui',
   };
-
-  const accordionItems = [
-    {
-      value: 'item-1',
-      header: "Qu'est-ce que CosmicUI ?",
-      content:
-        'CosmicUI est une bibliothèque de composants React moderne et accessible, conçue pour créer des interfaces utilisateur élégantes et performantes.',
-    },
-    {
-      value: 'item-2',
-      header: 'Comment installer CosmicUI ?',
-      content:
-        'Vous pouvez installer CosmicUI via npm ou yarn : npm install @cosmic-ui/ui',
-    },
-    {
-      value: 'item-3',
-      header: 'CosmicUI est-il gratuit ?',
-      content:
-        'Oui, CosmicUI est entièrement gratuit et open source sous licence MIT.',
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,6 +74,7 @@ export default function AccordionPage() {
               <li>• Animations fluides d'ouverture/fermeture</li>
               <li>• Support des thèmes light/dark</li>
               <li>• Contenu personnalisable (texte, composants React)</li>
+              <li>• Icône de chevron avec rotation automatique</li>
             </ul>
           </div>
         </div>
@@ -125,32 +107,49 @@ export default function AccordionPage() {
               </div>
               <div className="p-2 min-h-[450px] flex items-center justify-start">
                 {!showCode ? (
-                  <Accordion items={accordionItems} />
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        CosmicUI est une bibliothèque de composants React moderne et accessible, conçue pour créer des interfaces utilisateur élégantes et performantes.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        Vous pouvez installer CosmicUI via npm, pnpm ou yarn : npm install @cosmic-ui/ui
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-3">
+                      <AccordionTrigger>CosmicUI est-il gratuit ?</AccordionTrigger>
+                      <AccordionContent>
+                        Oui, CosmicUI est entièrement gratuit et open source sous licence MIT.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 ) : (
                   <div className="relative w-full">
                     <div className="absolute top-4 right-4 z-10">
                       <button
                         onClick={async () => {
-                          const code = `import { Accordion } from "@cosmic-ui/ui";
+                          const code = `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@cosmic-ui/ui";
 
 export function AccordionDemo() {
-  const accordionItems = [
-    {
-      value: 'item-1',
-      header: 'Qu\\'est-ce que CosmicUI ?',
-      content: 'CosmicUI est une bibliothèque de composants React moderne et accessible.'
-    },
-    {
-      value: 'item-2',
-      header: 'Comment installer CosmicUI ?',
-      content: 'Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui'
-    }
-  ];
-
   return (
-    <div className="flex justify-center">
-      <Accordion items={accordionItems} />
-    </div>
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          CosmicUI est une bibliothèque de composants React moderne et accessible.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+        <AccordionContent>
+          Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   );
 }`;
                           try {
@@ -206,7 +205,7 @@ export function AccordionDemo() {
                         </div>
                         <div className="flex-1">
                           <span className="keyword">import</span>{' '}
-                          <span>&#123;</span> Accordion <span>&#125;</span>{' '}
+                          <span>&#123;</span> Accordion, AccordionItem, AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
                           <span className="keyword">from</span>{' '}
                           <span className="string">"@cosmic-ui/ui"</span>;
                         </div>
@@ -233,8 +232,7 @@ export function AccordionDemo() {
                         </div>
                         <div className="flex-1">
                           <span>&nbsp;&nbsp;</span>
-                          <span className="keyword">const</span> accordionItems
-                          = [
+                          <span className="keyword">return</span> (
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -242,7 +240,11 @@ export function AccordionDemo() {
                           5
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&#123;</span>
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span className="tag">Accordion</span> type=
+                          <span className="string">"single"</span> collapsible className=
+                          <span className="string">"w-full"</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -250,10 +252,10 @@ export function AccordionDemo() {
                           6
                         </div>
                         <div className="flex-1">
-                          <span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value:
-                          </span>{' '}
-                          <span className="string">'item-1'</span>,
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span className="tag">AccordionItem</span> value=
+                          <span className="string">"item-1"</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -261,13 +263,11 @@ export function AccordionDemo() {
                           7
                         </div>
                         <div className="flex-1">
-                          <span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header:
-                          </span>{' '}
-                          <span className="string">
-                            'Qu\\'est-ce que CosmicUI ?'
-                          </span>
-                          ,
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span className="tag">AccordionTrigger</span>
+                          <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
+                          <span className="tag">AccordionTrigger</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -275,12 +275,9 @@ export function AccordionDemo() {
                           8
                         </div>
                         <div className="flex-1">
-                          <span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:
-                          </span>{' '}
-                          <span className="string">
-                            'CosmicUI est une bibliothèque...'
-                          </span>
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                          <span className="tag">AccordionContent</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -288,7 +285,8 @@ export function AccordionDemo() {
                           9
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          CosmicUI est une bibliothèque de composants React...
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -296,22 +294,29 @@ export function AccordionDemo() {
                           10
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;];</span>
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                          <span className="tag">AccordionContent</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
                           11
                         </div>
-                        <div className="flex-1"></div>
+                        <div className="flex-1">
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                          <span className="tag">AccordionItem</span>
+                          <span>&gt;</span>
+                        </div>
                       </div>
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
                           12
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;</span>
-                          <span className="keyword">return</span> (
+                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                          <span className="tag">Accordion</span>
+                          <span>&gt;</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
@@ -319,44 +324,12 @@ export function AccordionDemo() {
                           13
                         </div>
                         <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                          <span className="tag">div</span> className=
-                          <span className="string">"flex justify-center"</span>
-                          <span>&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          14
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                          <span className="tag">Accordion</span> items=
-                          <span>&#123;</span>accordionItems<span>&#125;</span>
-                          <span>&nbsp;/&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          15
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                          <span className="tag">div</span>
-                          <span>&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          16
-                        </div>
-                        <div className="flex-1">
                           <span>&nbsp;&nbsp;);</span>
                         </div>
                       </div>
                       <div className="flex" data-line>
                         <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          17
+                          14
                         </div>
                         <div className="flex-1">
                           <span>&#125;</span>
@@ -432,7 +405,13 @@ export function AccordionDemo() {
             </div>
             <div className="px-4 py-3.5 bg-white dark:bg-black">
               <pre className="font-mono text-sm leading-relaxed">
-                <code>{installCommands[packageManager as keyof typeof installCommands]}</code>
+                <code>
+                  {
+                    installCommands[
+                      packageManager as keyof typeof installCommands
+                    ]
+                  }
+                </code>
               </pre>
             </div>
           </div>
@@ -442,8 +421,7 @@ export function AccordionDemo() {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-foreground">Usage</h2>
           <p className="text-muted-foreground mb-4">
-            Importez le composant et créez un tableau d'éléments avec value,
-            header et content.
+            L'Accordion utilise une structure composée de 4 composants principaux : Accordion (conteneur), AccordionItem (élément), AccordionTrigger (déclencheur) et AccordionContent (contenu).
           </p>
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
             <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 px-3 py-1 mb-3">
@@ -469,7 +447,7 @@ export function AccordionDemo() {
                     </div>
                     <div className="flex-1">
                       <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> Accordion <span>&#125;</span>{' '}
+                      <span>&#123;</span> Accordion, AccordionItem, AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
                       <span className="keyword">from</span>{' '}
                       <span className="string">"@cosmic-ui/ui"</span>;
                     </div>
@@ -485,7 +463,9 @@ export function AccordionDemo() {
                       3
                     </div>
                     <div className="flex-1">
-                      <span className="keyword">const</span> items = [
+                      <span className="keyword">export function</span>{' '}
+                      <span className="function">MyAccordion</span>
+                      () <span>&#123;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -493,7 +473,8 @@ export function AccordionDemo() {
                       4
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&#123;</span>
+                      <span>&nbsp;&nbsp;</span>
+                      <span className="keyword">return</span> (
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -501,8 +482,10 @@ export function AccordionDemo() {
                       5
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;value:</span>{' '}
-                      <span className="string">'item-1'</span>,
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">Accordion</span> type=
+                      <span className="string">"single"</span> collapsible
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -510,8 +493,10 @@ export function AccordionDemo() {
                       6
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;header:</span>{' '}
-                      <span className="string">'Question 1'</span>,
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">AccordionItem</span> value=
+                      <span className="string">"item-1"</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -519,8 +504,11 @@ export function AccordionDemo() {
                       7
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;content:</span>{' '}
-                      <span className="string">'Réponse 1'</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">AccordionTrigger</span>
+                      <span>&gt;</span>Question 1&lt;/
+                      <span className="tag">AccordionTrigger</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -528,7 +516,11 @@ export function AccordionDemo() {
                       8
                     </div>
                     <div className="flex-1">
-                      <span>&nbsp;&nbsp;&#125;</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                      <span className="tag">AccordionContent</span>
+                      <span>&gt;</span>Réponse 1&lt;/
+                      <span className="tag">AccordionContent</span>
+                      <span>&gt;</span>
                     </div>
                   </div>
                   <div className="flex" data-line>
@@ -536,7 +528,35 @@ export function AccordionDemo() {
                       9
                     </div>
                     <div className="flex-1">
-                      <span>];</span>
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">AccordionItem</span>
+                      <span>&gt;</span>
+                    </div>
+                  </div>
+                  <div className="flex" data-line>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      10
+                    </div>
+                    <div className="flex-1">
+                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                      <span className="tag">Accordion</span>
+                      <span>&gt;</span>
+                    </div>
+                  </div>
+                  <div className="flex" data-line>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      11
+                    </div>
+                    <div className="flex-1">
+                      <span>&nbsp;&nbsp;);</span>
+                    </div>
+                  </div>
+                  <div className="flex" data-line>
+                    <div className="select-none pr-4 text-right text-gray-400 w-8">
+                      12
+                    </div>
+                    <div className="flex-1">
+                      <span>&#125;</span>
                     </div>
                   </div>
                 </code>
@@ -558,7 +578,7 @@ export function AccordionDemo() {
             </h3>
             <p className="text-muted-foreground mb-4 text-sm">
               Un seul élément peut être ouvert à la fois. Parfait pour les FAQ
-              ou les menus de navigation.
+              ou les menus de navigation. L'élément ouvert peut être refermé en cliquant dessus.
             </p>
             <div className="flex justify-start">
               <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
@@ -571,7 +591,20 @@ export function AccordionDemo() {
                   </button>
                 </div>
                 <div className="p-2 min-h-[450px] flex items-center justify-start">
-                  <Accordion items={accordionItems} type="single" />
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        CosmicUI est une bibliothèque de composants React moderne et accessible.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               </div>
             </div>
@@ -597,7 +630,20 @@ export function AccordionDemo() {
                   </button>
                 </div>
                 <div className="p-2 min-h-[450px] flex items-center justify-start">
-                  <Accordion items={accordionItems} type="multiple" />
+                  <Accordion type="multiple" className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>Qu'est-ce que CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        CosmicUI est une bibliothèque de composants React moderne et accessible.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>Comment installer CosmicUI ?</AccordionTrigger>
+                      <AccordionContent>
+                        Vous pouvez installer CosmicUI via npm : npm install @cosmic-ui/ui
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               </div>
             </div>
