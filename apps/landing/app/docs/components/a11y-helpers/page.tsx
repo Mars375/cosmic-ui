@@ -46,7 +46,7 @@ const CodeBlock = ({
           </button>
         </div>
         <div className="px-4 py-3.5 bg-white dark:bg-black">
-          <pre className="font-mono text-sm leading-relaxed">
+          <pre className="font-mono text-sm leading-relaxed" data-line>
             <code>{children}</code>
           </pre>
         </div>
@@ -210,37 +210,55 @@ export function MyA11yHelpers() {
                     )
                   }
                 >
-                  {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-import { Eye, EyeOff } from 'lucide-react';
-
-export function MyA11yHelpers() {
-  return (
-    <div className="space-y-4">
-      {/* SkipLink pour la navigation */}
-      <SkipLink href="#main">
-        Aller au contenu principal
-      </SkipLink>
-      
-      {/* VisuallyHidden pour les lecteurs d'écran */}
-      <Button>
-        <Eye className="w-4 h-4" />
-        <VisuallyHidden>Voir le contenu</VisuallyHidden>
-      </Button>
-      
-      {/* Exemple combiné */}
-      <div className="space-y-2">
-        <SkipLink href="#navigation">
-          Aller à la navigation
-        </SkipLink>
-        <Button>
-          <EyeOff className="w-4 h-4" />
-          <VisuallyHidden>Masquer le contenu</VisuallyHidden>
-        </Button>
-      </div>
-    </div>
-  );
-}`}
+                  {<>
+                    <span className="keyword">import</span>{' '}
+                    <span>&#123;</span> VisuallyHidden, SkipLink{' '}
+                    <span>&#125;</span> <span className="keyword">from</span>{' '}
+                    <span className="string">'@cosmic-ui/ui'</span>;<br />
+                    <span className="keyword">import</span>{' '}
+                    <span>&#123;</span> Button{' '}
+                    <span>&#125;</span> <span className="keyword">from</span>{' '}
+                    <span className="string">'@cosmic-ui/ui'</span>;<br />
+                    <span className="keyword">import</span>{' '}
+                    <span>&#123;</span> Eye, EyeOff{' '}
+                    <span>&#125;</span> <span className="keyword">from</span>{' '}
+                    <span className="string">'lucide-react'</span>;<br /><br />
+                    <span className="keyword">export function</span>{' '}
+                    <span className="function">MyA11yHelpers</span>(){' '}
+                    <span>&#123;</span><br />
+                    &nbsp;&nbsp;<span className="keyword">return</span> (<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">div</span> className=
+                    <span className="string">"space-y-4"</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="comment">&#123;/* SkipLink pour la navigation */&#125;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">SkipLink</span> href=
+                    <span className="string">"#main"</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller au contenu principal<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/SkipLink</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="comment">&#123;/* VisuallyHidden pour les lecteurs d'écran */&#125;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">Button</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">Eye</span> className=
+                    <span className="string">"w-4 h-4"</span> /<span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>Voir le contenu<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/Button</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="comment">&#123;/* Exemple combiné */&#125;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">div</span> className=
+                    <span className="string">"space-y-2"</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">SkipLink</span> href=
+                    <span className="string">"#navigation"</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller à la navigation<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/SkipLink</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">Button</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">EyeOff</span> className=
+                    <span className="string">"w-4 h-4"</span> /<span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>Masquer le contenu<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/Button</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/div</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">/div</span><span>&gt;</span><br />
+                    &nbsp;&nbsp;);<br />
+                    <span>&#125;</span>
+                  </>}
                 </CodeBlock>
               </div>
             )}
@@ -260,7 +278,9 @@ export function MyA11yHelpers() {
                 handleCopy(`npm install @cosmic-ui/ui`, 'install')
               }
             >
-              {`npm install @cosmic-ui/ui`}
+              {<>
+                <span className="keyword">npm</span> <span className="function">install</span> <span className="string">@cosmic-ui/ui</span>
+              </>}
             </CodeBlock>
           </div>
         </div>
@@ -291,18 +311,22 @@ export function MyA11yHelpers() {
                 )
               }
             >
-              {`import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
-
-// SkipLink pour la navigation
-<SkipLink href="#main">
-  Aller au contenu principal
-</SkipLink>
-
-// VisuallyHidden pour les lecteurs d'écran
-<Button>
-  <Icon />
-  <VisuallyHidden>Description de l'action</VisuallyHidden>
-</Button>`}
+              {<>
+                <span className="keyword">import</span>{' '}
+                <span>&#123;</span> VisuallyHidden, SkipLink{' '}
+                <span>&#125;</span> <span className="keyword">from</span>{' '}
+                <span className="string">'@cosmic-ui/ui'</span>;<br /><br />
+                <span className="comment">// SkipLink pour la navigation</span><br />
+                <span className="tag">SkipLink</span> href=
+                <span className="string">"#main"</span><span>&gt;</span><br />
+                &nbsp;&nbsp;Aller au contenu principal<br />
+                <span className="tag">/SkipLink</span><span>&gt;</span><br /><br />
+                <span className="comment">// VisuallyHidden pour les lecteurs d'écran</span><br />
+                <span className="tag">Button</span><span>&gt;</span><br />
+                &nbsp;&nbsp;<span className="tag">Icon</span> /<span>&gt;</span><br />
+                &nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>Description de l'action<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                <span className="tag">/Button</span><span>&gt;</span>
+              </>}
             </CodeBlock>
           </div>
         </div>
@@ -402,42 +426,47 @@ export function MyA11yHelpers() {
                       )
                     }
                   >
-                    {`// SkipLink personnalisé
-<SkipLink href="#footer">
-  Aller au pied de page
-</SkipLink>
-
-// VisuallyHidden avec texte descriptif
-<Button>
-  <SkipForward className="w-4 h-4" />
-  <VisuallyHidden>Passer à la section suivante</VisuallyHidden>
-</Button>
-
-// SkipLink avec contenu personnalisé
-<SkipLink href="#search">
-  <span className="flex items-center gap-2">
-    <SearchIcon className="w-4 h-4" />
-    Aller à la recherche
-  </span>
-</SkipLink>
-
-// VisuallyHidden pour les formulaires
-<label>
-  Email
-  <VisuallyHidden>(requis)</VisuallyHidden>
-  <Input type="email" required />
-</label>
-
-// SkipLink pour les sections importantes
-<SkipLink href="#main-content">
-  Aller au contenu principal
-</SkipLink>
-
-// VisuallyHidden pour les icônes
-<Button>
-  <DownloadIcon className="w-4 h-4" />
-  <VisuallyHidden>Télécharger le fichier</VisuallyHidden>
-</Button>`}
+                    {<>
+                      <span className="comment">// SkipLink personnalisé</span><br />
+                      <span className="tag">SkipLink</span> href=
+                      <span className="string">"#footer"</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;Aller au pied de page<br />
+                      <span className="tag">/SkipLink</span><span>&gt;</span><br /><br />
+                      <span className="comment">// VisuallyHidden avec texte descriptif</span><br />
+                      <span className="tag">Button</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">SkipForward</span> className=
+                      <span className="string">"w-4 h-4"</span> /<span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>Passer à la section suivante<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                      <span className="tag">/Button</span><span>&gt;</span><br /><br />
+                      <span className="comment">// SkipLink avec contenu personnalisé</span><br />
+                      <span className="tag">SkipLink</span> href=
+                      <span className="string">"#search"</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">span</span> className=
+                      <span className="string">"flex items-center gap-2"</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="tag">SearchIcon</span> className=
+                      <span className="string">"w-4 h-4"</span> /<span>&gt;</span><br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;Aller à la recherche<br />
+                      &nbsp;&nbsp;<span className="tag">/span</span><span>&gt;</span><br />
+                      <span className="tag">/SkipLink</span><span>&gt;</span><br /><br />
+                      <span className="comment">// VisuallyHidden pour les formulaires</span><br />
+                      <span className="tag">label</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;Email<br />
+                      &nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>(requis)<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">Input</span> type=
+                      <span className="string">"email"</span> required /<span>&gt;</span><br />
+                      <span className="tag">/label</span><span>&gt;</span><br /><br />
+                      <span className="comment">// SkipLink pour les sections importantes</span><br />
+                      <span className="tag">SkipLink</span> href=
+                      <span className="string">"#main-content"</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;Aller au contenu principal<br />
+                      <span className="tag">/SkipLink</span><span>&gt;</span><br /><br />
+                      <span className="comment">// VisuallyHidden pour les icônes</span><br />
+                      <span className="tag">Button</span><span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">DownloadIcon</span> className=
+                      <span className="string">"w-4 h-4"</span> /<span>&gt;</span><br />
+                      &nbsp;&nbsp;<span className="tag">VisuallyHidden</span><span>&gt;</span>Télécharger le fichier<span className="tag">/VisuallyHidden</span><span>&gt;</span><br />
+                      <span className="tag">/Button</span><span>&gt;</span>
+                    </>}
                   </CodeBlock>
                 </div>
               )}

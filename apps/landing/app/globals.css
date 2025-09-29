@@ -299,3 +299,12 @@
 [data-line] span:is(.dark *) {
   color: var(--shiki-text-dark) !important;
 }
+
+/* Coloration des commentaires */
+[data-line] .comment {
+  color: #6a737d;
+}
+
+[data-line] .comment:is(.dark *) {
+  color: #8b949e !important;
+}
