@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "private": false,
   "type": "module",
+  "description": "A modern, accessible React component library with dark mode support",
+  "keywords": ["react", "components", "ui", "tailwind", "typescript", "dark-mode", "accessible"],
+  "author": "Cosmic UI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/cosmic-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://cosmic-ui.dev",
+  "bugs": {
+    "url": "https://github.com/your-username/cosmic-ui/issues"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -34,7 +47,7 @@
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
-  "devDependencies": {
+  "dependencies": {
     "@cosmic-ui/tokens": "workspace:*",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -48,6 +61,12 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-toast": "^1.2.15",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "class-variance-authority": "^0.7.0",
+    "react-hook-form": "^7.63.0",
+    "recharts": "^3.2.1",
+    "tailwind-merge": "^2.5.2"
+  },
+  "devDependencies": {
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
@@ -65,7 +84,6 @@
     "@typescript-eslint/parser": "^8.44.1",
     "autoprefixer": "^10.4.20",
     "axe-core": "^4.10.0",
-    "class-variance-authority": "^0.7.0",
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^9.1.2",
     "eslint-plugin-react": "^7.37.5",
@@ -79,10 +97,7 @@
     "prettier": "^3.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.63.0",
-    "recharts": "^3.2.1",
     "storybook": "^8.2.9",
-    "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.10",
     "tsup": "^8.2.4",
     "typescript": "^5.6.3"

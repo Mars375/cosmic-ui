@@ -58,10 +58,11 @@ export function StepWizard({
       size === 'md' && 'w-8 h-8 text-sm',
       size === 'lg' && 'w-10 h-10 text-base',
       status === 'completed' && 'bg-cosmic-primary text-white',
-      status === 'current' && 'bg-cosmic-primary text-white ring-2 ring-cosmic-primary ring-offset-2 ring-offset-cosmic-background',
+      status === 'current' &&
+        'bg-cosmic-primary text-white ring-2 ring-cosmic-primary ring-offset-2 ring-offset-cosmic-background',
       status === 'upcoming' && 'bg-cosmic-border text-white/50',
       isClickable && 'cursor-pointer hover:bg-cosmic-primary/80',
-      step.disabled && 'cursor-not-allowed opacity-50'
+      step.disabled && 'cursor-not-allowed opacity-50',
     );
 
     const content = (() => {

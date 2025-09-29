@@ -351,10 +351,7 @@ export function TeamManagement({
       )}
 
       {/* Invite Modal */}
-      <Modal
-        open={showInviteModal}
-        onOpenChange={(open) => setShowInviteModal(open)}
-      >
+      <Modal open={showInviteModal} onOpenChange={(open) => setShowInviteModal(open)}>
         <ModalHeader>
           <ModalTitle>Inviter un membre</ModalTitle>
         </ModalHeader>
@@ -381,7 +378,6 @@ export function TeamManagement({
               <option value="viewer">Observateur</option>
             </select>
           </div>
-
         </div>
         <ModalFooter>
           <Button variant="outline" onClick={() => setShowInviteModal(false)}>

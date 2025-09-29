@@ -75,25 +75,33 @@ export function NavigationMenu({
       size === 'lg' && 'px-4 py-3 text-base',
       orientation === 'vertical' && 'w-full',
       item.disabled && 'opacity-50 cursor-not-allowed',
-      !item.disabled && 'cursor-pointer'
+      !item.disabled && 'cursor-pointer',
     );
 
     const variantClasses = twMerge(
       // Default variant
-      variant === 'default' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/50',
+      variant === 'default' &&
+        !isActive &&
+        'text-white/70 hover:text-white hover:bg-cosmic-border/50',
       variant === 'default' && isActive && 'text-white bg-cosmic-primary',
 
       // Pills variant
-      variant === 'pills' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/50',
+      variant === 'pills' &&
+        !isActive &&
+        'text-white/70 hover:text-white hover:bg-cosmic-border/50',
       variant === 'pills' && isActive && 'text-white bg-cosmic-primary',
 
       // Underline variant
-      variant === 'underline' && !isActive && 'text-white/70 hover:text-white border-b-2 border-transparent hover:border-cosmic-primary',
+      variant === 'underline' &&
+        !isActive &&
+        'text-white/70 hover:text-white border-b-2 border-transparent hover:border-cosmic-primary',
       variant === 'underline' && isActive && 'text-white border-b-2 border-cosmic-primary',
 
       // Ghost variant
-      variant === 'ghost' && !isActive && 'text-white/70 hover:text-white hover:bg-cosmic-border/30',
-      variant === 'ghost' && isActive && 'text-white bg-cosmic-border/20'
+      variant === 'ghost' &&
+        !isActive &&
+        'text-white/70 hover:text-white hover:bg-cosmic-border/30',
+      variant === 'ghost' && isActive && 'text-white bg-cosmic-border/20',
     );
 
     return (

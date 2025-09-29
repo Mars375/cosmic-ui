@@ -67,7 +67,7 @@ function parseMarkdown(content: string): React.ReactNode[] {
               level === 3 && 'text-xl mb-2',
               level === 4 && 'text-lg mb-2',
               level === 5 && 'text-base mb-1',
-              level === 6 && 'text-sm mb-1'
+              level === 6 && 'text-sm mb-1',
             ),
           },
           text,
