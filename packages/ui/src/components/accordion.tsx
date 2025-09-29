@@ -16,7 +16,7 @@ export interface AccordionProps {
 
 export const Accordion = ({ className, items, type = 'single' }: AccordionProps) => {
   return (
-    <RadixAccordion.Root type={type as any} collapsible className="w-full">
+    <RadixAccordion.Root type={type as any} className="w-full">
       {items.map((it) => (
         <RadixAccordion.Item
           key={it.value}
