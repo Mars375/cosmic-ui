@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { PricingTable } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { PricingTable } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Check, Star, Zap } from 'lucide-react';
 
 const CodeBlock = ({
@@ -296,7 +296,7 @@ export default function PricingTablePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { PricingTable } from '@cosmic-ui/react';
+                      `import { PricingTable } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyPricingTable() {
@@ -402,7 +402,7 @@ export function MyPricingTable() {
                     )
                   }
                 >
-                  {`import { PricingTable } from '@cosmic-ui/react';
+                  {`import { PricingTable } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyPricingTable() {
@@ -516,14 +516,14 @@ export function MyPricingTable() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant PricingTable est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -538,7 +538,7 @@ export function MyPricingTable() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { PricingTable } from '@cosmic-ui/react';
+                  `import { PricingTable } from '@cosmic-ui/components';
 
 const plans = [
   {
@@ -568,7 +568,7 @@ const plans = [
                 )
               }
             >
-              {`import { PricingTable } from '@cosmic-ui/react';
+              {`import { PricingTable } from '@cosmic-ui/components';
 
 const plans = [
   {

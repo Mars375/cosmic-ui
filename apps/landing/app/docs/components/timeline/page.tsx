@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Timeline } from '@cosmic-ui/react';
+import { Timeline } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -148,7 +148,7 @@ export default function TimelinePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { Timeline } from '@cosmic-ui/react';
+                      `import { Timeline } from '@cosmic-ui/components';
 
 const items = [
   {
@@ -184,7 +184,7 @@ export function MyTimeline() {
                     )
                   }
                 >
-                  {`import { Timeline } from '@cosmic-ui/react';
+                  {`import { Timeline } from '@cosmic-ui/components';
 
 const items = [
   {
@@ -228,14 +228,14 @@ export function MyTimeline() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant Timeline est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -250,7 +250,7 @@ export function MyTimeline() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { Timeline } from '@cosmic-ui/react';
+                  `import { Timeline } from '@cosmic-ui/components';
 
 const items = [
   {
@@ -267,7 +267,7 @@ const items = [
                 )
               }
             >
-              {`import { Timeline } from '@cosmic-ui/react';
+              {`import { Timeline } from '@cosmic-ui/components';
 
 const items = [
   {

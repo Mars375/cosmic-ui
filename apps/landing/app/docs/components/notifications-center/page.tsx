@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { NotificationsCenter } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { NotificationsCenter } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Bell, Check, X, Info, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 
 const CodeBlock = ({
@@ -213,7 +213,7 @@ export default function NotificationsCenterPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { NotificationsCenter } from '@cosmic-ui/react';
+                      `import { NotificationsCenter } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyNotificationsCenter() {
@@ -294,7 +294,7 @@ export function MyNotificationsCenter() {
                     )
                   }
                 >
-                  {`import { NotificationsCenter } from '@cosmic-ui/react';
+                  {`import { NotificationsCenter } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyNotificationsCenter() {
@@ -383,14 +383,14 @@ export function MyNotificationsCenter() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant NotificationsCenter est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -405,7 +405,7 @@ export function MyNotificationsCenter() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { NotificationsCenter } from '@cosmic-ui/react';
+                  `import { NotificationsCenter } from '@cosmic-ui/components';
 
 const notifications = [
   {
@@ -430,7 +430,7 @@ const notifications = [
                 )
               }
             >
-              {`import { NotificationsCenter } from '@cosmic-ui/react';
+              {`import { NotificationsCenter } from '@cosmic-ui/components';
 
 const notifications = [
   {

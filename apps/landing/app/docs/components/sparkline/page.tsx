@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkline } from '@cosmic-ui/react';
+import { Sparkline } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -141,7 +141,7 @@ export default function SparklinePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { Sparkline } from '@cosmic-ui/react';
+                      `import { Sparkline } from '@cosmic-ui/components';
 
 const data = [10, 25, 15, 30, 20, 35, 25, 40, 30, 45, 35, 50];
 
@@ -170,7 +170,7 @@ export function MySparkline() {
                     )
                   }
                 >
-                  {`import { Sparkline } from '@cosmic-ui/react';
+                  {`import { Sparkline } from '@cosmic-ui/components';
 
 const data = [10, 25, 15, 30, 20, 35, 25, 40, 30, 45, 35, 50];
 
@@ -207,14 +207,14 @@ export function MySparkline() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant Sparkline est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -229,7 +229,7 @@ export function MySparkline() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { Sparkline } from '@cosmic-ui/react';
+                  `import { Sparkline } from '@cosmic-ui/components';
 
 const data = [10, 25, 15, 30, 20, 35, 25, 40];
 
@@ -245,7 +245,7 @@ const data = [10, 25, 15, 30, 20, 35, 25, 40];
                 )
               }
             >
-              {`import { Sparkline } from '@cosmic-ui/react';
+              {`import { Sparkline } from '@cosmic-ui/components';
 
 const data = [10, 25, 15, 30, 20, 35, 25, 40];
 

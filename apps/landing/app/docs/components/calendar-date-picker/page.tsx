@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CalendarDatePicker } from '@cosmic-ui/react';
+import { CalendarDatePicker } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -138,7 +138,7 @@ export default function CalendarDatePickerPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { CalendarDatePicker } from '@cosmic-ui/react';
+                      `import { CalendarDatePicker } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyCalendarDatePicker() {
@@ -165,7 +165,7 @@ export function MyCalendarDatePicker() {
                     )
                   }
                 >
-                  {`import { CalendarDatePicker } from '@cosmic-ui/react';
+                  {`import { CalendarDatePicker } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyCalendarDatePicker() {
@@ -200,14 +200,14 @@ export function MyCalendarDatePicker() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant CalendarDatePicker est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -222,7 +222,7 @@ export function MyCalendarDatePicker() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { CalendarDatePicker } from '@cosmic-ui/react';
+                  `import { CalendarDatePicker } from '@cosmic-ui/components';
 
 <CalendarDatePicker
   value={selectedDate}
@@ -232,7 +232,7 @@ export function MyCalendarDatePicker() {
                 )
               }
             >
-              {`import { CalendarDatePicker } from '@cosmic-ui/react';
+              {`import { CalendarDatePicker } from '@cosmic-ui/components';
 
 <CalendarDatePicker
   value={selectedDate}

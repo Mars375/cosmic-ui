@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Search, Bell, User, Settings } from 'lucide-react';
 
 const CodeBlock = ({
@@ -157,8 +157,8 @@ export default function TopbarPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                      `import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Search, Bell, User, Settings } from 'lucide-react';
 
 export function MyTopbar() {
@@ -195,8 +195,8 @@ export function MyTopbar() {
                     )
                   }
                 >
-                  {`import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                  {`import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Search, Bell, User, Settings } from 'lucide-react';
 
 export function MyTopbar() {
@@ -241,14 +241,14 @@ export function MyTopbar() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant Topbar est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -264,7 +264,7 @@ export function MyTopbar() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { Topbar } from '@cosmic-ui/react';
+                  `import { Topbar } from '@cosmic-ui/components';
 
 <Topbar
   logo={<span>Mon App</span>}
@@ -275,7 +275,7 @@ export function MyTopbar() {
                 )
               }
             >
-              {`import { Topbar } from '@cosmic-ui/react';
+              {`import { Topbar } from '@cosmic-ui/components';
 
 <Topbar
   logo={<span>Mon App</span>}

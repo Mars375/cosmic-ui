@@ -10,8 +10,8 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+} from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { X, Settings, User, Bell } from 'lucide-react';
 
 const CodeBlock = ({
@@ -176,8 +176,8 @@ export default function DrawerPage() {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+} from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { User, Settings, Bell } from 'lucide-react';
 import { useState } from 'react';
 
@@ -235,8 +235,8 @@ export function MyDrawer() {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+} from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { User, Settings, Bell } from 'lucide-react';
 import { useState } from 'react';
 
@@ -293,14 +293,14 @@ export function MyDrawer() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant Drawer est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -315,7 +315,7 @@ export function MyDrawer() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { Drawer, DrawerTrigger, DrawerContent } from '@cosmic-ui/react';
+                  `import { Drawer, DrawerTrigger, DrawerContent } from '@cosmic-ui/components';
 
 <Drawer>
   <DrawerTrigger asChild>
@@ -329,7 +329,7 @@ export function MyDrawer() {
                 )
               }
             >
-              {`import { Drawer, DrawerTrigger, DrawerContent } from '@cosmic-ui/react';
+              {`import { Drawer, DrawerTrigger, DrawerContent } from '@cosmic-ui/components';
 
 <Drawer>
   <DrawerTrigger asChild>

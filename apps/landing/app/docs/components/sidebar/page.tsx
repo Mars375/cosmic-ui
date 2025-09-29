@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Sidebar } from '@cosmic-ui/react';
+import { Sidebar } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, FileText, BarChart3 } from 'lucide-react';
 
 const CodeBlock = ({
@@ -197,7 +197,7 @@ export default function SidebarPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { Sidebar } from '@cosmic-ui/react';
+                      `import { Sidebar } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, FileText, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -280,7 +280,7 @@ export function MySidebar() {
                     )
                   }
                 >
-                  {`import { Sidebar } from '@cosmic-ui/react';
+                  {`import { Sidebar } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, FileText, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -371,14 +371,14 @@ export function MySidebar() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant Sidebar est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -394,7 +394,7 @@ export function MySidebar() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { Sidebar } from '@cosmic-ui/react';
+                  `import { Sidebar } from '@cosmic-ui/components';
 
 const items = [
   { key: 'home', label: 'Accueil', href: '/' },
@@ -406,7 +406,7 @@ const items = [
                 )
               }
             >
-              {`import { Sidebar } from '@cosmic-ui/react';
+              {`import { Sidebar } from '@cosmic-ui/components';
 
 const items = [
   { key: 'home', label: 'Accueil', href: '/' },

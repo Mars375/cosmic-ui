@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { TeamManagement } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { TeamManagement } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Users, UserPlus, Mail, Shield, Eye, UserX } from 'lucide-react';
 
 const CodeBlock = ({
@@ -276,7 +276,7 @@ export default function TeamManagementPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { TeamManagement } from '@cosmic-ui/react';
+                      `import { TeamManagement } from '@cosmic-ui/components';
 
 export function MyTeamManagement() {
   const members = [
@@ -364,7 +364,7 @@ export function MyTeamManagement() {
                     )
                   }
                 >
-                  {`import { TeamManagement } from '@cosmic-ui/react';
+                  {`import { TeamManagement } from '@cosmic-ui/components';
 
 export function MyTeamManagement() {
   const members = [
@@ -460,14 +460,14 @@ export function MyTeamManagement() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant TeamManagement est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -482,7 +482,7 @@ export function MyTeamManagement() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { TeamManagement } from '@cosmic-ui/react';
+                  `import { TeamManagement } from '@cosmic-ui/components';
 
 const members = [
   {
@@ -512,7 +512,7 @@ const invitations = [];
                 )
               }
             >
-              {`import { TeamManagement } from '@cosmic-ui/react';
+              {`import { TeamManagement } from '@cosmic-ui/components';
 
 const members = [
   {

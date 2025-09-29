@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { RichTextEditor } from '@cosmic-ui/react';
+import { RichTextEditor } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -133,7 +133,7 @@ export default function RichTextEditorPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { RichTextEditor } from '@cosmic-ui/react';
+                      `import { RichTextEditor } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyRichTextEditor() {
@@ -153,7 +153,7 @@ export function MyRichTextEditor() {
                     )
                   }
                 >
-                  {`import { RichTextEditor } from '@cosmic-ui/react';
+                  {`import { RichTextEditor } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyRichTextEditor() {
@@ -181,14 +181,14 @@ export function MyRichTextEditor() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant RichTextEditor est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -204,7 +204,7 @@ export function MyRichTextEditor() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { RichTextEditor } from '@cosmic-ui/react';
+                  `import { RichTextEditor } from '@cosmic-ui/components';
 
 <RichTextEditor
   value={htmlContent}
@@ -217,7 +217,7 @@ export function MyRichTextEditor() {
                 )
               }
             >
-              {`import { RichTextEditor } from '@cosmic-ui/react';
+              {`import { RichTextEditor } from '@cosmic-ui/components';
 
 <RichTextEditor
   value={htmlContent}

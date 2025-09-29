@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { MarkdownRenderer } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { MarkdownRenderer } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { FileText, Code, Hash } from 'lucide-react';
 
 const CodeBlock = ({
@@ -238,7 +238,7 @@ const createUser = (userData: Omit<User, 'id'>): User => {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { MarkdownRenderer } from '@cosmic-ui/react';
+                      `import { MarkdownRenderer } from '@cosmic-ui/components';
 
 export function MyMarkdownRenderer() {
   const markdownContent = \`# Titre Principal
@@ -285,7 +285,7 @@ function hello() {
                     )
                   }
                 >
-                  {`import { MarkdownRenderer } from '@cosmic-ui/react';
+                  {`import { MarkdownRenderer } from '@cosmic-ui/components';
 
 export function MyMarkdownRenderer() {
   const markdownContent = \`# Titre Principal
@@ -340,14 +340,14 @@ function hello() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant MarkdownRenderer est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -362,7 +362,7 @@ function hello() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { MarkdownRenderer } from '@cosmic-ui/react';
+                  `import { MarkdownRenderer } from '@cosmic-ui/components';
 
 const content = \`# Mon Titre
 Ceci est du **texte en gras** et du *texte en italique*.\`;
@@ -375,7 +375,7 @@ Ceci est du **texte en gras** et du *texte en italique*.\`;
                 )
               }
             >
-              {`import { MarkdownRenderer } from '@cosmic-ui/react';
+              {`import { MarkdownRenderer } from '@cosmic-ui/components';
 
 const content = \`# Mon Titre
 Ceci est du **texte en gras** et du *texte en italique*.\`;

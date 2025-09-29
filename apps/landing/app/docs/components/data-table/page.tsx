@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { DataTable } from '@cosmic-ui/react';
-import { Badge } from '@cosmic-ui/react';
+import { DataTable } from '@cosmic-ui/components';
+import { Badge } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -195,8 +195,8 @@ export default function DataTablePage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { DataTable } from '@cosmic-ui/react';
-import { Badge } from '@cosmic-ui/react';
+                      `import { DataTable } from '@cosmic-ui/components';
+import { Badge } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 interface User {
@@ -259,8 +259,8 @@ export function MyDataTable() {
                     )
                   }
                 >
-                  {`import { DataTable } from '@cosmic-ui/react';
-import { Badge } from '@cosmic-ui/react';
+                  {`import { DataTable } from '@cosmic-ui/components';
+import { Badge } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 interface User {
@@ -331,14 +331,14 @@ export function MyDataTable() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant DataTable est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -353,7 +353,7 @@ export function MyDataTable() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { DataTable } from '@cosmic-ui/react';
+                  `import { DataTable } from '@cosmic-ui/components';
 
 const columns = [
   { key: 'name', header: 'Nom', sortable: true },
@@ -375,7 +375,7 @@ const data = [
                 )
               }
             >
-              {`import { DataTable } from '@cosmic-ui/react';
+              {`import { DataTable } from '@cosmic-ui/components';
 
 const columns = [
   { key: 'name', header: 'Nom', sortable: true },

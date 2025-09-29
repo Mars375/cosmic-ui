@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PieChart } from '@cosmic-ui/react';
+import { PieChart } from '@cosmic-ui/components';
 
 const CodeBlock = ({
   children,
@@ -155,7 +155,7 @@ export default function PieChartPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { PieChart } from '@cosmic-ui/react';
+                      `import { PieChart } from '@cosmic-ui/components';
 
 const data = [
   { name: 'Ventes', value: 45, color: '#6366f1' },
@@ -194,7 +194,7 @@ export function MyPieChart() {
                     )
                   }
                 >
-                  {`import { PieChart } from '@cosmic-ui/react';
+                  {`import { PieChart } from '@cosmic-ui/components';
 
 const data = [
   { name: 'Ventes', value: 45, color: '#6366f1' },
@@ -241,14 +241,14 @@ export function MyPieChart() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant PieChart est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -263,7 +263,7 @@ export function MyPieChart() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { PieChart } from '@cosmic-ui/react';
+                  `import { PieChart } from '@cosmic-ui/components';
 
 const data = [
   { name: 'Catégorie 1', value: 40, color: '#6366f1' },
@@ -281,7 +281,7 @@ const data = [
                 )
               }
             >
-              {`import { PieChart } from '@cosmic-ui/react';
+              {`import { PieChart } from '@cosmic-ui/components';
 
 const data = [
   { name: 'Catégorie 1', value: 40, color: '#6366f1' },

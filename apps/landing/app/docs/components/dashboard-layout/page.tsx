@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { DashboardLayout } from '@cosmic-ui/react';
-import { Sidebar } from '@cosmic-ui/react';
-import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { DashboardLayout } from '@cosmic-ui/components';
+import { Sidebar } from '@cosmic-ui/components';
+import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, Search } from 'lucide-react';
 
 const CodeBlock = ({
@@ -211,10 +211,10 @@ export default function DashboardLayoutPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { DashboardLayout } from '@cosmic-ui/react';
-import { Sidebar } from '@cosmic-ui/react';
-import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                      `import { DashboardLayout } from '@cosmic-ui/components';
+import { Sidebar } from '@cosmic-ui/components';
+import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, Search } from 'lucide-react';
 
 const sidebarItems = [
@@ -303,10 +303,10 @@ export function MyDashboard() {
                     )
                   }
                 >
-                  {`import { DashboardLayout } from '@cosmic-ui/react';
-import { Sidebar } from '@cosmic-ui/react';
-import { Topbar } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                  {`import { DashboardLayout } from '@cosmic-ui/components';
+import { Sidebar } from '@cosmic-ui/components';
+import { Topbar } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Home, Settings, User, Bell, Search } from 'lucide-react';
 
 const sidebarItems = [
@@ -403,14 +403,14 @@ export function MyDashboard() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant DashboardLayout est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -426,7 +426,7 @@ export function MyDashboard() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { DashboardLayout } from '@cosmic-ui/react';
+                  `import { DashboardLayout } from '@cosmic-ui/components';
 
 <DashboardLayout
   sidebar={<Sidebar items={items} />}
@@ -438,7 +438,7 @@ export function MyDashboard() {
                 )
               }
             >
-              {`import { DashboardLayout } from '@cosmic-ui/react';
+              {`import { DashboardLayout } from '@cosmic-ui/components';
 
 <DashboardLayout
   sidebar={<Sidebar items={items} />}

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { KanbanBoard } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { KanbanBoard } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Plus, User, Calendar, Tag } from 'lucide-react';
 
 const CodeBlock = ({
@@ -270,7 +270,7 @@ export default function KanbanBoardPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { KanbanBoard } from '@cosmic-ui/react';
+                      `import { KanbanBoard } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyKanbanBoard() {
@@ -380,7 +380,7 @@ export function MyKanbanBoard() {
                     )
                   }
                 >
-                  {`import { KanbanBoard } from '@cosmic-ui/react';
+                  {`import { KanbanBoard } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyKanbanBoard() {
@@ -498,14 +498,14 @@ export function MyKanbanBoard() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant KanbanBoard est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -520,7 +520,7 @@ export function MyKanbanBoard() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { KanbanBoard } from '@cosmic-ui/react';
+                  `import { KanbanBoard } from '@cosmic-ui/components';
 
 const columns = [
   {
@@ -549,7 +549,7 @@ const columns = [
                 )
               }
             >
-              {`import { KanbanBoard } from '@cosmic-ui/react';
+              {`import { KanbanBoard } from '@cosmic-ui/components';
 
 const columns = [
   {

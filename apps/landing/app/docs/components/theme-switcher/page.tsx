@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ThemeSwitcher } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { ThemeSwitcher } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Sun, Moon, Monitor, Palette } from 'lucide-react';
 
 const CodeBlock = ({
@@ -143,7 +143,7 @@ export default function ThemeSwitcherPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { ThemeSwitcher } from '@cosmic-ui/react';
+                      `import { ThemeSwitcher } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyThemeSwitcher() {
@@ -178,7 +178,7 @@ export function MyThemeSwitcher() {
                     )
                   }
                 >
-                  {`import { ThemeSwitcher } from '@cosmic-ui/react';
+                  {`import { ThemeSwitcher } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyThemeSwitcher() {
@@ -221,14 +221,14 @@ export function MyThemeSwitcher() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant ThemeSwitcher est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -243,7 +243,7 @@ export function MyThemeSwitcher() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { ThemeSwitcher } from '@cosmic-ui/react';
+                  `import { ThemeSwitcher } from '@cosmic-ui/components';
 
 const [theme, setTheme] = useState('system');
 
@@ -258,7 +258,7 @@ const [theme, setTheme] = useState('system');
                 )
               }
             >
-              {`import { ThemeSwitcher } from '@cosmic-ui/react';
+              {`import { ThemeSwitcher } from '@cosmic-ui/components';
 
 const [theme, setTheme] = useState('system');
 

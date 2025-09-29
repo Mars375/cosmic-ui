@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { AIAssistant } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { AIAssistant } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { Bot, User, Code, Lightbulb } from 'lucide-react';
 
 const CodeBlock = ({
@@ -188,7 +188,7 @@ export default function AIAssistantPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { AIAssistant } from '@cosmic-ui/react';
+                      `import { AIAssistant } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyAIAssistant() {
@@ -242,7 +242,7 @@ export function MyAIAssistant() {
                     )
                   }
                 >
-                  {`import { AIAssistant } from '@cosmic-ui/react';
+                  {`import { AIAssistant } from '@cosmic-ui/components';
 import { useState } from 'react';
 
 export function MyAIAssistant() {
@@ -304,14 +304,14 @@ export function MyAIAssistant() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant AIAssistant est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -326,7 +326,7 @@ export function MyAIAssistant() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { AIAssistant } from '@cosmic-ui/react';
+                  `import { AIAssistant } from '@cosmic-ui/components';
 
 const messages = [
   {
@@ -349,7 +349,7 @@ const messages = [
                 )
               }
             >
-              {`import { AIAssistant } from '@cosmic-ui/react';
+              {`import { AIAssistant } from '@cosmic-ui/components';
 
 const messages = [
   {

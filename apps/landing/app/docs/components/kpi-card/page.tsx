@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { KpiCard } from '@cosmic-ui/react';
+import { KpiCard } from '@cosmic-ui/components';
 import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingCart, Activity } from 'lucide-react';
 
 const CodeBlock = ({
@@ -129,7 +129,7 @@ export default function KpiCardPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { KpiCard } from '@cosmic-ui/react';
+                      `import { KpiCard } from '@cosmic-ui/components';
 import { TrendingUp } from 'lucide-react';
 
 export function MyKpiCard() {
@@ -148,7 +148,7 @@ export function MyKpiCard() {
                     )
                   }
                 >
-                  {`import { KpiCard } from '@cosmic-ui/react';
+                  {`import { KpiCard } from '@cosmic-ui/components';
 import { TrendingUp } from 'lucide-react';
 
 export function MyKpiCard() {
@@ -175,14 +175,14 @@ export function MyKpiCard() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant KpiCard est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -197,7 +197,7 @@ export function MyKpiCard() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { KpiCard } from '@cosmic-ui/react';
+                  `import { KpiCard } from '@cosmic-ui/components';
 
 <KpiCard
   label="Utilisateurs actifs"
@@ -210,7 +210,7 @@ export function MyKpiCard() {
                 )
               }
             >
-              {`import { KpiCard } from '@cosmic-ui/react';
+              {`import { KpiCard } from '@cosmic-ui/components';
 
 <KpiCard
   label="Utilisateurs actifs"

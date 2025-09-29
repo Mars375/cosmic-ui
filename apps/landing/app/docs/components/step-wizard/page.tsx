@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { StepWizard } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+import { StepWizard } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { User, Mail, Lock, Check } from 'lucide-react';
 
 const CodeBlock = ({
@@ -254,8 +254,8 @@ export default function StepWizardPage() {
                 <CodeBlock
                   onCopy={() =>
                     handleCopy(
-                      `import { StepWizard } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                      `import { StepWizard } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { User, Mail, Lock, Check } from 'lucide-react';
 import { useState } from 'react';
 
@@ -398,8 +398,8 @@ export function MyStepWizard() {
                     )
                   }
                 >
-                  {`import { StepWizard } from '@cosmic-ui/react';
-import { Button } from '@cosmic-ui/react';
+                  {`import { StepWizard } from '@cosmic-ui/components';
+import { Button } from '@cosmic-ui/components';
 import { User, Mail, Lock, Check } from 'lucide-react';
 import { useState } from 'react';
 
@@ -550,14 +550,14 @@ export function MyStepWizard() {
           <div className="bg-cosmic-card border border-cosmic-border rounded-lg p-4">
             <p className="text-cosmic-muted-foreground mb-4">
               Le composant StepWizard est déjà inclus dans le package
-              @cosmic-ui/react.
+              @cosmic-ui/components.
             </p>
             <CodeBlock
               onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/react`, 'install')
+                handleCopy(`npm install @cosmic-ui/components`, 'install')
               }
             >
-              {`npm install @cosmic-ui/react`}
+              {`npm install @cosmic-ui/components`}
             </CodeBlock>
           </div>
         </div>
@@ -572,7 +572,7 @@ export function MyStepWizard() {
             <CodeBlock
               onCopy={() =>
                 handleCopy(
-                  `import { StepWizard } from '@cosmic-ui/react';
+                  `import { StepWizard } from '@cosmic-ui/components';
 
 const steps = [
   {
@@ -595,7 +595,7 @@ const steps = [
                 )
               }
             >
-              {`import { StepWizard } from '@cosmic-ui/react';
+              {`import { StepWizard } from '@cosmic-ui/components';
 
 const steps = [
   {
