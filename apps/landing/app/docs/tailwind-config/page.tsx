@@ -145,79 +145,77 @@ export default function TailwindConfigPage() {
       </h2>
 
       <CodeBlock fileName="tailwind.config.ts" language="typescript">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
             <span style={{ color: '#6A737D' }}>// tailwind.config.ts</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span> preset{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>
+            <span className="keyword">import</span> preset{' '}
+            <span className="keyword">from</span>{' '}
+            <span className="string">
               '@cosmic-ui/tokens/tailwind.preset.cjs'
             </span>
             ;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span> type{' '}
-            <span style={{ color: '#24292E' }}>&#123;</span> Config{' '}
-            <span style={{ color: '#24292E' }}>&#125;</span>{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>'tailwindcss'</span>;
+            <span className="keyword">import</span> type <span>&#123;</span>{' '}
+            Config <span>&#125;</span> <span className="keyword">from</span>{' '}
+            <span className="string">'tailwindcss'</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>const</span> config: Config{' '}
-            <span style={{ color: '#24292E' }}>= &#123;</span>
+            <span className="keyword">const</span> config: Config{' '}
+            <span>= &#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;content: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>
-            <span style={{ color: '#032F62' }}>
+            <span>&nbsp;&nbsp;content: </span>
+            <span>&#91;</span>
+            <span className="string">
               './src/**/*.&#123;js,ts,jsx,tsx&#125;'
             </span>
-            <span style={{ color: '#24292E' }}>&#93;</span>,
+            <span>&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;presets: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>preset
-            <span style={{ color: '#24292E' }}>&#93;</span>,
+            <span>&nbsp;&nbsp;presets: </span>
+            <span>&#91;</span>preset
+            <span>&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>;
+            <span>&#125;</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             10
           </div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>export default</span> config;
+            <span className="keyword">export default</span> config;
           </div>
         </div>
       </CodeBlock>
@@ -231,109 +229,105 @@ export default function TailwindConfigPage() {
       </p>
 
       <CodeBlock fileName="tailwind.config.ts" language="typescript">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span> preset{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>
+            <span className="keyword">import</span> preset{' '}
+            <span className="keyword">from</span>{' '}
+            <span className="string">
               '@cosmic-ui/tokens/tailwind.preset.cjs'
             </span>
             ;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span> type{' '}
-            <span style={{ color: '#24292E' }}>&#123;</span> Config{' '}
-            <span style={{ color: '#24292E' }}>&#125;</span>{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>'tailwindcss'</span>;
+            <span className="keyword">import</span> type <span>&#123;</span>{' '}
+            Config <span>&#125;</span> <span className="keyword">from</span>{' '}
+            <span className="string">'tailwindcss'</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>const</span> config: Config{' '}
-            <span style={{ color: '#24292E' }}>= &#123;</span>
+            <span className="keyword">const</span> config: Config{' '}
+            <span>= &#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;content: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>
+            <span>&nbsp;&nbsp;content: </span>
+            <span>&#91;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#032F62' }}>
+            <span className="string">
               &nbsp;&nbsp;&nbsp;&nbsp;'./src/**/*.&#123;js,ts,jsx,tsx&#125;'
             </span>
             ,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#032F62' }}>
+            <span className="string">
               &nbsp;&nbsp;&nbsp;&nbsp;'./app/**/*.&#123;js,ts,jsx,tsx&#125;'
             </span>
             ,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
           <div className="flex-1">
-            <span style={{ color: '#032F62' }}>
+            <span className="string">
               &nbsp;&nbsp;&nbsp;&nbsp;'./components/**/*.&#123;js,ts,jsx,tsx&#125;'
             </span>
             ,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;&#93;</span>,
+            <span>&nbsp;&nbsp;&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             10
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;presets: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>preset
-            <span style={{ color: '#24292E' }}>&#93;</span>,
+            <span>&nbsp;&nbsp;presets: </span>
+            <span>&#91;</span>preset
+            <span>&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             11
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;theme: </span>
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span>&nbsp;&nbsp;theme: </span>
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             12
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;extend:{' '}
-            </span>
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;extend: </span>
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             13
           </div>
@@ -344,104 +338,91 @@ export default function TailwindConfigPage() {
             </span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             14
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:{' '}
-            </span>
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: </span>
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             15
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;brand:{' '}
-            </span>
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;brand: </span>
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             16
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
+            <span>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50:{' '}
             </span>
-            <span style={{ color: '#032F62' }}>'#faf5ff'</span>,
+            <span className="string">'#faf5ff'</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             17
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
+            <span>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500:{' '}
             </span>
-            <span style={{ color: '#032F62' }}>'#8b5cf6'</span>,
+            <span className="string">'#8b5cf6'</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             18
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
+            <span>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;900:{' '}
             </span>
-            <span style={{ color: '#032F62' }}>'#581c87'</span>,
+            <span className="string">'#581c87'</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             19
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
-            </span>
-            ,
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             20
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;
-            </span>
-            ,
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             21
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&#125;
-            </span>
-            ,
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             22
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;plugins: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>
+            <span>&nbsp;&nbsp;plugins: </span>
+            <span>&#91;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             23
           </div>
@@ -451,57 +432,53 @@ export default function TailwindConfigPage() {
             </span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             24
           </div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;require
-            </span>
-            (<span style={{ color: '#032F62' }}>'@tailwindcss/forms'</span>),
+            <span className="keyword">&nbsp;&nbsp;&nbsp;&nbsp;require</span>(
+            <span className="string">'@tailwindcss/forms'</span>),
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             25
           </div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;require
-            </span>
-            (<span style={{ color: '#032F62' }}>'@tailwindcss/typography'</span>
+            <span className="keyword">&nbsp;&nbsp;&nbsp;&nbsp;require</span>(
+            <span className="string">'@tailwindcss/typography'</span>
             ),
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             26
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;&#93;</span>,
+            <span>&nbsp;&nbsp;&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             27
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>;
+            <span>&#125;</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             28
           </div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             29
           </div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>export default</span> config;
+            <span className="keyword">export default</span> config;
           </div>
         </div>
       </CodeBlock>
@@ -516,30 +493,29 @@ export default function TailwindConfigPage() {
       </p>
 
       <CodeBlock fileName="tailwind.config.ts" language="typescript">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>export default</span>{' '}
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span className="keyword">export default</span> <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;content: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>
+            <span>&nbsp;&nbsp;content: </span>
+            <span>&#91;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1">
-            <span style={{ color: '#032F62' }}>
+            <span className="string">
               &nbsp;&nbsp;&nbsp;&nbsp;'./src/**/*.&#123;js,ts,jsx,tsx&#125;'
             </span>
             ,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1">
             <span style={{ color: '#6A737D' }}>
@@ -548,33 +524,33 @@ export default function TailwindConfigPage() {
             </span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#032F62' }}>
+            <span className="string">
               &nbsp;&nbsp;&nbsp;&nbsp;'./node_modules/@cosmic-ui/ui/dist/**/*.&#123;js,ts&#125;'
             </span>
             ,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;&#93;</span>,
+            <span>&nbsp;&nbsp;&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;presets: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>preset
-            <span style={{ color: '#24292E' }}>&#93;</span>,
+            <span>&nbsp;&nbsp;presets: </span>
+            <span>&#91;</span>preset
+            <span>&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>;
+            <span>&#125;</span>;
           </div>
         </div>
       </CodeBlock>
@@ -588,104 +564,104 @@ export default function TailwindConfigPage() {
       </p>
 
       <CodeBlock fileName="globals.css" language="css">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
             <span style={{ color: '#6A737D' }}>// globals.css</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>:root &#123;</span>
+            <span>:root &#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--background: </span>
-            <span style={{ color: '#032F62' }}>0 0% 100%</span>;
+            <span>&nbsp;&nbsp;--background: </span>
+            <span className="string">0 0% 100%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--foreground: </span>
-            <span style={{ color: '#032F62' }}>222.2 84% 4.9%</span>;
+            <span>&nbsp;&nbsp;--foreground: </span>
+            <span className="string">222.2 84% 4.9%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--primary: </span>
-            <span style={{ color: '#032F62' }}>262.1 83.3% 57.8%</span>;
+            <span>&nbsp;&nbsp;--primary: </span>
+            <span className="string">262.1 83.3% 57.8%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--muted: </span>
-            <span style={{ color: '#032F62' }}>210 40% 98%</span>;
+            <span>&nbsp;&nbsp;--muted: </span>
+            <span className="string">210 40% 98%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>
+            <span>&#125;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>.dark &#123;</span>
+            <span>.dark &#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             10
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--background: </span>
-            <span style={{ color: '#032F62' }}>222.2 84% 4.9%</span>;
+            <span>&nbsp;&nbsp;--background: </span>
+            <span className="string">222.2 84% 4.9%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             11
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--foreground: </span>
-            <span style={{ color: '#032F62' }}>210 40% 98%</span>;
+            <span>&nbsp;&nbsp;--foreground: </span>
+            <span className="string">210 40% 98%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             12
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--primary: </span>
-            <span style={{ color: '#032F62' }}>263.4 70% 50.4%</span>;
+            <span>&nbsp;&nbsp;--primary: </span>
+            <span className="string">263.4 70% 50.4%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             13
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;--muted: </span>
-            <span style={{ color: '#032F62' }}>217.2 32.6% 17.5%</span>;
+            <span>&nbsp;&nbsp;--muted: </span>
+            <span className="string">217.2 32.6% 17.5%</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">
             14
           </div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>
+            <span>&#125;</span>
           </div>
         </div>
       </CodeBlock>
@@ -696,114 +672,108 @@ export default function TailwindConfigPage() {
 
       <h3 className="text-xl font-semibold mb-4 text-foreground">Next.js</h3>
       <CodeBlock fileName="next.config.js" language="javascript">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
             <span style={{ color: '#6A737D' }}>// next.config.js</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>const</span>{' '}
-            <span style={{ color: '#24292E' }}>&#123;</span> addPlugin{' '}
-            <span style={{ color: '#24292E' }}>&#125;</span> ={' '}
-            <span style={{ color: '#D73A49' }}>require</span>(
-            <span style={{ color: '#032F62' }}>'tailwindcss/plugin'</span>);
+            <span className="keyword">const</span> <span>&#123;</span> addPlugin{' '}
+            <span>&#125;</span> = <span className="keyword">require</span>(
+            <span className="string">'tailwindcss/plugin'</span>);
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>module.exports</span> ={' '}
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span className="keyword">module.exports</span> ={' '}
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;experimental: </span>
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span>&nbsp;&nbsp;experimental: </span>
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>
-              &nbsp;&nbsp;&nbsp;&nbsp;optimizeCss:{' '}
-            </span>
-            <span style={{ color: '#D73A49' }}>true</span>,{' '}
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;optimizeCss: </span>
+            <span className="keyword">true</span>,{' '}
             <span style={{ color: '#6A737D' }}>// Pour l'optimisation CSS</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;&#125;</span>,
+            <span>&nbsp;&nbsp;&#125;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>;
+            <span>&#125;</span>;
           </div>
         </div>
       </CodeBlock>
 
       <h3 className="text-xl font-semibold mb-4 text-foreground">Vite</h3>
       <CodeBlock fileName="vite.config.ts" language="typescript">
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
           <div className="flex-1">
             <span style={{ color: '#6A737D' }}>// vite.config.ts</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span>{' '}
-            <span style={{ color: '#24292E' }}>&#123;</span> defineConfig{' '}
-            <span style={{ color: '#24292E' }}>&#125;</span>{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>'vite'</span>;
+            <span className="keyword">import</span> <span>&#123;</span>{' '}
+            defineConfig <span>&#125;</span>{' '}
+            <span className="keyword">from</span>{' '}
+            <span className="string">'vite'</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>import</span> tailwindcss{' '}
-            <span style={{ color: '#D73A49' }}>from</span>{' '}
-            <span style={{ color: '#032F62' }}>'@tailwindcss/vite'</span>;
+            <span className="keyword">import</span> tailwindcss{' '}
+            <span className="keyword">from</span>{' '}
+            <span className="string">'@tailwindcss/vite'</span>;
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
           <div className="flex-1"></div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
           <div className="flex-1">
-            <span style={{ color: '#D73A49' }}>export default</span>{' '}
-            defineConfig(
-            <span style={{ color: '#24292E' }}>&#123;</span>
+            <span className="keyword">export default</span> defineConfig(
+            <span>&#123;</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&nbsp;&nbsp;plugins: </span>
-            <span style={{ color: '#24292E' }}>&#91;</span>tailwindcss()
-            <span style={{ color: '#24292E' }}>&#93;</span>,
+            <span>&nbsp;&nbsp;plugins: </span>
+            <span>&#91;</span>tailwindcss()
+            <span>&#93;</span>,
           </div>
         </div>
-        <div className="flex">
+        <div className="flex" data-line>
           <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
           <div className="flex-1">
-            <span style={{ color: '#24292E' }}>&#125;</span>);
+            <span>&#125;</span>);
           </div>
         </div>
       </CodeBlock>

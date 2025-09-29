@@ -111,267 +111,1552 @@ export default function NextJSSetupPage() {
         obtenir les meilleures performances et la meilleure DX.
       </p>
 
-      <h2>Structure de projet recommandée</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Structure de projet recommandée
+      </h2>
 
-      <p>Organisation suggérée pour un projet Next.js avec CosmicUI :</p>
+      <p className="text-foreground mb-6">
+        Organisation suggérée pour un projet Next.js avec CosmicUI :
+      </p>
 
-      <pre>
-        <code>{`my-app/
-├── app/
-│   ├── globals.css
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── docs/
-│       ├── layout.tsx
-│       └── components/
-├── components/
-│   ├── ui/          # Composants CosmicUI wrappés
-│   └── custom/      # Vos composants métier
-├── lib/
-│   └── utils.ts     # Fonction cn() et utilitaires
-├── tailwind.config.ts
-└── package.json`}</code>
-      </pre>
+      <CodeBlock fileName="Structure" language="text">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">my-app/</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">├── app/</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">│&nbsp;&nbsp;&nbsp;├── globals.css</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1">│&nbsp;&nbsp;&nbsp;├── layout.tsx</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">│&nbsp;&nbsp;&nbsp;├── page.tsx</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1">│&nbsp;&nbsp;&nbsp;└── docs/</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── layout.tsx
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1">
+            │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── components/
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">├── components/</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            10
+          </div>
+          <div className="flex-1">
+            │&nbsp;&nbsp;&nbsp;├──
+            ui/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style={{ color: '#6A737D' }}>
+              # Composants CosmicUI wrappés
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            11
+          </div>
+          <div className="flex-1">
+            │&nbsp;&nbsp;&nbsp;└── custom/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style={{ color: '#6A737D' }}># Vos composants métier</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            12
+          </div>
+          <div className="flex-1">├── lib/</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            13
+          </div>
+          <div className="flex-1">
+            │&nbsp;&nbsp;&nbsp;└── utils.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style={{ color: '#6A737D' }}>
+              # Fonction cn() et utilitaires
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            14
+          </div>
+          <div className="flex-1">├── tailwind.config.ts</div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            15
+          </div>
+          <div className="flex-1">└── package.json</div>
+        </div>
+      </CodeBlock>
 
-      <h2>Configuration TypeScript</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Configuration TypeScript
+      </h2>
 
-      <h3>tsconfig.json</h3>
-      <pre>
-        <code>{`{
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "ES6"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
-}`}</code>
-      </pre>
+      <CodeBlock fileName="tsconfig.json" language="json">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="string">"compilerOptions"</span>
+            <span>: &#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"target"</span>
+            <span>: </span>
+            <span className="string">"ES2017"</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"lib"</span>
+            <span>: &#91;</span>
+            <span className="string">"dom"</span>
+            <span>, </span>
+            <span className="string">"dom.iterable"</span>
+            <span>, </span>
+            <span className="string">"ES6"</span>
+            <span>&#93;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"allowJs"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"skipLibCheck"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"strict"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"noEmit"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"esModuleInterop"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            10
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"module"</span>
+            <span>: </span>
+            <span className="string">"esnext"</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            11
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"moduleResolution"</span>
+            <span>: </span>
+            <span className="string">"bundler"</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            12
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"resolveJsonModule"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            13
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"isolatedModules"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            14
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"jsx"</span>
+            <span>: </span>
+            <span className="string">"preserve"</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            15
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"incremental"</span>
+            <span>: </span>
+            <span className="keyword">true</span>
+            <span>,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            16
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"plugins"</span>
+            <span>: &#91;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            17
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            18
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"name"</span>
+            <span>: </span>
+            <span className="string">"next"</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            19
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            20
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#93;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            21
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"paths"</span>
+            <span>: &#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            22
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"@/*"</span>
+            <span>: &#91;</span>
+            <span className="string">"./src/*"</span>
+            <span>&#93;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            23
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"@/components/*"</span>
+            <span>: &#91;</span>
+            <span className="string">"./src/components/*"</span>
+            <span>&#93;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            24
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">"@/lib/*"</span>
+            <span>: &#91;</span>
+            <span className="string">"./src/lib/*"</span>
+            <span>&#93;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            25
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            26
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&#125;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            27
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="string">"include"</span>
+            <span>: &#91;</span>
+            <span className="string">"next-env.d.ts"</span>
+            <span>, </span>
+            <span className="string">"**/*.ts"</span>
+            <span>, </span>
+            <span className="string">"**/*.tsx"</span>
+            <span>&#93;,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            28
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="string">"exclude"</span>
+            <span>: &#91;</span>
+            <span className="string">"node_modules"</span>
+            <span>&#93;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            29
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>
+          </div>
+        </div>
+      </CodeBlock>
 
-      <h2>Layout Root</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Layout Root
+      </h2>
 
-      <p>Configurez votre layout principal pour le thème global :</p>
+      <p className="text-foreground mb-6">
+        Configurez votre layout principal pour le thème global :
+      </p>
 
-      <pre>
-        <code>{`// app/layout.tsx
-import { Inter } from 'next/font/google';
-import './globals.css';
+      <CodeBlock fileName="app/layout.tsx" language="typescript">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span style={{ color: '#6A737D' }}>// app/layout.tsx</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">
+            <span className="keyword">import</span> <span>&#123;</span> Inter{' '}
+            <span>&#125;</span> <span className="keyword">from</span>{' '}
+            <span className="string">'next/font/google'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">
+            <span className="keyword">import</span>{' '}
+            <span className="string">'./globals.css'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span className="keyword">const</span> inter ={' '}
+            <span className="function">Inter</span>(<span>&#123;</span> subsets:{' '}
+            <span>&#91;</span>
+            <span className="string">'latin'</span>
+            <span>&#93;</span> <span>&#125;</span>);
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            <span className="keyword">export const</span> metadata ={' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;title: </span>
+            <span className="string">'Mon App'</span>,
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;description: </span>
+            <span className="string">
+              'Application construite avec CosmicUI'
+            </span>
+            ,
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            10
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            11
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            12
+          </div>
+          <div className="flex-1">
+            <span className="keyword">export default function</span>{' '}
+            <span className="function">RootLayout</span>(<span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            13
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;children,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            14
+          </div>
+          <div className="flex-1">
+            <span>
+              &#125;: <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            15
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;children: React.ReactNode;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            16
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>) <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            17
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">return</span> (
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            18
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+            <span className="tag">html</span> lang=
+            <span className="string">"fr"</span> suppressHydrationWarning
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            19
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+            <span className="tag">body</span> className=<span>&#123;</span>
+            inter.className<span>&#125;</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            20
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+            <span className="tag">ThemeProvider</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            21
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>&#123;</span>children<span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            22
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+            <span className="tag">ThemeProvider</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            23
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+            <span className="tag">body</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            24
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+            <span className="tag">html</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            25
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;);</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            26
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>
+          </div>
+        </div>
+      </CodeBlock>
 
-const inter = Inter({ subsets: ['latin'] });
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Gestion du thème
+      </h2>
 
-export const metadata = {
- (title: 'Mon App',
-  description: 'Application construite avec CosmicUI',
-};
+      <CodeBlock fileName="lib/theme-provider.tsx" language="typescript">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span className="string">'use client'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">
+            <span className="keyword">import</span> <span>&#123;</span>{' '}
+            createContext, useContext, useEffect, useState <span>&#125;</span>{' '}
+            <span className="keyword">from</span>{' '}
+            <span className="string">'react'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span className="keyword">type</span> Theme ={' '}
+            <span className="string">'dark'</span> |{' '}
+            <span className="string">'light'</span> |{' '}
+            <span className="string">'system'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            <span className="keyword">interface</span> ThemeProviderProps{' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;children: React.ReactNode;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;defaultTheme?: Theme;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            10
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;storageKey?: </span>
+            <span className="keyword">string</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            11
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            12
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            13
+          </div>
+          <div className="flex-1">
+            <span className="keyword">type</span> ThemeContextType ={' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            14
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;theme: Theme;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            15
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;setTheme: (theme: Theme) =&gt; </span>
+            <span className="keyword">void</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            16
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            17
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            18
+          </div>
+          <div className="flex-1">
+            <span className="keyword">const</span> ThemeProviderContext ={' '}
+            <span className="function">createContext</span>&lt;ThemeContextType
+            | <span className="keyword">undefined</span>&gt;(
+            <span className="keyword">undefined</span>);
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            19
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            20
+          </div>
+          <div className="flex-1">
+            <span className="keyword">export function</span>{' '}
+            <span className="function">ThemeProvider</span>(<span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            21
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;children,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            22
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;defaultTheme = </span>
+            <span className="string">'system'</span>,
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            23
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;storageKey = </span>
+            <span className="string">'cosmic-ui-theme'</span>,
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            24
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;...props</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            25
+          </div>
+          <div className="flex-1">
+            <span>
+              &#125;: ThemeProviderProps) <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            26
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">const</span> <span>&#91;</span>theme,
+            setTheme<span>&#93;</span> ={' '}
+            <span className="function">useState</span>
+            &lt;Theme&gt;(defaultTheme);
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            27
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            28
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="function">useEffect</span>(() =&gt;{' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            29
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="keyword">const</span> media = window.
+            <span className="function">matchMedia</span>(
+            <span className="string">'(prefers-color-scheme: dark)'</span>);
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            30
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="keyword">if</span> (theme ==={' '}
+            <span className="string">'system'</span>) <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            31
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media.matches ?
+              document.documentElement.classList.
+              <span className="function">add</span>(
+              <span className="string">'dark'</span>)
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            32
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+              document.documentElement.classList.
+              <span className="function">remove</span>(
+              <span className="string">'dark'</span>);
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            33
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span>&#125;</span>{' '}
+              <span className="keyword">else</span> <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            34
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.documentElement.classList.
+              <span className="function">toggle</span>(
+              <span className="string">'dark'</span>, theme ==={' '}
+              <span className="string">'dark'</span>);
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            35
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            36
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#125;</span>, <span>&#91;</span>theme
+              <span>&#93;</span>);
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            37
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            38
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">const</span> value = <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            39
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;theme,</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            40
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;setTheme: (theme: Theme) =&gt;{' '}
+              <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            41
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localStorage.
+              <span className="function">setItem</span>(storageKey, theme);
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            42
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span className="function">setTheme</span>(theme);
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            43
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span>&#125;</span>,
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            44
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&#125;</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            45
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            46
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">return</span> (
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            47
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+            <span className="tag">ThemeProviderContext.Provider</span>{' '}
+            <span>&#123;</span>...props<span>&#125;</span> value=
+            <span>&#123;</span>value<span>&#125;</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            48
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&#123;</span>children
+              <span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            49
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+            <span className="tag">ThemeProviderContext.Provider</span>
+            <span>&gt;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            50
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;);</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            51
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            52
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            53
+          </div>
+          <div className="flex-1">
+            <span className="keyword">export const</span> useTheme = () =&gt;{' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            54
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">const</span> context ={' '}
+            <span className="function">useContext</span>(ThemeProviderContext);
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            55
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            56
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">if</span> (context ==={' '}
+            <span className="keyword">undefined</span>) <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            57
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="keyword">throw new</span>{' '}
+            <span className="function">Error</span>(
+            <span className="string">
+              'useTheme must be used within a ThemeProvider'
+            </span>
+            );
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            58
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&#125;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            59
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            60
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">return</span> context;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            61
+          </div>
+          <div className="flex-1">
+            <span>&#125;</span>;
+          </div>
+        </div>
+      </CodeBlock>
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}`}</code>
-      </pre>
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Utilitaires
+      </h2>
 
-      <h2>Gestion du thème</h2>
+      <CodeBlock fileName="lib/utils.ts" language="typescript">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span className="keyword">import</span> <span>&#123;</span>{' '}
+            <span className="keyword">type</span> ClassValue, clsx{' '}
+            <span>&#125;</span> <span className="keyword">from</span>{' '}
+            <span className="string">'clsx'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">
+            <span className="keyword">import</span> <span>&#123;</span> twMerge{' '}
+            <span>&#125;</span> <span className="keyword">from</span>{' '}
+            <span className="string">'tailwind-merge'</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1">
+            <span className="keyword">export function</span>{' '}
+            <span className="function">cn</span>(...inputs: ClassValue
+            <span>&#91;</span>
+            <span>&#93;</span>) <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;</span>
+            <span className="keyword">return</span>{' '}
+            <span className="function">twMerge</span>(
+            <span className="function">clsx</span>(inputs));
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1">
+            <span>&#125;</span>
+          </div>
+        </div>
+      </CodeBlock>
 
-      <h3>Theme Provider</h3>
-      <pre>
-        <code>{`'use client';
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Configuration globals.css
+      </h2>
 
-import { createContext, useContext, useEffect, useState } from 'react';
+      <CodeBlock fileName="app/globals.css" language="css">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span className="keyword">@tailwind</span> base;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">
+            <span className="keyword">@tailwind</span> components;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">
+            <span className="keyword">@tailwind</span> utilities;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span className="keyword">@layer</span> base <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;:root <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--background: </span>
+            <span className="string">0 0% 100%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--foreground: </span>
+            <span className="string">222.2 84% 4.9%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--primary: </span>
+            <span className="string">221.2 83.2% 53.3%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            10
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--border: </span>
+            <span className="string">214.3 31.8% 91.4%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            11
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--radius: </span>
+            <span className="string">0.5rem</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            12
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            13
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;.dark <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            14
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--background: </span>
+            <span className="string">222.2 84% 4.9%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            15
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--foreground: </span>
+            <span className="string">210 40% 98%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            16
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--primary: </span>
+            <span className="string">217.2 91.2% 59.8%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            17
+          </div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;--border: </span>
+            <span className="string">217.2 32.6% 17.5%</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            18
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            19
+          </div>
+          <div className="flex-1">
+            <span>
+              <span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            20
+          </div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            21
+          </div>
+          <div className="flex-1">
+            <span className="keyword">@layer</span> base <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            22
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;* <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            23
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="keyword">@apply</span>{' '}
+              border-border;
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            24
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            25
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;body <span>&#123;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            26
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="keyword">@apply</span>{' '}
+              bg-background text-foreground;
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            27
+          </div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#125;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">
+            28
+          </div>
+          <div className="flex-1">
+            <span>
+              <span>&#125;</span>
+            </span>
+          </div>
+        </div>
+      </CodeBlock>
 
-type Theme = 'dark' | 'light' | 'system';
+      <h2 className="text-2xl font-semibold mb-6 text-foreground">
+        Configuration next.config.js
+      </h2>
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-  defaultTheme?: Theme;
-  storageKey?: string;
-}
+      <CodeBlock fileName="next.config.js" language="javascript">
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">1</div>
+          <div className="flex-1">
+            <span style={{ color: '#6A737D' }}>
+              /** @type &#123;import('next').NextConfig&#125; */
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">2</div>
+          <div className="flex-1">
+            <span className="keyword">const</span> nextConfig ={' '}
+            <span>&#123;</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">3</div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;transpilePackages: <span>&#91;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">4</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">'@cosmic-ui/ui'</span>,
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">5</div>
+          <div className="flex-1">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span className="string">'@cosmic-ui/tokens'</span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">6</div>
+          <div className="flex-1">
+            <span>
+              &nbsp;&nbsp;<span>&#93;</span>
+            </span>
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">7</div>
+          <div className="flex-1">
+            <span>&#125;</span>;
+          </div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">8</div>
+          <div className="flex-1"></div>
+        </div>
+        <div className="flex" data-line>
+          <div className="select-none pr-4 text-right text-gray-400 w-8">9</div>
+          <div className="flex-1">
+            <span className="keyword">module.exports</span> = nextConfig;
+          </div>
+        </div>
+      </CodeBlock>
 
-type ThemeContextType = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-};
-
-const ThemeProviderContext = createContext<ThemeContextType | undefined>(undefined);
-
-export function ThemeProvider({
-  children,
-  defaultTheme = 'system',
-  storageKey = 'cosmic-ui-theme',
-  ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    if (theme === 'system') {
-      media.matches ? document.documentElement.classList.add('dark')
-                  : document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-    }
-  }, [theme]);
-
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
-
-  return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
-}
-
-export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-
-  return context;
-};`}</code>
-      </pre>
-
-      <h2>utilities.ts</h2>
-
-      <pre>
-        <code>{`import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}`}</code>
-      </pre>
-
-      <h2>Configuration globals.css</h2>
-
-      <pre>
-        <code>{`@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}`}</code>
-      </pre>
-
-      <h2>Configuration next.config.js</h2>
-
-      <pre>
-        <code>{`/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['@cosmic-ui/ui'],
-  },
-  transpilePackages: ['@cosmic-ui/ui'],
-};
-
-module.exports = nextConfig;`}</code>
-      </pre>
-
-      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mt-6">
-        <h3 className="text-green-800 dark:text-green-200 font-semibold">
+      <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 mt-12">
+        <h3 className="text-green-800 dark:text-green-200 font-semibold mb-2">
           🚀 Optimisé
         </h3>
-        <p className="text-green-700 dark:text-green-300 mt-1">
+        <p className="text-green-700 dark:text-green-300">
           Cette configuration est optimisée pour les performances Next.js avec
           support SSR/SSG et tree-shaking automatique.
         </p>

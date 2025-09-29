@@ -231,3 +231,71 @@
 }
 
 /* Documentation styles - using Tailwind classes in components instead */
+
+/* Variables pour la coloration syntaxique */
+:root {
+  /* Chaînes de caractères */
+  --shiki-string-dark: #9ecbff;
+  --shiki-string-light: #0a3069;
+
+  /* Mots-clés (import, export, const, etc.) */
+  --shiki-keyword-dark: #f97583;
+  --shiki-keyword-light: #cf222e;
+
+  /* Noms de fonctions */
+  --shiki-function-dark: #b392f0;
+  --shiki-function-light: #8250df;
+
+  /* Balises HTML/JSX */
+  --shiki-tag-dark: #85e89d;
+  --shiki-tag-light: #116329;
+
+  /* Texte par défaut */
+  --shiki-text-dark: #e1e4e8;
+  --shiki-text-light: #24292e;
+}
+
+/* Coloration des chaînes de caractères */
+[data-line] .string {
+  color: var(--shiki-string-light);
+}
+
+[data-line] .string:is(.dark *) {
+  color: var(--shiki-string-dark) !important;
+}
+
+/* Coloration des mots-clés */
+[data-line] .keyword {
+  color: var(--shiki-keyword-light);
+}
+
+[data-line] .keyword:is(.dark *) {
+  color: var(--shiki-keyword-dark) !important;
+}
+
+/* Coloration des noms de fonctions */
+[data-line] .function {
+  color: var(--shiki-function-light);
+}
+
+[data-line] .function:is(.dark *) {
+  color: var(--shiki-function-dark) !important;
+}
+
+/* Coloration des balises HTML/JSX */
+[data-line] .tag {
+  color: var(--shiki-tag-light);
+}
+
+[data-line] .tag:is(.dark *) {
+  color: var(--shiki-tag-dark) !important;
+}
+
+/* Texte par défaut */
+[data-line] span {
+  color: var(--shiki-text-light);
+}
+
+[data-line] span:is(.dark *) {
+  color: var(--shiki-text-dark) !important;
+}
