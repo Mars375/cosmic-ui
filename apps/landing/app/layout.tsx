@@ -88,12 +88,12 @@ export default function RootLayout({
               >
                 CosmicUI
               </Link>
-              <Link
+              {/* <Link
                 href="/docs"
                 className="text-sm text-muted-foreground hover:text-foreground"
               >
                 Docs
-              </Link>
+              </Link> */}
             </div>
           }
           actions={
@@ -127,4 +127,3 @@ export default function RootLayout({
     </html>
   );
 }
-

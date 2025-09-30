@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function DocsRedirect() {
+export default function DocsSlugRedirect() {
   const router = useRouter();
 
   useEffect(() => {
