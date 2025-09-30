@@ -164,4 +164,4 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 
 ## License
 
-MIT © [Cosmic UI Team](https://github.com/loic-cosmic/cosmic-ui)
+MIT © [Cosmic UI Team](https://github.com/Mars375/cosmic-ui)

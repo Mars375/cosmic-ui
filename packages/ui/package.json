@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/loic-cosmic/cosmic-ui.git",
+    "url": "https://github.com/Mars375/cosmic-ui.git",
     "directory": "packages/ui"
   },
   "homepage": "https://cosmic-ui.vercel.app",
   "bugs": {
-    "url": "https://github.com/loic-cosmic/cosmic-ui/issues"
+    "url": "https://github.com/Mars375/cosmic-ui/issues"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
