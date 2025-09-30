@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
+import { ClientWrapper } from './components/client-wrapper';
 import { KpiCard } from '../../../packages/ui/src/components/kpi-card';
 import { LineChart } from '../../../packages/ui/src/components/line-chart';
 import { PieChart } from '../../../packages/ui/src/components/pie-chart';
@@ -41,7 +42,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="container max-w-[1400px] px-4 mx-auto">
+    <ClientWrapper>
+      <main className="container max-w-[1400px] px-4 mx-auto">
       {/* Work in Progress Banner */}
       <div className="relative overflow-hidden bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-8">
         <div className="flex items-center justify-between">
@@ -109,7 +111,8 @@ export default function Home() {
           {active === 'auth' && <AuthPanel />}
         </div>
       </section>
-    </main>
+      </main>
+    </ClientWrapper>
   );
 }
 
