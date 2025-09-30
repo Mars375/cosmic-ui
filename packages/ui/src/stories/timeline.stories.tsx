@@ -16,3 +16,4 @@ const meta: Meta<typeof Timeline> = {
 export default meta;
 
 export const Default: StoryObj<typeof Timeline> = {};
+

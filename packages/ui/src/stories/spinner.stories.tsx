@@ -11,3 +11,4 @@ export default meta;
 
 export const Default: StoryObj<typeof Spinner> = {};
 export const Large: StoryObj<typeof Spinner> = { args: { size: 48 } };
+

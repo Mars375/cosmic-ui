@@ -7,3 +7,4 @@ test('renders topbar with banner role', () => {
   expect(screen.getByRole('banner')).toBeInTheDocument();
   expect(screen.getByText('Logo')).toBeInTheDocument();
 });
+

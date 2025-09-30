@@ -46,3 +46,4 @@ export const RegisterPage = () => {
 
 LoginPage.displayName = 'LoginPage';
 RegisterPage.displayName = 'RegisterPage';
+

@@ -26,3 +26,4 @@ const meta: Meta<typeof LineChart<Row>> = {
 export default meta;
 
 export const Default: StoryObj<typeof LineChart<Row>> = {};
+

@@ -27,3 +27,4 @@ export const Topbar = ({ className, logo, actions, search, ...props }: TopbarPro
 };
 
 Topbar.displayName = 'Topbar';
+

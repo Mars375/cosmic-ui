@@ -43,3 +43,4 @@ export const Monthly: StoryObj<typeof PricingTable> = {};
 export const Yearly: StoryObj<typeof PricingTable> = {
   args: { billingPeriod: 'yearly' },
 };
+

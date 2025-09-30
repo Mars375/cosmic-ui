@@ -69,3 +69,4 @@ export const ToastViewport = ({
 
 // Alias pour compatibilité
 export const Toast = ToastRoot;
+

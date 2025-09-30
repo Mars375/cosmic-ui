@@ -17,3 +17,4 @@ export const Default: StoryObj<typeof Tooltip> = {
     </Tooltip>
   ),
 };
+

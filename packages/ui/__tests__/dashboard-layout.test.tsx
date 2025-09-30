@@ -10,3 +10,4 @@ test('renders dashboard main content', () => {
   );
   expect(screen.getByText('Main')).toBeInTheDocument();
 });
+

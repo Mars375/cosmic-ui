@@ -26,3 +26,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Checkbox id="snap" label="Snap" />);
   expect(asFragment()).toMatchSnapshot();
 });
+

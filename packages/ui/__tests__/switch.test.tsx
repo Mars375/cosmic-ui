@@ -24,3 +24,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Switch id="snap" label="Snap" />);
   expect(asFragment()).toMatchSnapshot();
 });
+

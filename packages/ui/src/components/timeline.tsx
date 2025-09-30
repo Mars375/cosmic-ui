@@ -35,3 +35,4 @@ export const Timeline = ({ items, ...props }: TimelineProps) => {
 };
 
 Timeline.displayName = 'Timeline';
+

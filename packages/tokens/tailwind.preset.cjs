@@ -42,3 +42,4 @@ module.exports = {
   // Support pour le mode sombre
   darkMode: 'class',
 };
+

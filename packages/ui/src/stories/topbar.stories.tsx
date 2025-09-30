@@ -20,3 +20,4 @@ export const Default: StoryObj<typeof Topbar> = {
     ),
   },
 };
+

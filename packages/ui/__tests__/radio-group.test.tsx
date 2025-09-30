@@ -30,3 +30,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<RadioGroup ariaLabel="Choice" items={items} />);
   expect(asFragment()).toMatchSnapshot();
 });
+

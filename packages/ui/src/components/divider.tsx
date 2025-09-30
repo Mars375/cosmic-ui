@@ -27,3 +27,4 @@ export const Divider = ({ className, orientation = 'horizontal', ...props }: Div
 };
 
 Divider.displayName = 'Divider';
+

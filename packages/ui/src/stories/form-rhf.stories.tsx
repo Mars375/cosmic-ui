@@ -9,3 +9,4 @@ const meta: Meta<typeof FormWithReactHookForm> = {
 export default meta;
 
 export const Example: StoryObj<typeof FormWithReactHookForm> = {};
+

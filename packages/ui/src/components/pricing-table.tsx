@@ -116,3 +116,4 @@ export const PricingTable = React.forwardRef<HTMLDivElement, PricingTableProps>(
   },
 );
 PricingTable.displayName = 'PricingTable';
+

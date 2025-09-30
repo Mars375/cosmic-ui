@@ -18,3 +18,4 @@ export const Warning: StoryObj<typeof Badge> = { args: { variant: 'warning', chi
 export const Destructive: StoryObj<typeof Badge> = {
   args: { variant: 'destructive', children: 'Removed' },
 };
+

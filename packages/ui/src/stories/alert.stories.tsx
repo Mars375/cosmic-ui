@@ -19,3 +19,4 @@ export const Warning: StoryObj<typeof Alert> = {
 export const Error: StoryObj<typeof Alert> = {
   args: { variant: 'error', title: 'Error', children: 'Something went wrong.' },
 };
+

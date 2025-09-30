@@ -156,7 +156,7 @@ function App() {
 
 ## Documentation
 
-Visit [https://cosmic-ui.dev](https://cosmic-ui.dev) for complete documentation, examples, and API reference.
+Visit [https://cosmic-ui.vercel.app](https://cosmic-ui.vercel.app) for complete documentation, examples, and API reference.
 
 ## Contributing
 
@@ -164,4 +164,4 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 
 ## License
 
-MIT © [Cosmic UI Team](https://github.com/your-username/cosmic-ui)
+MIT © [Cosmic UI Team](https://github.com/loic-cosmic/cosmic-ui)

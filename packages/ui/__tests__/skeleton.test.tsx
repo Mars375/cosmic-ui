@@ -6,3 +6,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Skeleton className="h-6 w-40" />);
   expect(asFragment()).toMatchSnapshot();
 });
+

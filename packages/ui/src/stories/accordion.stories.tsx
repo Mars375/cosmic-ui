@@ -17,3 +17,4 @@ const meta: Meta<typeof Accordion> = {
 export default meta;
 
 export const Default: StoryObj<typeof Accordion> = {};
+

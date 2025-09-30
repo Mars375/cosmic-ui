@@ -49,3 +49,4 @@ export const Avatar = ({
 };
 
 Avatar.displayName = 'Avatar';
+

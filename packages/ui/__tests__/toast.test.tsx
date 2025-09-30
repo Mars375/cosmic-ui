@@ -30,3 +30,4 @@ test('shows toast on open', async () => {
   await user.click(screen.getByRole('button', { name: /open/i }));
   expect(await screen.findByText('Title')).toBeInTheDocument();
 });
+

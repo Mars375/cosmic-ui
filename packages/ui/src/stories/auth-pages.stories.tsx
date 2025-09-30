@@ -14,3 +14,4 @@ export const Login: StoryObj = {
 export const Register: StoryObj = {
   render: () => <RegisterPage />,
 };
+

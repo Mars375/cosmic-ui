@@ -24,3 +24,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Textarea placeholder="Snapshot" />);
   expect(asFragment()).toMatchSnapshot();
 });
+

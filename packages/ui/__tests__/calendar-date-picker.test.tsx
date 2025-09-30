@@ -11,3 +11,4 @@ test('navigates months and selects a date', async () => {
   await user.click(dayBtn);
   expect(onChange).toHaveBeenCalled();
 });
+

@@ -9,3 +9,4 @@ test('renders and triggers file input on click', async () => {
   await user.click(region);
   expect(region).toBeInTheDocument();
 });
+

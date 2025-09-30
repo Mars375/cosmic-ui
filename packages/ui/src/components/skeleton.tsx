@@ -23,3 +23,4 @@ export const Skeleton = ({ className, rounded = 'md', ...props }: SkeletonProps)
 };
 
 Skeleton.displayName = 'Skeleton';
+

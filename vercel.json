@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd apps/landing && pnpm build",
+  "outputDirectory": "apps/landing/out",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "functions": {
+    "apps/landing/app/**/*.tsx": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}

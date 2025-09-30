@@ -23,3 +23,4 @@ export const Negative: StoryObj<typeof KpiCard> = {
 export const Neutral: StoryObj<typeof KpiCard> = {
   args: { delta: 0, deltaDirection: 'neutral' },
 };
+

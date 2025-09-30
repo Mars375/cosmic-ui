@@ -9,3 +9,4 @@ const meta: Meta<typeof InputOTP> = {
 export default meta;
 
 export const Default: StoryObj<typeof InputOTP> = {};
+

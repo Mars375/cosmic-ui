@@ -63,3 +63,4 @@ export const KpiCard = React.forwardRef<HTMLDivElement, KpiCardProps>(
   },
 );
 KpiCard.displayName = 'KpiCard';
+

@@ -12,3 +12,4 @@ export default meta;
 export const Default: StoryObj<typeof ProgressBar> = {};
 export const Full: StoryObj<typeof ProgressBar> = { args: { value: 100 } };
 export const Empty: StoryObj<typeof ProgressBar> = { args: { value: 0 } };
+

@@ -18,3 +18,4 @@ export const Vertical: StoryObj<typeof Divider> = {
     </div>
   ),
 };
+

@@ -10,3 +10,4 @@ const meta: Meta<typeof Slider> = {
 export default meta;
 
 export const Default: StoryObj<typeof Slider> = {};
+

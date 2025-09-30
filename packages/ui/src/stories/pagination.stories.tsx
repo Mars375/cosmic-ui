@@ -16,3 +16,4 @@ export const Controlled: StoryObj<typeof Pagination> = {
     return <Pagination {...args} page={page} onPageChange={setPage} />;
   },
 };
+

@@ -13,3 +13,4 @@ export const Default: StoryObj<typeof Avatar> = {};
 export const WithImage: StoryObj<typeof Avatar> = {
   args: { src: 'https://i.pravatar.cc/80', alt: 'User' },
 };
+

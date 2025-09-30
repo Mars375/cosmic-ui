@@ -23,3 +23,4 @@ export const Spinner = ({ size = 20, color = 'currentColor', ...props }: Spinner
     />
   );
 };
+

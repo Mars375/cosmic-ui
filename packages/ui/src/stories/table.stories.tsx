@@ -33,3 +33,4 @@ export const Basic: StoryObj<typeof Table> = {
     </Table>
   ),
 };
+

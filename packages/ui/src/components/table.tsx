@@ -39,3 +39,4 @@ export interface TdProps extends React.TdHTMLAttributes<HTMLTableCellElement> {}
 export const Td = ({ className, ...props }: TdProps) => (
   <td className={twMerge('px-3 py-2', className)} {...props} />
 );
+

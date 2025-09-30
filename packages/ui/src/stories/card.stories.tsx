@@ -49,3 +49,4 @@ export const Variants: StoryObj<typeof Card> = {
     </div>
   ),
 };
+

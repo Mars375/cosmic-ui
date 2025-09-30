@@ -22,3 +22,4 @@ test('opens dropdown and shows items', async () => {
   await user.click(screen.getByRole('button', { name: /open/i }));
   expect(await screen.findByText('Profile')).toBeInTheDocument();
 });
+

@@ -20,3 +20,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<ProgressBar value={90} />);
   expect(asFragment()).toMatchSnapshot();
 });
+

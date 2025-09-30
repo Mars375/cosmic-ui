@@ -26,3 +26,4 @@ export const DashboardLayout = ({
 };
 
 DashboardLayout.displayName = 'DashboardLayout';
+

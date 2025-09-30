@@ -32,3 +32,4 @@ export const Slider = ({ className, label, ...props }: SliderProps) => (
 );
 
 Slider.displayName = 'Slider';
+

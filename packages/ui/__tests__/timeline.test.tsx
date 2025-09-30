@@ -14,3 +14,4 @@ test('renders timeline items', () => {
   expect(screen.getByText('A')).toBeInTheDocument();
   expect(screen.getByText('B')).toBeInTheDocument();
 });
+

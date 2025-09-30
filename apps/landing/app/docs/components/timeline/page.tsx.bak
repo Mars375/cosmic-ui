@@ -350,7 +350,7 @@ const items = [
                         {
                           id: 2,
                           title: 'Action effectuée',
-                          description: 'L\\'utilisateur a effectué une action importante',
+                          description: "L'utilisateur a effectué une action importante",
                           time: '09:45',
                         },
                       ]}

@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/cosmic-ui.git",
+    "url": "https://github.com/loic-cosmic/cosmic-ui.git",
     "directory": "packages/ui"
   },
-  "homepage": "https://cosmic-ui.dev",
+  "homepage": "https://cosmic-ui.vercel.app",
   "bugs": {
-    "url": "https://github.com/your-username/cosmic-ui/issues"
+    "url": "https://github.com/loic-cosmic/cosmic-ui/issues"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -36,11 +36,13 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
+    "prepublishOnly": "pnpm build",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "test": "jest --passWithNoTests",

@@ -13,3 +13,4 @@ export const Default: StoryObj<typeof FileUpload> = {
     children: 'Click to select files',
   },
 };
+

@@ -13,3 +13,4 @@ export const Default: StoryObj<typeof Checkbox> = {};
 export const Disabled: StoryObj<typeof Checkbox> = {
   args: { disabled: true },
 };
+

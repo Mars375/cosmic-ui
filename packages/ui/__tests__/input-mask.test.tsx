@@ -9,3 +9,4 @@ test('applies mask to input', async () => {
   await user.type(input, '12345678');
   expect((input as HTMLInputElement).value).toBe('1234 5678');
 });
+

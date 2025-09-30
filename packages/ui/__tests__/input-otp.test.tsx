@@ -9,3 +9,4 @@ test('enters digits and moves focus', async () => {
   await user.type(boxes[0], '1');
   expect(boxes[1]).toHaveFocus();
 });
+

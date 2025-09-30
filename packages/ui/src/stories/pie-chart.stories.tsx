@@ -17,3 +17,4 @@ const meta: Meta<typeof PieChart> = {
 export default meta;
 
 export const Default: StoryObj<typeof PieChart> = {};
+

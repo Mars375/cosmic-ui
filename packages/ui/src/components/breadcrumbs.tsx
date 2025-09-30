@@ -35,3 +35,4 @@ export const Breadcrumbs = ({ className, items, separator = '/', ...props }: Bre
 };
 
 Breadcrumbs.displayName = 'Breadcrumbs';
+

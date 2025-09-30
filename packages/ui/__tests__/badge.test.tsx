@@ -20,3 +20,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Badge variant="destructive">Removed</Badge>);
   expect(asFragment()).toMatchSnapshot();
 });
+

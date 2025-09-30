@@ -27,3 +27,4 @@ export const Basic: StoryObj<typeof DashboardLayout> = {
     </DashboardLayout>
   ),
 };
+

@@ -13,3 +13,4 @@ export const Default: StoryObj<typeof Skeleton> = {};
 export const Circle: StoryObj<typeof Skeleton> = {
   args: { className: 'h-10 w-10', rounded: 'full' },
 };
+

@@ -17,3 +17,4 @@ test('opens drawer and shows title', async () => {
   await user.click(screen.getByRole('button', { name: /open drawer/i }));
   expect(await screen.findByText('Panel')).toBeInTheDocument();
 });
+

@@ -664,7 +664,10 @@ export function SingleAccordion() {
 }`;
                           try {
                             await navigator.clipboard.writeText(code);
-                            setCopiedStates(prev => ({ ...prev, single: true }));
+                            setCopiedStates(prev => ({
+                              ...prev,
+                              single: true,
+                            }));
                             setTimeout(() => {
                               setCopiedStates(prev => ({
                                 ...prev,
@@ -742,7 +745,8 @@ export function SingleAccordion() {
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Accordion, AccordionItem,
-                            AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                            AccordionTrigger, AccordionContent{' '}
+                            <span>&#125;</span>{' '}
                             <span className="keyword">from</span>{' '}
                             <span className="string">"@cosmic-ui/ui"</span>;
                           </div>
@@ -779,7 +783,8 @@ export function SingleAccordion() {
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">Accordion</span> type=
-                            <span className="string">"single"</span> collapsible className=
+                            <span className="string">"single"</span> collapsible
+                            className=
                             <span className="string">"w-full"</span>
                             <span>&gt;</span>
                           </div>
@@ -789,7 +794,9 @@ export function SingleAccordion() {
                             6
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionItem</span> value=
                             <span className="string">"item-1"</span>
                             <span>&gt;</span>
@@ -800,7 +807,9 @@ export function SingleAccordion() {
                             7
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionTrigger</span>
                             <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
                             <span className="tag">AccordionTrigger</span>
@@ -812,7 +821,9 @@ export function SingleAccordion() {
                             8
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -822,7 +833,9 @@ export function SingleAccordion() {
                             9
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
                             CosmicUI est une bibliothèque de composants React...
                           </div>
                         </div>
@@ -831,7 +844,9 @@ export function SingleAccordion() {
                             10
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -841,7 +856,9 @@ export function SingleAccordion() {
                             11
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionItem</span>
                             <span>&gt;</span>
                           </div>
@@ -851,7 +868,9 @@ export function SingleAccordion() {
                             12
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionItem</span> value=
                             <span className="string">"item-2"</span>
                             <span>&gt;</span>
@@ -862,7 +881,9 @@ export function SingleAccordion() {
                             13
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionTrigger</span>
                             <span>&gt;</span>Comment installer CosmicUI ?&lt;/
                             <span className="tag">AccordionTrigger</span>
@@ -874,7 +895,9 @@ export function SingleAccordion() {
                             14
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -884,7 +907,9 @@ export function SingleAccordion() {
                             15
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
                             Vous pouvez installer CosmicUI via npm...
                           </div>
                         </div>
@@ -893,7 +918,9 @@ export function SingleAccordion() {
                             16
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -903,7 +930,9 @@ export function SingleAccordion() {
                             17
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionItem</span>
                             <span>&gt;</span>
                           </div>
@@ -1000,7 +1029,10 @@ export function MultipleAccordion() {
 }`;
                           try {
                             await navigator.clipboard.writeText(code);
-                            setCopiedStates(prev => ({ ...prev, multiple: true }));
+                            setCopiedStates(prev => ({
+                              ...prev,
+                              multiple: true,
+                            }));
                             setTimeout(() => {
                               setCopiedStates(prev => ({
                                 ...prev,
@@ -1078,7 +1110,8 @@ export function MultipleAccordion() {
                           <div className="flex-1">
                             <span className="keyword">import</span>{' '}
                             <span>&#123;</span> Accordion, AccordionItem,
-                            AccordionTrigger, AccordionContent <span>&#125;</span>{' '}
+                            AccordionTrigger, AccordionContent{' '}
+                            <span>&#125;</span>{' '}
                             <span className="keyword">from</span>{' '}
                             <span className="string">"@cosmic-ui/ui"</span>;
                           </div>
@@ -1115,7 +1148,8 @@ export function MultipleAccordion() {
                           <div className="flex-1">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
                             <span className="tag">Accordion</span> type=
-                            <span className="string">"multiple"</span> className=
+                            <span className="string">"multiple"</span>{' '}
+                            className=
                             <span className="string">"w-full"</span>
                             <span>&gt;</span>
                           </div>
@@ -1125,7 +1159,9 @@ export function MultipleAccordion() {
                             6
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionItem</span> value=
                             <span className="string">"item-1"</span>
                             <span>&gt;</span>
@@ -1136,7 +1172,9 @@ export function MultipleAccordion() {
                             7
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionTrigger</span>
                             <span>&gt;</span>Qu'est-ce que CosmicUI ?&lt;/
                             <span className="tag">AccordionTrigger</span>
@@ -1148,7 +1186,9 @@ export function MultipleAccordion() {
                             8
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -1158,7 +1198,9 @@ export function MultipleAccordion() {
                             9
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
                             CosmicUI est une bibliothèque de composants React...
                           </div>
                         </div>
@@ -1167,7 +1209,9 @@ export function MultipleAccordion() {
                             10
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -1177,7 +1221,9 @@ export function MultipleAccordion() {
                             11
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionItem</span>
                             <span>&gt;</span>
                           </div>
@@ -1187,7 +1233,9 @@ export function MultipleAccordion() {
                             12
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionItem</span> value=
                             <span className="string">"item-2"</span>
                             <span>&gt;</span>
@@ -1198,7 +1246,9 @@ export function MultipleAccordion() {
                             13
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionTrigger</span>
                             <span>&gt;</span>Comment installer CosmicUI ?&lt;/
                             <span className="tag">AccordionTrigger</span>
@@ -1210,7 +1260,9 @@ export function MultipleAccordion() {
                             14
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -1220,7 +1272,9 @@ export function MultipleAccordion() {
                             15
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span>
                             Vous pouvez installer CosmicUI via npm...
                           </div>
                         </div>
@@ -1229,7 +1283,9 @@ export function MultipleAccordion() {
                             16
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionContent</span>
                             <span>&gt;</span>
                           </div>
@@ -1239,7 +1295,9 @@ export function MultipleAccordion() {
                             17
                           </div>
                           <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
+                            <span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
+                            </span>
                             <span className="tag">AccordionItem</span>
                             <span>&gt;</span>
                           </div>

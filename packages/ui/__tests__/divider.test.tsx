@@ -15,3 +15,4 @@ test('renders vertical separator', () => {
   );
   expect(screen.getByRole('separator')).toHaveAttribute('aria-orientation', 'vertical');
 });
+

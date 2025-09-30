@@ -19,3 +19,4 @@ export const Default: StoryObj<typeof Select> = {};
 export const DisabledItem: StoryObj<typeof Select> = {
   args: { items: [...items, { value: 'legacy', label: 'Legacy', disabled: true }] },
 };
+

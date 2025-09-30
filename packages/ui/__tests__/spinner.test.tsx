@@ -20,3 +20,4 @@ test('matches snapshot', () => {
   const { asFragment } = render(<Spinner size={16} />);
   expect(asFragment()).toMatchSnapshot();
 });
+

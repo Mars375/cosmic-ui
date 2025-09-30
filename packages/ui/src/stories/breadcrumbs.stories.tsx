@@ -12,3 +12,4 @@ const meta: Meta<typeof Breadcrumbs> = {
 export default meta;
 
 export const Default: StoryObj<typeof Breadcrumbs> = {};
+

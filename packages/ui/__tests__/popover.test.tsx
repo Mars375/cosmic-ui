@@ -15,3 +15,4 @@ test('opens popover and shows content', async () => {
   await user.click(screen.getByRole('button', { name: /open popover/i }));
   expect(await screen.findByText('Some content')).toBeInTheDocument();
 });
+

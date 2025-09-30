@@ -28,3 +28,4 @@ const meta: Meta<typeof DataTable<Row>> = {
 export default meta;
 
 export const Default: StoryObj<typeof DataTable<Row>> = {};
+

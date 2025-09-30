@@ -23,3 +23,4 @@ export const SkipLink = ({
 
 VisuallyHidden.displayName = 'VisuallyHidden';
 SkipLink.displayName = 'SkipLink';
+

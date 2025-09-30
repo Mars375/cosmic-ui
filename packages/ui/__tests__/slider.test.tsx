@@ -6,3 +6,4 @@ test('renders slider and thumb', () => {
   render(<Slider defaultValue={[20]} />);
   expect(screen.getByRole('slider')).toBeInTheDocument();
 });
+

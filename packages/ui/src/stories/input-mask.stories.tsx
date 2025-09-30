@@ -13,3 +13,4 @@ const meta: Meta<typeof InputWithMask> = {
 export default meta;
 
 export const CreditCard: StoryObj<typeof InputWithMask> = {};
+

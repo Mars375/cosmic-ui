@@ -28,3 +28,4 @@ export const Default: StoryObj<typeof Sidebar> = {
 export const Collapsed: StoryObj<typeof Sidebar> = {
   args: { collapsed: true },
 };
+

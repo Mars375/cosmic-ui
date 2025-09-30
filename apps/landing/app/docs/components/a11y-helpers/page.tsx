@@ -895,7 +895,11 @@ export default function A11yHelpersPage() {
                         1
                       </div>
                       <div className="flex-1">
-                        <span className="keyword">import</span> <span>&#123;</span> VisuallyHidden, SkipLink <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                        <span className="keyword">import</span>{' '}
+                        <span>&#123;</span> VisuallyHidden, SkipLink{' '}
+                        <span>&#125;</span>{' '}
+                        <span className="keyword">from</span>{' '}
+                        <span className="string">'@cosmic-ui/ui'</span>;
                       </div>
                     </div>
                     <div className="flex" data-line>
@@ -903,7 +907,10 @@ export default function A11yHelpersPage() {
                         2
                       </div>
                       <div className="flex-1">
-                        <span className="keyword">import</span> <span>&#123;</span> Button <span>&#125;</span> <span className="keyword">from</span> <span className="string">'@cosmic-ui/ui'</span>;
+                        <span className="keyword">import</span>{' '}
+                        <span>&#123;</span> Button <span>&#125;</span>{' '}
+                        <span className="keyword">from</span>{' '}
+                        <span className="string">'@cosmic-ui/ui'</span>;
                       </div>
                     </div>
                     <div className="flex" data-line>
@@ -911,7 +918,10 @@ export default function A11yHelpersPage() {
                         3
                       </div>
                       <div className="flex-1">
-                        <span className="keyword">import</span> <span>&#123;</span> SkipForward <span>&#125;</span> <span className="keyword">from</span> <span className="string">'lucide-react'</span>;
+                        <span className="keyword">import</span>{' '}
+                        <span>&#123;</span> SkipForward <span>&#125;</span>{' '}
+                        <span className="keyword">from</span>{' '}
+                        <span className="string">'lucide-react'</span>;
                       </div>
                     </div>
                     <div className="flex" data-line>
