@@ -1,7 +1,6 @@
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": ".next",
+  "buildCommand": "cd apps/landing && pnpm build",
+  "outputDirectory": "apps/landing/.next",
   "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "rootDirectory": "apps/landing"
+  "framework": "nextjs"
 }
