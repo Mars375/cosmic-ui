@@ -1,4 +1,4 @@
-# @cosmic-ui/ui
+# cosmic-ui-mars
 
 A modern, accessible React component library with dark mode support built with Tailwind CSS and TypeScript.
 
@@ -15,11 +15,11 @@ A modern, accessible React component library with dark mode support built with T
 ## Installation
 
 ```bash
-npm install @cosmic-ui/ui
+npm install cosmic-ui-mars
 # or
-yarn add @cosmic-ui/ui
+yarn add cosmic-ui-mars
 # or
-pnpm add @cosmic-ui/ui
+pnpm add cosmic-ui-mars
 ```
 
 ## Peer Dependencies
@@ -44,7 +44,7 @@ npx tailwindcss init -p
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@cosmic-ui/ui/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/cosmic-ui-mars/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
@@ -64,7 +64,7 @@ module.exports = {
 4. **Import and use components**:
 
 ```tsx
-import { Button, Card, Input } from '@cosmic-ui/ui';
+import { Button, Card, Input } from 'cosmic-ui-mars';
 
 function App() {
   return (
@@ -91,7 +91,7 @@ The components support dark mode out of the box. To enable it:
 2. **Use a theme provider** (recommended):
 
 ```tsx
-import { ThemeProvider } from '@cosmic-ui/ui';
+import { ThemeProvider } from 'cosmic-ui-mars';
 
 function App() {
   return (
