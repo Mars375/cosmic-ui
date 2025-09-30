@@ -56,7 +56,7 @@ export default function Home() {
                 Work in Progress
               </h3>
               <p className="text-xs text-amber-700 dark:text-amber-300">
-                Cette bibliothèque est en cours de développement. La documentation est temporairement indisponible.
+                Cette bibliothèque est en cours de développement. Certaines fonctionnalités peuvent être incomplètes.
               </p>
             </div>
           </div>
@@ -74,11 +74,7 @@ export default function Home() {
           accessible, pour construire des applications SaaS rapidement.
         </p>
         <div className="mb-4 flex items-center justify-center gap-3">
-          <Button 
-            onClick={() => alert('La documentation est temporairement indisponible pendant la finalisation.')}
-            className="opacity-50 cursor-not-allowed"
-            disabled
-          >
+          <Button onClick={() => router.push('/docs')}>
             Commencer
           </Button>
           <Button variant="outline" onClick={() => setActive('examples')}>
