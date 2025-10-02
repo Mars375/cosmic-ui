@@ -1,346 +1,411 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator, 
-  DropdownLabel 
-} from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-const CodeBlock = ({ children, onCopy }: { children: string; onCopy: () => void }) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-2 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import {
+  DropdownMenu,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownLabel,
+} from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
+import {
+  MoreVertical,
+  User,
+  Settings,
+  LogOut,
+  Download,
+  Share,
+  Edit,
+  Trash2,
+} from 'lucide-react';
 
 export default function DropdownMenuPage() {
   const [showCode, setShowCode] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <h1 className="text-3xl font-bold">Dropdown Menu</h1>
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <MoreVertical className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">DropdownMenu</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          Le composant Dropdown Menu affiche une liste d'actions contextuelles dans un menu déroulant, 
-          idéal pour les actions secondaires et l'organisation de l'interface.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Menu déroulant contextuel pour afficher des actions et des options
+          dans une interface.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xl font-semibold">Aperçu</h2>
-            <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-              <button
-                onClick={() => setShowCode(false)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
-              >
-                Aperçu
-              </button>
-              <button
-                onClick={() => setShowCode(true)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
-              >
-                Code
-              </button>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <DropdownMenu>
+                <DropdownTrigger asChild>
+                  <Button variant="outline">
+                    <MoreVertical className="w-4 h-4 mr-2" />
+                    Actions
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent>
+                  <DropdownItem>
+                    <Edit className="w-4 h-4 mr-2" />
+                    Modifier
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Download className="w-4 h-4 mr-2" />
+                    Télécharger
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Share className="w-4 h-4 mr-2" />
+                    Partager
+                  </DropdownItem>
+                  <DropdownSeparator />
+                  <DropdownItem className="text-red-600">
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Supprimer
+                  </DropdownItem>
+                </DropdownContent>
+              </DropdownMenu>
             </div>
           </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/DropdownMenuExample.tsx"
+              showPackageManager={false}
+            >
+              {`import { 
+  DropdownMenu, 
+  DropdownTrigger, 
+  DropdownContent, 
+  DropdownItem, 
+  DropdownSeparator 
+} from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 
-          <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-            {!showCode ? (
-              <div className="p-4">
+<DropdownMenu>
+  <DropdownTrigger asChild>
+    <Button variant="outline">
+      <MoreVertical className="w-4 h-4 mr-2" />
+      Actions
+    </Button>
+  </DropdownTrigger>
+  <DropdownContent>
+    <DropdownItem>
+      <Edit className="w-4 h-4 mr-2" />
+      Modifier
+    </DropdownItem>
+    <DropdownItem>
+      <Download className="w-4 h-4 mr-2" />
+      Télécharger
+    </DropdownItem>
+    <DropdownSeparator />
+    <DropdownItem className="text-red-600">
+      <Trash2 className="w-4 h-4 mr-2" />
+      Supprimer
+    </DropdownItem>
+  </DropdownContent>
+</DropdownMenu>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Variants
+        </h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Menu avec labels
+              </h3>
+              <p className="text-muted-foreground">
+                Menu avec des labels pour organiser les éléments.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
                 <DropdownMenu>
                   <DropdownTrigger asChild>
-                    <Button variant="outline">Actions</Button>
+                    <Button variant="outline">
+                      <User className="w-4 h-4 mr-2" />
+                      Profil
+                    </Button>
                   </DropdownTrigger>
                   <DropdownContent>
-                    <DropdownItem>Modifier</DropdownItem>
-                    <DropdownItem>Dupliquer</DropdownItem>
+                    <DropdownLabel>Mon compte</DropdownLabel>
+                    <DropdownItem>
+                      <User className="w-4 h-4 mr-2" />
+                      Profil
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Settings className="w-4 h-4 mr-2" />
+                      Paramètres
+                    </DropdownItem>
                     <DropdownSeparator />
-                    <DropdownItem>Supprimer</DropdownItem>
+                    <DropdownLabel>Actions</DropdownLabel>
+                    <DropdownItem>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Déconnexion
+                    </DropdownItem>
                   </DropdownContent>
                 </DropdownMenu>
               </div>
-            ) : (
-              <div className="w-full bg-white dark:bg-black p-2 rounded">
-                <CodeBlock onCopy={() => copyToClipboard(`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator 
-} from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <Button variant="outline">Actions</Button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownItem>Modifier</DropdownItem>
-        <DropdownItem>Dupliquer</DropdownItem>
-        <DropdownSeparator />
-        <DropdownItem>Supprimer</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
-}`, 'main')}>
-{`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator 
-} from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <Button variant="outline">Actions</Button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownItem>Modifier</DropdownItem>
-        <DropdownItem>Dupliquer</DropdownItem>
-        <DropdownSeparator />
-        <DropdownItem>Supprimer</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/LabeledDropdownMenu.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\dropdownMenu\page.tsxExample() {
+  <DropdownMenu>
+  <DropdownTrigger asChild>
+    <Button variant="outline">
+      <User className="w-4 h-4 mr-2" />
+      Profil
+    </Button>
+  </DropdownTrigger>
+  <DropdownContent>
+    <DropdownLabel>Mon compte</DropdownLabel>
+    <DropdownItem>
+      <User className="w-4 h-4 mr-2" />
+      Profil
+    </DropdownItem>
+    <DropdownItem>
+      <Settings className="w-4 h-4 mr-2" />
+      Paramètres
+    </DropdownItem>
+    <DropdownSeparator />
+    <DropdownLabel>Actions</DropdownLabel>
+    <DropdownItem>
+      <LogOut className="w-4 h-4 mr-2" />
+      Déconnexion
+    </DropdownItem>
+  </DropdownContent>
+</DropdownMenu>
 }`}
-                </CodeBlock>
-              </div>
-            )}
+              </CodeBlock>
+            </div>
           </div>
-        </div>
 
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Installation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
-{`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Utilisation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard(`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator,
-  DropdownLabel 
-} from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <button>Menu</button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownLabel>Actions</DropdownLabel>
-        <DropdownItem>Éditer</DropdownItem>
-        <DropdownItem>Partager</DropdownItem>
-        <DropdownSeparator />
-        <DropdownItem>Supprimer</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
-}`, 'usage')}>
-{`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator,
-  DropdownLabel 
-} from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <button>Menu</button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownLabel>Actions</DropdownLabel>
-        <DropdownItem>Éditer</DropdownItem>
-        <DropdownItem>Partager</DropdownItem>
-        <DropdownSeparator />
-        <DropdownItem>Supprimer</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
-}`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6">Variantes</h2>
-
-          {/* With Labels */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <h3 className="text-lg font-medium">Avec labels</h3>
-              <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setShowCode(false)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Aperçu
-                </button>
-                <button
-                  onClick={() => setShowCode(true)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Code
-                </button>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Menu avec états
+              </h3>
+              <p className="text-muted-foreground">
+                Menu avec différents états d'éléments.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <DropdownMenu>
+                  <DropdownTrigger asChild>
+                    <Button variant="outline">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Options
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent>
+                    <DropdownItem>Option 1</DropdownItem>
+                    <DropdownItem disabled>Option désactivée</DropdownItem>
+                    <DropdownItem>Option 3</DropdownItem>
+                    <DropdownSeparator />
+                    <DropdownItem>Option 4</DropdownItem>
+                  </DropdownContent>
+                </DropdownMenu>
               </div>
             </div>
-
-            <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-              {!showCode ? (
-                <div className="p-4">
-                  <DropdownMenu>
-                    <DropdownTrigger asChild>
-                      <Button variant="outline">Options</Button>
-                    </DropdownTrigger>
-                    <DropdownContent>
-                      <DropdownLabel>Fichier</DropdownLabel>
-                      <DropdownItem>Nouveau</DropdownItem>
-                      <DropdownItem>Ouvrir</DropdownItem>
-                      <DropdownItem>Sauvegarder</DropdownItem>
-                      <DropdownSeparator />
-                      <DropdownLabel>Édition</DropdownLabel>
-                      <DropdownItem>Annuler</DropdownItem>
-                      <DropdownItem>Refaire</DropdownItem>
-                    </DropdownContent>
-                  </DropdownMenu>
-                </div>
-              ) : (
-                <div className="w-full bg-white dark:bg-black p-2 rounded">
-                  <CodeBlock onCopy={() => copyToClipboard(`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator,
-  DropdownLabel 
-} from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <Button variant="outline">Options</Button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownLabel>Fichier</DropdownLabel>
-        <DropdownItem>Nouveau</DropdownItem>
-        <DropdownItem>Ouvrir</DropdownItem>
-        <DropdownItem>Sauvegarder</DropdownItem>
-        <DropdownSeparator />
-        <DropdownLabel>Édition</DropdownLabel>
-        <DropdownItem>Annuler</DropdownItem>
-        <DropdownItem>Refaire</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
-}`, 'with-labels')}>
-{`import { 
-  DropdownMenu, 
-  DropdownTrigger, 
-  DropdownContent, 
-  DropdownItem, 
-  DropdownSeparator,
-  DropdownLabel 
-} from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <DropdownMenu>
-      <DropdownTrigger asChild>
-        <Button variant="outline">Options</Button>
-      </DropdownTrigger>
-      <DropdownContent>
-        <DropdownLabel>Fichier</DropdownLabel>
-        <DropdownItem>Nouveau</DropdownItem>
-        <DropdownItem>Ouvrir</DropdownItem>
-        <DropdownItem>Sauvegarder</DropdownItem>
-        <DropdownSeparator />
-        <DropdownLabel>Édition</DropdownLabel>
-        <DropdownItem>Annuler</DropdownItem>
-        <DropdownItem>Refaire</DropdownItem>
-      </DropdownContent>
-    </DropdownMenu>
-  );
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/StatefulDropdownMenu.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\dropdownMenu\page.tsxExample() {
+  <DropdownMenu>
+  <DropdownTrigger asChild>
+    <Button variant="outline">
+      <Settings className="w-4 h-4 mr-2" />
+      Options
+    </Button>
+  </DropdownTrigger>
+  <DropdownContent>
+    <DropdownItem>
+      Option 1
+    </DropdownItem>
+    <DropdownItem disabled>
+      Option désactivée
+    </DropdownItem>
+    <DropdownItem>
+      Option 3
+    </DropdownItem>
+    <DropdownSeparator />
+    <DropdownItem>
+      Option 4
+    </DropdownItem>
+  </DropdownContent>
+</DropdownMenu>
 }`}
-                  </CodeBlock>
-                </div>
-              )}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Composant
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Props
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownMenu
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Conteneur principal du menu
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownTrigger
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  asChild
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Élément déclencheur du menu
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownContent
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  align, side
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Contenu du menu déroulant
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownItem
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  disabled, onSelect
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Élément du menu
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownSeparator
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Séparateur entre les éléments
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  DropdownLabel
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Label pour organiser les éléments
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              icônes
+            </code>{' '}
+            pour identifier rapidement les actions
+          </li>
+          <li>
+            • Organisez les éléments avec des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              labels
+            </code>{' '}
+            et des séparateurs
+          </li>
+          <li>
+            • Désactivez les éléments non disponibles avec{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              disabled
+            </code>
+          </li>
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              couleurs
+            </code>{' '}
+            pour indiquer les actions dangereuses
+          </li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

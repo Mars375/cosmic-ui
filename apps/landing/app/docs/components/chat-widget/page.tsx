@@ -1,46 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { ChatWidget } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { ChatWidget } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { MessageCircle, User, Bot } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function ChatWidgetPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [messages, setMessages] = useState([
     {
       id: '1',
@@ -56,529 +23,251 @@ export default function ChatWidgetPage() {
       sender: 'user' as const,
       timestamp: new Date(Date.now() - 30000),
       type: 'text' as const,
+      name: 'Vous',
     },
     {
       id: '3',
-      content: 'Je comprends. Pouvez-vous me donner le numéro de votre commande ?',
+      content: 'Je vais vous aider avec votre commande. Pouvez-vous me donner le numéro de commande ?',
       sender: 'agent' as const,
-      timestamp: new Date(Date.now() - 20000),
+      timestamp: new Date(),
       type: 'text' as const,
       name: 'Support',
     },
-    {
-      id: '4',
-      content: 'Bien sûr, c\'est #12345',
-      sender: 'user' as const,
-      timestamp: new Date(Date.now() - 10000),
-      type: 'text' as const,
-    },
   ]);
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const handleSendMessage = (content: string) => {
+  const handleSendMessage = (message: string) => {
     const newMessage = {
       id: Date.now().toString(),
-      content,
+      content: message,
       sender: 'user' as const,
       timestamp: new Date(),
       type: 'text' as const,
+      name: 'Vous',
     };
     setMessages(prev => [...prev, newMessage]);
-  };
-
-  const handleSendFile = (file: File) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content: `Fichier envoyé: ${file.name}`,
-      sender: 'user' as const,
-      timestamp: new Date(),
-      type: 'file' as const,
-      metadata: {
-        fileName: file.name,
-        fileSize: `${(file.size / 1024).toFixed(1)} KB`,
-      },
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const agent = {
-    id: 'support',
-    name: 'Support',
-    avatar: '/avatars/support.jpg',
-    status: 'online' as const,
-    role: 'Agent de support',
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">ChatWidget</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de chat pour support client avec agent et messages
-          multimédia.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <MessageCircle className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">ChatWidget</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Widget de chat pour le support client et l'assistance en temps réel.
+        </p>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="h-96">
                 <ChatWidget
                   messages={messages}
-                  agent={agent}
                   onSendMessage={handleSendMessage}
-                  onSendFile={handleSendFile}
                   placeholder="Tapez votre message..."
-                  maxHeight={350}
-                  showTyping={true}
-                  isTyping={false}
-                  disabled={false}
-                  showSenderName={true}
-                  groupConsecutive={true}
+                  title="Support Client"
                 />
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { ChatWidget } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/ChatWidgetExample.tsx" showPackageManager={false}>
+{`import { ChatWidget } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyChatWidget() {
-  const [messages, setMessages] = useState([
-    {
-      id: '1',
-      content: 'Bonjour ! Comment puis-je vous aider ?',
-      sender: 'agent',
-      timestamp: new Date(),
-      type: 'text',
-      name: 'Support',
-    },
-  ]);
-
-  const handleSendMessage = (content: string) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content,
-      sender: 'user',
-      timestamp: new Date(),
-      type: 'text',
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const handleSendFile = (file: File) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content: \`Fichier envoyé: \${file.name}\`,
-      sender: 'user',
-      timestamp: new Date(),
-      type: 'file',
-      metadata: {
-        fileName: file.name,
-        fileSize: \`\${(file.size / 1024).toFixed(1)} KB\`,
-      },
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const agent = {
-    id: 'support',
+const [messages, setMessages] = useState([
+  {
+    id: '1',
+    content: 'Bonjour ! Comment puis-je vous aider ?',
+    sender: 'agent',
+    timestamp: new Date(),
+    type: 'text',
     name: 'Support',
-    avatar: '/avatars/support.jpg',
-    status: 'online',
-    role: 'Agent de support',
+  },
+]);
+
+const handleSendMessage = (message: string) => {
+  const newMessage = {
+    id: Date.now().toString(),
+    content: message,
+    sender: 'user',
+    timestamp: new Date(),
+    type: 'text',
+    name: 'Vous',
   };
+  setMessages(prev => [...prev, newMessage]);
+};
 
-  return (
-    <ChatWidget
-      messages={messages}
-      agent={agent}
-      onSendMessage={handleSendMessage}
-      onSendFile={handleSendFile}
-      placeholder="Tapez votre message..."
-      maxHeight={350}
-      showTyping={true}
-      isTyping={false}
-      disabled={false}
-      showSenderName={true}
-      groupConsecutive={true}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { ChatWidget } from '@cosmic-ui/ui';
-import { useState } from 'react';
+<ChatWidget
+  messages={messages}
+  onSendMessage={handleSendMessage}
+  placeholder="Tapez votre message..."
+  title="Support Client"
+/>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
 
-export function MyChatWidget() {
-  const [messages, setMessages] = useState([
-    {
-      id: '1',
-      content: 'Bonjour ! Comment puis-je vous aider ?',
-      sender: 'agent',
-      timestamp: new Date(),
-      type: 'text',
-      name: 'Support',
-    },
-  ]);
-
-  const handleSendMessage = (content: string) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content,
-      sender: 'user',
-      timestamp: new Date(),
-      type: 'text',
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const handleSendFile = (file: File) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content: \`Fichier envoyé: \${file.name}\`,
-      sender: 'user',
-      timestamp: new Date(),
-      type: 'file',
-      metadata: {
-        fileName: file.name,
-        fileSize: \`\${(file.size / 1024).toFixed(1)} KB\`,
-      },
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const agent = {
-    id: 'support',
-    name: 'Support',
-    avatar: '/avatars/support.jpg',
-    status: 'online',
-    role: 'Agent de support',
-  };
-
-  return (
-    <ChatWidget
-      messages={messages}
-      agent={agent}
-      onSendMessage={handleSendMessage}
-      onSendFile={handleSendFile}
-      placeholder="Tapez votre message..."
-      maxHeight={350}
-      showTyping={true}
-      isTyping={false}
-      disabled={false}
-      showSenderName={true}
-      groupConsecutive={true}
-    />
-  );
-}`}
-                </CodeBlock>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Chat compact</h3>
+              <p className="text-muted-foreground">Version compacte du widget de chat.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-64">
+                  <ChatWidget
+                    messages={messages.slice(0, 2)}
+                    onSendMessage={handleSendMessage}
+                    placeholder="Message..."
+                    title="Chat"
+                    compact
+                  />
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant ChatWidget est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un chat de support client.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { ChatWidget } from '@cosmic-ui/ui';
-
-const messages = [
-  {
-    id: '1',
-    content: 'Bonjour !',
-    sender: 'agent',
-    timestamp: new Date(),
-    type: 'text',
-  },
-];
-
-const agent = {
-  id: 'support',
-  name: 'Support',
-  status: 'online',
-};
-
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={(content) => console.log(content)}
-  placeholder="Tapez votre message..."
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { ChatWidget } from '@cosmic-ui/ui';
-
-const messages = [
-  {
-    id: '1',
-    content: 'Bonjour !',
-    sender: 'agent',
-    timestamp: new Date(),
-    type: 'text',
-  },
-];
-
-const agent = {
-  id: 'support',
-  name: 'Support',
-  status: 'online',
-};
-
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={(content) => console.log(content)}
-  placeholder="Tapez votre message..."
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
             </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Agent hors ligne
-                    </h3>
-                    <ChatWidget
-                      messages={messages.slice(0, 2)}
-                      agent={{ ...agent, status: 'offline' }}
-                      onSendMessage={handleSendMessage}
-                      placeholder="Agent hors ligne"
-                      maxHeight={200}
-                      showTyping={false}
-                      disabled={true}
-                      showSenderName={false}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      En cours de frappe
-                    </h3>
-                    <ChatWidget
-                      messages={messages.slice(0, 2)}
-                      agent={agent}
-                      onSendMessage={handleSendMessage}
-                      placeholder="Tapez votre message..."
-                      maxHeight={200}
-                      showTyping={true}
-                      isTyping={true}
-                      showSenderName={true}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Agent hors ligne
-<ChatWidget
+            <div>
+              <CodeBlock language="typescript" filePath="components/CompactChatWidget.tsx" showPackageManager={false}>
+{`export default function App\docs\components\chatWidget\page.tsxExample() {
+  return <ChatWidget
   messages={messages}
-  agent={{ ...agent, status: 'offline' }}
   onSendMessage={handleSendMessage}
-  placeholder="Agent hors ligne"
-  disabled={true}
-  showSenderName={false}
-/>
+  placeholder="Message..."
+  title="Chat"
+  compact
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// En cours de frappe
-<ChatWidget
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Chat avec statut</h3>
+              <p className="text-muted-foreground">Widget avec indicateur de statut de l'agent.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-64">
+                  <ChatWidget
+                    messages={messages}
+                    onSendMessage={handleSendMessage}
+                    placeholder="Tapez votre message..."
+                    title="Support Client"
+                    agentStatus="online"
+                    agentName="Marie Dubois"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/ChatWidgetWithStatus.tsx" showPackageManager={false}>
+{`export default function App\docs\components\chatWidget\page.tsxExample() {
+  return <ChatWidget
   messages={messages}
-  agent={agent}
   onSendMessage={handleSendMessage}
   placeholder="Tapez votre message..."
-  showTyping={true}
-  isTyping={true}
-  showSenderName={true}
-/>
-
-// Sans regroupement
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={handleSendMessage}
-  groupConsecutive={false}
-  showSenderName={true}
-/>
-
-// Avec fichiers
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={handleSendMessage}
-  onSendFile={handleSendFile}
-  placeholder="Tapez votre message ou envoyez un fichier..."
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Agent hors ligne
-<ChatWidget
-  messages={messages}
-  agent={{ ...agent, status: 'offline' }}
-  onSendMessage={handleSendMessage}
-  placeholder="Agent hors ligne"
-  disabled={true}
-  showSenderName={false}
-/>
-
-// En cours de frappe
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={handleSendMessage}
-  placeholder="Tapez votre message..."
-  showTyping={true}
-  isTyping={true}
-  showSenderName={true}
-/>
-
-// Sans regroupement
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={handleSendMessage}
-  groupConsecutive={false}
-  showSenderName={true}
-/>
-
-// Avec fichiers
-<ChatWidget
-  messages={messages}
-  agent={agent}
-  onSendMessage={handleSendMessage}
-  onSendFile={handleSendFile}
-  placeholder="Tapez votre message ou envoyez un fichier..."
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
+  title="Support Client"
+  agentStatus="online"
+  agentName="Marie Dubois"
+/>;
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">messages</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Message[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des messages du chat</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onSendMessage</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(message: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback appelé lors de l'envoi d'un message</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">title</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'Chat'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Titre du widget</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">placeholder</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'Tapez votre message...'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Placeholder du champ de saisie</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">compact</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Mode compact du widget</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">agentStatus</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'online' | 'offline' | 'away'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'online'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Statut de l'agent</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">agentName</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Nom de l'agent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez le mode <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">compact</code> pour les espaces restreints</li>
+          <li>• Affichez le <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">statut</code> de l'agent pour informer les utilisateurs</li>
+          <li>• Gérez l'état des messages avec <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">useState</code></li>
+          <li>• Intégrez avec votre système de support client</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

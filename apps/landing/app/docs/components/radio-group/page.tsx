@@ -1,347 +1,338 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-const CodeBlock = ({ children, onCopy }: { children: string; onCopy: () => void }) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-2 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { RadioGroup, RadioGroupItem } from 'cosmic-ui-mars';
+import { Circle } from 'lucide-react';
 
 export default function RadioGroupPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
+  const [selectedValue, setSelectedValue] = useState('option1');
+  const [selectedSize, setSelectedSize] = useState('medium');
+  const [selectedTheme, setSelectedTheme] = useState('light');
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <h1 className="text-3xl font-bold">Radio Group</h1>
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          Le composant Radio Group permet aux utilisateurs de sélectionner une seule option 
-          parmi plusieurs choix mutuellement exclusifs.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xl font-semibold">Aperçu</h2>
-            <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-              <button
-                onClick={() => setShowCode(false)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
-              >
-                Aperçu
-              </button>
-              <button
-                onClick={() => setShowCode(true)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
-              >
-                Code
-              </button>
-            </div>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Circle className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">RadioGroup</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Groupe de boutons radio pour sélectionner une option parmi plusieurs choix exclusifs.
+        </p>
+      </div>
 
-          <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-            {!showCode ? (
-              <div className="p-4">
-                <RadioGroup defaultValue="option1">
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">Sélection: {selectedValue}</p>
+                <RadioGroup value={selectedValue} onValueChange={setSelectedValue}>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option1" id="r1" />
-                    <label htmlFor="r1" className="text-sm font-medium">
+                    <RadioGroupItem value="option1" id="option1" />
+                    <label htmlFor="option1" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                       Option 1
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option2" id="r2" />
-                    <label htmlFor="r2" className="text-sm font-medium">
+                    <RadioGroupItem value="option2" id="option2" />
+                    <label htmlFor="option2" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                       Option 2
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option3" id="r3" />
-                    <label htmlFor="r3" className="text-sm font-medium">
+                    <RadioGroupItem value="option3" id="option3" />
+                    <label htmlFor="option3" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                       Option 3
                     </label>
                   </div>
                 </RadioGroup>
               </div>
-            ) : (
-              <div className="w-full bg-white dark:bg-black p-2 rounded">
-                <CodeBlock onCopy={() => copyToClipboard(`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="option1">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option1" id="r1" />
-        <label htmlFor="r1" className="text-sm font-medium">
-          Option 1
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option2" id="r2" />
-        <label htmlFor="r2" className="text-sm font-medium">
-          Option 2
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option3" id="r3" />
-        <label htmlFor="r3" className="text-sm font-medium">
-          Option 3
-        </label>
-      </div>
-    </RadioGroup>
-  );
-}`, 'main')}>
-{`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="option1">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option1" id="r1" />
-        <RadioGroupItem value="option2" id="r2" />
-        <label htmlFor="r2" className="text-sm font-medium">
-          Option 2
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option3" id="r3" />
-        <label htmlFor="r3" className="text-sm font-medium">
-          Option 3
-        </label>
-      </div>
-    </RadioGroup>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Installation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
-{`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Utilisation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard(`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="small">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="small" id="size-small" />
-        <label htmlFor="size-small" className="text-sm font-medium">
-          Petit
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="medium" id="size-medium" />
-        <label htmlFor="size-medium" className="text-sm font-medium">
-          Moyen
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="large" id="size-large" />
-        <label htmlFor="size-large" className="text-sm font-medium">
-          Grand
-        </label>
-      </div>
-    </RadioGroup>
-  );
-}`, 'usage')}>
-{`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="small">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="small" id="size-small" />
-        <label htmlFor="size-small" className="text-sm font-medium">
-          Petit
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="medium" id="size-medium" />
-        <label htmlFor="size-medium" className="text-sm font-medium">
-          Moyen
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="large" id="size-large" />
-        <label htmlFor="size-large" className="text-sm font-medium">
-          Grand
-        </label>
-      </div>
-    </RadioGroup>
-  );
-}`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6">Variantes</h2>
-
-          {/* Horizontal Layout */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <h3 className="text-lg font-medium">Disposition horizontale</h3>
-              <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setShowCode(false)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Aperçu
-                </button>
-                <button
-                  onClick={() => setShowCode(true)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Code
-                </button>
-              </div>
             </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/RadioGroupExample.tsx" showPackageManager={false}>
+{`import { RadioGroup, RadioGroupItem } from 'cosmic-ui-mars';
+import { useState } from 'react';
 
-            <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-              {!showCode ? (
-                <div className="p-4">
-                  <RadioGroup defaultValue="red" className="flex flex-row space-x-6">
+const [selectedValue, setSelectedValue] = useState('option1');
+
+<RadioGroup value={selectedValue} onValueChange={setSelectedValue}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option1" id="option1" />
+    <label htmlFor="option1">Option 1</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option2" id="option2" />
+    <label htmlFor="option2">Option 2</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option3" id="option3" />
+    <label htmlFor="option3">Option 3</label>
+  </div>
+</RadioGroup>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Groupe avec tailles</h3>
+              <p className="text-muted-foreground">RadioGroup avec différentes tailles.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <p className="text-sm text-muted-foreground">Taille sélectionnée: {selectedSize}</p>
+                  <RadioGroup value={selectedSize} onValueChange={setSelectedSize}>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="red" id="color-red" />
-                      <label htmlFor="color-red" className="text-sm font-medium">
-                        Rouge
-                      </label>
+                      <RadioGroupItem value="small" id="small" size="sm" />
+                      <label htmlFor="small" className="text-sm">Petit</label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="blue" id="color-blue" />
-                      <label htmlFor="color-blue" className="text-sm font-medium">
-                        Bleu
-                      </label>
+                      <RadioGroupItem value="medium" id="medium" size="md" />
+                      <label htmlFor="medium" className="text-sm">Moyen</label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="green" id="color-green" />
-                      <label htmlFor="color-green" className="text-sm font-medium">
-                        Vert
-                      </label>
+                      <RadioGroupItem value="large" id="large" size="lg" />
+                      <label htmlFor="large" className="text-sm">Grand</label>
                     </div>
                   </RadioGroup>
                 </div>
-              ) : (
-                <div className="w-full bg-white dark:bg-black p-2 rounded">
-                  <CodeBlock onCopy={() => copyToClipboard(`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="red" className="flex flex-row space-x-6">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="red" id="color-red" />
-        <label htmlFor="color-red" className="text-sm font-medium">
-          Rouge
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="blue" id="color-blue" />
-        <label htmlFor="color-blue" className="text-sm font-medium">
-          Bleu
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="green" id="color-green" />
-        <label htmlFor="color-green" className="text-sm font-medium">
-          Vert
-        </label>
-      </div>
-    </RadioGroup>
-  );
-}`, 'horizontal')}>
-{`import { RadioGroup, RadioGroupItem } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <RadioGroup defaultValue="red" className="flex flex-row space-x-6">
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="red" id="color-red" />
-        <label htmlFor="color-red" className="text-sm font-medium">
-          Rouge
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="blue" id="color-blue" />
-        <label htmlFor="color-blue" className="text-sm font-medium">
-          Bleu
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="green" id="color-green" />
-        <label htmlFor="color-green" className="text-sm font-medium">
-          Vert
-        </label>
-      </div>
-    </RadioGroup>
-  );
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/SizedRadioGroup.tsx" showPackageManager={false}>
+{`export default function App\docs\components\radioGroup\page.tsxExample() {
+  <RadioGroup value={selectedSize} onValueChange={setSelectedSize}>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="small" id="small" size="sm" />
+    <label htmlFor="small">Petit</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="medium" id="medium" size="md" />
+    <label htmlFor="medium">Moyen</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="large" id="large" size="lg" />
+    <label htmlFor="large">Grand</label>
+  </div>
+</RadioGroup>
 }`}
-                  </CodeBlock>
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Groupe désactivé</h3>
+              <p className="text-muted-foreground">RadioGroup avec options désactivées.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <RadioGroup defaultValue="enabled">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="enabled" id="enabled" />
+                    <label htmlFor="enabled" className="text-sm">Option activée</label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="disabled" id="disabled" disabled />
+                    <label htmlFor="disabled" className="text-sm text-muted-foreground">Option désactivée</label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="another" id="another" />
+                    <label htmlFor="another" className="text-sm">Autre option</label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/DisabledRadioGroup.tsx" showPackageManager={false}>
+{`export default function App\docs\components\radioGroup\page.tsxExample() {
+  <RadioGroup defaultValue="enabled">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="enabled" id="enabled" />
+    <label htmlFor="enabled">Option activée</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="disabled" id="disabled" disabled />
+    <label htmlFor="disabled">Option désactivée</label>
+  </div>
+</RadioGroup>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Groupe horizontal</h3>
+              <p className="text-muted-foreground">RadioGroup avec disposition horizontale.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <p className="text-sm text-muted-foreground">Thème: {selectedTheme}</p>
+                  <RadioGroup 
+                    value={selectedTheme} 
+                    onValueChange={setSelectedTheme}
+                    className="flex flex-row space-x-6"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="light" id="light-theme" />
+                      <label htmlFor="light-theme" className="text-sm">Clair</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="dark" id="dark-theme" />
+                      <label htmlFor="dark-theme" className="text-sm">Sombre</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="auto" id="auto-theme" />
+                      <label htmlFor="auto-theme" className="text-sm">Auto</label>
+                    </div>
+                  </RadioGroup>
                 </div>
-              )}
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/HorizontalRadioGroup.tsx" showPackageManager={false}>
+{`export default function App\docs\components\radioGroup\page.tsxExample() {
+  <RadioGroup 
+  value={selectedTheme} 
+  onValueChange={setSelectedTheme}
+  className="flex flex-row space-x-6"
+>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="light" id="light" />
+    <label htmlFor="light">Clair</label>
+  </div>
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="dark" id="dark" />
+    <label htmlFor="dark">Sombre</label>
+  </div>
+</RadioGroup>
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        
+        <div className="mb-8">
+          <h3 className="text-lg font-medium mb-4 text-foreground">RadioGroup</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-border rounded-lg">
+              <thead>
+                <tr className="bg-muted/50">
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">value</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Valeur sélectionnée</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">defaultValue</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Valeur par défaut</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">onValueChange</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(value: string) => void</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback de changement</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">disabled</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Désactiver le groupe</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-4 text-foreground">RadioGroupItem</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-border rounded-lg">
+              <thead>
+                <tr className="bg-muted/50">
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                  <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">value</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Valeur de l'option</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">id</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Identifiant unique</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">size</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'sm' | 'md' | 'lg'</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'md'</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Taille du bouton radio</td>
+                </tr>
+                <tr>
+                  <td className="border border-border px-4 py-3 font-mono text-sm">disabled</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                  <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Désactiver l'option</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">labels clairs</code> pour chaque option</li>
+          <li>• Associez toujours un <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">label</code> à chaque RadioGroupItem</li>
+          <li>• Limitez le nombre d'<code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">options</code> (max 5-7)</li>
+          <li>• Utilisez la disposition <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">verticale</code> par défaut</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

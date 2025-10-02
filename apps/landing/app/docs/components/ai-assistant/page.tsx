@@ -1,46 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { AIAssistant } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import React, { useState } from 'react';
+import { CodeBlock } from '../../../components/code-block';
+import { AIAssistant } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { Bot, User, Code, Lightbulb } from 'lucide-react';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
 
 export default function AIAssistantPage() {
   const [showCode, setShowCode] = useState(false);
   const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [messages, setMessages] = useState([
     {
       id: '1',
@@ -76,14 +44,6 @@ export default function AIAssistantPage() {
     },
   ]);
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
   const handleSendMessage = (message: string) => {
     const newMessage = {
       id: Date.now().toString(),
@@ -107,88 +67,52 @@ export default function AIAssistantPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">AIAssistant</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Bot className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">AIAssistant</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
+        <p className="text-xl text-muted-foreground max-w-3xl">
           Un composant d'assistant IA avec chat, suggestions et support de code.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <AIAssistant
+                messages={messages}
+                onSendMessage={handleSendMessage}
+                onSuggestionClick={handleSuggestionClick}
+                placeholder="Posez votre question à l'IA..."
+                isTyping={false}
+                disabled={false}
+                maxHeight={350}
+                showSuggestions={true}
+                suggestions={suggestions}
+                className="relative !static !bottom-auto !left-auto !w-full"
+              />
+            </div>
           </div>
-
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <AIAssistant
-                  messages={messages}
-                  onSendMessage={handleSendMessage}
-                  onSuggestionClick={handleSuggestionClick}
-                  placeholder="Posez votre question à l'IA..."
-                  isTyping={false}
-                  disabled={false}
-                  maxHeight={350}
-                  showSuggestions={true}
-                  suggestions={suggestions}
-                />
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { AIAssistant } from '@cosmic-ui/ui';
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/AIAssistantExample.tsx" showPackageManager={false}>
+              {`import { AIAssistant } from 'cosmic-ui-mars';
+import * as React from 'react';
 import { useState } from 'react';
 
 export function MyAIAssistant() {
@@ -235,298 +159,196 @@ export function MyAIAssistant() {
       maxHeight={350}
       showSuggestions={true}
       suggestions={suggestions}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { AIAssistant } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyAIAssistant() {
-  const [messages, setMessages] = useState([
-    {
-      id: '1',
-      content: 'Bonjour ! Je suis votre assistant IA.',
-      sender: 'ai',
-      timestamp: new Date(),
-      type: 'text',
-    },
-  ]);
-
-  const handleSendMessage = (message: string) => {
-    const newMessage = {
-      id: Date.now().toString(),
-      content: message,
-      sender: 'user',
-      timestamp: new Date(),
-      type: 'text',
-    };
-    setMessages(prev => [...prev, newMessage]);
-  };
-
-  const handleSuggestionClick = (suggestion: string) => {
-    handleSendMessage(suggestion);
-  };
-
-  const suggestions = [
-    'Explique-moi les hooks React',
-    'Comment créer un composant ?',
-    'Qu\\'est-ce que le state ?',
-    'Montre-moi un exemple de useEffect',
-  ];
-
-  return (
-    <AIAssistant
-      messages={messages}
-      onSendMessage={handleSendMessage}
-      onSuggestionClick={handleSuggestionClick}
-      placeholder="Posez votre question à l'IA..."
-      isTyping={false}
-      disabled={false}
-      maxHeight={350}
-      showSuggestions={true}
-      suggestions={suggestions}
+      className="relative !static !bottom-auto !left-auto !w-full"
     />
   );
 }`}
-                </CodeBlock>
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Sans suggestions</h3>
+              <p className="text-muted-foreground">Assistant sans suggestions de questions.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <AIAssistant
+                  messages={messages.slice(0, 2)}
+                  onSendMessage={handleSendMessage}
+                  placeholder="Tapez votre message..."
+                  showSuggestions={false}
+                  maxHeight={200}
+                  className="relative !static !bottom-auto !left-auto !w-full"
+                />
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant AIAssistant est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un assistant IA interactif.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { AIAssistant } from '@cosmic-ui/ui';
-
-const messages = [
-  {
-    id: '1',
-    content: 'Bonjour !',
-    sender: 'ai',
-    timestamp: new Date(),
-    type: 'text',
-  },
-];
-
-<AIAssistant
-  messages={messages}
-  onSendMessage={(message) => console.log(message)}
-  placeholder="Posez votre question..."
-  showSuggestions={true}
-  suggestions={['Question 1', 'Question 2']}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { AIAssistant } from '@cosmic-ui/ui';
-
-const messages = [
-  {
-    id: '1',
-    content: 'Bonjour !',
-    sender: 'ai',
-    timestamp: new Date(),
-    type: 'text',
-  },
-];
-
-<AIAssistant
-  messages={messages}
-  onSendMessage={(message) => console.log(message)}
-  placeholder="Posez votre question..."
-  showSuggestions={true}
-  suggestions={['Question 1', 'Question 2']}
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
             </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Sans suggestions
-                    </h3>
-                    <AIAssistant
-                      messages={messages.slice(0, 2)}
-                      onSendMessage={handleSendMessage}
-                      placeholder="Tapez votre message..."
-                      showSuggestions={false}
-                      maxHeight={200}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      En cours de frappe
-                    </h3>
-                    <AIAssistant
-                      messages={messages.slice(0, 2)}
-                      onSendMessage={handleSendMessage}
-                      placeholder="Tapez votre message..."
-                      isTyping={true}
-                      showSuggestions={false}
-                      maxHeight={200}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Sans suggestions
-<AIAssistant
+            <div>
+              <CodeBlock language="typescript" filePath="components/AIAssistantNoSuggestions.tsx" showPackageManager={false}>
+                {`export default function App\docs\components\aiAssistant\page.tsxExample() {
+  return <AIAssistant
   messages={messages}
   onSendMessage={handleSendMessage}
   placeholder="Tapez votre message..."
   showSuggestions={false}
   maxHeight={300}
-/>
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// En cours de frappe
-<AIAssistant
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">En cours de frappe</h3>
+              <p className="text-muted-foreground">Assistant avec indicateur de frappe.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <AIAssistant
+                  messages={messages.slice(0, 2)}
+                  onSendMessage={handleSendMessage}
+                  placeholder="Tapez votre message..."
+                  isTyping={true}
+                  showSuggestions={false}
+                  maxHeight={200}
+                  className="relative !static !bottom-auto !left-auto !w-full"
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/AIAssistantTyping.tsx" showPackageManager={false}>
+                {`export default function App\docs\components\aiAssistant\page.tsxExample() {
+  return <AIAssistant
   messages={messages}
   onSendMessage={handleSendMessage}
   placeholder="Tapez votre message..."
   isTyping={true}
   showSuggestions={false}
   maxHeight={300}
-/>
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// Désactivé
-<AIAssistant
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Désactivé</h3>
+              <p className="text-muted-foreground">Assistant en mode désactivé.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <AIAssistant
+                  messages={messages.slice(0, 2)}
+                  onSendMessage={handleSendMessage}
+                  placeholder="Assistant indisponible"
+                  disabled={true}
+                  showSuggestions={false}
+                  maxHeight={200}
+                  className="relative !static !bottom-auto !left-auto !w-full"
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/AIAssistantDisabled.tsx" showPackageManager={false}>
+                {`export default function App\docs\components\aiAssistant\page.tsxExample() {
+  return <AIAssistant
   messages={messages}
   onSendMessage={handleSendMessage}
   placeholder="Assistant indisponible"
   disabled={true}
   showSuggestions={false}
   maxHeight={300}
-/>
-
-// Avec code
-const messageWithCode = {
-  id: '1',
-  content: 'Voici un exemple de code :',
-  sender: 'ai',
-  timestamp: new Date(),
-  type: 'code',
-  code: {
-    language: 'javascript',
-    content: 'console.log("Hello World!");',
-  },
-};`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Sans suggestions
-<AIAssistant
-  messages={messages}
-  onSendMessage={handleSendMessage}
-  placeholder="Tapez votre message..."
-  showSuggestions={false}
-  maxHeight={300}
-/>
-
-// En cours de frappe
-<AIAssistant
-  messages={messages}
-  onSendMessage={handleSendMessage}
-  placeholder="Tapez votre message..."
-  isTyping={true}
-  showSuggestions={false}
-  maxHeight={300}
-/>
-
-// Désactivé
-<AIAssistant
-  messages={messages}
-  onSendMessage={handleSendMessage}
-  placeholder="Assistant indisponible"
-  disabled={true}
-  showSuggestions={false}
-  maxHeight={300}
-/>
-
-// Avec code
-const messageWithCode = {
-  id: '1',
-  content: 'Voici un exemple de code :',
-  sender: 'ai',
-  timestamp: new Date(),
-  type: 'code',
-  code: {
-    language: 'javascript',
-    content: 'console.log("Hello World!");',
-  },
-};`}
-                  </CodeBlock>
-                </div>
-              )}
+/>;
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* API Reference */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">messages</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Message[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des messages du chat</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onSendMessage</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(message: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback appelé lors de l'envoi d'un message</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">placeholder</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">"Tapez votre message..."</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Placeholder du champ de saisie</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">isTyping</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Affiche l'indicateur de frappe</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">disabled</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Désactive l'assistant</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showSuggestions</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">true</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Affiche les suggestions</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">suggestions</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des suggestions</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">maxHeight</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">number</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">400</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Hauteur maximale du chat</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Par défaut, le composant utilise un <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">positionnement fixe</code> (widget flottant)</li>
+          <li>• Pour l'intégrer dans une page, utilisez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">className="relative !static !w-full"</code></li>
+          <li>• Utilisez des messages structurés avec <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">type</code> et <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">sender</code></li>
+          <li>• Le type <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">code</code> permet d'afficher du code avec coloration syntaxique</li>
+          <li>• Les suggestions améliorent l'expérience utilisateur</li>
+          <li>• Utilisez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">isTyping</code> pour indiquer une réponse en cours</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code> pour les chats</li>
+        </ul>
       </div>
     </div>
   );

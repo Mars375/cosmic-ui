@@ -1,462 +1,220 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { LoginPage, RegisterPage } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { LogIn, UserPlus, Mail, Lock, User } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function AuthPagesPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState<'login' | 'register'>('login');
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">Auth Pages</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <LogIn className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">Auth Pages</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Des pages d'authentification prêtes à l'emploi pour la connexion et
-          l'inscription.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Composants de pages d'authentification prêts à l'emploi pour login et
+          inscription.
         </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
-          </div>
-
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <div className="flex gap-2 mb-4">
-                    <button
-                      onClick={() => setCurrentPage('login')}
-                      className={`px-3 py-1 rounded text-sm ${
-                        currentPage === 'login'
-                          ? 'bg-cosmic-primary text-white'
-                          : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                      }`}
-                    >
-                      Connexion
-                    </button>
-                    <button
-                      onClick={() => setCurrentPage('register')}
-                      className={`px-3 py-1 rounded text-sm ${
-                        currentPage === 'register'
-                          ? 'bg-cosmic-primary text-white'
-                          : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                      }`}
-                    >
-                      Inscription
-                    </button>
-                  </div>
-                  
-                  {currentPage === 'login' ? (
-                    <LoginPage />
-                  ) : (
-                    <RegisterPage />
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyAuthPages() {
-  const [currentPage, setCurrentPage] = useState<'login' | 'register'>('login');
-
-  return (
-    <div className="space-y-4">
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setCurrentPage('login')}
-          className={\`px-3 py-1 rounded text-sm \${
-            currentPage === 'login'
-              ? 'bg-primary text-white'
-              : 'bg-border text-foreground hover:bg-border/80'
-          }\`}
-        >
-          Connexion
-        </button>
-        <button
-          onClick={() => setCurrentPage('register')}
-          className={\`px-3 py-1 rounded text-sm \${
-            currentPage === 'register'
-              ? 'bg-primary text-white'
-              : 'bg-border text-foreground hover:bg-border/80'
-          }\`}
-        >
-          Inscription
-        </button>
       </div>
-      
-      {currentPage === 'login' ? (
-        <LoginPage />
-      ) : (
-        <RegisterPage />
-      )}
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
+
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="flex gap-2 mb-4">
+                <Button
+                  variant={currentPage === 'login' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setCurrentPage('login')}
                 >
-                  {`import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
+                  Login
+                </Button>
+                <Button
+                  variant={currentPage === 'register' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setCurrentPage('register')}
+                >
+                  Register
+                </Button>
+              </div>
+              {currentPage === 'login' ? <LoginPage /> : <RegisterPage />}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/AuthPagesExample.tsx"
+              showPackageManager={false}
+            >
+              {`import { LoginPage, RegisterPage } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyAuthPages() {
-  const [currentPage, setCurrentPage] = useState<'login' | 'register'>('login');
+const [currentPage, setCurrentPage] = useState<'login' | 'register'>('login');
 
-  return (
-    <div className="space-y-4">
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setCurrentPage('login')}
-          className={\`px-3 py-1 rounded text-sm \${
-            currentPage === 'login'
-              ? 'bg-primary text-white'
-              : 'bg-border text-foreground hover:bg-border/80'
-          }\`}
-        >
-          Connexion
-        </button>
-        <button
-          onClick={() => setCurrentPage('register')}
-          className={\`px-3 py-1 rounded text-sm \${
-            currentPage === 'register'
-              ? 'bg-primary text-white'
-              : 'bg-border text-foreground hover:bg-border/80'
-          }\`}
-        >
-          Inscription
-        </button>
+{currentPage === 'login' ? <LoginPage /> : <RegisterPage />}`}
+            </CodeBlock>
+          </div>
+        </div>
       </div>
-      
-      {currentPage === 'login' ? (
-        <LoginPage />
-      ) : (
-        <RegisterPage />
-      )}
-    </div>
-  );
-}`}
-                </CodeBlock>
+
+      {/* Composants individuels */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Composants individuels
+        </h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Page de connexion
+              </h3>
+              <p className="text-muted-foreground">
+                Composant de page de connexion avec formulaire.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <LoginPage />
               </div>
-            )}
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/LoginPageExample.tsx"
+                showPackageManager={false}
+              >
+                {`import { LoginPage } from 'cosmic-ui-mars';
+
+<LoginPage />`}
+              </CodeBlock>
+            </div>
           </div>
-        </div>
 
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Les composants Auth Pages sont déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Page d'inscription
+              </h3>
+              <p className="text-muted-foreground">
+                Composant de page d'inscription avec formulaire.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <RegisterPage />
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/RegisterPageExample.tsx"
+                showPackageManager={false}
+              >
+                {`import { RegisterPage } from 'cosmic-ui-mars';
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez ces composants pour créer des pages d'authentification.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
-
-// Page de connexion
-<LoginPage />
-
-// Page d'inscription
-<RegisterPage />`,
-                  'usage'
-                )
-              }
-            >
-              {`import { LoginPage, RegisterPage } from '@cosmic-ui/ui';
-
-// Page de connexion
-<LoginPage />
-
-// Page d'inscription
 <RegisterPage />`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Page de connexion
-                    </h3>
-                    <LoginPage />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Page d'inscription
-                    </h3>
-                    <RegisterPage />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Page de connexion simple
-<LoginPage />
-
-// Page d'inscription simple
-<RegisterPage />
-
-// Utilisation dans un layout
-<div className="min-h-screen flex items-center justify-center">
-  <div className="w-full max-w-md">
-    <LoginPage />
-  </div>
-</div>
-
-// Avec navigation entre les pages
-const [isLogin, setIsLogin] = useState(true);
-
-<div className="space-y-4">
-  <div className="flex gap-2">
-    <button
-      onClick={() => setIsLogin(true)}
-      className={\`px-3 py-1 rounded \${
-        isLogin ? 'bg-primary text-white' : 'bg-border'
-      }\`}
-    >
-      Connexion
-    </button>
-    <button
-      onClick={() => setIsLogin(false)}
-      className={\`px-3 py-1 rounded \${
-        !isLogin ? 'bg-primary text-white' : 'bg-border'
-      }\`}
-    >
-      Inscription
-    </button>
-  </div>
-  
-  {isLogin ? <LoginPage /> : <RegisterPage />}
-</div>
-
-// Intégration avec un router
-import { useRouter } from 'next/router';
-
-const router = useRouter();
-
-const handleLogin = () => {
-  // Logique de connexion
-  router.push('/dashboard');
-};
-
-const handleRegister = () => {
-  // Logique d'inscription
-  router.push('/welcome');
-};`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Page de connexion simple
-<LoginPage />
-
-// Page d'inscription simple
-<RegisterPage />
-
-// Utilisation dans un layout
-<div className="min-h-screen flex items-center justify-center">
-  <div className="w-full max-w-md">
-    <LoginPage />
-  </div>
-</div>
-
-// Avec navigation entre les pages
-const [isLogin, setIsLogin] = useState(true);
-
-<div className="space-y-4">
-  <div className="flex gap-2">
-    <button
-      onClick={() => setIsLogin(true)}
-      className={\`px-3 py-1 rounded \${
-        isLogin ? 'bg-primary text-white' : 'bg-border'
-      }\`}
-    >
-      Connexion
-    </button>
-    <button
-      onClick={() => setIsLogin(false)}
-      className={\`px-3 py-1 rounded \${
-        !isLogin ? 'bg-primary text-white' : 'bg-border'
-      }\`}
-    >
-      Inscription
-    </button>
-  </div>
-  
-  {isLogin ? <LoginPage /> : <RegisterPage />}
-</div>
-
-// Intégration avec un router
-import { useRouter } from 'next/router';
-
-const router = useRouter();
-
-const handleLogin = () => {
-  // Logique de connexion
-  router.push('/dashboard');
-};
-
-const handleRegister = () => {
-  // Logique d'inscription
-  router.push('/welcome');
-};`}
-                  </CodeBlock>
-                </div>
-              )}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Composant
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Props
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  LoginPage
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Page de connexion avec formulaire
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  RegisterPage
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Page d'inscription avec formulaire
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              LoginPage
+            </code>{' '}
+            pour la connexion
+          </li>
+          <li>
+            • Utilisez{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              RegisterPage
+            </code>{' '}
+            pour l'inscription
+          </li>
+          <li>• Personnalisez les styles selon votre design system</li>
+          <li>• Intégrez avec votre système d'authentification</li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

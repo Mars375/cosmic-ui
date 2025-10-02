@@ -1,46 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { DebugPanel } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { DebugPanel } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { Bug, Network, Activity, Trash2 } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function DebugPanelPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [isOpen, setIsOpen] = useState(false);
   const [logs, setLogs] = useState([
     {
@@ -80,656 +47,270 @@ export default function DebugPanelPage() {
       url: '/api/users',
       method: 'GET',
       status: 200,
-      statusText: 'OK',
       duration: 150,
       timestamp: new Date(Date.now() - 300000),
-      responseData: { users: [] },
     },
     {
       id: '2',
-      url: '/api/auth/login',
+      url: '/api/posts',
       method: 'POST',
-      status: 401,
-      statusText: 'Unauthorized',
-      duration: 89,
+      status: 201,
+      duration: 200,
       timestamp: new Date(Date.now() - 240000),
-      requestData: { email: 'test@example.com' },
-      error: 'Invalid credentials',
     },
     {
       id: '3',
-      url: '/api/data',
-      method: 'GET',
-      status: 200,
-      statusText: 'OK',
-      duration: 234,
+      url: '/api/auth/login',
+      method: 'POST',
+      status: 401,
+      duration: 100,
       timestamp: new Date(Date.now() - 180000),
-      responseData: { data: 'success' },
     },
   ]);
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const handleClearLogs = () => {
-    setLogs([]);
-  };
-
-  const handleClearNetwork = () => {
-    setNetworkRequests([]);
-  };
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const addLog = () => {
+  const addLog = (level: 'info' | 'warn' | 'error' | 'debug', message: string, source: string) => {
     const newLog = {
       id: Date.now().toString(),
       timestamp: new Date(),
-      level: 'info' as const,
-      message: 'Nouveau log ajouté',
-      source: 'Debug',
+      level,
+      message,
+      source,
     };
     setLogs(prev => [newLog, ...prev]);
   };
 
-  const addNetworkRequest = () => {
-    const newRequest = {
-      id: Date.now().toString(),
-      url: '/api/test',
-      method: 'POST',
-      status: 200,
-      statusText: 'OK',
-      duration: Math.floor(Math.random() * 200) + 50,
-      timestamp: new Date(),
-      responseData: { success: true },
-    };
-    setNetworkRequests(prev => [newRequest, ...prev]);
+  const clearLogs = () => {
+    setLogs([]);
+  };
+
+  const clearNetworkRequests = () => {
+    setNetworkRequests([]);
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">Debug Panel</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Bug className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">DebugPanel</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un panneau de débogage pour surveiller les logs, les requêtes réseau
-          et les performances.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Panneau de débogage pour surveiller les logs, les requêtes réseau et les performances de l'application.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
-          </div>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <div className="flex gap-2">
-                    <Button onClick={addLog} size="sm">
-                      <Bug className="w-4 h-4" />
-                      Ajouter Log
-                    </Button>
-                    <Button onClick={addNetworkRequest} size="sm">
-                      <Network className="w-4 h-4" />
-                      Ajouter Requête
-                    </Button>
-                  </div>
-                  
-                  <DebugPanel
-                    logs={logs}
-                    networkRequests={networkRequests}
-                    onClearLogs={handleClearLogs}
-                    onClearNetwork={handleClearNetwork}
-                    isOpen={isOpen}
-                    onToggle={handleToggle}
-                    position="bottom"
-                    maxHeight={300}
-                    showNetwork={true}
-                    showLogs={true}
-                    showPerformance={true}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { DebugPanel } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyDebugPanel() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [logs, setLogs] = useState([
-    {
-      id: '1',
-      timestamp: new Date(),
-      level: 'info',
-      message: 'Application démarrée avec succès',
-      source: 'App',
-    },
-    {
-      id: '2',
-      timestamp: new Date(),
-      level: 'warn',
-      message: 'Connexion lente détectée',
-      source: 'Network',
-    },
-    {
-      id: '3',
-      timestamp: new Date(),
-      level: 'error',
-      message: 'Erreur de validation des données',
-      source: 'Form',
-      data: { field: 'email', value: 'invalid-email' },
-    },
-  ]);
-
-  const [networkRequests, setNetworkRequests] = useState([
-    {
-      id: '1',
-      url: '/api/users',
-      method: 'GET',
-      status: 200,
-      statusText: 'OK',
-      duration: 150,
-      timestamp: new Date(),
-      responseData: { users: [] },
-    },
-    {
-      id: '2',
-      url: '/api/auth/login',
-      method: 'POST',
-      status: 401,
-      statusText: 'Unauthorized',
-      duration: 89,
-      timestamp: new Date(),
-      requestData: { email: 'test@example.com' },
-      error: 'Invalid credentials',
-    },
-  ]);
-
-  const handleClearLogs = () => {
-    setLogs([]);
-  };
-
-  const handleClearNetwork = () => {
-    setNetworkRequests([]);
-  };
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <DebugPanel
-      logs={logs}
-      networkRequests={networkRequests}
-      onClearLogs={handleClearLogs}
-      onClearNetwork={handleClearNetwork}
-      isOpen={isOpen}
-      onToggle={handleToggle}
-      position="bottom"
-      maxHeight={300}
-      showNetwork={true}
-      showLogs={true}
-      showPerformance={true}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { DebugPanel } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyDebugPanel() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [logs, setLogs] = useState([
-    {
-      id: '1',
-      timestamp: new Date(),
-      level: 'info',
-      message: 'Application démarrée avec succès',
-      source: 'App',
-    },
-    {
-      id: '2',
-      timestamp: new Date(),
-      level: 'warn',
-      message: 'Connexion lente détectée',
-      source: 'Network',
-    },
-    {
-      id: '3',
-      timestamp: new Date(),
-      level: 'error',
-      message: 'Erreur de validation des données',
-      source: 'Form',
-      data: { field: 'email', value: 'invalid-email' },
-    },
-  ]);
-
-  const [networkRequests, setNetworkRequests] = useState([
-    {
-      id: '1',
-      url: '/api/users',
-      method: 'GET',
-      status: 200,
-      statusText: 'OK',
-      duration: 150,
-      timestamp: new Date(),
-      responseData: { users: [] },
-    },
-    {
-      id: '2',
-      url: '/api/auth/login',
-      method: 'POST',
-      status: 401,
-      statusText: 'Unauthorized',
-      duration: 89,
-      timestamp: new Date(),
-      requestData: { email: 'test@example.com' },
-      error: 'Invalid credentials',
-    },
-  ]);
-
-  const handleClearLogs = () => {
-    setLogs([]);
-  };
-
-  const handleClearNetwork = () => {
-    setNetworkRequests([]);
-  };
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <DebugPanel
-      logs={logs}
-      networkRequests={networkRequests}
-      onClearLogs={handleClearLogs}
-      onClearNetwork={handleClearNetwork}
-      isOpen={isOpen}
-      onToggle={handleToggle}
-      position="bottom"
-      maxHeight={300}
-      showNetwork={true}
-      showLogs={true}
-      showPerformance={true}
-    />
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant DebugPanel est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un panneau de débogage.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { DebugPanel } from '@cosmic-ui/ui';
-
-const logs = [
-  {
-    id: '1',
-    timestamp: new Date(),
-    level: 'info',
-    message: 'Application démarrée',
-    source: 'App',
-  },
-];
-
-const networkRequests = [
-  {
-    id: '1',
-    url: '/api/users',
-    method: 'GET',
-    status: 200,
-    duration: 150,
-    timestamp: new Date(),
-  },
-];
-
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={() => setLogs([])}
-  onClearNetwork={() => setNetworkRequests([])}
-  isOpen={isOpen}
-  onToggle={() => setIsOpen(!isOpen)}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { DebugPanel } from '@cosmic-ui/ui';
-
-const logs = [
-  {
-    id: '1',
-    timestamp: new Date(),
-    level: 'info',
-    message: 'Application démarrée',
-    source: 'App',
-  },
-];
-
-const networkRequests = [
-  {
-    id: '1',
-    url: '/api/users',
-    method: 'GET',
-    status: 200,
-    duration: 150,
-    timestamp: new Date(),
-  },
-];
-
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={() => setLogs([])}
-  onClearNetwork={() => setNetworkRequests([])}
-  isOpen={isOpen}
-  onToggle={() => setIsOpen(!isOpen)}
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Logs seulement
-                    </h3>
-                    <DebugPanel
-                      logs={logs.slice(0, 2)}
-                      networkRequests={[]}
-                      onClearLogs={handleClearLogs}
-                      onClearNetwork={handleClearNetwork}
-                      isOpen={isOpen}
-                      onToggle={handleToggle}
-                      position="bottom"
-                      maxHeight={200}
-                      showNetwork={false}
-                      showLogs={true}
-                      showPerformance={false}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Réseau seulement
-                    </h3>
-                    <DebugPanel
-                      logs={[]}
-                      networkRequests={networkRequests.slice(0, 2)}
-                      onClearLogs={handleClearLogs}
-                      onClearNetwork={handleClearNetwork}
-                      isOpen={isOpen}
-                      onToggle={handleToggle}
-                      position="right"
-                      maxHeight={200}
-                      showNetwork={true}
-                      showLogs={false}
-                      showPerformance={false}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Logs seulement
-<DebugPanel
-  logs={logs}
-  networkRequests={[]}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={false}
-  showLogs={true}
-  showPerformance={false}
-/>
-
-// Réseau seulement
-<DebugPanel
-  logs={[]}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={true}
-  showLogs={false}
-  showPerformance={false}
-/>
-
-// Position à droite
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  position="right"
-  maxHeight={400}
-/>
-
-// Hauteur personnalisée
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  maxHeight={500}
-/>
-
-// Performance seulement
-<DebugPanel
-  logs={[]}
-  networkRequests={[]}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={false}
-  showLogs={false}
-  showPerformance={true}
-/>`,
-                        'variants'
-                      )
-                    }
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <Button onClick={() => setIsOpen(true)}>
+                  <Bug className="w-4 h-4 mr-2" />
+                  Ouvrir le panneau de débogage
+                </Button>
+                <div className="space-x-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => addLog('info', 'Nouveau log d\'information', 'Test')}
                   >
-                    {`// Logs seulement
-<DebugPanel
-  logs={logs}
-  networkRequests={[]}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={false}
-  showLogs={true}
-  showPerformance={false}
-/>
-
-// Réseau seulement
-<DebugPanel
-  logs={[]}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={true}
-  showLogs={false}
-  showPerformance={false}
-/>
-
-// Position à droite
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  position="right"
-  maxHeight={400}
-/>
-
-// Hauteur personnalisée
-<DebugPanel
-  logs={logs}
-  networkRequests={networkRequests}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  maxHeight={500}
-/>
-
-// Performance seulement
-<DebugPanel
-  logs={[]}
-  networkRequests={[]}
-  onClearLogs={handleClearLogs}
-  onClearNetwork={handleClearNetwork}
-  isOpen={isOpen}
-  onToggle={handleToggle}
-  showNetwork={false}
-  showLogs={false}
-  showPerformance={true}
-/>`}
-                  </CodeBlock>
+                    Ajouter log info
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => addLog('error', 'Erreur de test', 'Test')}
+                  >
+                    Ajouter log erreur
+                  </Button>
                 </div>
-              )}
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/DebugPanelExample.tsx" showPackageManager={false}>
+{`import { DebugPanel } from 'cosmic-ui-mars';
+import { useState } from 'react';
+
+const [isOpen, setIsOpen] = useState(false);
+const [logs, setLogs] = useState([]);
+
+const addLog = (level, message, source) => {
+  const newLog = {
+    id: Date.now().toString(),
+    timestamp: new Date(),
+    level,
+    message,
+    source,
+  };
+  setLogs(prev => [newLog, ...prev]);
+};
+
+<DebugPanel
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  logs={logs}
+  onClearLogs={() => setLogs([])}
+/>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Panneau avec requêtes réseau</h3>
+              <p className="text-muted-foreground">Panneau affichant les requêtes réseau et leurs performances.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button onClick={() => setIsOpen(true)}>
+                  <Network className="w-4 h-4 mr-2" />
+                  Voir les requêtes réseau
+                </Button>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/NetworkDebugPanel.tsx" showPackageManager={false}>
+{`export default function App\docs\components\debugPanel\page.tsxExample() {
+  <DebugPanel
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  logs={logs}
+  networkRequests={networkRequests}
+  onClearLogs={clearLogs}
+  onClearNetworkRequests={clearNetworkRequests}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Panneau avec métriques</h3>
+              <p className="text-muted-foreground">Panneau affichant les métriques de performance.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button onClick={() => setIsOpen(true)}>
+                  <Activity className="w-4 h-4 mr-2" />
+                  Voir les métriques
+                </Button>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/MetricsDebugPanel.tsx" showPackageManager={false}>
+{`export default function App\docs\components\debugPanel\page.tsxExample() {
+  <DebugPanel
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  logs={logs}
+  metrics={{
+    memory: 45.2,
+    cpu: 12.8,
+    network: 1.2
+  }}
+  onClearLogs={clearLogs}
+/>
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">isOpen</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">État d'ouverture du panneau</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onClose</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">() => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback appelé lors de la fermeture</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">logs</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Log[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des logs à afficher</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">networkRequests</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">NetworkRequest[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des requêtes réseau</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onClearLogs</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">() => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback pour effacer les logs</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onClearNetworkRequests</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">() => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback pour effacer les requêtes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez le <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">DebugPanel</code> uniquement en développement</li>
+          <li>• Organisez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">logs</code> par niveau de priorité</li>
+          <li>• Surveillez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">requêtes réseau</code> pour détecter les problèmes</li>
+          <li>• Affichez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">métriques</code> de performance en temps réel</li>
+          <li>• Implémentez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">filtres</code> pour faciliter le débogage</li>
+        </ul>
+      </div>
+
+      {/* DebugPanel Component */}
+      <DebugPanel
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        logs={logs}
+        networkRequests={networkRequests}
+        onClearLogs={clearLogs}
+        onClearNetworkRequests={clearNetworkRequests}
+      />
     </div>
   );
 }

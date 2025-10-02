@@ -1,56 +1,15 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { FileExplorer } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { FileExplorer } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { Folder, File, Upload, Search } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function FileExplorerPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [expandedFolders, setExpandedFolders] = useState(new Set(['documents', 'images']));
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
 
   const sampleFiles = [
     {
@@ -97,11 +56,11 @@ export default function FileExplorerPage() {
           extension: 'jpg',
         },
         {
-          id: 'logo.png',
-          name: 'Logo.png',
+          id: 'photo2.png',
+          name: 'Photo2.png',
           type: 'file' as const,
-          size: 256000,
-          path: '/images/logo.png',
+          size: 768000,
+          path: '/images/photo2.png',
           modified: new Date('2024-01-10'),
           extension: 'png',
         },
@@ -122,533 +81,258 @@ export default function FileExplorerPage() {
     setSelectedFile(file);
   };
 
-  const handleFolderToggle = (folder: any) => {
-    const newExpanded = new Set(expandedFolders);
-    if (newExpanded.has(folder.id)) {
-      newExpanded.delete(folder.id);
-    } else {
-      newExpanded.add(folder.id);
-    }
-    setExpandedFolders(newExpanded);
-  };
-
-  const handleFileUpload = (file: File) => {
-    console.log('Upload file:', file.name);
-  };
-
-  const handleFileDelete = (file: any) => {
-    console.log('Delete file:', file.name);
-  };
-
-  const handleFileRename = (file: any, newName: string) => {
-    console.log('Rename file:', file.name, 'to', newName);
-  };
-
-  const handleFolderCreate = (name: string) => {
-    console.log('Create folder:', name);
+  const handleFolderToggle = (folderId: string) => {
+    setExpandedFolders(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(folderId)) {
+        newSet.delete(folderId);
+      } else {
+        newSet.add(folderId);
+      }
+      return newSet;
+    });
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">FileExplorer</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant d'explorateur de fichiers avec navigation, recherche et
-          gestion de fichiers.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Folder className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">FileExplorer</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Explorateur de fichiers avec navigation hiérarchique et gestion des dossiers.
+        </p>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="h-96 border rounded-lg overflow-hidden">
                 <FileExplorer
                   files={sampleFiles}
-                  onFileSelect={handleFileSelect}
-                  onFolderToggle={handleFolderToggle}
-                  onFileUpload={handleFileUpload}
-                  onFileDelete={handleFileDelete}
-                  onFileRename={handleFileRename}
-                  onFolderCreate={handleFolderCreate}
                   selectedFile={selectedFile}
+                  onFileSelect={handleFileSelect}
                   expandedFolders={expandedFolders}
-                  showToolbar={true}
-                  showSearch={true}
-                  showDetails={true}
-                  maxHeight={350}
+                  onFolderToggle={handleFolderToggle}
                 />
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { FileExplorer } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/FileExplorerExample.tsx" showPackageManager={false}>
+{`import { FileExplorer } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyFileExplorer() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [expandedFolders, setExpandedFolders] = useState(new Set(['documents']));
+const [selectedFile, setSelectedFile] = useState(null);
+const [expandedFolders, setExpandedFolders] = useState(new Set(['documents']));
 
-  const files = [
-    {
-      id: 'documents',
-      name: 'Documents',
-      type: 'folder',
-      path: '/documents',
-      modified: new Date('2024-01-15'),
-      children: [
-        {
-          id: 'report.pdf',
-          name: 'Rapport.pdf',
-          type: 'file',
-          size: 1024000,
-          path: '/documents/rapport.pdf',
-          modified: new Date('2024-01-14'),
-          extension: 'pdf',
-        },
-      ],
-    },
-    {
-      id: 'readme.txt',
-      name: 'README.txt',
-      type: 'file',
-      size: 1024,
-      path: '/readme.txt',
-      modified: new Date('2024-01-09'),
-      extension: 'txt',
-    },
-  ];
+const sampleFiles = [
+  {
+    id: 'documents',
+    name: 'Documents',
+    type: 'folder',
+    path: '/documents',
+    children: [
+      {
+        id: 'report.pdf',
+        name: 'Rapport.pdf',
+        type: 'file',
+        size: 1024000,
+        path: '/documents/rapport.pdf',
+        extension: 'pdf',
+      },
+    ],
+  },
+];
 
-  const handleFileSelect = (file) => {
-    setSelectedFile(file);
-  };
+<FileExplorer
+  files={sampleFiles}
+  selectedFile={selectedFile}
+  onFileSelect={setSelectedFile}
+  expandedFolders={expandedFolders}
+  onFolderToggle={(folderId) => {
+    setExpandedFolders(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(folderId)) {
+        newSet.delete(folderId);
+      } else {
+        newSet.add(folderId);
+      }
+      return newSet;
+    });
+  }}
+/>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
 
-  const handleFolderToggle = (folder) => {
-    const newExpanded = new Set(expandedFolders);
-    if (newExpanded.has(folder.id)) {
-      newExpanded.delete(folder.id);
-    } else {
-      newExpanded.add(folder.id);
-    }
-    setExpandedFolders(newExpanded);
-  };
-
-  const handleFileUpload = (file) => {
-    console.log('Upload file:', file.name);
-  };
-
-  const handleFileDelete = (file) => {
-    console.log('Delete file:', file.name);
-  };
-
-  const handleFileRename = (file, newName) => {
-    console.log('Rename file:', file.name, 'to', newName);
-  };
-
-  const handleFolderCreate = (name) => {
-    console.log('Create folder:', name);
-  };
-
-  return (
-    <FileExplorer
-      files={files}
-      onFileSelect={handleFileSelect}
-      onFolderToggle={handleFolderToggle}
-      onFileUpload={handleFileUpload}
-      onFileDelete={handleFileDelete}
-      onFileRename={handleFileRename}
-      onFolderCreate={handleFolderCreate}
-      selectedFile={selectedFile}
-      expandedFolders={expandedFolders}
-      showToolbar={true}
-      showSearch={true}
-      showDetails={true}
-      maxHeight={350}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { FileExplorer } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyFileExplorer() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [expandedFolders, setExpandedFolders] = useState(new Set(['documents']));
-
-  const files = [
-    {
-      id: 'documents',
-      name: 'Documents',
-      type: 'folder',
-      path: '/documents',
-      modified: new Date('2024-01-15'),
-      children: [
-        {
-          id: 'report.pdf',
-          name: 'Rapport.pdf',
-          type: 'file',
-          size: 1024000,
-          path: '/documents/rapport.pdf',
-          modified: new Date('2024-01-14'),
-          extension: 'pdf',
-        },
-      ],
-    },
-    {
-      id: 'readme.txt',
-      name: 'README.txt',
-      type: 'file',
-      size: 1024,
-      path: '/readme.txt',
-      modified: new Date('2024-01-09'),
-      extension: 'txt',
-    },
-  ];
-
-  const handleFileSelect = (file) => {
-    setSelectedFile(file);
-  };
-
-  const handleFolderToggle = (folder) => {
-    const newExpanded = new Set(expandedFolders);
-    if (newExpanded.has(folder.id)) {
-      newExpanded.delete(folder.id);
-    } else {
-      newExpanded.add(folder.id);
-    }
-    setExpandedFolders(newExpanded);
-  };
-
-  const handleFileUpload = (file) => {
-    console.log('Upload file:', file.name);
-  };
-
-  const handleFileDelete = (file) => {
-    console.log('Delete file:', file.name);
-  };
-
-  const handleFileRename = (file, newName) => {
-    console.log('Rename file:', file.name, 'to', newName);
-  };
-
-  const handleFolderCreate = (name) => {
-    console.log('Create folder:', name);
-  };
-
-  return (
-    <FileExplorer
-      files={files}
-      onFileSelect={handleFileSelect}
-      onFolderToggle={handleFolderToggle}
-      onFileUpload={handleFileUpload}
-      onFileDelete={handleFileDelete}
-      onFileRename={handleFileRename}
-      onFolderCreate={handleFolderCreate}
-      selectedFile={selectedFile}
-      expandedFolders={expandedFolders}
-      showToolbar={true}
-      showSearch={true}
-      showDetails={true}
-      maxHeight={350}
-    />
-  );
-}`}
-                </CodeBlock>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Explorateur avec recherche</h3>
+              <p className="text-muted-foreground">Explorateur avec fonction de recherche intégrée.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-96 border rounded-lg overflow-hidden">
+                  <FileExplorer
+                    files={sampleFiles}
+                    selectedFile={selectedFile}
+                    onFileSelect={handleFileSelect}
+                    expandedFolders={expandedFolders}
+                    onFolderToggle={handleFolderToggle}
+                    searchable
+                    searchPlaceholder="Rechercher des fichiers..."
+                  />
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant FileExplorer est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un explorateur de fichiers.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { FileExplorer } from '@cosmic-ui/ui';
-
-const files = [
-  {
-    id: 'documents',
-    name: 'Documents',
-    type: 'folder',
-    path: '/documents',
-    modified: new Date(),
-    children: [],
-  },
-];
-
-<FileExplorer
-  files={files}
-  onFileSelect={(file) => console.log(file)}
-  onFolderToggle={(folder) => console.log(folder)}
-  showToolbar={true}
-  showSearch={true}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { FileExplorer } from '@cosmic-ui/ui';
-
-const files = [
-  {
-    id: 'documents',
-    name: 'Documents',
-    type: 'folder',
-    path: '/documents',
-    modified: new Date(),
-    children: [],
-  },
-];
-
-<FileExplorer
-  files={files}
-  onFileSelect={(file) => console.log(file)}
-  onFolderToggle={(folder) => console.log(folder)}
-  showToolbar={true}
-  showSearch={true}
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
             </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/SearchableFileExplorer.tsx" showPackageManager={false}>
+{`export default function App\docs\components\fileExplorer\page.tsxExample() {
+  return <FileExplorer
+  files={sampleFiles}
+  selectedFile={selectedFile}
+  onFileSelect={setSelectedFile}
+  expandedFolders={expandedFolders}
+  onFolderToggle={handleFolderToggle}
+  searchable
+  searchPlaceholder="Rechercher des fichiers..."
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Sans toolbar
-                    </h3>
-                    <FileExplorer
-                      files={sampleFiles.slice(0, 2)}
-                      onFileSelect={handleFileSelect}
-                      onFolderToggle={handleFolderToggle}
-                      selectedFile={selectedFile}
-                      expandedFolders={expandedFolders}
-                      showToolbar={false}
-                      showSearch={false}
-                      showDetails={false}
-                      maxHeight={200}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Avec recherche
-                    </h3>
-                    <FileExplorer
-                      files={sampleFiles.slice(0, 2)}
-                      onFileSelect={handleFileSelect}
-                      onFolderToggle={handleFolderToggle}
-                      selectedFile={selectedFile}
-                      expandedFolders={expandedFolders}
-                      showToolbar={false}
-                      showSearch={true}
-                      showDetails={false}
-                      maxHeight={200}
-                    />
-                  </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Explorateur avec actions</h3>
+              <p className="text-muted-foreground">Explorateur avec actions contextuelles.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-96 border rounded-lg overflow-hidden">
+                  <FileExplorer
+                    files={sampleFiles}
+                    selectedFile={selectedFile}
+                    onFileSelect={handleFileSelect}
+                    expandedFolders={expandedFolders}
+                    onFolderToggle={handleFolderToggle}
+                    showActions
+                    onUpload={() => console.log('Upload')}
+                    onNewFolder={() => console.log('New folder')}
+                  />
                 </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Sans toolbar
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/ActionableFileExplorer.tsx" showPackageManager={false}>
+{`export default function App\docs\components\fileExplorer\page.tsxExample() {
+  <FileExplorer
+  files={sampleFiles}
+  selectedFile={selectedFile}
+  onFileSelect={setSelectedFile}
+  expandedFolders={expandedFolders}
   onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={false}
-  showDetails={false}
+  showActions
+  onUpload={() => console.log('Upload')}
+  onNewFolder={() => console.log('New folder')}
 />
-
-// Avec recherche
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={true}
-  showDetails={false}
-/>
-
-// Avec détails
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={true}
-  showSearch={true}
-  showDetails={true}
-/>
-
-// Lecture seule
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={true}
-  showDetails={true}
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Sans toolbar
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={false}
-  showDetails={false}
-/>
-
-// Avec recherche
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={true}
-  showDetails={false}
-/>
-
-// Avec détails
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={true}
-  showSearch={true}
-  showDetails={true}
-/>
-
-// Lecture seule
-<FileExplorer
-  files={files}
-  onFileSelect={handleFileSelect}
-  onFolderToggle={handleFolderToggle}
-  showToolbar={false}
-  showSearch={true}
-  showDetails={true}
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">files</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">FileItem[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des fichiers et dossiers</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">selectedFile</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">FileItem | null</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">null</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Fichier sélectionné</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onFileSelect</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(file: FileItem) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback lors de la sélection d'un fichier</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">expandedFolders</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Set&lt;string&gt;</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">new Set()</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Dossiers ouverts</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onFolderToggle</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(folderId: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback lors de l'ouverture/fermeture d'un dossier</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">searchable</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Activer la recherche</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showActions</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher les actions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Organisez les fichiers en <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">hiérarchie</code> logique</li>
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">icônes</code> pour identifier les types de fichiers</li>
+          <li>• Implémentez la <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">recherche</code> pour de grandes structures</li>
+          <li>• Ajoutez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">actions contextuelles</code> selon les besoins</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

@@ -1,120 +1,52 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { ChartsFilters } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { ChartsFilters } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
+import { Filter, BarChart3, TrendingUp } from 'lucide-react';
 
 export default function ChartsFiltersPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [filters, setFilters] = useState({
     category: 'all',
     period: '7d',
     status: ['active'],
   });
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
   const handleFilterChange = (filterId: string, value: any) => {
     setFilters(prev => ({ ...prev, [filterId]: value }));
   };
 
-  const sampleCharts = [
-    {
-      id: 'sales',
-      title: 'Ventes',
-      type: 'line' as const,
-      data: [
-        { name: 'Jan', value: 120, category: 'sales' },
-        { name: 'Fév', value: 150, category: 'sales' },
-        { name: 'Mar', value: 180, category: 'sales' },
-        { name: 'Avr', value: 200, category: 'sales' },
-        { name: 'Mai', value: 170, category: 'sales' },
-        { name: 'Juin', value: 220, category: 'sales' },
-      ],
-      filters: ['category', 'period'],
-    },
-    {
-      id: 'users',
-      title: 'Utilisateurs',
-      type: 'pie' as const,
-      data: [
-        { name: 'Actifs', value: 65, color: '#22c55e' },
-        { name: 'Inactifs', value: 25, color: '#ef4444' },
-        { name: 'En attente', value: 10, color: '#eab308' },
-      ],
-      filters: ['status'],
-    },
-  ];
-
-  const sampleFilters = [
+  const filterConfig = [
     {
       id: 'category',
       label: 'Catégorie',
-      type: 'select' as const,
+      type: 'select',
       options: [
         { id: 'all', label: 'Toutes', value: 'all' },
         { id: 'sales', label: 'Ventes', value: 'sales' },
-        { id: 'marketing', label: 'Marketing', value: 'marketing' },
-        { id: 'support', label: 'Support', value: 'support' },
+        { id: 'users', label: 'Utilisateurs', value: 'users' },
+        { id: 'revenue', label: 'Revenus', value: 'revenue' },
       ],
       value: filters.category,
     },
     {
       id: 'period',
       label: 'Période',
-      type: 'select' as const,
+      type: 'select',
       options: [
+        { id: '1d', label: '1 jour', value: '1d' },
         { id: '7d', label: '7 jours', value: '7d' },
         { id: '30d', label: '30 jours', value: '30d' },
         { id: '90d', label: '90 jours', value: '90d' },
-        { id: '1y', label: '1 an', value: '1y' },
       ],
       value: filters.period,
     },
     {
       id: 'status',
       label: 'Statut',
-      type: 'multiselect' as const,
+      type: 'multiselect',
       options: [
         { id: 'active', label: 'Actif', value: 'active', color: '#22c55e' },
         { id: 'inactive', label: 'Inactif', value: 'inactive', color: '#ef4444' },
@@ -125,532 +57,194 @@ export default function ChartsFiltersPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">ChartsFilters</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Filter className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">ChartsFilters</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de filtres pour graphiques avec support de différents
-          types de filtres et actions.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Composant de filtres pour les graphiques et tableaux de données.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
-          </div>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <ChartsFilters
-                  charts={sampleCharts}
-                  filters={sampleFilters}
-                  onFilterChange={handleFilterChange}
-                  showFilters={true}
-                  showExport={true}
-                  showRefresh={true}
-                  maxHeight={300}
-                />
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <ChartsFilters
+                filters={filterConfig}
+                onChange={handleFilterChange}
+              />
+              <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                <p className="text-sm text-muted-foreground">Filtres appliqués :</p>
+                <pre className="text-xs mt-2 text-foreground">
+                  {JSON.stringify(filters, null, 2)}
+                </pre>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { ChartsFilters } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/ChartsFiltersExample.tsx" showPackageManager={false}>
+{`import { ChartsFilters } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyChartsFilters() {
-  const [filters, setFilters] = useState({
-    category: 'all',
-    period: '7d',
-    status: ['active'],
-  });
+const [filters, setFilters] = useState({
+  category: 'all',
+  period: '7d',
+  status: ['active'],
+});
 
-  const handleFilterChange = (filterId: string, value: any) => {
-    setFilters(prev => ({ ...prev, [filterId]: value }));
-  };
-
-  const charts = [
-    {
-      id: 'sales',
-      title: 'Ventes',
-      type: 'line',
-      data: [
-        { name: 'Jan', value: 120, category: 'sales' },
-        { name: 'Fév', value: 150, category: 'sales' },
-        { name: 'Mar', value: 180, category: 'sales' },
-        { name: 'Avr', value: 200, category: 'sales' },
-        { name: 'Mai', value: 170, category: 'sales' },
-        { name: 'Juin', value: 220, category: 'sales' },
-      ],
-      filters: ['category', 'period'],
-    },
-    {
-      id: 'users',
-      title: 'Utilisateurs',
-      type: 'pie',
-      data: [
-        { name: 'Actifs', value: 65, color: '#22c55e' },
-        { name: 'Inactifs', value: 25, color: '#ef4444' },
-        { name: 'En attente', value: 10, color: '#eab308' },
-      ],
-      filters: ['status'],
-    },
-  ];
-
-  const filterConfig = [
-    {
-      id: 'category',
-      label: 'Catégorie',
-      type: 'select',
-      options: [
-        { id: 'all', label: 'Toutes', value: 'all' },
-        { id: 'sales', label: 'Ventes', value: 'sales' },
-        { id: 'marketing', label: 'Marketing', value: 'marketing' },
-        { id: 'support', label: 'Support', value: 'support' },
-      ],
-      value: filters.category,
-    },
-    {
-      id: 'period',
-      label: 'Période',
-      type: 'select',
-      options: [
-        { id: '7d', label: '7 jours', value: '7d' },
-        { id: '30d', label: '30 jours', value: '30d' },
-        { id: '90d', label: '90 jours', value: '90d' },
-        { id: '1y', label: '1 an', value: '1y' },
-      ],
-      value: filters.period,
-    },
-    {
-      id: 'status',
-      label: 'Statut',
-      type: 'multiselect',
-      options: [
-        { id: 'active', label: 'Actif', value: 'active', color: '#22c55e' },
-        { id: 'inactive', label: 'Inactif', value: 'inactive', color: '#ef4444' },
-        { id: 'pending', label: 'En attente', value: 'pending', color: '#eab308' },
-      ],
-      value: filters.status,
-    },
-  ];
-
-  return (
-    <ChartsFilters
-      charts={charts}
-      filters={filterConfig}
-      onFilterChange={handleFilterChange}
-      showFilters={true}
-      showExport={true}
-      showRefresh={true}
-      maxHeight={300}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { ChartsFilters } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyChartsFilters() {
-  const [filters, setFilters] = useState({
-    category: 'all',
-    period: '7d',
-    status: ['active'],
-  });
-
-  const handleFilterChange = (filterId: string, value: any) => {
-    setFilters(prev => ({ ...prev, [filterId]: value }));
-  };
-
-  const charts = [
-    {
-      id: 'sales',
-      title: 'Ventes',
-      type: 'line',
-      data: [
-        { name: 'Jan', value: 120, category: 'sales' },
-        { name: 'Fév', value: 150, category: 'sales' },
-        { name: 'Mar', value: 180, category: 'sales' },
-        { name: 'Avr', value: 200, category: 'sales' },
-        { name: 'Mai', value: 170, category: 'sales' },
-        { name: 'Juin', value: 220, category: 'sales' },
-      ],
-      filters: ['category', 'period'],
-    },
-    {
-      id: 'users',
-      title: 'Utilisateurs',
-      type: 'pie',
-      data: [
-        { name: 'Actifs', value: 65, color: '#22c55e' },
-        { name: 'Inactifs', value: 25, color: '#ef4444' },
-        { name: 'En attente', value: 10, color: '#eab308' },
-      ],
-      filters: ['status'],
-    },
-  ];
-
-  const filterConfig = [
-    {
-      id: 'category',
-      label: 'Catégorie',
-      type: 'select',
-      options: [
-        { id: 'all', label: 'Toutes', value: 'all' },
-        { id: 'sales', label: 'Ventes', value: 'sales' },
-        { id: 'marketing', label: 'Marketing', value: 'marketing' },
-        { id: 'support', label: 'Support', value: 'support' },
-      ],
-      value: filters.category,
-    },
-    {
-      id: 'period',
-      label: 'Période',
-      type: 'select',
-      options: [
-        { id: '7d', label: '7 jours', value: '7d' },
-        { id: '30d', label: '30 jours', value: '30d' },
-        { id: '90d', label: '90 jours', value: '90d' },
-        { id: '1y', label: '1 an', value: '1y' },
-      ],
-      value: filters.period,
-    },
-    {
-      id: 'status',
-      label: 'Statut',
-      type: 'multiselect',
-      options: [
-        { id: 'active', label: 'Actif', value: 'active', color: '#22c55e' },
-        { id: 'inactive', label: 'Inactif', value: 'inactive', color: '#ef4444' },
-        { id: 'pending', label: 'En attente', value: 'pending', color: '#eab308' },
-      ],
-      value: filters.status,
-    },
-  ];
-
-  return (
-    <ChartsFilters
-      charts={charts}
-      filters={filterConfig}
-      onFilterChange={handleFilterChange}
-      showFilters={true}
-      showExport={true}
-      showRefresh={true}
-      maxHeight={300}
-    />
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant ChartsFilters est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer des filtres pour vos graphiques.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { ChartsFilters } from '@cosmic-ui/ui';
-
-const charts = [
+const filterConfig = [
   {
-    id: 'chart1',
-    title: 'Mon Graphique',
-    type: 'line',
-    data: [
-      { name: 'Jan', value: 100 },
-      { name: 'Fév', value: 150 },
-    ],
-    filters: ['period'],
-  },
-];
-
-const filters = [
-  {
-    id: 'period',
-    label: 'Période',
+    id: 'category',
+    label: 'Catégorie',
     type: 'select',
     options: [
-      { id: '7d', label: '7 jours', value: '7d' },
-      { id: '30d', label: '30 jours', value: '30d' },
+      { id: 'all', label: 'Toutes', value: 'all' },
+      { id: 'sales', label: 'Ventes', value: 'sales' },
     ],
+    value: filters.category,
   },
 ];
 
 <ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={(id, value) => console.log(id, value)}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { ChartsFilters } from '@cosmic-ui/ui';
-
-const charts = [
-  {
-    id: 'chart1',
-    title: 'Mon Graphique',
-    type: 'line',
-    data: [
-      { name: 'Jan', value: 100 },
-      { name: 'Fév', value: 150 },
-    ],
-    filters: ['period'],
-  },
-];
-
-const filters = [
-  {
-    id: 'period',
-    label: 'Période',
-    type: 'select',
-    options: [
-      { id: '7d', label: '7 jours', value: '7d' },
-      { id: '30d', label: '30 jours', value: '30d' },
-    ],
-  },
-];
-
-<ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={(id, value) => console.log(id, value)}
+  filters={filterConfig}
+  onChange={(filterId, value) => {
+    setFilters(prev => ({ ...prev, [filterId]: value }));
+  }}
 />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
+      {/* Types de filtres */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Types de filtres</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Filtre select</h3>
+              <p className="text-muted-foreground">Filtre avec sélection unique.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <ChartsFilters
+                  filters={[filterConfig[0]]}
+                  onChange={handleFilterChange}
+                />
+              </div>
             </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/SelectFilter.tsx" showPackageManager={false}>
+{`export default function App\docs\components\chartsFilters\page.tsxExample() {
+  {
+  id: 'category',
+  label: 'Catégorie',
+  type: 'select',
+  options: [
+    { id: 'all', label: 'Toutes', value: 'all' },
+    { id: 'sales', label: 'Ventes', value: 'sales' },
+  ],
+  value: filters.category,
+}
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Filtres simples
-                    </h3>
-                    <ChartsFilters
-                      charts={sampleCharts.slice(0, 1)}
-                      filters={sampleFilters.slice(0, 1)}
-                      onFilterChange={handleFilterChange}
-                      showFilters={true}
-                      showExport={false}
-                      showRefresh={false}
-                      maxHeight={200}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Avec actions
-                    </h3>
-                    <ChartsFilters
-                      charts={sampleCharts.slice(0, 1)}
-                      filters={sampleFilters.slice(0, 2)}
-                      onFilterChange={handleFilterChange}
-                      showFilters={true}
-                      showExport={true}
-                      showRefresh={true}
-                      maxHeight={200}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Filtres simples
-<ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={handleFilterChange}
-  showFilters={true}
-  showExport={false}
-  showRefresh={false}
-/>
-
-// Avec actions
-<ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={handleFilterChange}
-  showFilters={true}
-  showExport={true}
-  showRefresh={true}
-/>
-
-// Filtres multiselect
-const multiselectFilter = {
-  id: 'categories',
-  label: 'Catégories',
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Filtre multiselect</h3>
+              <p className="text-muted-foreground">Filtre avec sélection multiple.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <ChartsFilters
+                  filters={[filterConfig[2]]}
+                  onChange={handleFilterChange}
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/MultiselectFilter.tsx" showPackageManager={false}>
+{`export default function App\docs\components\chartsFilters\page.tsxExample() {
+  {
+  id: 'status',
+  label: 'Statut',
   type: 'multiselect',
   options: [
-    { id: 'cat1', label: 'Catégorie 1', value: 'cat1' },
-    { id: 'cat2', label: 'Catégorie 2', value: 'cat2' },
+    { id: 'active', label: 'Actif', value: 'active', color: '#22c55e' },
+    { id: 'inactive', label: 'Inactif', value: 'inactive', color: '#ef4444' },
   ],
-};
-
-// Filtres date
-const dateFilter = {
-  id: 'dateRange',
-  label: 'Période',
-  type: 'daterange',
-  value: { start: new Date(), end: new Date() },
-};`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Filtres simples
-<ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={handleFilterChange}
-  showFilters={true}
-  showExport={false}
-  showRefresh={false}
-/>
-
-// Avec actions
-<ChartsFilters
-  charts={charts}
-  filters={filters}
-  onFilterChange={handleFilterChange}
-  showFilters={true}
-  showExport={true}
-  showRefresh={true}
-/>
-
-// Filtres multiselect
-const multiselectFilter = {
-  id: 'categories',
-  label: 'Catégories',
-  type: 'multiselect',
-  options: [
-    { id: 'cat1', label: 'Catégorie 1', value: 'cat1' },
-    { id: 'cat2', label: 'Catégorie 2', value: 'cat2' },
-  ],
-};
-
-// Filtres date
-const dateFilter = {
-  id: 'dateRange',
-  label: 'Période',
-  type: 'daterange',
-  value: { start: new Date(), end: new Date() },
-};`}
-                  </CodeBlock>
-                </div>
-              )}
+  value: filters.status,
+}
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">filters</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">FilterConfig[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Configuration des filtres</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onChange</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(filterId: string, value: any) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback appelé lors du changement de filtre</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">className</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Classes CSS supplémentaires</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">select</code> pour les filtres uniques</li>
+          <li>• Utilisez <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">multiselect</code> pour les filtres multiples</li>
+          <li>• Ajoutez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">couleurs</code> pour les options multiselect</li>
+          <li>• Gérez l'état des filtres avec <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">useState</code></li>
+          <li>• Intégrez avec vos composants de graphiques</li>
+        </ul>
       </div>
     </div>
   );

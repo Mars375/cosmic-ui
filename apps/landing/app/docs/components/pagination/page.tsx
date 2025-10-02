@@ -1,332 +1,185 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { Pagination } from '@cosmic-ui/ui';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { Pagination } from 'cosmic-ui-mars';
+import { CodeBlock } from '../../../components/code-block';
+import { Button } from 'cosmic-ui-mars';
+import { Star, Heart, Settings, User, Bell, Download, Share2, Trash2, Edit, Plus, Minus } from 'lucide-react';
 
 export default function PaginationPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-  const [currentPage, setCurrentPage] = useState(5);
+  const [value, setValue] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
+  const handleLoadingDemo = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-          </button>
-          <h1 className="text-4xl font-bold">Pagination</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">Pagination</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de pagination simple et accessible pour naviguer entre
-          les pages de contenu.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Un composant de pagination pour naviguer entre les pages.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <Pagination>
+                Contenu du composant
+              </Pagination>
+            </div>
           </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/PaginationExample.tsx" showPackageManager={false}>
+{`import { Pagination } from 'cosmic-ui-mars';
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full flex items-center justify-center">
-                <Pagination
-                  totalPages={10}
-                  page={currentPage}
-                  onPageChange={setCurrentPage}
-                />
+<Pagination>
+  Contenu du composant
+</Pagination>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Pagination avec tailles</h3>
+              <p className="text-muted-foreground">Description du variant</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Pagination>
+                  Contenu du composant
+                </Pagination>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { Pagination } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyPagination() {
-  const [currentPage, setCurrentPage] = useState(5);
-
-  return (
-    <Pagination
-      totalPages={10}
-      page={currentPage}
-      onPageChange={setCurrentPage}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { Pagination } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyPagination() {
-  const [currentPage, setCurrentPage] = useState(5);
-
-  return (
-    <Pagination
-      totalPages={10}
-      page={currentPage}
-      onPageChange={setCurrentPage}
-    />
-  );
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/Pagination1.tsx" showPackageManager={false}>
+{`export default function App\docs\components\pagination\page.tsxExample() {
+  <Pagination>
+  Contenu du composant
+</Pagination>
 }`}
-                </CodeBlock>
+              </CodeBlock>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {/* Exemples interactifs */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Exemples interactifs</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple avec état</h3>
+            <p className="text-muted-foreground">Composant avec gestion d'état React.</p>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <Pagination>
+                  Contenu interactif
+                </Pagination>
+                
+                
               </div>
-            )}
+            </div>
           </div>
-        </div>
+          <div>
+            <CodeBlock language="typescript" filePath="components/InteractivePagination.tsx" showPackageManager={false}>
+{`export default function App\docs\components\pagination\page.tsxExample() {
+  const [state, setState = useState(null);
 
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant Pagination est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
+<Pagination>
+  Contenu interactif
+</Pagination>
+}`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Importez le composant et utilisez-le avec le nombre total de pages
-              et la page actuelle.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { Pagination } from '@cosmic-ui/ui';
-
-<Pagination
-  totalPages={20}
-  page={1}
-  onPageChange={(page) => console.log('Page changed:', page)}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { Pagination } from '@cosmic-ui/ui';
-
-<Pagination
-  totalPages={20}
-  page={1}
-  onPageChange={(page) => console.log('Page changed:', page)}
-/>`}
-            </CodeBlock>
-          </div>
+      {/* API Reference */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">variant</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Style visuel du composant</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">size</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'sm' | 'default' | 'lg'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Taille du composant</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">disabled</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Désactive le composant</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">className</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Classes CSS supplémentaires</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-8">
-                  <div className="text-center">
-                    <h3 className="text-sm font-medium mb-4">Page 1 sur 10</h3>
-                    <Pagination
-                      totalPages={10}
-                      page={1}
-                      onPageChange={() => {}}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-sm font-medium mb-4">Page 5 sur 10</h3>
-                    <Pagination
-                      totalPages={10}
-                      page={5}
-                      onPageChange={() => {}}
-                    />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-sm font-medium mb-4">Page 10 sur 10</h3>
-                    <Pagination
-                      totalPages={10}
-                      page={10}
-                      onPageChange={() => {}}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Page 1 sur 10
-<Pagination
-  totalPages={10}
-  page={1}
-  onPageChange={(page) => setCurrentPage(page)}
-/>
-
-// Page 5 sur 10
-<Pagination
-  totalPages={10}
-  page={5}
-  onPageChange={(page) => setCurrentPage(page)}
-/>
-
-// Page 10 sur 10
-<Pagination
-  totalPages={10}
-  page={10}
-  onPageChange={(page) => setCurrentPage(page)}
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Page 1 sur 10
-<Pagination
-  totalPages={10}
-  page={1}
-  onPageChange={(page) => setCurrentPage(page)}
-/>
-
-// Page 5 sur 10
-<Pagination
-  totalPages={10}
-  page={5}
-  onPageChange={(page) => setCurrentPage(page)}
-/>
-
-// Page 10 sur 10
-<Pagination
-  totalPages={10}
-  page={10}
-  onPageChange={(page) => setCurrentPage(page)}
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez le variant <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">default</code> pour les cas standards</li>
+          <li>• Le variant <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">destructive</code> pour les actions dangereuses</li>
+          <li>• Ajoutez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">icônes</code> pour améliorer la compréhension</li>
+          <li>• Utilisez l'état <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">disabled</code> pour les actions non disponibles</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

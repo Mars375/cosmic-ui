@@ -1,438 +1,84 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { ThemeSwitcher } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-import { Sun, Moon, Monitor, Palette } from 'lucide-react';
+import { CodeBlock } from '../../../components/code-block';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+// ThemeSwitcher component placeholder
+const ThemeSwitcher = () => (
+  <div className="p-4 border-2 border-dashed border-muted-foreground/25 rounded-lg text-center">
+    <p className="text-muted-foreground">
+      Composant <code className="font-mono">ThemeSwitcher</code> en cours de
+      développement
+    </p>
+  </div>
+);
+import { Palette } from 'lucide-react';
 
 export default function ThemeSwitcherPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>('system');
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const handleThemeChange = (theme: 'light' | 'dark' | 'system') => {
-    setCurrentTheme(theme);
-    console.log('Theme changed to:', theme);
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">ThemeSwitcher</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de changement de thème avec support des modes clair,
-          sombre et système.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Palette className="w-6 h-6 text-primary" />
           </div>
-
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold mb-2">Thème actuel : {currentTheme}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400-foreground mb-4">
-                      Cliquez sur les boutons ci-dessous pour changer de thème
-                    </p>
-                  </div>
-                  <ThemeSwitcher
-                    currentTheme={currentTheme}
-                    onThemeChange={handleThemeChange}
-                    variant="button"
-                    size="md"
-                    showLabel={true}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { ThemeSwitcher } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyThemeSwitcher() {
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>('system');
-
-  const handleThemeChange = (theme) => {
-    setCurrentTheme(theme);
-    console.log('Theme changed to:', theme);
-  };
-
-  return (
-    <div className="space-y-4">
-      <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">
-          Thème actuel : {currentTheme}
-        </h3>
-        <p className="text-sm text-muted-foreground mb-4">
-          Cliquez sur les boutons ci-dessous pour changer de thème
+          <h1 className="text-4xl font-bold text-foreground">ThemeSwitcher</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Sélecteur de thème pour basculer entre les modes clair et sombre.
         </p>
       </div>
-      <ThemeSwitcher
-        currentTheme={currentTheme}
-        onThemeChange={handleThemeChange}
-        variant="button"
-        size="md"
-        showLabel={true}
-      />
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { ThemeSwitcher } from '@cosmic-ui/ui';
-import { useState } from 'react';
 
-export function MyThemeSwitcher() {
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark' | 'system'>('system');
-
-  const handleThemeChange = (theme) => {
-    setCurrentTheme(theme);
-    console.log('Theme changed to:', theme);
-  };
-
-  return (
-    <div className="space-y-4">
-      <div className="text-center">
-        <h3 className="text-lg font-semibold mb-2">
-          Thème actuel : {currentTheme}
-        </h3>
-        <p className="text-sm text-muted-foreground mb-4">
-          Cliquez sur les boutons ci-dessous pour changer de thème
-        </p>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
       </div>
-      <ThemeSwitcher
-        currentTheme={currentTheme}
-        onThemeChange={handleThemeChange}
-        variant="button"
-        size="md"
-        showLabel={true}
-      />
-    </div>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
 
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant ThemeSwitcher est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <ThemeSwitcher />
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
             <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
+              language="typescript"
+              filePath="components/ThemeSwitcherExample.tsx"
+              showPackageManager={false}
             >
-              {`npm install @cosmic-ui/ui`}
+              {`import { ThemeSwitcher } from 'cosmic-ui-mars';
+
+<ThemeSwitcher />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour permettre aux utilisateurs de changer de thème.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { ThemeSwitcher } from '@cosmic-ui/ui';
-
-const [theme, setTheme] = useState('system');
-
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={true}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { ThemeSwitcher } from '@cosmic-ui/ui';
-
-const [theme, setTheme] = useState('system');
-
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={true}
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Variant dropdown
-                    </h3>
-                    <ThemeSwitcher
-                      currentTheme={currentTheme}
-                      onThemeChange={handleThemeChange}
-                      variant="dropdown"
-                      size="sm"
-                      showLabel={false}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Variant toggle
-                    </h3>
-                    <ThemeSwitcher
-                      currentTheme={currentTheme}
-                      onThemeChange={handleThemeChange}
-                      variant="toggle"
-                      size="lg"
-                      showLabel={true}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Variant button
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={true}
-/>
-
-// Variant dropdown
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="dropdown"
-  size="sm"
-  showLabel={false}
-/>
-
-// Variant toggle
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="toggle"
-  size="lg"
-  showLabel={true}
-/>
-
-// Tailles disponibles
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="sm"    // sm, md, lg
-  showLabel={true}
-/>
-
-// Sans labels
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={false}
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Variant button
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={true}
-/>
-
-// Variant dropdown
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="dropdown"
-  size="sm"
-  showLabel={false}
-/>
-
-// Variant toggle
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="toggle"
-  size="lg"
-  showLabel={true}
-/>
-
-// Tailles disponibles
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="sm"    // sm, md, lg
-  showLabel={true}
-/>
-
-// Sans labels
-<ThemeSwitcher
-  currentTheme={theme}
-  onThemeChange={setTheme}
-  variant="button"
-  size="md"
-  showLabel={false}
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

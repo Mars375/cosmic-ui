@@ -1,54 +1,15 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { InputWithMask } from '@cosmic-ui/ui';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { InputWithMask } from 'cosmic-ui-mars';
+import { Hash } from 'lucide-react';
 
 export default function InputMaskPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [phoneValue, setPhoneValue] = useState('');
   const [creditCardValue, setCreditCardValue] = useState('');
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
+  const [dateValue, setDateValue] = useState('');
 
   // Masques personnalisés
   const phoneMask = (raw: string) => {
@@ -67,401 +28,321 @@ export default function InputMaskPage() {
     return groups.join(' ');
   };
 
+  const dateMask = (raw: string) => {
+    const cleaned = raw.replace(/\D/g, '');
+    if (cleaned.length <= 2) return cleaned;
+    if (cleaned.length <= 4)
+      return `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
+    return `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4, 8)}`;
+  };
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">InputMask</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant d'input avec masque personnalisable pour formater
-          automatiquement la saisie utilisateur.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Hash className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">InputMask</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Champ de saisie avec masque pour formater automatiquement les données saisies.
+        </p>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full space-y-4">
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
                 <div>
-                  <label className="mb-2 block text-sm font-medium">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Téléphone
                   </label>
                   <InputWithMask
-                    mask={phoneMask}
                     value={phoneValue}
-                    onChange={e => setPhoneValue(e.target.value)}
-                    placeholder="06 12 34 56 78"
+                    onChange={setPhoneValue}
+                    mask={phoneMask}
+                    placeholder="01 23 45 67 89"
                   />
                 </div>
+                
                 <div>
-                  <label className="mb-2 block text-sm font-medium">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Carte de crédit
                   </label>
                   <InputWithMask
-                    mask={creditCardMask}
                     value={creditCardValue}
-                    onChange={e => setCreditCardValue(e.target.value)}
+                    onChange={setCreditCardValue}
+                    mask={creditCardMask}
                     placeholder="1234 5678 9012 3456"
                     maxLength={19}
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Date
+                  </label>
+                  <InputWithMask
+                    value={dateValue}
+                    onChange={setDateValue}
+                    mask={dateMask}
+                    placeholder="DD/MM/YYYY"
+                    maxLength={10}
+                  />
+                </div>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { InputWithMask } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/InputMaskExample.tsx" showPackageManager={false}>
+{`import { InputWithMask } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-// Masque pour téléphone français
+const [phoneValue, setPhoneValue] = useState('');
+
 const phoneMask = (raw: string) => {
   const cleaned = raw.replace(/\\D/g, '');
   if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2)}\`;
-  if (cleaned.length <= 6) return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2, 4)} \${cleaned.slice(4)}\`;
+  if (cleaned.length <= 4)
+    return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2)}\`;
+  if (cleaned.length <= 6)
+    return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2, 4)} \${cleaned.slice(4)}\`;
   return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2, 4)} \${cleaned.slice(4, 6)} \${cleaned.slice(6, 8)}\`;
 };
 
-// Masque pour carte de crédit
-const creditCardMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  const groups = cleaned.match(/.{1,4}/g) || [];
-  return groups.join(' ');
-};
-
-export function MyInputMask() {
-  const [phoneValue, setPhoneValue] = useState('');
-  const [creditCardValue, setCreditCardValue] = useState('');
-
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="mb-2 block text-sm font-medium">Téléphone</label>
-        <InputWithMask
-          mask={phoneMask}
-          value={phoneValue}
-          onChange={(e) => setPhoneValue(e.target.value)}
-          placeholder="06 12 34 56 78"
-        />
-      </div>
-      <div>
-        <label className="mb-2 block text-sm font-medium">Carte de crédit</label>
-        <InputWithMask
-          mask={creditCardMask}
-          value={creditCardValue}
-          onChange={(e) => setCreditCardValue(e.target.value)}
-          placeholder="1234 5678 9012 3456"
-          maxLength={19}
-        />
-      </div>
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { InputWithMask } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-// Masque pour téléphone français
-const phoneMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2)}\`;
-  if (cleaned.length <= 6) return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2, 4)} \${cleaned.slice(4)}\`;
-  return \`\${cleaned.slice(0, 2)} \${cleaned.slice(2, 4)} \${cleaned.slice(4, 6)} \${cleaned.slice(6, 8)}\`;
-};
-
-// Masque pour carte de crédit
-const creditCardMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  const groups = cleaned.match(/.{1,4}/g) || [];
-  return groups.join(' ');
-};
-
-export function MyInputMask() {
-  const [phoneValue, setPhoneValue] = useState('');
-  const [creditCardValue, setCreditCardValue] = useState('');
-
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="mb-2 block text-sm font-medium">Téléphone</label>
-        <InputWithMask
-          mask={phoneMask}
-          value={phoneValue}
-          onChange={(e) => setPhoneValue(e.target.value)}
-          placeholder="06 12 34 56 78"
-        />
-      </div>
-      <div>
-        <label className="mb-2 block text-sm font-medium">Carte de crédit</label>
-        <InputWithMask
-          mask={creditCardMask}
-          value={creditCardValue}
-          onChange={(e) => setCreditCardValue(e.target.value)}
-          placeholder="1234 5678 9012 3456"
-          maxLength={19}
-        />
-      </div>
-    </div>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant InputMask est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Créez des masques personnalisés pour formater la saisie
-              utilisateur.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { InputWithMask } from '@cosmic-ui/ui';
-
-const dateMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2)}\`;
-  return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2, 4)}/\${cleaned.slice(4, 8)}\`;
-};
-
 <InputWithMask
-  mask={dateMask}
-  placeholder="JJ/MM/AAAA"
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { InputWithMask } from '@cosmic-ui/ui';
-
-const dateMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2)}\`;
-  return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2, 4)}/\${cleaned.slice(4, 8)}\`;
-};
-
-<InputWithMask
-  mask={dateMask}
-  placeholder="JJ/MM/AAAA"
+  value={phoneValue}
+  onChange={setPhoneValue}
+  mask={phoneMask}
+  placeholder="01 23 45 67 89"
 />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Masque de devise</h3>
+              <p className="text-muted-foreground">Masque pour formater les montants en devise.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Montant
+                  </label>
+                  <InputWithMask
+                    value=""
+                    onChange={() => {}}
+                    mask={(raw) => {
+                      const cleaned = raw.replace(/\D/g, '');
+                      const amount = parseInt(cleaned) / 100;
+                      return amount.toLocaleString('fr-FR', {
+                        style: 'currency',
+                        currency: 'EUR'
+                      });
+                    }}
+                    placeholder="0,00 €"
+                  />
+                </div>
+              </div>
             </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/CurrencyMask.tsx" showPackageManager={false}>
+{`export default function App\docs\components\inputMask\page.tsxExample() {
+  <InputWithMask
+  value={amount}
+  onChange={setAmount}
+  mask={(raw) => {
+    const cleaned = raw.replace(/\\D/g, '');
+    const amount = parseInt(cleaned) / 100;
+    return amount.toLocaleString('fr-FR', {
+      style: 'currency',
+      currency: 'EUR'
+    });
+  }}
+  placeholder="0,00 €"
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">Date</h3>
-                    <InputWithMask
-                      mask={raw => {
-                        const cleaned = raw.replace(/\D/g, '');
-                        if (cleaned.length <= 2) return cleaned;
-                        if (cleaned.length <= 4)
-                          return `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
-                        return `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4, 8)}`;
-                      }}
-                      placeholder="JJ/MM/AAAA"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">Code postal</h3>
-                    <InputWithMask
-                      mask={raw => raw.replace(/\D/g, '').slice(0, 5)}
-                      placeholder="75001"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">SIRET</h3>
-                    <InputWithMask
-                      mask={raw => {
-                        const cleaned = raw.replace(/\D/g, '');
-                        if (cleaned.length <= 3) return cleaned;
-                        if (cleaned.length <= 6)
-                          return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
-                        if (cleaned.length <= 9)
-                          return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6)}`;
-                        return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6, 9)} ${cleaned.slice(9, 14)}`;
-                      }}
-                      placeholder="123 456 789 01234"
-                    />
-                  </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Masque d'IP</h3>
+              <p className="text-muted-foreground">Masque pour formater les adresses IP.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Adresse IP
+                  </label>
+                  <InputWithMask
+                    value=""
+                    onChange={() => {}}
+                    mask={(raw) => {
+                      const cleaned = raw.replace(/[^0-9.]/g, '');
+                      const parts = cleaned.split('.');
+                      return parts.slice(0, 4).join('.');
+                    }}
+                    placeholder="192.168.1.1"
+                    maxLength={15}
+                  />
                 </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Masque pour date
-const dateMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2)}\`;
-  return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2, 4)}/\${cleaned.slice(4, 8)}\`;
-};
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/IPMask.tsx" showPackageManager={false}>
+{`export default function App\docs\components\inputMask\page.tsxExample() {
+  <InputWithMask
+  value={ip}
+  onChange={setIp}
+  mask={(raw) => {
+    const cleaned = raw.replace(/[^0-9.]/g, '');
+    const parts = cleaned.split('.');
+    return parts.slice(0, 4).join('.');
+  }}
+  placeholder="192.168.1.1"
+  maxLength={15}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-<InputWithMask mask={dateMask} placeholder="JJ/MM/AAAA" />
-
-// Masque pour code postal
-const postalCodeMask = (raw: string) => raw.replace(/\\D/g, '').slice(0, 5);
-
-<InputWithMask mask={postalCodeMask} placeholder="75001" />
-
-// Masque pour SIRET
-const siretMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 3) return cleaned;
-  if (cleaned.length <= 6) return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3)}\`;
-  if (cleaned.length <= 9) return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3, 6)} \${cleaned.slice(6)}\`;
-  return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3, 6)} \${cleaned.slice(6, 9)} \${cleaned.slice(9, 14)}\`;
-};
-
-<InputWithMask mask={siretMask} placeholder="123 456 789 01234" />`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Masque pour date
-const dateMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 2) return cleaned;
-  if (cleaned.length <= 4) return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2)}\`;
-  return \`\${cleaned.slice(0, 2)}/\${cleaned.slice(2, 4)}/\${cleaned.slice(4, 8)}\`;
-};
-
-<InputWithMask mask={dateMask} placeholder="JJ/MM/AAAA" />
-
-// Masque pour code postal
-const postalCodeMask = (raw: string) => raw.replace(/\\D/g, '').slice(0, 5);
-
-<InputWithMask mask={postalCodeMask} placeholder="75001" />
-
-// Masque pour SIRET
-const siretMask = (raw: string) => {
-  const cleaned = raw.replace(/\\D/g, '');
-  if (cleaned.length <= 3) return cleaned;
-  if (cleaned.length <= 6) return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3)}\`;
-  if (cleaned.length <= 9) return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3, 6)} \${cleaned.slice(6)}\`;
-  return \`\${cleaned.slice(0, 3)} \${cleaned.slice(3, 6)} \${cleaned.slice(6, 9)} \${cleaned.slice(9, 14)}\`;
-};
-
-<InputWithMask mask={siretMask} placeholder="123 456 789 01234" />`}
-                  </CodeBlock>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Masque avec validation</h3>
+              <p className="text-muted-foreground">Masque avec validation en temps réel.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    Code postal
+                  </label>
+                  <InputWithMask
+                    value=""
+                    onChange={() => {}}
+                    mask={(raw) => {
+                      const cleaned = raw.replace(/\D/g, '');
+                      return cleaned.slice(0, 5);
+                    }}
+                    placeholder="75001"
+                    maxLength={5}
+                    onValidate={(value) => {
+                      const cleaned = value.replace(/\D/g, '');
+                      return cleaned.length === 5;
+                    }}
+                  />
                 </div>
-              )}
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/ValidatedMask.tsx" showPackageManager={false}>
+{`export default function App\docs\components\inputMask\page.tsxExample() {
+  <InputWithMask
+  value={postalCode}
+  onChange={setPostalCode}
+  mask={(raw) => {
+    const cleaned = raw.replace(/\\D/g, '');
+    return cleaned.slice(0, 5);
+  }}
+  placeholder="75001"
+  maxLength={5}
+  onValidate={(value) => {
+    const cleaned = value.replace(/\\D/g, '');
+    return cleaned.length === 5;
+  }}
+/>
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">value</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">''</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Valeur du champ</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onChange</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(value: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback lors du changement</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">mask</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(raw: string) => string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Fonction de masquage</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">placeholder</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">''</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Texte d'aide</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">maxLength</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">number</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Infinity</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Longueur maximale</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onValidate</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(value: string) => boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Fonction de validation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Créez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">masques personnalisés</code> pour vos besoins</li>
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">placeholders</code> pour guider l'utilisateur</li>
+          <li>• Implémentez la <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">validation</code> pour assurer la qualité des données</li>
+          <li>• Définissez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">limites de longueur</code> appropriées</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

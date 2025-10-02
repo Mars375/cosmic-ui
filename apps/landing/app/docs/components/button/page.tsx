@@ -1,1651 +1,440 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { Button } from '@cosmic-ui/ui';
+import { Button } from 'cosmic-ui-mars';
+import { CodeBlock } from '../../../components/code-block';
+import { Download, Heart, Star, Settings, Trash2, Plus, Minus } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  fileName,
-  language = 'bash',
-}: {
-  children: React.ReactNode;
-  fileName?: string;
-  language?: string;
-}) => {
-  const [copied, setCopied] = useState(false);
+export default function ButtonPage() {
+  const [loading, setLoading] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const copyToClipboard = async () => {
-    try {
-      const textContent =
-        typeof children === 'string'
-          ? children
-          : Array.isArray(children)
-            ? children.join('')
-            : String(children);
-      await navigator.clipboard.writeText(textContent);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
+  const handleLoadingDemo = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
   };
 
   return (
-    <div className="relative mb-6">
-      <div className="border border-border rounded-lg overflow-hidden">
-        <div className="flex items-center gap-2 border-b px-3 py-1">
-          <div className="bg-foreground flex size-4 items-center justify-center rounded-[1px] opacity-70">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              className="fill-foreground w-4 h-4"
-            >
-              <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"></path>
-            </svg>
-          </div>
-          <span className="text-muted-foreground text-sm">{fileName}</span>
-          <button
-            onClick={copyToClipboard}
-            className="text-gray-500 hover:text-gray-700 transition-colors ml-auto"
-          >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {copied ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-        <div className="px-4 py-3.5 bg-white dark:bg-black">
-          <pre className="font-mono text-sm leading-relaxed">
-            <code>{children}</code>
-          </pre>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function ButtonPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showSecondaryCode, setShowSecondaryCode] = useState(false);
-  const [showOutlineCode, setShowOutlineCode] = useState(false);
-  const [showGhostCode, setShowGhostCode] = useState(false);
-  const [showDestructiveCode, setShowDestructiveCode] = useState(false);
-  const [showSizesCode, setShowSizesCode] = useState(false);
-  const [showDisabledCode, setShowDisabledCode] = useState(false);
-
-  const [copiedStates, setCopiedStates] = useState({
-    main: false,
-    secondary: false,
-    outline: false,
-    ghost: false,
-    destructive: false,
-    sizes: false,
-    disabled: false,
-  });
-
-  return (
-    <div>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-4xl font-bold mb-4 text-foreground">Button</h1>
-            <p className="text-lg text-muted-foreground">
-              Un composant bouton polyvalent avec plusieurs variants et tailles.
-              Parfait pour les actions principales et secondaires dans vos
-              interfaces.
-            </p>
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+            </svg>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
+          <h1 className="text-4xl font-bold text-foreground">Button</h1>
         </div>
-      </div>
-
-      {/* Preview */}
-      <div className="mb-8 flex justify-start">
-        <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-          <div className="flex items-center gap-0 border-b border-border">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                !showCode
-                  ? 'text-foreground border-foreground'
-                  : 'text-muted-foreground border-transparent hover:text-foreground'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                showCode
-                  ? 'text-foreground border-foreground'
-                  : 'text-muted-foreground border-transparent hover:text-foreground'
-              }`}
-            >
-              Code
-            </button>
-          </div>
-          <div className="p-2 min-h-[450px] flex items-center justify-center">
-            {!showCode ? (
-              <Button>Button</Button>
-            ) : (
-              <div className="relative w-full">
-                <div className="absolute top-4 right-4 z-10">
-                  <button
-                    onClick={async () => {
-                      const code = `import { Button } from "@cosmic-ui/ui";
-
-export function ButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button>Button</Button>
-    </div>
-  );
-}`;
-                      try {
-                        await navigator.clipboard.writeText(code);
-                        setCopiedStates(prev => ({ ...prev, main: true }));
-                        setTimeout(() => {
-                          setCopiedStates(prev => ({ ...prev, main: false }));
-                        }, 2000);
-                      } catch (err) {
-                        console.error('Failed to copy text: ', err);
-                      }
-                    }}
-                    className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {copiedStates.main ? (
-                      <svg
-                        className="h-4 w-4 text-green-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-                <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      1
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> Button <span>&#125;</span>{' '}
-                      <span className="keyword">from</span>{' '}
-                      <span className="string">"@cosmic-ui/ui"</span>;
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      2
-                    </div>
-                    <div className="flex-1"></div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      3
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">export function</span>{' '}
-                      <span className="function">ButtonDemo</span>(){' '}
-                      <span>&#123;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      4
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;</span>
-                      <span className="keyword">return</span> (
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      5
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">div</span> className=
-                      <span className="string">"flex justify-center"</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      6
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>Button<span>&lt;/</span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      7
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                      <span className="tag">div</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      8
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;);</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      9
-                    </div>
-                    <div className="flex-1">
-                      <span>&#125;</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Un composant bouton polyvalent avec plusieurs variants, tailles et états. 
+          Parfait pour les actions principales et secondaires dans vos interfaces.
+        </p>
       </div>
 
       {/* Installation */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-foreground">
-          Installation
-        </h2>
-        <p className="text-muted-foreground mb-4">
-          Le composant Button est inclus dans le package principal de CosmicUI.
-        </p>
-        <CodeBlock fileName="Terminal" language="bash">
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              1
-            </div>
-            <div className="flex-1">pnpm add @cosmic-ui/ui</div>
-          </div>
-        </CodeBlock>
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
       </div>
 
-      {/* Usage */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-foreground">Usage</h2>
-        <p className="text-muted-foreground mb-4">
-          Importez le composant et utilisez-le dans votre application :
-        </p>
-        <CodeBlock fileName="my-component.tsx" language="tsx">
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              1
-            </div>
-            <div className="flex-1">
-              <span className="keyword">import</span> <span>&#123;</span> Button{' '}
-              <span>&#125;</span> <span className="keyword">from</span>{' '}
-              <span className="string">'@cosmic-ui/ui'</span>;
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="flex flex-wrap gap-3">
+                <Button>Bouton par défaut</Button>
+                <Button variant="secondary">Secondaire</Button>
+                <Button variant="outline">Contour</Button>
+                <Button variant="ghost">Fantôme</Button>
+              </div>
             </div>
           </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              2
-            </div>
-            <div className="flex-1"></div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/ButtonExample.tsx" showPackageManager={false}>
+{`import { Button } from 'cosmic-ui-mars';
+
+export function ButtonExample() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button>Bouton par défaut</Button>
+      <Button variant="secondary">Secondaire</Button>
+      <Button variant="outline">Contour</Button>
+      <Button variant="ghost">Fantôme</Button>
+    </div>
+  );
+}`}
+            </CodeBlock>
           </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              3
-            </div>
-            <div className="flex-1">
-              <span className="keyword">export function</span>{' '}
-              <span className="function">MyComponent</span>(){' '}
-              <span>&#123;</span>
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              4
-            </div>
-            <div className="flex-1">
-              <span>&nbsp;&nbsp;</span>
-              <span className="keyword">return</span> (
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              5
-            </div>
-            <div className="flex-1">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-              <span className="tag">Button</span> onClick=&#123;() =&gt;{' '}
-              <span className="function">alert</span>(
-              <span className="string">'Hello!'</span>)&#125;<span>&gt;</span>
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              6
-            </div>
-            <div className="flex-1">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cliquez ici</span>
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              7
-            </div>
-            <div className="flex-1">
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-              <span className="tag">Button</span>
-              <span>&gt;</span>
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              8
-            </div>
-            <div className="flex-1">
-              <span>&nbsp;&nbsp;);</span>
-            </div>
-          </div>
-          <div className="flex" data-line>
-            <div className="select-none pr-4 text-right text-gray-400 w-8">
-              9
-            </div>
-            <div className="flex-1">
-              <span>&#125;</span>
-            </div>
-          </div>
-        </CodeBlock>
+        </div>
       </div>
 
       {/* Variants */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-foreground">
-          Variants
-        </h2>
-        <p className="text-muted-foreground mb-6">
-          Le composant Button supporte plusieurs variants pour différents cas
-          d'usage :
-        </p>
-
-        <div className="space-y-6">
-          {/* Secondary */}
-          <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Secondary
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowSecondaryCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showSecondaryCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowSecondaryCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showSecondaryCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center">
-                  {!showSecondaryCode ? (
-                    <Button variant="secondary">Secondary Button</Button>
-                  ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
-
-export function SecondaryButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button variant="secondary">Secondary Button</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                secondary: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  secondary: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.secondary ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">
-                              SecondaryButtonDemo
-                            </span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> variant=
-                            <span className="string">"secondary"</span>
-                            <span>&gt;</span>Secondary Button<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          {/* Default */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Default</h3>
+              <p className="text-muted-foreground">Le variant par défaut pour les actions principales.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button>Action principale</Button>
               </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/DefaultButton.tsx" showPackageManager={false}>
+{`export default function DefaultButton() {
+  return <Button>Action principale</Button>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          {/* Secondary */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Secondary</h3>
+              <p className="text-muted-foreground">Pour les actions secondaires moins importantes.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button variant="secondary">Action secondaire</Button>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/SecondaryButton.tsx" showPackageManager={false}>
+{`export default function SecondaryButton() {
+  return <Button variant="secondary">Action secondaire</Button>;
+}`}
+              </CodeBlock>
             </div>
           </div>
 
           {/* Outline */}
-          <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Outline
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowOutlineCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showOutlineCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowOutlineCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showOutlineCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center">
-                  {!showOutlineCode ? (
-                    <Button variant="outline">Outline Button</Button>
-                  ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
-
-export function OutlineButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button variant="outline">Outline Button</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                outline: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  outline: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.outline ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">OutlineButtonDemo</span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> variant=
-                            <span className="string">"outline"</span>
-                            <span>&gt;</span>Outline Button<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Outline</h3>
+              <p className="text-muted-foreground">Bouton avec bordure pour un style plus discret.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button variant="outline">Bouton contour</Button>
               </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/OutlineButton.tsx" showPackageManager={false}>
+{`export default function App\docs\components\button\page.tsxExample() {
+  return <Button variant="outline">Bouton contour</Button>;
+}`}
+              </CodeBlock>
             </div>
           </div>
 
           {/* Ghost */}
-          <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">Ghost</h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowGhostCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showGhostCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowGhostCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showGhostCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center">
-                  {!showGhostCode ? (
-                    <Button variant="ghost">Ghost Button</Button>
-                  ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
-
-export function GhostButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button variant="ghost">Ghost Button</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                ghost: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  ghost: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.ghost ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">GhostButtonDemo</span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> variant=
-                            <span className="string">"ghost"</span>
-                            <span>&gt;</span>Ghost Button<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Ghost</h3>
+              <p className="text-muted-foreground">Bouton transparent pour les actions discrètes.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button variant="ghost">Bouton fantôme</Button>
               </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/GhostButton.tsx" showPackageManager={false}>
+{`export default function App\docs\components\button\page.tsxExample() {
+  return <Button variant="ghost">Bouton fantôme</Button>;
+}`}
+              </CodeBlock>
             </div>
           </div>
 
           {/* Destructive */}
-          <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Destructive
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowDestructiveCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showDestructiveCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowDestructiveCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showDestructiveCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center">
-                  {!showDestructiveCode ? (
-                    <Button variant="destructive">Delete</Button>
-                  ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Destructive</h3>
+              <p className="text-muted-foreground">Pour les actions destructives comme supprimer.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button variant="destructive">Supprimer</Button>
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/DestructiveButton.tsx" showPackageManager={false}>
+{`export default function App\docs\components\button\page.tsxExample() {
+  return <Button variant="destructive">Supprimer</Button>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+        </div>
+      </div>
 
-export function DestructiveButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button variant="destructive">Delete</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                destructive: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  destructive: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.destructive ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">
-                              DestructiveButtonDemo
-                            </span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> variant=
-                            <span className="string">"destructive"</span>
-                            <span>&gt;</span>Delete<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
+      {/* Tailles */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Tailles</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemples</h3>
+            <p className="text-muted-foreground">Trois tailles disponibles pour s'adapter à vos besoins.</p>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button size="sm">Petit</Button>
+                <Button>Moyen</Button>
+                <Button size="lg">Grand</Button>
               </div>
             </div>
           </div>
-
-          {/* Sizes */}
           <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Tailles
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowSizesCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showSizesCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowSizesCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showSizesCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center gap-4">
-                  {!showSizesCode ? (
+            <CodeBlock language="typescript" filePath="components/ButtonSizes.tsx" showPackageManager={false}>
+{`export default function App\docs\components\button\page.tsxExample() {
+  <div className="flex flex-wrap items-center gap-3">
+  <Button size="sm">Petit</Button>
+  <Button>Moyen</Button>
+  <Button size="lg">Grand</Button>
+</div>
+}`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Avec icônes */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Avec icônes</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemples</h3>
+            <p className="text-muted-foreground">Ajoutez des icônes pour améliorer la clarté des actions.</p>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="flex flex-wrap gap-3">
+                <Button>
+                  <Download className="w-4 h-4 mr-2" />
+                  Télécharger
+                </Button>
+                <Button variant="outline">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Paramètres
+                </Button>
+                <Button variant="destructive">
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Supprimer
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <CodeBlock language="typescript" filePath="components/ButtonWithIcons.tsx" showPackageManager={false}>
+{`import { Download, Settings, Trash2 } from 'lucide-react';
+
+<div className="flex flex-wrap gap-3">
+  <Button>
+    <Download className="w-4 h-4 mr-2" />
+    Télécharger
+  </Button>
+  <Button variant="outline">
+    <Settings className="w-4 h-4 mr-2" />
+    Paramètres
+  </Button>
+  <Button variant="destructive">
+    <Trash2 className="w-4 h-4 mr-2" />
+    Supprimer
+  </Button>
+</div>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* États */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">États</h2>
+        <div className="space-y-8">
+          {/* Loading */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Loading</h3>
+              <p className="text-muted-foreground">Bouton avec état de chargement pour les actions asynchrones.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <Button onClick={handleLoadingDemo} disabled={loading}>
+                  {loading ? (
                     <>
-                      <Button size="sm">Small</Button>
-                      <Button>Default</Button>
-                      <Button size="lg">Large</Button>
+                      <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                      Chargement...
                     </>
                   ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
-
-export function SizesButtonDemo() {
-  return (
-    <div className="flex justify-center gap-4">
-      <Button size="sm">Small</Button>
-      <Button>Default</Button>
-      <Button size="lg">Large</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                sizes: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  sizes: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.sizes ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">SizesButtonDemo</span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center gap-4"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> size=
-                            <span className="string">"sm"</span>
-                            <span>&gt;</span>Small<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>Default<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> size=
-                            <span className="string">"lg"</span>
-                            <span>&gt;</span>Large<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            10
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            11
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    'Cliquer pour charger'
                   )}
-                </div>
+                </Button>
               </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/LoadingButton.tsx" showPackageManager={false}>
+{`export default function LoadingButton() {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
+  return (
+    <Button onClick={handleClick} disabled={loading}>
+      {loading ? (
+        <>
+          <div className="w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin" />
+          Chargement...
+        </>
+      ) : (
+        'Cliquer pour charger'
+      )}
+    </Button>
+  );
+}`}
+              </CodeBlock>
             </div>
           </div>
 
           {/* Disabled */}
-          <div>
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Désactivé
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button
-                    onClick={() => setShowDisabledCode(false)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      !showDisabledCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setShowDisabledCode(true)}
-                    className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                      showDisabledCode
-                        ? 'text-foreground border-foreground'
-                        : 'text-muted-foreground border-transparent hover:text-foreground'
-                    }`}
-                  >
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-center">
-                  {!showDisabledCode ? (
-                    <Button disabled>Disabled Button</Button>
-                  ) : (
-                    <div className="relative w-full">
-                      <div className="absolute top-4 right-4 z-10">
-                        <button
-                          onClick={async () => {
-                            const code = `import { Button } from "@cosmic-ui/ui";
-
-export function DisabledButtonDemo() {
-  return (
-    <div className="flex justify-center">
-      <Button disabled>Disabled Button</Button>
-    </div>
-  );
-}`;
-                            try {
-                              await navigator.clipboard.writeText(code);
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                disabled: true,
-                              }));
-                              setTimeout(() => {
-                                setCopiedStates(prev => ({
-                                  ...prev,
-                                  disabled: false,
-                                }));
-                              }, 2000);
-                            } catch (err) {
-                              console.error('Failed to copy text: ', err);
-                            }
-                          }}
-                          className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {copiedStates.disabled ? (
-                            <svg
-                              className="h-4 w-4 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-4 w-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          )}
-                        </button>
-                      </div>
-                      <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            1
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">import</span>{' '}
-                            <span>&#123;</span> Button <span>&#125;</span>{' '}
-                            <span className="keyword">from</span>{' '}
-                            <span className="string">"@cosmic-ui/ui"</span>;
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            2
-                          </div>
-                          <div className="flex-1"></div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            3
-                          </div>
-                          <div className="flex-1">
-                            <span className="keyword">export function</span>{' '}
-                            <span className="function">DisabledButtonDemo</span>
-                            () <span>&#123;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            4
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;</span>
-                            <span className="keyword">return</span> (
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            5
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                            <span className="tag">div</span> className=
-                            <span className="string">
-                              "flex justify-center"
-                            </span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            6
-                          </div>
-                          <div className="flex-1">
-                            <span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                            </span>
-                            <span className="tag">Button</span> disabled
-                            <span>&gt;</span>Disabled Button<span>&lt;/</span>
-                            <span className="tag">Button</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            7
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                            <span className="tag">div</span>
-                            <span>&gt;</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            8
-                          </div>
-                          <div className="flex-1">
-                            <span>&nbsp;&nbsp;);</span>
-                          </div>
-                        </div>
-                        <div className="flex" data-line>
-                          <div className="select-none pr-4 text-right text-gray-400 w-8">
-                            9
-                          </div>
-                          <div className="flex-1">
-                            <span>&#125;</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Disabled</h3>
+              <p className="text-muted-foreground">Bouton désactivé pour les actions non disponibles.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="flex flex-wrap gap-3">
+                  <Button disabled>Désactivé</Button>
+                  <Button variant="secondary" disabled>Secondaire désactivé</Button>
+                  <Button variant="outline" disabled>Contour désactivé</Button>
                 </div>
               </div>
             </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/DisabledButtons.tsx" showPackageManager={false}>
+{`export default function App\docs\components\button\page.tsxExample() {
+  <div className="flex flex-wrap gap-3">
+  <Button disabled>Désactivé</Button>
+  <Button variant="secondary" disabled>Secondaire désactivé</Button>
+  <Button variant="outline" disabled>Contour désactivé</Button>
+</div>
+}`}
+              </CodeBlock>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Exemples interactifs */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Exemples interactifs</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Compteur avec boutons</h3>
+            <p className="text-muted-foreground">Exemple pratique d'utilisation des boutons dans une interface.</p>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="flex items-center justify-center gap-4">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setCount(count - 1)}
+                >
+                  <Minus className="w-4 h-4" />
+                </Button>
+                <span className="text-2xl font-bold w-12 text-center">{count}</span>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setCount(count + 1)}
+                >
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <CodeBlock language="typescript" filePath="components/CounterExample.tsx" showPackageManager={false}>
+{`export default function CounterExample() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="flex items-center justify-center gap-4">
+      <Button 
+        variant="outline" 
+        size="sm"
+        onClick={() => setCount(count - 1)}
+      >
+        <Minus className="w-4 h-4" />
+      </Button>
+      <span className="text-2xl font-bold w-12 text-center">{count}</span>
+      <Button 
+        variant="outline" 
+        size="sm"
+        onClick={() => setCount(count + 1)}
+      >
+        <Plus className="w-4 h-4" />
+      </Button>
+    </div>
+  );
+}`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* API Reference */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">variant</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Style visuel du bouton</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">size</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'sm' | 'default' | 'lg'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Taille du bouton</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">disabled</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Désactive le bouton</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onClick</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">() => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Fonction appelée au clic</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez le variant <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">default</code> pour les actions principales</li>
+          <li>• Le variant <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">destructive</code> doit être utilisé avec parcimonie</li>
+          <li>• Ajoutez des icônes pour améliorer la compréhension des actions</li>
+          <li>• Utilisez l'état <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">loading</code> pour les actions asynchrones</li>
+        </ul>
       </div>
     </div>
   );

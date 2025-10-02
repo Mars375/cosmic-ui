@@ -1,55 +1,14 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { FileUpload } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { FileUpload } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { Upload, File, X, Check } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function FileUploadPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
 
   const handleFiles = (files: FileList) => {
     const newFiles = Array.from(files);
@@ -69,419 +28,252 @@ export default function FileUploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">FileUpload</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Upload className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">FileUpload</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de téléchargement de fichiers avec glisser-déposer et
-          prévisualisation.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Composant d'upload de fichiers avec drag & drop et gestion des fichiers.
         </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
-          </div>
-
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <FileUpload
-                    accept=".pdf,.doc,.docx,.txt"
-                    multiple={true}
-                    onFiles={handleFiles}
-                    className="min-h-[120px]"
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
-                      <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-                        Glissez vos fichiers ici ou cliquez pour sélectionner
-                      </span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
-                        PDF, DOC, DOCX, TXT (max 10MB)
-                      </span>
-                    </div>
-                  </FileUpload>
-                  
-                  {uploadedFiles.length > 0 && (
-                    <div className="space-y-2">
-                      <h4 className="text-sm font-medium">Fichiers sélectionnés :</h4>
-                      {uploadedFiles.map((file, index) => (
-                        <div key={index} className="flex items-center justify-between p-2 bg-white dark:bg-gray-900 rounded border">
-                          <div className="flex items-center gap-2">
-                            <File className="w-4 h-4 text-gray-600 dark:text-gray-400-foreground" />
-                            <div>
-                              <p className="text-sm font-medium">{file.name}</p>
-                              <p className="text-xs text-gray-600 dark:text-gray-400-foreground">
-                                {formatFileSize(file.size)}
-                              </p>
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => removeFile(index)}
-                            className="p-1 hover:bg-cosmic-border rounded"
-                          >
-                            <X className="w-4 h-4 text-gray-600 dark:text-gray-400-foreground" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { FileUpload } from '@cosmic-ui/ui';
-import { Upload } from 'lucide-react';
-import { useState } from 'react';
-
-export function MyFileUpload() {
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-
-  const handleFiles = (files) => {
-    const newFiles = Array.from(files);
-    setUploadedFiles(prev => [...prev, ...newFiles]);
-  };
-
-  return (
-    <FileUpload
-      accept=".pdf,.doc,.docx,.txt"
-      multiple={true}
-      onFiles={handleFiles}
-      className="min-h-[120px]"
-    >
-      <div className="flex flex-col items-center gap-2">
-        <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
-        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-          Glissez vos fichiers ici ou cliquez pour sélectionner
-        </span>
-        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
-          PDF, DOC, DOCX, TXT (max 10MB)
-        </span>
       </div>
-    </FileUpload>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { FileUpload } from '@cosmic-ui/ui';
-import { Upload } from 'lucide-react';
-import { useState } from 'react';
 
-export function MyFileUpload() {
-  const [uploadedFiles, setUploadedFiles] = useState([]);
-
-  const handleFiles = (files) => {
-    const newFiles = Array.from(files);
-    setUploadedFiles(prev => [...prev, ...newFiles]);
-  };
-
-  return (
-    <FileUpload
-      accept=".pdf,.doc,.docx,.txt"
-      multiple={true}
-      onFiles={handleFiles}
-      className="min-h-[120px]"
-    >
-      <div className="flex flex-col items-center gap-2">
-        <Upload className="w-8 h-8 text-gray-600 dark:text-gray-400-foreground" />
-        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-          Glissez vos fichiers ici ou cliquez pour sélectionner
-        </span>
-        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
-          PDF, DOC, DOCX, TXT (max 10MB)
-        </span>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
       </div>
-    </FileUpload>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
 
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant FileUpload est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer une zone de téléchargement de fichiers.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { FileUpload } from '@cosmic-ui/ui';
-
-<FileUpload
-  accept=".pdf,.doc,.docx"
-  multiple={true}
-  onFiles={(files) => console.log(files)}
->
-  <span>Cliquez pour sélectionner des fichiers</span>
-</FileUpload>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { FileUpload } from '@cosmic-ui/ui';
-
-<FileUpload
-  accept=".pdf,.doc,.docx"
-  multiple={true}
-  onFiles={(files) => console.log(files)}
->
-  <span>Cliquez pour sélectionner des fichiers</span>
-</FileUpload>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Fichier unique
-                    </h3>
-                    <FileUpload
-                      accept="image/*"
-                      multiple={false}
-                      onFiles={handleFiles}
-                      className="min-h-[80px]"
-                    >
-                      <div className="flex flex-col items-center gap-1">
-                        <Upload className="w-6 h-6 text-gray-600 dark:text-gray-400-foreground" />
-                        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
-                          Sélectionner une image
-                        </span>
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <FileUpload
+                onFiles={handleFiles}
+                accept=".pdf,.doc,.docx,.jpg,.png"
+                maxSize={5 * 1024 * 1024} // 5MB
+                multiple
+              />
+              {uploadedFiles.length > 0 && (
+                <div className="mt-4 space-y-2">
+                  <h4 className="font-medium text-foreground">Fichiers uploadés :</h4>
+                  {uploadedFiles.map((file, index) => (
+                    <div key={index} className="flex items-center justify-between p-2 bg-muted/50 rounded">
+                      <div className="flex items-center gap-2">
+                        <File className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-sm text-foreground">{file.name}</span>
+                        <span className="text-xs text-muted-foreground">({formatFileSize(file.size)})</span>
                       </div>
-                    </FileUpload>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Tous types
-                    </h3>
-                    <FileUpload
-                      multiple={true}
-                      onFiles={handleFiles}
-                      className="min-h-[80px]"
-                    >
-                      <div className="flex flex-col items-center gap-1">
-                        <Upload className="w-6 h-6 text-gray-600 dark:text-gray-400-foreground" />
-                        <span className="text-xs text-gray-600 dark:text-gray-400-foreground">
-                          Tous types de fichiers
-                        </span>
-                      </div>
-                    </FileUpload>
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Fichier unique
-<FileUpload
-  accept="image/*"
-  multiple={false}
-  onFiles={handleFiles}
->
-  <span>Sélectionner une image</span>
-</FileUpload>
-
-// Tous types
-<FileUpload
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Tous types de fichiers</span>
-</FileUpload>
-
-// Images seulement
-<FileUpload
-  accept="image/*"
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Sélectionner des images</span>
-</FileUpload>
-
-// Documents seulement
-<FileUpload
-  accept=".pdf,.doc,.docx,.txt"
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Sélectionner des documents</span>
-</FileUpload>
-
-// Avec contenu personnalisé
-<FileUpload onFiles={handleFiles}>
-  <div className="text-center">
-    <Upload className="w-12 h-12 mx-auto mb-2" />
-    <p className="font-medium">Glissez vos fichiers ici</p>
-    <p className="text-sm text-muted-foreground">
-      ou cliquez pour parcourir
-    </p>
-  </div>
-</FileUpload>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Fichier unique
-<FileUpload
-  accept="image/*"
-  multiple={false}
-  onFiles={handleFiles}
->
-  <span>Sélectionner une image</span>
-</FileUpload>
-
-// Tous types
-<FileUpload
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Tous types de fichiers</span>
-</FileUpload>
-
-// Images seulement
-<FileUpload
-  accept="image/*"
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Sélectionner des images</span>
-</FileUpload>
-
-// Documents seulement
-<FileUpload
-  accept=".pdf,.doc,.docx,.txt"
-  multiple={true}
-  onFiles={handleFiles}
->
-  <span>Sélectionner des documents</span>
-</FileUpload>
-
-// Avec contenu personnalisé
-<FileUpload onFiles={handleFiles}>
-  <div className="text-center">
-    <Upload className="w-12 h-12 mx-auto mb-2" />
-    <p className="font-medium">Glissez vos fichiers ici</p>
-    <p className="text-sm text-muted-foreground">
-      ou cliquez pour parcourir
-    </p>
-  </div>
-</FileUpload>`}
-                  </CodeBlock>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeFile(index)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
           </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/FileUploadExample.tsx" showPackageManager={false}>
+{`import { FileUpload } from 'cosmic-ui-mars';
+import { useState } from 'react';
+
+const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+const handleFiles = (files: FileList) => {
+  const newFiles = Array.from(files);
+  setUploadedFiles(prev => [...prev, ...newFiles]);
+};
+
+<FileUpload
+  onFiles={handleFiles}
+  accept=".pdf,.doc,.docx,.jpg,.png"
+  maxSize={5 * 1024 * 1024} // 5MB
+  multiple
+/>`}
+            </CodeBlock>
+          </div>
         </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Upload simple</h3>
+              <p className="text-muted-foreground">Upload d'un seul fichier avec validation.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <FileUpload
+                  onFiles={(files) => console.log('Single file:', files[0])}
+                  accept=".pdf"
+                  maxSize={2 * 1024 * 1024} // 2MB
+                  multiple={false}
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/SingleFileUpload.tsx" showPackageManager={false}>
+{`export default function App\docs\components\fileUpload\page.tsxExample() {
+  <FileUpload
+  onFiles={(files) => console.log('Single file:', files[0])}
+  accept=".pdf"
+  maxSize={2 * 1024 * 1024} // 2MB
+  multiple={false}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Upload avec prévisualisation</h3>
+              <p className="text-muted-foreground">Upload avec prévisualisation des images.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <FileUpload
+                  onFiles={handleFiles}
+                  accept=".jpg,.jpeg,.png,.gif"
+                  maxSize={10 * 1024 * 1024} // 10MB
+                  multiple
+                  showPreview
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/PreviewFileUpload.tsx" showPackageManager={false}>
+{`export default function App\docs\components\fileUpload\page.tsxExample() {
+  return <FileUpload
+  onFiles={handleFiles}
+  accept=".jpg,.jpeg,.png,.gif"
+  maxSize={10 * 1024 * 1024} // 10MB
+  multiple
+  showPreview
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Upload avec progression</h3>
+              <p className="text-muted-foreground">Upload avec barre de progression.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <FileUpload
+                  onFiles={handleFiles}
+                  accept="*"
+                  maxSize={50 * 1024 * 1024} // 50MB
+                  multiple
+                  showProgress
+                  onProgress={(progress) => console.log('Progress:', progress)}
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/ProgressFileUpload.tsx" showPackageManager={false}>
+{`export default function App\docs\components\fileUpload\page.tsxExample() {
+  <FileUpload
+  onFiles={handleFiles}
+  accept="*"
+  maxSize={50 * 1024 * 1024} // 50MB
+  multiple
+  showProgress
+  onProgress={(progress) => console.log('Progress:', progress)}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onFiles</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(files: FileList) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback appelé lors de la sélection de fichiers</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">accept</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">string</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'*'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Types de fichiers acceptés</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">maxSize</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">number</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Infinity</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Taille maximale en bytes</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">multiple</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">true</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Autoriser la sélection multiple</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showPreview</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher la prévisualisation</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showProgress</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher la barre de progression</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onProgress</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(progress: number) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback pour le suivi de progression</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Définissez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">limites de taille</code> appropriées</li>
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">types MIME</code> spécifiques pour la sécurité</li>
+          <li>• Implémentez la <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">validation côté serveur</code></li>
+          <li>• Affichez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">messages d'erreur</code> clairs</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

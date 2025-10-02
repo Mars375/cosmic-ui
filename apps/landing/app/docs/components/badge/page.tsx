@@ -1,23 +1,33 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { Badge } from '@cosmic-ui/ui';
+import { Badge } from 'cosmic-ui-mars';
+import { CodeBlock } from '../../../components/code-block';
+import { Button } from 'cosmic-ui-mars';
+import {
+  X,
+  Check,
+  AlertCircle,
+  Info,
+  Star,
+  Heart,
+  ShoppingCart,
+} from 'lucide-react';
 
 export default function BadgePage() {
-  const [showCode, setShowCode] = useState(false);
-  const [copiedStates, setCopiedStates] = useState({
-    main: false,
-    variants: false,
-  });
+  const [notifications, setNotifications] = useState(5);
+  const [likes, setLikes] = useState(42);
+  const [cartItems, setCartItems] = useState(3);
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header avec navigation */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-muted rounded-lg transition-colors">
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
             <svg
-              className="h-5 w-5"
+              className="w-6 h-6 text-primary"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -26,273 +36,591 @@ export default function BadgePage() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M15 19l-7-7 7-7"
+                d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
               />
             </svg>
-          </button>
-          <h1 className="text-3xl font-bold text-foreground">Badge</h1>
-          <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">Badge</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Un composant badge pour afficher des étiquettes, des compteurs et des
+          statuts. Parfait pour les notifications, les catégories et les
+          indicateurs visuels.
+        </p>
+      </div>
+
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="flex flex-wrap gap-3">
+              <Badge>Défaut</Badge>
+              <Badge variant="secondary">Secondaire</Badge>
+              <Badge variant="success">Succès</Badge>
+              <Badge variant="warning">Attention</Badge>
+              <Badge variant="destructive">Erreur</Badge>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/BadgeExample.tsx"
+              showPackageManager={false}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+              {`import { Badge } from 'cosmic-ui-mars';
+
+<div className="flex flex-wrap gap-3">
+  <Badge>Défaut</Badge>
+  <Badge variant="secondary">Secondaire</Badge>
+  <Badge variant="success">Succès</Badge>
+  <Badge variant="warning">Attention</Badge>
+  <Badge variant="destructive">Erreur</Badge>
+</div>`}
+            </CodeBlock>
+          </div>
         </div>
+      </div>
 
-        {/* Résumé */}
-        <div className="mb-8">
-          <p className="text-lg text-muted-foreground">
-            Un composant badge pour afficher des étiquettes avec différents
-            styles et couleurs.
-          </p>
-        </div>
-
-        {/* Preview principale */}
-        <div className="mb-12">
-          <div className="flex justify-start">
-            <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-              <div className="flex items-center gap-0 border-b border-border">
-                <button
-                  onClick={() => setShowCode(false)}
-                  className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                    !showCode
-                      ? 'text-foreground border-foreground'
-                      : 'text-muted-foreground border-transparent hover:text-foreground'
-                  }`}
-                >
-                  Preview
-                </button>
-                <button
-                  onClick={() => setShowCode(true)}
-                  className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
-                    showCode
-                      ? 'text-foreground border-foreground'
-                      : 'text-muted-foreground border-transparent hover:text-foreground'
-                  }`}
-                >
-                  Code
-                </button>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Variants
+        </h2>
+        <div className="space-y-8">
+          {/* Default */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Default</h3>
+              <p className="text-muted-foreground">
+                Le variant par défaut pour les badges standards.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Badge>Nouveau</Badge>
+                <Badge>Populaire</Badge>
+                <Badge>Recommandé</Badge>
               </div>
-              <div className="p-2 min-h-[450px] flex items-center justify-start">
-                {!showCode ? (
-                  <Badge>Badge</Badge>
-                ) : (
-                  <div className="relative w-full">
-                    <div className="absolute top-4 right-4 z-10">
-                      <button
-                        onClick={async () => {
-                          const code = `import { Badge } from "@cosmic-ui/ui";
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/DefaultBadge.tsx"
+                showPackageManager={false}
+              >
+                {`export default function BadgeExample() {
+  <div className="flex flex-wrap gap-3">
+  <Badge>Nouveau</Badge>
+  <Badge>Populaire</Badge>
+  <Badge>Recommandé</Badge>
+</div>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-export function BadgeDemo() {
-  return (
-    <div className="flex justify-center">
-      <Badge>Badge</Badge>
-    </div>
-  );
-}`;
-                          try {
-                            await navigator.clipboard.writeText(code);
-                            setCopiedStates(prev => ({ ...prev, main: true }));
-                            setTimeout(() => {
-                              setCopiedStates(prev => ({
-                                ...prev,
-                                main: false,
-                              }));
-                            }, 2000);
-                          } catch (err) {
-                            console.error('Failed to copy text: ', err);
-                          }
-                        }}
-                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {copiedStates.main ? (
-                          <svg
-                            className="h-4 w-4 text-green-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                        ) : (
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                            />
-                          </svg>
-                        )}
-                      </button>
-                    </div>
-                    <div className="bg-white dark:bg-black rounded-lg p-2 font-mono text-sm overflow-x-auto w-full">
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          1
-                        </div>
-                        <div className="flex-1">
-                          <span className="keyword">import</span>{' '}
-                          <span>&#123;</span> Badge <span>&#125;</span>{' '}
-                          <span className="keyword">from</span>{' '}
-                          <span className="string">"@cosmic-ui/ui"</span>;
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          2
-                        </div>
-                        <div className="flex-1"></div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          3
-                        </div>
-                        <div className="flex-1">
-                          <span className="keyword">export function</span>{' '}
-                          <span className="function">BadgeDemo</span>
-                          () <span>&#123;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          4
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;</span>
-                          <span className="keyword">return</span> (
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          5
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                          <span className="tag">div</span> className=
-                          <span className="string">"flex justify-center"</span>
-                          <span>&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          6
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                          <span className="tag">Badge</span>
-                          <span>&gt;</span>Badge<span>&lt;/</span>
-                          <span className="tag">Badge</span>
-                          <span>&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          7
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                          <span className="tag">div</span>
-                          <span>&gt;</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          8
-                        </div>
-                        <div className="flex-1">
-                          <span>&nbsp;&nbsp;);</span>
-                        </div>
-                      </div>
-                      <div className="flex" data-line>
-                        <div className="select-none pr-4 text-right text-gray-400 w-8">
-                          9
-                        </div>
-                        <div className="flex-1">
-                          <span>&#125;</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+          {/* Secondary */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Secondary</h3>
+              <p className="text-muted-foreground">
+                Pour les badges secondaires moins importants.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="secondary">Brouillon</Badge>
+                <Badge variant="secondary">En attente</Badge>
+                <Badge variant="secondary">Archivé</Badge>
               </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/SecondaryBadge.tsx"
+                showPackageManager={false}
+              >
+                {`export default function BadgeExample() {
+  <div className="flex flex-wrap gap-3">
+  <Badge variant="secondary">Brouillon</Badge>
+  <Badge variant="secondary">En attente</Badge>
+  <Badge variant="secondary">Archivé</Badge>
+</div>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          {/* Outline */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Outline</h3>
+              <p className="text-muted-foreground">
+                Badge avec bordure pour un style plus discret.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="secondary">React</Badge>
+                <Badge variant="secondary">TypeScript</Badge>
+                <Badge variant="secondary">Next.js</Badge>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/OutlineBadge.tsx"
+                showPackageManager={false}
+              >
+                {`export default function BadgeExample() {
+  <div className="flex flex-wrap gap-3">
+  <Badge variant="secondary">React</Badge>
+  <Badge variant="secondary">TypeScript</Badge>
+  <Badge variant="secondary">Next.js</Badge>
+</div>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          {/* Destructive */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Destructive
+              </h3>
+              <p className="text-muted-foreground">
+                Pour les statuts d'erreur ou d'alerte.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="destructive">Erreur</Badge>
+                <Badge variant="destructive">Expiré</Badge>
+                <Badge variant="destructive">Bloqué</Badge>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/DestructiveBadge.tsx"
+                showPackageManager={false}
+              >
+                {`export default function BadgeExample() {
+  <div className="flex flex-wrap gap-3">
+  <Badge variant="destructive">Erreur</Badge>
+  <Badge variant="destructive">Expiré</Badge>
+  <Badge variant="destructive">Bloqué</Badge>
+</div>
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Installation */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">
-            Installation
-          </h2>
-          <div className="bg-muted p-4 rounded-lg">
-            <code className="text-sm">npm install @cosmic-ui/ui</code>
+      {/* Avec icônes */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Avec icônes
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemples</h3>
+            <p className="text-muted-foreground">
+              Badges avec icônes pour améliorer la compréhension.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Badge>
+                <Check className="w-3 h-3 mr-1" />
+                Succès
+              </Badge>
+              <Badge variant="secondary">
+                <Info className="w-3 h-3 mr-1" />
+                Information
+              </Badge>
+              <Badge variant="destructive">
+                <AlertCircle className="w-3 h-3 mr-1" />
+                Attention
+              </Badge>
+              <Badge variant="secondary">
+                <Star className="w-3 h-3 mr-1" />
+                Premium
+              </Badge>
+            </div>
+          </div>
+          <div>
+            <CodeBlock
+              language="typescript"
+              filePath="components/BadgeWithIcons.tsx"
+              showPackageManager={false}
+            >
+              {`import { Check, Info, AlertCircle, Star } from 'lucide-react';
+
+<div className="flex flex-wrap gap-3">
+  <Badge>
+    <Check className="w-3 h-3 mr-1" />
+    Succès
+  </Badge>
+  <Badge variant="secondary">
+    <Info className="w-3 h-3 mr-1" />
+    Information
+  </Badge>
+  <Badge variant="destructive">
+    <AlertCircle className="w-3 h-3 mr-1" />
+    Attention
+  </Badge>
+  <Badge variant="secondary">
+    <Star className="w-3 h-3 mr-1" />
+    Premium
+  </Badge>
+</div>`}
+            </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Usage */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">Usage</h2>
-          <div className="bg-muted p-4 rounded-lg">
-            <code className="text-sm">
-              import &#123; Badge &#125; from "@cosmic-ui/ui";
-            </code>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">
-            Variants
-          </h2>
-
-          {/* Variants */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 text-foreground">
-              Variants
-            </h3>
-            <div className="flex justify-start">
-              <div className="w-[500px] border border-border rounded-lg overflow-hidden bg-background">
-                <div className="flex items-center gap-0 border-b border-border">
-                  <button className="px-4 py-3 text-sm font-medium text-foreground border-b-2 border-foreground">
-                    Preview
-                  </button>
-                  <button className="px-4 py-3 text-sm font-medium text-muted-foreground border-transparent">
-                    Code
-                  </button>
-                </div>
-                <div className="p-2 min-h-[450px] flex items-center justify-start">
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="default">Default</Badge>
-                    <Badge variant="secondary">Secondary</Badge>
-                    <Badge variant="success">Success</Badge>
-                    <Badge variant="warning">Warning</Badge>
-                    <Badge variant="destructive">Destructive</Badge>
-                  </div>
-                </div>
+      {/* Compteurs */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Compteurs
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemples</h3>
+            <p className="text-muted-foreground">
+              Badges utilisés comme compteurs pour les notifications et actions.
+            </p>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground">
+                  Notifications
+                </span>
+                <Badge variant="destructive">{notifications}</Badge>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setNotifications(notifications + 1)}
+                >
+                  +
+                </Button>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground">Likes</span>
+                <Badge variant="secondary">
+                  <Heart className="w-3 h-3 mr-1" />
+                  {likes}
+                </Badge>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setLikes(likes + 1)}
+                >
+                  +
+                </Button>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground">Panier</span>
+                <Badge>
+                  <ShoppingCart className="w-3 h-3 mr-1" />
+                  {cartItems}
+                </Badge>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setCartItems(cartItems + 1)}
+                >
+                  +
+                </Button>
               </div>
             </div>
           </div>
+          <div>
+            <CodeBlock
+              language="typescript"
+              filePath="components/BadgeCounters.tsx"
+              showPackageManager={false}
+            >
+              {`export default function BadgeExample() {
+  const [notifications, setNotifications] = useState(5);
+const [likes, setLikes] = useState(42);
+const [cartItems, setCartItems] = useState(3);
+
+<div className="space-y-4">
+  <div className="flex items-center gap-3">
+    <span className="text-sm text-muted-foreground">Notifications</span>
+    <Badge variant="destructive">{notifications}</Badge>
+    <Button 
+      variant="secondary" 
+      size="sm"
+      onClick={() => setNotifications(notifications + 1)}
+    >
+      +
+    </Button>
+  </div>
+  <div className="flex items-center gap-3">
+    <span className="text-sm text-muted-foreground">Likes</span>
+    <Badge variant="secondary">
+      <Heart className="w-3 h-3 mr-1" />
+      {likes}
+    </Badge>
+    <Button 
+      variant="secondary" 
+      size="sm"
+      onClick={() => setLikes(likes + 1)}
+    >
+      +
+    </Button>
+  </div>
+</div>
+}`}
+            </CodeBlock>
+          </div>
         </div>
+      </div>
+
+      {/* Badges supprimables */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Badges supprimables
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <p className="text-muted-foreground">
+              Badges avec bouton de suppression pour les filtres et tags.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="secondary" className="pr-1">
+                React
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-auto p-0 ml-1 hover:bg-transparent"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+              </Badge>
+              <Badge variant="secondary" className="pr-1">
+                TypeScript
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-auto p-0 ml-1 hover:bg-transparent"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+              </Badge>
+              <Badge variant="secondary" className="pr-1">
+                Frontend
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-auto p-0 ml-1 hover:bg-transparent"
+                >
+                  <X className="w-3 h-3" />
+                </Button>
+              </Badge>
+            </div>
+          </div>
+          <div>
+            <CodeBlock
+              language="typescript"
+              filePath="components/RemovableBadge.tsx"
+              showPackageManager={false}
+            >
+              {`import { X } from 'lucide-react';
+
+<div className="flex flex-wrap gap-2">
+  <Badge variant="secondary" className="pr-1">
+    React
+    <Button
+      variant="ghost"
+      size="sm"
+      className="h-auto p-0 ml-1 hover:bg-transparent"
+    >
+      <X className="w-3 h-3" />
+    </Button>
+  </Badge>
+  <Badge variant="secondary" className="pr-1">
+    TypeScript
+    <Button
+      variant="ghost"
+      size="sm"
+      className="h-auto p-0 ml-1 hover:bg-transparent"
+    >
+      <X className="w-3 h-3" />
+    </Button>
+  </Badge>
+</div>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Statuts */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Statuts</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemples</h3>
+            <p className="text-muted-foreground">
+              Badges pour afficher différents statuts d'état.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 border rounded-lg">
+                <span className="text-sm">Commande #1234</span>
+                <Badge>Livré</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 border rounded-lg">
+                <span className="text-sm">Commande #1235</span>
+                <Badge variant="secondary">En cours</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 border rounded-lg">
+                <span className="text-sm">Commande #1236</span>
+                <Badge variant="secondary">En attente</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 border rounded-lg">
+                <span className="text-sm">Commande #1237</span>
+                <Badge variant="destructive">Annulé</Badge>
+              </div>
+            </div>
+          </div>
+          <div>
+            <CodeBlock
+              language="typescript"
+              filePath="components/StatusBadges.tsx"
+              showPackageManager={false}
+            >
+              {`export default function BadgeExample() {
+  <div className="space-y-3">
+  <div className="flex items-center justify-between p-3 border rounded-lg">
+    <span className="text-sm">Commande #1234</span>
+    <Badge>Livré</Badge>
+  </div>
+  <div className="flex items-center justify-between p-3 border rounded-lg">
+    <span className="text-sm">Commande #1235</span>
+    <Badge variant="secondary">En cours</Badge>
+  </div>
+  <div className="flex items-center justify-between p-3 border rounded-lg">
+    <span className="text-sm">Commande #1236</span>
+    <Badge variant="secondary">En attente</Badge>
+  </div>
+  <div className="flex items-center justify-between p-3 border rounded-lg">
+    <span className="text-sm">Commande #1237</span>
+    <Badge variant="destructive">Annulé</Badge>
+  </div>
+</div>
+}`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* API Reference */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Prop
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Type
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Défaut
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  variant
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'default' | 'secondary' | 'outline' | 'destructive'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'default'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Style visuel du badge
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  className
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  string
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Classes CSS supplémentaires
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez le variant{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              default
+            </code>{' '}
+            pour les statuts positifs
+          </li>
+          <li>
+            • Le variant{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              destructive
+            </code>{' '}
+            pour les erreurs et alertes
+          </li>
+          <li>
+            • Ajoutez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              icônes
+            </code>{' '}
+            pour améliorer la compréhension
+          </li>
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              compteurs
+            </code>{' '}
+            pour les notifications
+          </li>
+          <li>
+            • Rendez les badges{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              supprimables
+            </code>{' '}
+            pour les filtres
+          </li>
+        </ul>
       </div>
     </div>
   );

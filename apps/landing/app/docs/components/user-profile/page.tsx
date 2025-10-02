@@ -1,603 +1,85 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { UserProfile } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-import { User, Mail, MapPin, Globe, Building, Phone, Clock, Globe2, Bell, Shield, Eye } from 'lucide-react';
+import { CodeBlock } from '../../../components/code-block';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+// UserProfile component placeholder
+const UserProfile = () => (
+  <div className="p-4 border-2 border-dashed border-muted-foreground/25 rounded-lg text-center">
+    <p className="text-muted-foreground">
+      Composant <code className="font-mono">UserProfile</code> en cours de
+      développement
+    </p>
+  </div>
+);
+import { User } from 'lucide-react';
 
 export default function UserProfilePage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const sampleUser = {
-    id: '1',
-    name: 'Alice Martin',
-    email: 'alice.martin@example.com',
-    avatar: '/avatars/alice.jpg',
-    bio: 'Développeuse frontend passionnée par React et TypeScript. J\'aime créer des interfaces utilisateur intuitives et accessibles.',
-    location: 'Paris, France',
-    website: 'https://alice-martin.dev',
-    company: 'TechCorp',
-    role: 'Senior Frontend Developer',
-    phone: '+33 1 23 45 67 89',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public' as const,
-      showEmail: true,
-      showPhone: false,
-      showLocation: true,
-    },
-  };
-
-  const handleSave = (user: any) => {
-    console.log('Save user:', user);
-  };
-
-  const handleAvatarChange = (file: File) => {
-    console.log('Avatar changed:', file.name);
-  };
-
-  const simpleUser = {
-    id: '1',
-    name: 'Bob Dupont',
-    email: 'bob@example.com',
-    notifications: {
-      email: true,
-      push: false,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'private' as const,
-      showEmail: false,
-      showPhone: false,
-      showLocation: false,
-    },
-  };
-
-  const complexUser = {
-    id: '1',
-    name: 'Charlie Bernard',
-    email: 'charlie.bernard@company.com',
-    avatar: '/avatars/charlie.jpg',
-    bio: 'Full-stack developer with 5+ years of experience. Passionate about clean code, architecture, and team collaboration.',
-    location: 'Lyon, France',
-    website: 'https://charlie-bernard.com',
-    company: 'InnovateTech',
-    role: 'Lead Developer',
-    phone: '+33 4 56 78 90 12',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: true,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'friends' as const,
-      showEmail: true,
-      showPhone: true,
-      showLocation: true,
-    },
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">UserProfile</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <User className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">UserProfile</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de profil utilisateur avec informations personnelles,
-          notifications et paramètres de confidentialité.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Composant de profil utilisateur pour afficher et gérer les
+          informations personnelles.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <UserProfile />
+            </div>
           </div>
-
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full overflow-y-auto">
-                <UserProfile
-                  user={sampleUser}
-                  onSave={handleSave}
-                  onAvatarChange={handleAvatarChange}
-                />
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { UserProfile } from '@cosmic-ui/ui';
-
-export function MyUserProfile() {
-  const user = {
-    id: '1',
-    name: 'Alice Martin',
-    email: 'alice.martin@example.com',
-    avatar: '/avatars/alice.jpg',
-    bio: 'Développeuse frontend passionnée par React et TypeScript.',
-    location: 'Paris, France',
-    website: 'https://alice-martin.dev',
-    company: 'TechCorp',
-    role: 'Senior Frontend Developer',
-    phone: '+33 1 23 45 67 89',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: true,
-    },
-  };
-
-  const handleSave = (user) => {
-    console.log('Save user:', user);
-  };
-
-  const handleAvatarChange = (file) => {
-    console.log('Avatar changed:', file.name);
-  };
-
-  return (
-    <UserProfile
-      user={user}
-      onSave={handleSave}
-      onAvatarChange={handleAvatarChange}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { UserProfile } from '@cosmic-ui/ui';
-
-export function MyUserProfile() {
-  const user = {
-    id: '1',
-    name: 'Alice Martin',
-    email: 'alice.martin@example.com',
-    avatar: '/avatars/alice.jpg',
-    bio: 'Développeuse frontend passionnée par React et TypeScript.',
-    location: 'Paris, France',
-    website: 'https://alice-martin.dev',
-    company: 'TechCorp',
-    role: 'Senior Frontend Developer',
-    phone: '+33 1 23 45 67 89',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: true,
-    },
-  };
-
-  const handleSave = (user) => {
-    console.log('Save user:', user);
-  };
-
-  const handleAvatarChange = (file) => {
-    console.log('Avatar changed:', file.name);
-  };
-
-  return (
-    <UserProfile
-      user={user}
-      onSave={handleSave}
-      onAvatarChange={handleAvatarChange}
-    />
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant UserProfile est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
             <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
+              language="typescript"
+              filePath="components/UserProfileExample.tsx"
+              showPackageManager={false}
             >
-              {`npm install @cosmic-ui/ui`}
+              {`import { UserProfile } from 'cosmic-ui-mars';
+
+<UserProfile />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un profil utilisateur.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { UserProfile } from '@cosmic-ui/ui';
-
-const user = {
-  id: '1',
-  name: 'John Doe',
-  email: 'john@example.com',
-  notifications: {
-    email: true,
-    push: false,
-    marketing: false,
-    security: true,
-  },
-  privacy: {
-    profileVisibility: 'public',
-    showEmail: true,
-    showPhone: false,
-    showLocation: false,
-  },
-};
-
-<UserProfile
-  user={user}
-  onSave={(user) => console.log('Save:', user)}
-  onAvatarChange={(file) => console.log('Avatar:', file)}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { UserProfile } from '@cosmic-ui/ui';
-
-const user = {
-  id: '1',
-  name: 'John Doe',
-  email: 'john@example.com',
-  notifications: {
-    email: true,
-    push: false,
-    marketing: false,
-    security: true,
-  },
-  privacy: {
-    profileVisibility: 'public',
-    showEmail: true,
-    showPhone: false,
-    showLocation: false,
-  },
-};
-
-<UserProfile
-  user={user}
-  onSave={(user) => console.log('Save:', user)}
-  onAvatarChange={(file) => console.log('Avatar:', file)}
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4 overflow-y-auto">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Profil simple
-                    </h3>
-                    <div className="max-h-[150px] overflow-y-auto">
-                      <UserProfile
-                        user={simpleUser}
-                        onSave={handleSave}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Profil complet
-                    </h3>
-                    <div className="max-h-[150px] overflow-y-auto">
-                      <UserProfile
-                        user={complexUser}
-                        onSave={handleSave}
-                        onAvatarChange={handleAvatarChange}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Profil simple
-<UserProfile
-  user={{
-    id: '1',
-    name: 'John Doe',
-    email: 'john@example.com',
-    notifications: {
-      email: true,
-      push: false,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: false,
-    },
-  }}
-  onSave={handleSave}
-/>
-
-// Profil complet
-<UserProfile
-  user={{
-    id: '1',
-    name: 'Alice Martin',
-    email: 'alice@example.com',
-    avatar: '/avatars/alice.jpg',
-    bio: 'Développeuse frontend...',
-    location: 'Paris, France',
-    website: 'https://alice.dev',
-    company: 'TechCorp',
-    role: 'Senior Developer',
-    phone: '+33 1 23 45 67 89',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: true,
-    },
-  }}
-  onSave={handleSave}
-  onAvatarChange={handleAvatarChange}
-/>
-
-// Mode lecture seule
-<UserProfile
-  user={user}
-  onSave={handleSave}
-  readOnly={true}
-/>
-
-// Sans changement d'avatar
-<UserProfile
-  user={user}
-  onSave={handleSave}
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Profil simple
-<UserProfile
-  user={{
-    id: '1',
-    name: 'John Doe',
-    email: 'john@example.com',
-    notifications: {
-      email: true,
-      push: false,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: false,
-    },
-  }}
-  onSave={handleSave}
-/>
-
-// Profil complet
-<UserProfile
-  user={{
-    id: '1',
-    name: 'Alice Martin',
-    email: 'alice@example.com',
-    avatar: '/avatars/alice.jpg',
-    bio: 'Développeuse frontend...',
-    location: 'Paris, France',
-    website: 'https://alice.dev',
-    company: 'TechCorp',
-    role: 'Senior Developer',
-    phone: '+33 1 23 45 67 89',
-    timezone: 'Europe/Paris',
-    language: 'fr',
-    notifications: {
-      email: true,
-      push: true,
-      marketing: false,
-      security: true,
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showEmail: true,
-      showPhone: false,
-      showLocation: true,
-    },
-  }}
-  onSave={handleSave}
-  onAvatarChange={handleAvatarChange}
-/>
-
-// Mode lecture seule
-<UserProfile
-  user={user}
-  onSave={handleSave}
-  readOnly={true}
-/>
-
-// Sans changement d'avatar
-<UserProfile
-  user={user}
-  onSave={handleSave}
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

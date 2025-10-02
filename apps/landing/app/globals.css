@@ -57,8 +57,10 @@
   --radius: 0.5rem;
 
   /* Code */
-  --code-bg: 222.2 32% 10%; /* ~ #0b1220 */
-  --code-fg: 210 40% 98%;
+  --code-bg: 40 30% 95%; /* beige très léger pour light mode */
+  --code-fg: 222.2 47.4% 11.2%;
+  --code-border: 40 22% 85%;
+  --code-header-bg: 40 30% 92%;
 }
 
 /* Couleurs et tokens - Dark */
@@ -99,18 +101,27 @@
   --input: 217.2 32.6% 17.5%;
   --ring: 239 84% 67%;
 
-  --code-bg: 222.2 32% 10%;
+  --code-bg: 222.2 32% 10%; /* sombre pour dark mode */
   --code-fg: 210 40% 98%;
+  --code-border: 217.2 32.6% 17.5%;
+  --code-header-bg: 222.2 32% 8%;
 }
 
 /* Application globale */
 @layer base {
   * {
     @apply border-border;
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
   }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
   }
   :root {
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -128,74 +139,97 @@
 /* Utilitaires couleurs pour Tailwind */
 .bg-background {
   background-color: hsl(var(--background));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-background-opposite {
   background-color: hsl(var(--background-opposite));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-foreground {
   background-color: hsl(var(--foreground));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-card {
   background-color: hsl(var(--card));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-popover {
   background-color: hsl(var(--popover));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-primary {
   background-color: hsl(var(--primary));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-secondary {
   background-color: hsl(var(--secondary));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-muted {
   background-color: hsl(var(--muted));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-accent {
   background-color: hsl(var(--accent));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-destructive {
   background-color: hsl(var(--destructive));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-success {
   background-color: hsl(var(--success));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-warning {
   background-color: hsl(var(--warning));
+  transition: background-color 0.2s ease-in-out;
 }
 .bg-info {
   background-color: hsl(var(--info));
+  transition: background-color 0.2s ease-in-out;
 }
 
 .text-foreground {
   color: hsl(var(--foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-card-foreground {
   color: hsl(var(--card-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-popover-foreground {
   color: hsl(var(--popover-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-primary-foreground {
   color: hsl(var(--primary-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-muted-foreground {
   color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-accent-foreground {
   color: hsl(var(--accent-foreground));
+  transition: color 0.2s ease-in-out;
 }
 .text-destructive-foreground {
   color: hsl(var(--destructive-foreground));
+  transition: color 0.2s ease-in-out;
 }
 
 .border-border {
   border-color: hsl(var(--border));
+  transition: border-color 0.2s ease-in-out;
 }
 .border-input {
   border-color: hsl(var(--input));
+  transition: border-color 0.2s ease-in-out;
 }
 
 /* Composants communs */
@@ -209,12 +243,22 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* Blocs de code: look constant (sombre) dans les docs */
+/* Blocs de code: intégrés au thème */
 .bg-code {
   background-color: hsl(var(--code-bg));
+  transition: background-color 0.2s ease-in-out;
 }
 .text-code {
   color: hsl(var(--code-fg));
+  transition: color 0.2s ease-in-out;
+}
+.bg-code-header {
+  background-color: hsl(var(--code-header-bg));
+  transition: background-color 0.2s ease-in-out;
+}
+.border-code {
+  border-color: hsl(var(--code-border));
+  transition: border-color 0.2s ease-in-out;
 }
 
 /* Aide: radius utilitaire pour composants */
@@ -253,6 +297,16 @@
   /* Texte par défaut */
   --shiki-text-dark: #e1e4e8;
   --shiki-text-light: #24292e;
+}
+
+/* Transitions fluides pour la coloration syntaxique */
+[data-line] .string,
+[data-line] .keyword,
+[data-line] .function,
+[data-line] .tag,
+[data-line] span,
+[data-line] .comment {
+  transition: color 0.2s ease-in-out;
 }
 
 /* Coloration des chaînes de caractères */
@@ -309,6 +363,306 @@
   color: #8b949e !important;
 }
 
+/* Lignes mises en évidence */
+[data-line] .highlighted-line {
+  background-color: rgba(255, 235, 59, 0.2);
+  border-left: 3px solid #ffc107;
+  padding-left: 8px;
+  margin-left: -8px;
+}
+
+[data-line] .highlighted-line:is(.dark *) {
+  background-color: rgba(255, 193, 7, 0.15);
+  border-left-color: #ffc107;
+}
+
+/* Numéros de ligne */
+.line-numbers {
+  counter-reset: line-numbering;
+}
+
+.line-numbers .line::before {
+  content: counter(line-numbering);
+  counter-increment: line-numbering;
+  display: inline-block;
+  width: 2em;
+  text-align: right;
+  margin-right: 1em;
+  color: #6a737d;
+  font-size: 0.875em;
+}
+
+.line-numbers .line:is(.dark *)::before {
+  color: #8b949e;
+}
+
+/* Fond transparent pour Shiki uniquement */
+.shiki {
+  background: transparent !important;
+  overflow-x: auto;
+}
+
+.shiki pre {
+  background: transparent !important;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.shiki code {
+  background: transparent !important;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Amélioration du contraste en mode sombre */
+.dark .shiki {
+  background: transparent !important;
+  overflow-x: auto;
+}
+
+.dark .shiki pre {
+  background: transparent !important;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.dark .shiki code {
+  background: transparent !important;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Override des couleurs Shiki pour un meilleur contraste en mode sombre */
+.dark .shiki span[style*="color:#24292E"] {
+  color: #f8f9fa !important;
+}
+
+.dark .shiki span[style*="color:#D73A49"] {
+  color: #ff6b6b !important;
+}
+
+.dark .shiki span[style*="color:#032F62"] {
+  color: #74c0fc !important;
+}
+
+.dark .shiki span[style*="color:#005CC5"] {
+  color: #91c7ff !important;
+}
+
+.dark .shiki span[style*="color:#6F42C1"] {
+  color: #d0bfff !important;
+}
+
+.dark .shiki span[style*="color:#E36209"] {
+  color: #ffa94d !important;
+}
+
+.dark .shiki span[style*="color:#22863A"] {
+  color: #8ce99a !important;
+}
+
+/* Styles pour les éléments de base en mode sombre */
+.dark .shiki .line {
+  color: #f8f9fa !important;
+}
+
+.dark .shiki .keyword {
+  color: #ff6b6b !important;
+}
+
+.dark .shiki .string {
+  color: #74c0fc !important;
+}
+
+.dark .shiki .function {
+  color: #d0bfff !important;
+}
+
+.dark .shiki .tag {
+  color: #8ce99a !important;
+}
+
+.dark .shiki .comment {
+  color: #adb5bd !important;
+}
+
+/* Correction de la coloration syntaxique incorrecte - styles plus spécifiques */
+.shiki .token.string {
+  color: #0a3069 !important;
+}
+
+.dark .shiki .token.string {
+  color: #9ecbff !important;
+}
+
+.shiki .token.keyword {
+  color: #cf222e !important;
+}
+
+.dark .shiki .token.keyword {
+  color: #f97583 !important;
+}
+
+.shiki .token.function {
+  color: #8250df !important;
+}
+
+.dark .shiki .token.function {
+  color: #b392f0 !important;
+}
+
+.shiki .token.tag {
+  color: #116329 !important;
+}
+
+.dark .shiki .token.tag {
+  color: #85e89d !important;
+}
+
+.shiki .token.comment {
+  color: #6a737d !important;
+}
+
+.dark .shiki .token.comment {
+  color: #8b949e !important;
+}
+
+/* Éviter la coloration incorrecte du texte dans les balises JSX */
+.shiki .token.tag .token.punctuation {
+  color: #24292e !important;
+}
+
+.dark .shiki .token.tag .token.punctuation {
+  color: #e1e4e8 !important;
+}
+
+/* Texte normal dans les balises JSX */
+.shiki .token.tag .token.plain {
+  color: #24292e !important;
+}
+
+.dark .shiki .token.tag .token.plain {
+  color: #e1e4e8 !important;
+}
+
+/* Correction spécifique pour les blocs JSX */
+.jsx-fixed .token.tag .token.plain {
+  color: #24292e !important;
+}
+
+.dark .jsx-fixed .token.tag .token.plain {
+  color: #e1e4e8 !important;
+}
+
+/* Éviter la coloration violette incorrecte */
+.jsx-fixed .token.tag .token.plain-text {
+  color: #24292e !important;
+}
+
+.dark .jsx-fixed .token.tag .token.plain-text {
+  color: #e1e4e8 !important;
+}
+
+/* Coloration spécifique pour les composants React/JSX */
+.shiki .token.tag .token.tag-name {
+  color: #22863a !important; /* Vert pour les noms de composants */
+}
+
+.dark .shiki .token.tag .token.tag-name {
+  color: #85e89d !important;
+}
+
+/* Coloration pour les noms de composants dans les imports */
+.shiki .token.imports .token.module .token.string {
+  color: #032f62 !important; /* Bleu pour les imports */
+}
+
+.dark .shiki .token.imports .token.module .token.string {
+  color: #79b8ff !important;
+}
+
+/* Coloration pour les noms de composants dans les exports */
+.shiki .token.keyword.export + .token.class-name,
+.shiki .token.keyword.export + .token.function-name {
+  color: #6f42c1 !important; /* Violet pour les exports */
+}
+
+.dark .shiki .token.keyword.export + .token.class-name,
+.dark .shiki .token.keyword.export + .token.function-name {
+  color: #b392f0 !important;
+}
+
+/* Coloration pour les props JSX */
+.shiki .token.tag .token.attr-name {
+  color: #6f42c1 !important; /* Violet pour les attributs */
+}
+
+.dark .shiki .token.tag .token.attr-name {
+  color: #b392f0 !important;
+}
+
+/* Coloration pour les valeurs de props JSX */
+.shiki .token.tag .token.attr-value {
+  color: #032f62 !important; /* Bleu pour les valeurs */
+}
+
+.dark .shiki .token.tag .token.attr-value {
+  color: #79b8ff !important;
+}
+
+/* Coloration spécifique pour les composants avec la classe component-highlighted */
+.component-highlighted .token.tag .token.tag-name {
+  color: #22863a !important; /* Vert pour les noms de composants */
+}
+
+.dark .component-highlighted .token.tag .token.tag-name {
+  color: #85e89d !important;
+}
+
+/* Coloration pour les noms de composants dans les imports */
+.component-highlighted .token.imports .token.module .token.string {
+  color: #032f62 !important; /* Bleu pour les imports */
+}
+
+.dark .component-highlighted .token.imports .token.module .token.string {
+  color: #79b8ff !important;
+}
+
+/* Coloration pour les noms de composants dans les exports */
+.component-highlighted .token.keyword.export + .token.class-name,
+.component-highlighted .token.keyword.export + .token.function-name {
+  color: #6f42c1 !important; /* Violet pour les exports */
+}
+
+.dark .component-highlighted .token.keyword.export + .token.class-name,
+.dark .component-highlighted .token.keyword.export + .token.function-name {
+  color: #b392f0 !important;
+}
+
+/* Coloration pour les props JSX */
+.component-highlighted .token.tag .token.attr-name {
+  color: #6f42c1 !important; /* Violet pour les attributs */
+}
+
+.dark .component-highlighted .token.tag .token.attr-name {
+  color: #b392f0 !important;
+}
+
+/* Coloration pour les valeurs de props JSX */
+.component-highlighted .token.tag .token.attr-value {
+  color: #032f62 !important; /* Bleu pour les valeurs */
+}
+
+.dark .component-highlighted .token.tag .token.attr-value {
+  color: #79b8ff !important;
+}
+
 /* Animations pour l'Accordion */
 @keyframes accordion-down {
   from {
@@ -335,4 +689,3 @@
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
 }
-

@@ -1,54 +1,22 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { KpiCard } from '@cosmic-ui/ui';
-import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingCart, Activity } from 'lucide-react';
+import { CodeBlock } from '../../../components/code-block';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+// KpiCard component placeholder
+const KpiCard = ({ label, value, icon, ...props }: any) => (
+  <div className="p-4 border-2 border-dashed border-muted-foreground/25 rounded-lg text-center">
+    <p className="text-muted-foreground">
+      Composant <code className="font-mono">KpiCard</code> : {label} - {value}
+    </p>
+  </div>
+);
+import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingCart, Activity } from 'lucide-react';
 
 export default function KpiCardPage() {
   const [showCode, setShowCode] = useState(false);
   const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-8">
@@ -92,21 +60,25 @@ export default function KpiCardPage() {
           <div className="flex gap-2 mb-4">
             <button
               onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
+              className={`export default function App\docs\components\kpiCard\page.tsxExample() {
+  px-4 py-2 rounded-lg text-sm font-medium ${
                 !showCode
                   ? 'bg-cosmic-primary text-white'
                   : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
+              }
+}`}
             >
               Preview
             </button>
             <button
               onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
+              className={`export default function App\docs\components\kpiCard\page.tsxExample() {
+  px-4 py-2 rounded-lg text-sm font-medium ${
                 showCode
                   ? 'bg-cosmic-primary text-white'
                   : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
+              }
+}`}
             >
               Code
             </button>
@@ -126,20 +98,7 @@ export default function KpiCardPage() {
               </div>
             ) : (
               <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { KpiCard } from '@cosmic-ui/ui';
-import { TrendingUp } from 'lucide-react';
-
-export function MyKpiCard() {
-  return (
-    <KpiCard
-      label="Ventes totales"
-      value="12,345"
-      delta={12.5}
-      deltaDirection="up"
-      icon={<TrendingUp className="w-5 h-5 text-green-500" />}
+                <CodeBlock language="typescript" filePath="components/Example.tsx" showPackageManager={false}>}
       helperText="vs mois dernier"
     />
   );
@@ -148,7 +107,7 @@ export function MyKpiCard() {
                     )
                   }
                 >
-                  {`import { KpiCard } from '@cosmic-ui/ui';
+                  {`import { KpiCard } from 'cosmic-ui-mars';
 import { TrendingUp } from 'lucide-react';
 
 export function MyKpiCard() {
@@ -175,14 +134,10 @@ export function MyKpiCard() {
           <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
             <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Le composant KpiCard est déjà inclus dans le package
-              @cosmic-ui/ui.
+              cosmic-ui-mars.
             </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
+            <CodeBlock language="typescript" filePath="components/Example.tsx" showPackageManager={false}>
+              {`pnpm add cosmic-ui-mars`}
             </CodeBlock>
           </div>
         </div>
@@ -194,23 +149,12 @@ export function MyKpiCard() {
             <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
               Utilisez le composant pour afficher des métriques KPI.
             </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { KpiCard } from '@cosmic-ui/ui';
-
-<KpiCard
-  label="Utilisateurs actifs"
-  value="1,234"
-  delta={8.2}
-  deltaDirection="up"
-  helperText="vs semaine dernière"
-/>`,
+            <CodeBlock language="typescript" filePath="components/Example.tsx" showPackageManager={false}>`,
                   'usage'
                 )
               }
             >
-              {`import { KpiCard } from '@cosmic-ui/ui';
+              {`import { KpiCard } from 'cosmic-ui-mars';
 
 <KpiCard
   label="Utilisateurs actifs"
@@ -232,21 +176,25 @@ export function MyKpiCard() {
             <div className="flex gap-2 mb-4">
               <button
                 onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`export default function App\docs\components\kpiCard\page.tsxExample() {
+  px-4 py-2 rounded-lg text-sm font-medium ${
                   !showCodeVariants
                     ? 'bg-cosmic-primary text-white'
                     : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
+                }
+}`}
               >
                 Preview
               </button>
               <button
                 onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`export default function App\docs\components\kpiCard\page.tsxExample() {
+  px-4 py-2 rounded-lg text-sm font-medium ${
                   showCodeVariants
                     ? 'bg-cosmic-primary text-white'
                     : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
+                }
+}`}
               >
                 Code
               </button>
@@ -295,16 +243,7 @@ export function MyKpiCard() {
                 </div>
               ) : (
                 <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Variation positive
-<KpiCard
-  label="Revenus"
-  value="€45,678"
-  delta={15.3}
-  deltaDirection="up"
-  icon={<DollarSign className="w-4 h-4 text-green-500" />}
+                  <CodeBlock language="typescript" filePath="components/Example.tsx" showPackageManager={false}>}
   helperText="vs mois dernier"
 />
 
@@ -349,7 +288,8 @@ export function MyKpiCard() {
                       )
                     }
                   >
-                    {`// Variation positive
+                    {`export default function App\docs\components\kpiCard\page.tsxExample() {
+  // Variation positive
 <KpiCard
   label="Revenus"
   value="€45,678"
@@ -395,7 +335,8 @@ export function MyKpiCard() {
   deltaDirection="up"
   icon={<Activity className="w-4 h-4 text-purple-500" />}
   helperText="vs hier"
-/>`}
+/>
+}`}
                   </CodeBlock>
                 </div>
               )}

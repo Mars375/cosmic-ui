@@ -1,46 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { NotificationsCenter } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { NotificationsCenter } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
 import { Bell, Check, X, Info, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function NotificationsCenterPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [notifications, setNotifications] = useState([
     {
       id: '1',
@@ -84,330 +51,93 @@ export default function NotificationsCenterPage() {
     },
     {
       id: '4',
-      title: 'Erreur de connexion',
-      message: 'Impossible de se connecter au serveur. Vérifiez votre connexion.',
+      title: 'Erreur système',
+      message: 'Une erreur est survenue lors de la sauvegarde',
       type: 'error' as const,
       timestamp: new Date(Date.now() - 1200000),
       read: true,
-      dismissible: true,
-    },
-    {
-      id: '5',
-      title: 'Mise à jour système',
-      message: 'Une nouvelle version de l\'application est disponible',
-      type: 'system' as const,
-      timestamp: new Date(Date.now() - 1800000),
-      read: true,
       action: {
-        label: 'Mettre à jour',
-        onClick: () => console.log('Mettre à jour'),
+        label: 'Réessayer',
+        onClick: () => console.log('Réessayer'),
       },
-      dismissible: false,
+      dismissible: true,
     },
   ]);
 
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const markAsRead = (id: string) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === id 
+          ? { ...notification, read: true }
+          : notification
+      )
+    );
   };
 
-  const handleMarkAsRead = (id: string) => {
-    setNotifications(prev => prev.map(notif => 
-      notif.id === id ? { ...notif, read: true } : notif
-    ));
+  const markAllAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, read: true }))
+    );
   };
 
-  const handleMarkAllAsRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
+  const dismissNotification = (id: string) => {
+    setNotifications(prev => 
+      prev.filter(notification => notification.id !== id)
+    );
   };
 
-  const handleDismiss = (id: string) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id));
-  };
-
-  const handleDismissAll = () => {
-    setNotifications(prev => prev.filter(notif => !notif.dismissible));
+  const dismissAll = () => {
+    setNotifications([]);
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">NotificationsCenter</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Bell className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">NotificationsCenter</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de centre de notifications avec différents types et
-          actions.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Centre de notifications pour afficher et gérer les notifications de l'application.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
-          </div>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <NotificationsCenter
-                  notifications={notifications}
-                  onMarkAsRead={handleMarkAsRead}
-                  onMarkAllAsRead={handleMarkAllAsRead}
-                  onDismiss={handleDismiss}
-                  onDismissAll={handleDismissAll}
-                  maxHeight={350}
-                  showUnreadCount={true}
-                />
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <Button onClick={() => setIsOpen(true)}>
+                  <Bell className="w-4 h-4 mr-2" />
+                  Ouvrir les notifications
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                  {notifications.filter(n => !n.read).length} notification(s) non lue(s)
+                </p>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { NotificationsCenter } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/NotificationsCenterExample.tsx" showPackageManager={false}>
+{`import { NotificationsCenter } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyNotificationsCenter() {
-  const [notifications, setNotifications] = useState([
-    {
-      id: '1',
-      title: 'Nouveau message',
-      message: 'Vous avez reçu un nouveau message de Alice Martin',
-      type: 'info',
-      timestamp: new Date(),
-      read: false,
-      avatar: '/avatars/alice.jpg',
-      action: {
-        label: 'Voir',
-        onClick: () => console.log('Voir message'),
-      },
-      dismissible: true,
-    },
-    {
-      id: '2',
-      title: 'Tâche terminée',
-      message: 'La tâche "Concevoir l\\'interface" a été marquée comme terminée',
-      type: 'success',
-      timestamp: new Date(),
-      read: false,
-      action: {
-        label: 'Voir la tâche',
-        onClick: () => console.log('Voir tâche'),
-      },
-      dismissible: true,
-    },
-    {
-      id: '3',
-      title: 'Attention requise',
-      message: 'Votre abonnement expire dans 3 jours',
-      type: 'warning',
-      timestamp: new Date(),
-      read: true,
-      action: {
-        label: 'Renouveler',
-        onClick: () => console.log('Renouveler abonnement'),
-      },
-      dismissible: true,
-    },
-  ]);
-
-  const handleMarkAsRead = (id) => {
-    setNotifications(prev => prev.map(notif => 
-      notif.id === id ? { ...notif, read: true } : notif
-    ));
-  };
-
-  const handleMarkAllAsRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
-  };
-
-  const handleDismiss = (id) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id));
-  };
-
-  const handleDismissAll = () => {
-    setNotifications(prev => prev.filter(notif => !notif.dismissible));
-  };
-
-  return (
-    <NotificationsCenter
-      notifications={notifications}
-      onMarkAsRead={handleMarkAsRead}
-      onMarkAllAsRead={handleMarkAllAsRead}
-      onDismiss={handleDismiss}
-      onDismissAll={handleDismissAll}
-      maxHeight={350}
-      showUnreadCount={true}
-    />
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { NotificationsCenter } from '@cosmic-ui/ui';
-import { useState } from 'react';
-
-export function MyNotificationsCenter() {
-  const [notifications, setNotifications] = useState([
-    {
-      id: '1',
-      title: 'Nouveau message',
-      message: 'Vous avez reçu un nouveau message de Alice Martin',
-      type: 'info',
-      timestamp: new Date(),
-      read: false,
-      avatar: '/avatars/alice.jpg',
-      action: {
-        label: 'Voir',
-        onClick: () => console.log('Voir message'),
-      },
-      dismissible: true,
-    },
-    {
-      id: '2',
-      title: 'Tâche terminée',
-      message: 'La tâche "Concevoir l\\'interface" a été marquée comme terminée',
-      type: 'success',
-      timestamp: new Date(),
-      read: false,
-      action: {
-        label: 'Voir la tâche',
-        onClick: () => console.log('Voir tâche'),
-      },
-      dismissible: true,
-    },
-    {
-      id: '3',
-      title: 'Attention requise',
-      message: 'Votre abonnement expire dans 3 jours',
-      type: 'warning',
-      timestamp: new Date(),
-      read: true,
-      action: {
-        label: 'Renouveler',
-        onClick: () => console.log('Renouveler abonnement'),
-      },
-      dismissible: true,
-    },
-  ]);
-
-  const handleMarkAsRead = (id) => {
-    setNotifications(prev => prev.map(notif => 
-      notif.id === id ? { ...notif, read: true } : notif
-    ));
-  };
-
-  const handleMarkAllAsRead = () => {
-    setNotifications(prev => prev.map(notif => ({ ...notif, read: true })));
-  };
-
-  const handleDismiss = (id) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id));
-  };
-
-  const handleDismissAll = () => {
-    setNotifications(prev => prev.filter(notif => !notif.dismissible));
-  };
-
-  return (
-    <NotificationsCenter
-      notifications={notifications}
-      onMarkAsRead={handleMarkAsRead}
-      onMarkAllAsRead={handleMarkAllAsRead}
-      onDismiss={handleDismiss}
-      onDismissAll={handleDismissAll}
-      maxHeight={350}
-      showUnreadCount={true}
-    />
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant NotificationsCenter est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un centre de notifications.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { NotificationsCenter } from '@cosmic-ui/ui';
-
-const notifications = [
+const [notifications, setNotifications] = useState([
   {
     id: '1',
     title: 'Nouveau message',
@@ -417,205 +147,215 @@ const notifications = [
     read: false,
     dismissible: true,
   },
-];
+]);
+
+const [isOpen, setIsOpen] = useState(false);
 
 <NotificationsCenter
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
   notifications={notifications}
-  onMarkAsRead={(id) => console.log('Mark as read:', id)}
-  onMarkAllAsRead={() => console.log('Mark all as read')}
-  onDismiss={(id) => console.log('Dismiss:', id)}
-  onDismissAll={() => console.log('Dismiss all')}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { NotificationsCenter } from '@cosmic-ui/ui';
-
-const notifications = [
-  {
-    id: '1',
-    title: 'Nouveau message',
-    message: 'Vous avez reçu un nouveau message',
-    type: 'info',
-    timestamp: new Date(),
-    read: false,
-    dismissible: true,
-  },
-];
-
-<NotificationsCenter
-  notifications={notifications}
-  onMarkAsRead={(id) => console.log('Mark as read:', id)}
-  onMarkAllAsRead={() => console.log('Mark all as read')}
-  onDismiss={(id) => console.log('Dismiss:', id)}
-  onDismissAll={() => console.log('Dismiss all')}
+  onMarkAsRead={(id) => {
+    setNotifications(prev => 
+      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    );
+  }}
+  onDismiss={(id) => {
+    setNotifications(prev => 
+      prev.filter(n => n.id !== id)
+    );
+  }}
 />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Centre avec filtres</h3>
+              <p className="text-muted-foreground">Centre avec filtres par type de notification.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <Button onClick={() => setIsOpen(true)}>
+                    <Bell className="w-4 h-4 mr-2" />
+                    Notifications avec filtres
+                  </Button>
+                </div>
+              </div>
             </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/FilteredNotificationsCenter.tsx" showPackageManager={false}>
+{`export default function App\docs\components\notificationsCenter\page.tsxExample() {
+  <NotificationsCenter
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  notifications={notifications}
+  onMarkAsRead={markAsRead}
+  onDismiss={dismissNotification}
+  showFilters
+  filterOptions={{
+    types: ['info', 'success', 'warning', 'error'],
+    readStatus: ['all', 'unread', 'read']
+  }}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Sans compteur
-                    </h3>
-                    <NotificationsCenter
-                      notifications={notifications.slice(0, 3)}
-                      onMarkAsRead={handleMarkAsRead}
-                      onMarkAllAsRead={handleMarkAllAsRead}
-                      onDismiss={handleDismiss}
-                      onDismissAll={handleDismissAll}
-                      maxHeight={200}
-                      showUnreadCount={false}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Notifications simples
-                    </h3>
-                    <NotificationsCenter
-                      notifications={notifications.slice(0, 2).map(notif => ({
-                        ...notif,
-                        action: undefined,
-                        avatar: undefined,
-                      }))}
-                      onMarkAsRead={handleMarkAsRead}
-                      onMarkAllAsRead={handleMarkAllAsRead}
-                      onDismiss={handleDismiss}
-                      onDismissAll={handleDismissAll}
-                      maxHeight={150}
-                      showUnreadCount={true}
-                    />
-                  </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Centre avec actions groupées</h3>
+              <p className="text-muted-foreground">Centre avec actions pour marquer tout comme lu.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <Button onClick={() => setIsOpen(true)}>
+                    <Bell className="w-4 h-4 mr-2" />
+                    Notifications avec actions
+                  </Button>
                 </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Sans compteur
-<NotificationsCenter
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/ActionableNotificationsCenter.tsx" showPackageManager={false}>
+{`export default function App\docs\components\notificationsCenter\page.tsxExample() {
+  <NotificationsCenter
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
   notifications={notifications}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-  showUnreadCount={false}
+  onMarkAsRead={markAsRead}
+  onDismiss={dismissNotification}
+  onMarkAllAsRead={markAllAsRead}
+  onDismissAll={dismissAll}
+  showBulkActions
 />
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// Notifications simples
-<NotificationsCenter
-  notifications={notifications.map(notif => ({
-    ...notif,
-    action: undefined,
-    avatar: undefined,
-  }))}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-/>
-
-// Avec actions
-<NotificationsCenter
-  notifications={notifications}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-/>
-
-// Types de notifications
-const notificationTypes = [
-  { type: 'info', title: 'Information', message: 'Message informatif' },
-  { type: 'success', title: 'Succès', message: 'Opération réussie' },
-  { type: 'warning', title: 'Attention', message: 'Attention requise' },
-  { type: 'error', title: 'Erreur', message: 'Une erreur est survenue' },
-  { type: 'system', title: 'Système', message: 'Notification système' },
-];`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Sans compteur
-<NotificationsCenter
-  notifications={notifications}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-  showUnreadCount={false}
-/>
-
-// Notifications simples
-<NotificationsCenter
-  notifications={notifications.map(notif => ({
-    ...notif,
-    action: undefined,
-    avatar: undefined,
-  }))}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-/>
-
-// Avec actions
-<NotificationsCenter
-  notifications={notifications}
-  onMarkAsRead={handleMarkAsRead}
-  onMarkAllAsRead={handleMarkAllAsRead}
-  onDismiss={handleDismiss}
-  onDismissAll={handleDismissAll}
-/>
-
-// Types de notifications
-const notificationTypes = [
-  { type: 'info', title: 'Information', message: 'Message informatif' },
-  { type: 'success', title: 'Succès', message: 'Opération réussie' },
-  { type: 'warning', title: 'Attention', message: 'Attention requise' },
-  { type: 'error', title: 'Erreur', message: 'Une erreur est survenue' },
-  { type: 'system', title: 'Système', message: 'Notification système' },
-];`}
-                  </CodeBlock>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Centre compact</h3>
+              <p className="text-muted-foreground">Centre avec style compact.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <Button onClick={() => setIsOpen(true)}>
+                    <Bell className="w-4 h-4 mr-2" />
+                    Notifications compactes
+                  </Button>
                 </div>
-              )}
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/CompactNotificationsCenter.tsx" showPackageManager={false}>
+{`export default function App\docs\components\notificationsCenter\page.tsxExample() {
+  <NotificationsCenter
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  notifications={notifications}
+  onMarkAsRead={markAsRead}
+  onDismiss={dismissNotification}
+  variant="compact"
+/>
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">isOpen</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">État d'ouverture du centre</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onClose</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">() => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback lors de la fermeture</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">notifications</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Notification[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des notifications</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onMarkAsRead</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(id: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback pour marquer comme lu</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onDismiss</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(id: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback pour supprimer</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showFilters</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher les filtres</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showBulkActions</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher les actions groupées</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">types de notification</code> appropriés</li>
+          <li>• Ajoutez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">actions</code> pour l'interaction</li>
+          <li>• Implémentez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">filtres</code> pour organiser</li>
+          <li>• Permettez la <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">suppression</code> des notifications</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
+      </div>
+
+      {/* NotificationsCenter Component */}
+      <NotificationsCenter
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        notifications={notifications}
+        onMarkAsRead={markAsRead}
+        onDismiss={dismissNotification}
+        onMarkAllAsRead={markAllAsRead}
+        onDismissAll={dismissAll}
+        showBulkActions
+      />
     </div>
   );
 }

@@ -1,1040 +1,439 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { VisuallyHidden, SkipLink } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
-import { Eye, EyeOff, SkipForward } from 'lucide-react';
-
-const CodeBlock = ({
-  children,
-  fileName,
-  language = 'bash',
-}: {
-  children: React.ReactNode;
-  fileName?: string;
-  language?: string;
-}) => {
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async () => {
-    try {
-      const textContent =
-        typeof children === 'string'
-          ? children
-          : Array.isArray(children)
-            ? children.join('')
-            : String(children);
-      await navigator.clipboard.writeText(textContent);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-    }
-  };
-
-  return (
-    <div className="relative mb-6">
-      <div className="border border-border rounded-lg overflow-hidden">
-        <div className="flex items-center gap-2 border-b px-3 py-1">
-          <div className="bg-foreground flex size-4 items-center justify-center rounded-[1px] opacity-70">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              className="fill-foreground w-4 h-4"
-            >
-              <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"></path>
-            </svg>
-          </div>
-          <span className="text-muted-foreground text-sm">{fileName}</span>
-          <button
-            onClick={copyToClipboard}
-            className="text-gray-500 hover:text-gray-700 transition-colors ml-auto"
-          >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {copied ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-        <div className="px-4 py-3.5 bg-white dark:bg-black">
-          <pre className="font-mono text-sm leading-relaxed">
-            <code>{children}</code>
-          </pre>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { VisuallyHidden, SkipLink } from 'cosmic-ui-mars';
+import { Button } from 'cosmic-ui-mars';
+import { Eye, EyeOff, SkipForward, Accessibility } from 'lucide-react';
 
 export default function A11yHelpersPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
+  const [showSkipLink, setShowSkipLink] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">A11y Helpers</h1>
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Accessibility className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">A11y Helpers</h1>
         </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Les composants d'accessibilité (A11y) aident à rendre votre
+          application accessible à tous les utilisateurs, y compris ceux qui
+          utilisent des technologies d'assistance.
+        </p>
+      </div>
 
-        {/* Summary */}
-        <div className="mb-8">
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
-            Des composants utilitaires pour améliorer l'accessibilité de vos
-            applications web et rendre votre interface utilisable par tous.
-          </p>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
 
-          {/* What is A11y? */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold text-blue-900 dark:text-blue-100 mb-3">
-              Qu'est-ce que l'accessibilité (A11y) ?
-            </h2>
-            <p className="text-blue-800 dark:text-blue-200 mb-4">
-              L'accessibilité web garantit que votre site peut être utilisé par{' '}
-              <strong>tous les utilisateurs</strong>, y compris ceux qui
-              utilisent des technologies d'assistance comme les lecteurs
-              d'écran, la navigation au clavier, ou des outils de zoom.
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">
+              VisuallyHidden
+            </h3>
+            <p className="text-muted-foreground">
+              Masque visuellement le contenu tout en le gardant accessible aux
+              lecteurs d'écran.
             </p>
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div>
-                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
-                  Qui en bénéficie ?
-                </h3>
-                <ul className="space-y-1 text-blue-800 dark:text-blue-200">
-                  <li>• Utilisateurs malvoyants ou aveugles</li>
-                  <li>• Personnes avec des troubles moteurs</li>
-                  <li>• Utilisateurs de lecteurs d'écran</li>
-                  <li>• Navigation au clavier uniquement</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-medium text-blue-900 dark:text-blue-100 mb-2">
-                  Pourquoi c'est important ?
-                </h3>
-                <ul className="space-y-1 text-blue-800 dark:text-blue-200">
-                  <li>• Conformité légale (RGAA, WCAG)</li>
-                  <li>• Meilleure expérience utilisateur</li>
-                  <li>• SEO amélioré</li>
-                  <li>• Plus large audience</li>
-                </ul>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <VisuallyHidden>
+                  Ce texte est masqué visuellement mais accessible aux lecteurs
+                  d'écran
+                </VisuallyHidden>
+                <p className="text-sm text-muted-foreground">
+                  ℹ️ Le texte ci-dessus est masqué visuellement mais présent
+                  dans le DOM pour les technologies d'assistance.
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const hiddenText = document.querySelector(
+                      '[data-visually-hidden]'
+                    );
+                    if (hiddenText) {
+                      alert(
+                        'Texte masqué trouvé : "' + hiddenText.textContent + '"'
+                      );
+                    }
+                  }}
+                >
+                  <Eye className="w-4 h-4 mr-2" />
+                  Révéler le texte masqué
+                </Button>
               </div>
             </div>
           </div>
-
-          {/* How to use these components */}
-          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-green-900 dark:text-green-100 mb-3">
-              Comment utiliser ces composants ?
-            </h2>
-            <div className="space-y-4 text-green-800 dark:text-green-200">
-              <div>
-                <h3 className="font-medium text-green-900 dark:text-green-100 mb-2">
-                  <span className="inline-flex items-center gap-2">
-                    <Eye className="w-4 h-4" />
-                    VisuallyHidden
-                  </span>
-                </h3>
-                <p className="text-sm">
-                  Masque visuellement du contenu tout en le gardant accessible
-                  aux lecteurs d'écran. Parfait pour les labels, descriptions,
-                  ou instructions cachées visuellement mais importantes pour
-                  l'accessibilité.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-medium text-green-900 dark:text-green-100 mb-2">
-                  <span className="inline-flex items-center gap-2">
-                    <SkipForward className="w-4 h-4" />
-                    SkipLink
-                  </span>
-                </h3>
-                <p className="text-sm">
-                  Permet aux utilisateurs de clavier de sauter directement au
-                  contenu principal, évitant de naviguer à travers tous les
-                  liens de navigation. Essentiel pour une navigation efficace.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/VisuallyHiddenExample.tsx"
+              showPackageManager={false}
             >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              Code
-            </button>
-          </div>
+              {`import { VisuallyHidden } from 'cosmic-ui-mars';
 
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">SkipLink</h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                      Appuyez sur Tab pour voir le lien de saut
-                    </p>
-                    <SkipLink href="#main">Aller au contenu principal</SkipLink>
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">VisuallyHidden</h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                      Texte caché visuellement mais accessible aux lecteurs
-                      d'écran
-                    </p>
-                    <Button>
-                      <Eye className="w-4 h-4" />
-                      <VisuallyHidden>Voir le contenu</VisuallyHidden>
-                    </Button>
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Exemple combiné
-                    </h3>
-                    <div className="space-y-2">
-                      <SkipLink href="#navigation">
-                        Aller à la navigation
-                      </SkipLink>
-                      <Button>
-                        <EyeOff className="w-4 h-4" />
-                        <VisuallyHidden>Masquer le contenu</VisuallyHidden>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock fileName="a11y-example.tsx">
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      1
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> VisuallyHidden, SkipLink{' '}
-                      <span>&#125;</span> <span className="keyword">from</span>{' '}
-                      <span className="string">'@cosmic-ui/ui'</span>;
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      2
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> Button <span>&#125;</span>{' '}
-                      <span className="keyword">from</span>{' '}
-                      <span className="string">'@cosmic-ui/ui'</span>;
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      3
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">import</span>{' '}
-                      <span>&#123;</span> Eye, EyeOff <span>&#125;</span>{' '}
-                      <span className="keyword">from</span>{' '}
-                      <span className="string">'lucide-react'</span>;
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      4
-                    </div>
-                    <div className="flex-1"></div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      5
-                    </div>
-                    <div className="flex-1">
-                      <span className="keyword">export function</span>{' '}
-                      <span className="function">MyA11yHelpers</span>(){' '}
-                      <span>&#123;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      6
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;</span>
-                      <span className="keyword">return</span> (
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      7
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">div</span> className=
-                      <span className="string">"space-y-4"</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      8
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      <span className="comment">
-                        &#123;/* SkipLink pour la navigation */&#125;
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      9
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">SkipLink</span> href=
-                      <span className="string">"#main"</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      10
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller au
-                        contenu principal
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      11
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                      <span className="tag">SkipLink</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      12
-                    </div>
-                    <div className="flex-1"></div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      13
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      <span className="comment">
-                        &#123;/* VisuallyHidden pour les lecteurs d'écran
-                        */&#125;
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      14
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      15
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">Eye</span> className=
-                      <span className="string">"w-4 h-4"</span> /
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      16
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">VisuallyHidden</span>
-                      <span>&gt;</span>Voir le contenu<span>&lt;/</span>
-                      <span className="tag">VisuallyHidden</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      17
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      18
-                    </div>
-                    <div className="flex-1"></div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      19
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      <span className="comment">
-                        &#123;/* Exemple combiné */&#125;
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      20
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
-                      <span className="tag">div</span> className=
-                      <span className="string">"space-y-2"</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      21
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">SkipLink</span> href=
-                      <span className="string">"#navigation"</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      22
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aller
-                        à la navigation
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      23
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
-                      </span>
-                      <span className="tag">SkipLink</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      24
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      25
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">EyeOff</span> className=
-                      <span className="string">"w-4 h-4"</span> /
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      26
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;
-                      </span>
-                      <span className="tag">VisuallyHidden</span>
-                      <span>&gt;</span>Masquer le contenu<span>&lt;/</span>
-                      <span className="tag">VisuallyHidden</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      27
-                    </div>
-                    <div className="flex-1">
-                      <span>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/
-                      </span>
-                      <span className="tag">Button</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      28
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                      <span className="tag">div</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      29
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/</span>
-                      <span className="tag">div</span>
-                      <span>&gt;</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      30
-                    </div>
-                    <div className="flex-1">
-                      <span>&nbsp;&nbsp;);</span>
-                    </div>
-                  </div>
-                  <div className="flex" data-line>
-                    <div className="select-none pr-4 text-right text-gray-400 w-8">
-                      31
-                    </div>
-                    <div className="flex-1">
-                      <span>&#125;</span>
-                    </div>
-                  </div>
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Les composants A11y Helpers sont déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock fileName="Terminal">
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  1
-                </div>
-                <div className="flex-1">
-                  <span className="keyword">npm</span>{' '}
-                  <span className="function">install</span>{' '}
-                  <span className="string">@cosmic-ui/ui</span>
-                </div>
-              </div>
+export default function MyComponent() {
+  return (
+    <div>
+      <h1>Titre visible</h1>
+      <VisuallyHidden>
+        Ce texte est masqué visuellement mais accessible
+      </VisuallyHidden>
+      <p>Contenu visible normal</p>
+    </div>
+  );
+}`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Utilisez ces composants pour améliorer l'accessibilité de votre
-              application.
+      {/* SkipLink */}
+      <div className="mb-12">
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">SkipLink</h3>
+            <p className="text-muted-foreground">
+              Lien pour permettre aux utilisateurs de passer directement au
+              contenu principal.
             </p>
-            <CodeBlock fileName="usage.tsx">
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  1
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <div className="relative">
+                  <SkipLink href="#main-content">
+                    Passer au contenu principal
+                  </SkipLink>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    ℹ️ Le lien ci-dessus n'est visible que lors de la navigation
+                    au clavier (Tab).
+                  </p>
                 </div>
-                <div className="flex-1">
-                  <span className="keyword">import</span> <span>&#123;</span>{' '}
-                  VisuallyHidden, SkipLink <span>&#125;</span>{' '}
-                  <span className="keyword">from</span>{' '}
-                  <span className="string">'@cosmic-ui/ui'</span>;
-                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowSkipLink(!showSkipLink)}
+                >
+                  <SkipForward className="w-4 h-4 mr-2" />
+                  {showSkipLink ? 'Masquer' : 'Afficher'} le SkipLink
+                </Button>
+                {showSkipLink && (
+                  <div className="p-3 bg-primary text-primary-foreground rounded text-sm">
+                    Voici à quoi ressemble le SkipLink quand il est visible
+                  </div>
+                )}
               </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  2
-                </div>
-                <div className="flex-1"></div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  3
-                </div>
-                <div className="flex-1">
-                  <span className="comment">
-                    // SkipLink pour la navigation
-                  </span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  4
-                </div>
-                <div className="flex-1">
-                  <span>&lt;</span>
-                  <span className="tag">SkipLink</span> href=
-                  <span className="string">"#main"</span>
-                  <span>&gt;</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  5
-                </div>
-                <div className="flex-1">
-                  <span>&nbsp;&nbsp;Aller au contenu principal</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  6
-                </div>
-                <div className="flex-1">
-                  <span>&lt;/</span>
-                  <span className="tag">SkipLink</span>
-                  <span>&gt;</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  7
-                </div>
-                <div className="flex-1"></div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  8
-                </div>
-                <div className="flex-1">
-                  <span className="comment">
-                    // VisuallyHidden pour les lecteurs d'écran
-                  </span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  9
-                </div>
-                <div className="flex-1">
-                  <span>&lt;</span>
-                  <span className="tag">Button</span>
-                  <span>&gt;</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  10
-                </div>
-                <div className="flex-1">
-                  <span>&nbsp;&nbsp;&lt;</span>
-                  <span className="tag">Icon</span> /<span>&gt;</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  11
-                </div>
-                <div className="flex-1">
-                  <span>&nbsp;&nbsp;&lt;</span>
-                  <span className="tag">VisuallyHidden</span>
-                  <span>&gt;</span>Description de l'action<span>&lt;/</span>
-                  <span className="tag">VisuallyHidden</span>
-                  <span>&gt;</span>
-                </div>
-              </div>
-              <div className="flex" data-line>
-                <div className="select-none pr-4 text-right text-gray-400 w-8">
-                  12
-                </div>
-                <div className="flex-1">
-                  <span>&lt;/</span>
-                  <span className="tag">Button</span>
-                  <span>&gt;</span>
-                </div>
-              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/SkipLinkExample.tsx"
+              showPackageManager={false}
+            >
+              {`import { SkipLink } from 'cosmic-ui-mars';
+
+export default function Layout() {
+  return (
+    <div>
+      <SkipLink href="#main-content">
+        Passer au contenu principal
+      </SkipLink>
+      
+      <nav>
+        {/* Navigation */}
+      </nav>
+      
+      <main id="main-content">
+        <h1>Contenu principal</h1>
+        <p>Le contenu principal de votre page...</p>
+      </main>
+    </div>
+  );
+}`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Real-world examples */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">
-            Exemples concrets d'utilisation
-          </h2>
-
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mb-4">
-              Cas d'usage courants
+      {/* Exemple complet */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Exemple complet
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">
+              Application accessible
             </h3>
-            <div className="grid md:grid-cols-2 gap-6 text-sm">
-              <div>
-                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">
-                  SkipLink - Navigation
-                </h4>
-                <ul className="space-y-1 text-amber-800 dark:text-amber-200">
-                  <li>• Sauter au contenu principal</li>
-                  <li>• Aller directement à la recherche</li>
-                  <li>• Accéder au menu de navigation</li>
-                  <li>• Passer au pied de page</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-medium text-amber-900 dark:text-amber-100 mb-2">
-                  VisuallyHidden - Labels
-                </h4>
-                <ul className="space-y-1 text-amber-800 dark:text-amber-200">
-                  <li>• Descriptions d'icônes</li>
-                  <li>• Instructions de formulaire</li>
-                  <li>• États de chargement</li>
-                  <li>• Messages d'erreur</li>
-                </ul>
+            <p className="text-muted-foreground">
+              Exemple d'utilisation complète des composants d'accessibilité.
+            </p>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <SkipLink href="#demo-content">Aller au contenu</SkipLink>
+
+                <nav className="flex gap-4 p-3 bg-card border rounded">
+                  <VisuallyHidden>
+                    <h2>Navigation principale</h2>
+                  </VisuallyHidden>
+                  <a href="#" className="text-primary hover:underline">
+                    Accueil
+                  </a>
+                  <a href="#" className="text-primary hover:underline">
+                    À propos
+                  </a>
+                  <a href="#" className="text-primary hover:underline">
+                    Contact
+                  </a>
+                </nav>
+
+                <main id="demo-content" className="p-3 bg-card border rounded">
+                  <h1 className="text-lg font-semibold mb-2">
+                    Contenu principal
+                  </h1>
+                  <p className="text-sm text-muted-foreground">
+                    Ce contenu est accessible via le lien "Aller au contenu".
+                  </p>
+                </main>
               </div>
             </div>
           </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/AccessibleApp.tsx"
+              showPackageManager={false}
+            >
+              {`import { VisuallyHidden, SkipLink } from 'cosmic-ui-mars';
 
-          <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-4">
-              Bonnes pratiques
+export default function AccessibleApp() {
+  return (
+    <div>
+      {/* Lien de saut pour la navigation */}
+      <SkipLink href="#main-content">
+        Aller au contenu
+      </SkipLink>
+      
+      {/* Navigation avec titre masqué pour les lecteurs d'écran */}
+      <nav>
+        <VisuallyHidden>
+          <h2>Navigation principale</h2>
+        </VisuallyHidden>
+        <ul className="flex gap-4">
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/about">À propos</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      
+      {/* Contenu principal */}
+      <main id="main-content">
+        <h1>Contenu principal</h1>
+        <p>Ce contenu est accessible via le lien de saut.</p>
+      </main>
+    </div>
+  );
+}`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* API Reference */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">
+              VisuallyHidden
             </h3>
-            <div className="space-y-3 text-sm text-purple-800 dark:text-purple-200">
-              <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">
-                  ✓
-                </span>
-                <span>
-                  Toujours ajouter un SkipLink en haut de page pour le contenu
-                  principal
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">
-                  ✓
-                </span>
-                <span>
-                  Utiliser VisuallyHidden pour décrire les icônes sans texte
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 font-bold">
-                  ✓
-                </span>
-                <span>
-                  Ajouter des descriptions pour les actions importantes
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-red-600 dark:text-red-400 font-bold">
-                  ✗
-                </span>
-                <span>Ne pas masquer du contenu important visuellement</span>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-border rounded-lg">
+                <thead>
+                  <tr className="bg-muted/50">
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Prop
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Type
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Défaut
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-border px-4 py-3 font-mono text-sm">
+                      children
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      React.ReactNode
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      -
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      Contenu à masquer visuellement
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-border px-4 py-3 font-mono text-sm">
+                      asChild
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      boolean
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      false
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      Rend le contenu comme enfant direct
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">
+              SkipLink
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-border rounded-lg">
+                <thead>
+                  <tr className="bg-muted/50">
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Prop
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Type
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Défaut
+                    </th>
+                    <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-border px-4 py-3 font-mono text-sm">
+                      href
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      string
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      -
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      ID de l'élément cible (ex: "#main-content")
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-border px-4 py-3 font-mono text-sm">
+                      children
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      React.ReactNode
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      -
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      Texte du lien
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="border border-border px-4 py-3 font-mono text-sm">
+                      className
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      string
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      -
+                    </td>
+                    <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                      Classes CSS supplémentaires
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes et exemples</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      SkipLink personnalisé
-                    </h3>
-                    <SkipLink href="#footer">Aller au pied de page</SkipLink>
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      VisuallyHidden avec texte
-                    </h3>
-                    <Button>
-                      <SkipForward className="w-4 h-4" />
-                      <VisuallyHidden>
-                        Passer à la section suivante
-                      </VisuallyHidden>
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock fileName="variants.tsx">
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        1
-                      </div>
-                      <div className="flex-1">
-                        <span className="keyword">import</span>{' '}
-                        <span>&#123;</span> VisuallyHidden, SkipLink{' '}
-                        <span>&#125;</span>{' '}
-                        <span className="keyword">from</span>{' '}
-                        <span className="string">'@cosmic-ui/ui'</span>;
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        2
-                      </div>
-                      <div className="flex-1">
-                        <span className="keyword">import</span>{' '}
-                        <span>&#123;</span> Button <span>&#125;</span>{' '}
-                        <span className="keyword">from</span>{' '}
-                        <span className="string">'@cosmic-ui/ui'</span>;
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        3
-                      </div>
-                      <div className="flex-1">
-                        <span className="keyword">import</span>{' '}
-                        <span>&#123;</span> SkipForward <span>&#125;</span>{' '}
-                        <span className="keyword">from</span>{' '}
-                        <span className="string">'lucide-react'</span>;
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        4
-                      </div>
-                      <div className="flex-1"></div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        5
-                      </div>
-                      <div className="flex-1">
-                        <span className="comment">
-                          // SkipLink personnalisé
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        6
-                      </div>
-                      <div className="flex-1">
-                        <span>&lt;</span>
-                        <span className="tag">SkipLink</span> href=
-                        <span className="string">"#footer"</span>
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        7
-                      </div>
-                      <div className="flex-1">
-                        <span>&nbsp;&nbsp;Aller au pied de page</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        8
-                      </div>
-                      <div className="flex-1">
-                        <span>&lt;/</span>
-                        <span className="tag">SkipLink</span>
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        9
-                      </div>
-                      <div className="flex-1"></div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        10
-                      </div>
-                      <div className="flex-1">
-                        <span className="comment">
-                          // VisuallyHidden avec texte descriptif
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        11
-                      </div>
-                      <div className="flex-1">
-                        <span>&lt;</span>
-                        <span className="tag">Button</span>
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        12
-                      </div>
-                      <div className="flex-1">
-                        <span>&nbsp;&nbsp;&lt;</span>
-                        <span className="tag">SkipForward</span> className=
-                        <span className="string">"w-4 h-4"</span> /
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        13
-                      </div>
-                      <div className="flex-1">
-                        <span>&nbsp;&nbsp;&lt;</span>
-                        <span className="tag">VisuallyHidden</span>
-                        <span>&gt;</span>Passer à la section suivante
-                        <span>&lt;/</span>
-                        <span className="tag">VisuallyHidden</span>
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                    <div className="flex" data-line>
-                      <div className="select-none pr-4 text-right text-gray-400 w-8">
-                        14
-                      </div>
-                      <div className="flex-1">
-                        <span>&lt;/</span>
-                        <span className="tag">Button</span>
-                        <span>&gt;</span>
-                      </div>
-                    </div>
-                  </CodeBlock>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'accessibilité
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              SkipLink
+            </code>{' '}
+            en début de page pour la navigation au clavier
+          </li>
+          <li>
+            •{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              VisuallyHidden
+            </code>{' '}
+            est parfait pour les titres de sections destinés aux lecteurs
+            d'écran
+          </li>
+          <li>
+            • Testez toujours avec un{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              lecteur d'écran
+            </code>{' '}
+            (NVDA, JAWS, VoiceOver)
+          </li>
+          <li>
+            • Assurez-vous que tous les éléments interactifs sont{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              accessibles au clavier
+            </code>
+          </li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines WCAG 2.1
+            </code>{' '}
+            niveau AA minimum
+          </li>
+        </ul>
       </div>
     </div>
   );

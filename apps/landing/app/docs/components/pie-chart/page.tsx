@@ -1,53 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { PieChart } from '@cosmic-ui/ui';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { PieChart } from 'cosmic-ui-mars';
 
 export default function PieChartPage() {
   const [showCode, setShowCode] = useState(false);
   const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
   const sampleData = [
     { name: 'Ventes', value: 45, color: '#6366f1' },
     { name: 'Marketing', value: 25, color: '#22c55e' },
@@ -62,387 +22,401 @@ export default function PieChartPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
             <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
+              className="w-6 h-6 text-primary"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">PieChart</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
             >
-              <path d="M9 18l6-6-6-6" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
+              />
             </svg>
-          </button>
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">PieChart</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de graphique en secteurs pour visualiser des données
-          catégorielles avec des couleurs personnalisables.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Graphique en secteurs pour visualiser des données proportionnelles.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="h-64">
+                <PieChart
+                  data={sampleData}
+                  width={200}
+                  height={200}
+                  showLegend
+                  showTooltip
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/PieChartExample.tsx"
+              showPackageManager={false}
             >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+              {`import { PieChart } from 'cosmic-ui-mars';
+
+const data = [
+  { name: 'Ventes', value: 45, color: '#6366f1' },
+  { name: 'Marketing', value: 25, color: '#22c55e' },
+  { name: 'Support', value: 20, color: '#eab308' },
+  { name: 'Autres', value: 10, color: '#ef4444' },
+];
+
+<PieChart
+  data={data}
+  width={200}
+  height={200}
+  showLegend
+  showTooltip
+/>`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Variants
+        </h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Graphique avec légende
+              </h3>
+              <p className="text-muted-foreground">
+                Graphique avec légende personnalisée.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-64">
+                  <PieChart
+                    data={userData}
+                    width={200}
+                    height={200}
+                    showLegend
+                    legendPosition="bottom"
+                    showTooltip
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/LegendPieChart.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\pieChart\page.tsxExample() {
+  return <PieChart
+  data={data}
+  width={200}
+  height={200}
+  showLegend
+  legendPosition="bottom"
+  showTooltip
+/>;
+}`}
+              </CodeBlock>
+            </div>
           </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full flex items-center justify-center">
-                <div className="text-center">
-                  <h3 className="text-sm font-medium mb-4">
-                    Répartition des ventes
-                  </h3>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Graphique interactif
+              </h3>
+              <p className="text-muted-foreground">
+                Graphique avec interactions et animations.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-64">
                   <PieChart
                     data={sampleData}
+                    width={200}
                     height={200}
-                    innerRadius={40}
-                    appearance="dark"
+                    showLegend
+                    showTooltip
+                    interactive
+                    animation
                   />
-                  <div className="mt-4 space-y-1">
-                    {sampleData.map((item, index) => (
-                      <div key={index} className="flex items-center gap-2 text-xs">
-                        <div
-                          className="w-3 h-3 rounded-full"
-                          style={{ backgroundColor: item.color }}
-                        />
-                        <span>{item.name}: {item.value}%</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { PieChart } from '@cosmic-ui/ui';
-
-const data = [
-  { name: 'Ventes', value: 45, color: '#6366f1' },
-  { name: 'Marketing', value: 25, color: '#22c55e' },
-  { name: 'Support', value: 20, color: '#eab308' },
-  { name: 'Autres', value: 10, color: '#ef4444' },
-];
-
-export function MyPieChart() {
-  return (
-    <div className="text-center">
-      <h3 className="text-sm font-medium mb-4">
-        Répartition des ventes
-      </h3>
-      <PieChart
-        data={data}
-        height={200}
-        innerRadius={40}
-        appearance="dark"
-      />
-      <div className="mt-4 space-y-1">
-        {data.map((item, index) => (
-          <div key={index} className="flex items-center gap-2 text-xs">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: item.color }}
-            />
-            <span>{item.name}: {item.value}%</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { PieChart } from '@cosmic-ui/ui';
-
-const data = [
-  { name: 'Ventes', value: 45, color: '#6366f1' },
-  { name: 'Marketing', value: 25, color: '#22c55e' },
-  { name: 'Support', value: 20, color: '#eab308' },
-  { name: 'Autres', value: 10, color: '#ef4444' },
-];
-
-export function MyPieChart() {
-  return (
-    <div className="text-center">
-      <h3 className="text-sm font-medium mb-4">
-        Répartition des ventes
-      </h3>
-      <PieChart
-        data={data}
-        height={200}
-        innerRadius={40}
-        appearance="dark"
-      />
-      <div className="mt-4 space-y-1">
-        {data.map((item, index) => (
-          <div key={index} className="flex items-center gap-2 text-xs">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: item.color }}
-            />
-            <span>{item.name}: {item.value}%</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/InteractivePieChart.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\pieChart\page.tsxExample() {
+  return <PieChart
+  data={data}
+  width={200}
+  height={200}
+  showLegend
+  showTooltip
+  interactive
+  animation
+/>;
 }`}
-                </CodeBlock>
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Graphique personnalisé
+              </h3>
+              <p className="text-muted-foreground">
+                Graphique avec styles personnalisés.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="h-64">
+                  <PieChart
+                    data={userData}
+                    width={200}
+                    height={200}
+                    showLegend
+                    showTooltip
+                    innerRadius={40}
+                    outerRadius={80}
+                    strokeWidth={2}
+                    stroke="#fff"
+                  />
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant PieChart est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer des graphiques en secteurs.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { PieChart } from '@cosmic-ui/ui';
-
-const data = [
-  { name: 'Catégorie 1', value: 40, color: '#6366f1' },
-  { name: 'Catégorie 2', value: 30, color: '#22c55e' },
-  { name: 'Catégorie 3', value: 30, color: '#eab308' },
-];
-
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={40}
-  appearance="dark"
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { PieChart } from '@cosmic-ui/ui';
-
-const data = [
-  { name: 'Catégorie 1', value: 40, color: '#6366f1' },
-  { name: 'Catégorie 2', value: 30, color: '#22c55e' },
-  { name: 'Catégorie 3', value: 30, color: '#eab308' },
-];
-
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={40}
-  appearance="dark"
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
             </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-6">
-                  <div className="text-center">
-                    <h3 className="text-sm font-medium mb-2">
-                      Utilisateurs
-                    </h3>
-                    <PieChart
-                      data={userData}
-                      height={150}
-                      innerRadius={30}
-                      appearance="dark"
-                    />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-sm font-medium mb-2">
-                      Donut chart
-                    </h3>
-                    <PieChart
-                      data={sampleData.slice(0, 3)}
-                      height={120}
-                      innerRadius={50}
-                      appearance="dark"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Graphique simple
-<PieChart
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/CustomPieChart.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\pieChart\page.tsxExample() {
+  return <PieChart
   data={data}
+  width={200}
   height={200}
+  showLegend
+  showTooltip
   innerRadius={40}
-  appearance="dark"
-/>
-
-// Donut chart
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={60}
-  appearance="dark"
-/>
-
-// Apparence claire
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={40}
-  appearance="light"
-/>
-
-// Sans couleurs personnalisées
-const dataWithoutColors = [
-  { name: 'Catégorie 1', value: 40 },
-  { name: 'Catégorie 2', value: 30 },
-  { name: 'Catégorie 3', value: 30 },
-];
-
-<PieChart
-  data={dataWithoutColors}
-  height={200}
-  innerRadius={40}
-  appearance="dark"
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Graphique simple
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={40}
-  appearance="dark"
-/>
-
-// Donut chart
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={60}
-  appearance="dark"
-/>
-
-// Apparence claire
-<PieChart
-  data={data}
-  height={200}
-  innerRadius={40}
-  appearance="light"
-/>
-
-// Sans couleurs personnalisées
-const dataWithoutColors = [
-  { name: 'Catégorie 1', value: 40 },
-  { name: 'Catégorie 2', value: 30 },
-  { name: 'Catégorie 3', value: 30 },
-];
-
-<PieChart
-  data={dataWithoutColors}
-  height={200}
-  innerRadius={40}
-  appearance="dark"
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
+  outerRadius={80}
+  strokeWidth={2}
+  stroke="#fff"
+/>;
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Prop
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Type
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Défaut
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  data
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  PieData[]
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  []
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Données du graphique
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  width
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  300
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Largeur du graphique
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  height
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  300
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Hauteur du graphique
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  showLegend
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Afficher la légende
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  showTooltip
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Afficher les tooltips
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  interactive
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Activer les interactions
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  animation
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Activer les animations
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              couleurs contrastées
+            </code>{' '}
+            pour les secteurs
+          </li>
+          <li>
+            • Limitez le nombre de{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              secteurs
+            </code>{' '}
+            (max 6-7)
+          </li>
+          <li>
+            • Ajoutez une{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              légende
+            </code>{' '}
+            pour la lisibilité
+          </li>
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              tooltips
+            </code>{' '}
+            pour les détails
+          </li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

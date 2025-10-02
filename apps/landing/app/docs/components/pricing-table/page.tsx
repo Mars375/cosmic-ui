@@ -1,55 +1,13 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { PricingTable } from '@cosmic-ui/ui';
-import { Button } from '@cosmic-ui/ui';
+import { CodeBlock } from '../../../components/code-block';
+import { PricingTable, Button } from 'cosmic-ui-mars';
 import { Check, Star, Zap } from 'lucide-react';
 
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
-
 export default function PricingTablePage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
 
   const samplePlans = [
     {
@@ -70,29 +28,29 @@ export default function PricingTablePage() {
         label: 'Commencer',
         onClick: () => console.log('Starter plan selected'),
       },
+      popular: false,
     },
     {
-      id: 'professional',
-      name: 'Professional',
+      id: 'pro',
+      name: 'Pro',
       description: 'Idéal pour les équipes en croissance',
       priceMonthly: 29,
       priceYearly: 290,
       currency: '€',
       features: [
-        'Jusqu\'à 25 projets',
+        'Projets illimités',
         '100GB de stockage',
         'Support prioritaire',
         'API avancée',
         'Analytics avancées',
         'Intégrations tierces',
-        'Collaboration en équipe',
+        'Collaboration équipe',
       ],
-      popular: true,
-      badge: 'Populaire',
       cta: {
-        label: 'Essayer gratuitement',
-        onClick: () => console.log('Professional plan selected'),
+        label: 'Choisir Pro',
+        onClick: () => console.log('Pro plan selected'),
       },
+      popular: true,
     },
     {
       id: 'enterprise',
@@ -102,692 +60,283 @@ export default function PricingTablePage() {
       priceYearly: 990,
       currency: '€',
       features: [
-        'Projets illimités',
+        'Tout du plan Pro',
         'Stockage illimité',
-        'Support 24/7',
-        'API complète',
+        'Support dédié 24/7',
+        'API entreprise',
         'Analytics personnalisées',
-        'Intégrations personnalisées',
+        'SSO et sécurité avancée',
         'Gestion des utilisateurs',
-        'Sécurité avancée',
         'SLA garanti',
       ],
       cta: {
-        label: 'Nous contacter',
+        label: 'Contacter',
         onClick: () => console.log('Enterprise plan selected'),
       },
-    },
-  ];
-
-  const simplePlans = [
-    {
-      id: 'basic',
-      name: 'Basique',
-      priceMonthly: 5,
-      currency: '€',
-      features: ['Fonctionnalités de base', 'Support email'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      priceMonthly: 15,
-      currency: '€',
-      features: ['Toutes les fonctionnalités', 'Support prioritaire'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-  ];
-
-  const complexPlans = [
-    {
-      id: 'free',
-      name: 'Gratuit',
-      description: 'Pour commencer',
-      priceMonthly: 0,
-      currency: '€',
-      features: [
-        '1 projet',
-        '1GB de stockage',
-        'Support communautaire',
-      ],
-      cta: {
-        label: 'Commencer gratuitement',
-        onClick: () => console.log('Free plan selected'),
-      },
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      description: 'Pour les professionnels',
-      priceMonthly: 19,
-      priceYearly: 190,
-      currency: '€',
-      features: [
-        '10 projets',
-        '50GB de stockage',
-        'Support par email',
-        'API complète',
-        'Analytics',
-        'Intégrations',
-      ],
-      popular: true,
-      cta: {
-        label: 'Essayer Pro',
-        onClick: () => console.log('Pro plan selected'),
-      },
-    },
-    {
-      id: 'business',
-      name: 'Business',
-      description: 'Pour les entreprises',
-      priceMonthly: 49,
-      priceYearly: 490,
-      currency: '€',
-      features: [
-        'Projets illimités',
-        '200GB de stockage',
-        'Support prioritaire',
-        'API avancée',
-        'Analytics avancées',
-        'Intégrations personnalisées',
-        'Gestion d\'équipe',
-      ],
-      cta: {
-        label: 'Contacter les ventes',
-        onClick: () => console.log('Business plan selected'),
-      },
+      popular: false,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">PricingTable</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de tableau de prix avec plans, fonctionnalités et
-          périodes de facturation.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Star className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">PricingTable</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Table de tarification pour présenter vos plans et offres de manière claire et attractive.
+        </p>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="mb-4">
-                  <div className="flex items-center justify-center gap-2">
-                    <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400-foreground'}`}>
-                      Mensuel
-                    </span>
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Installation</h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Usage basique</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <div className="flex justify-center mb-6">
+                  <div className="bg-muted rounded-lg p-1 flex">
                     <button
-                      onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'yearly' : 'monthly')}
-                      className="relative inline-flex h-6 w-11 items-center rounded-full bg-cosmic-border transition-colors focus:outline-none focus:ring-2 focus:ring-cosmic-primary focus:ring-offset-2"
+                      onClick={() => setBillingPeriod('monthly')}
+                      className={`export default function App\docs\components\pricingTable\page.tsxExample() {
+  px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                        billingPeriod === 'monthly'
+                          ? 'bg-background text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }
+}`}
                     >
-                      <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          billingPeriod === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-                        }`}
-                      />
+                      Mensuel
                     </button>
-                    <span className={`text-sm ${billingPeriod === 'yearly' ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400-foreground'}`}>
+                    <button
+                      onClick={() => setBillingPeriod('yearly')}
+                      className={`export default function App\docs\components\pricingTable\page.tsxExample() {
+  px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                        billingPeriod === 'yearly'
+                          ? 'bg-background text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }
+}`}
+                    >
                       Annuel
-                    </span>
+                    </button>
                   </div>
                 </div>
                 <PricingTable
                   plans={samplePlans}
                   billingPeriod={billingPeriod}
-                  className="grid-cols-1"
+                  onPlanSelect={(planId) => console.log('Plan selected:', planId)}
                 />
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { PricingTable } from '@cosmic-ui/ui';
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock language="typescript" filePath="components/PricingTableExample.tsx" showPackageManager={false}>
+{`import { PricingTable } from 'cosmic-ui-mars';
 import { useState } from 'react';
 
-export function MyPricingTable() {
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+const plans = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    description: 'Parfait pour les projets personnels',
+    priceMonthly: 9,
+    priceYearly: 90,
+    currency: '€',
+    features: [
+      'Jusqu\\'à 5 projets',
+      '10GB de stockage',
+      'Support par email',
+    ],
+    cta: {
+      label: 'Commencer',
+      onClick: () => console.log('Starter selected'),
+    },
+  },
+  // ... autres plans
+];
 
-  const plans = [
-    {
-      id: 'starter',
-      name: 'Starter',
-      description: 'Parfait pour les projets personnels',
-      priceMonthly: 9,
-      priceYearly: 90,
-      currency: '€',
-      features: [
-        'Jusqu\\'à 5 projets',
-        '10GB de stockage',
-        'Support par email',
-        'API de base',
-        'Analytics de base',
-      ],
-      cta: {
-        label: 'Commencer',
-        onClick: () => console.log('Starter plan selected'),
-      },
-    },
-    {
-      id: 'professional',
-      name: 'Professional',
-      description: 'Idéal pour les équipes en croissance',
-      priceMonthly: 29,
-      priceYearly: 290,
-      currency: '€',
-      features: [
-        'Jusqu\\'à 25 projets',
-        '100GB de stockage',
-        'Support prioritaire',
-        'API avancée',
-        'Analytics avancées',
-        'Intégrations tierces',
-        'Collaboration en équipe',
-      ],
-      popular: true,
-      badge: 'Populaire',
-      cta: {
-        label: 'Essayer gratuitement',
-        onClick: () => console.log('Professional plan selected'),
-      },
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      description: 'Pour les grandes organisations',
-      priceMonthly: 99,
-      priceYearly: 990,
-      currency: '€',
-      features: [
-        'Projets illimités',
-        'Stockage illimité',
-        'Support 24/7',
-        'API complète',
-        'Analytics personnalisées',
-        'Intégrations personnalisées',
-        'Gestion des utilisateurs',
-        'Sécurité avancée',
-        'SLA garanti',
-      ],
-      cta: {
-        label: 'Nous contacter',
-        onClick: () => console.log('Enterprise plan selected'),
-      },
-    },
-  ];
+const [billingPeriod, setBillingPeriod] = useState('monthly');
 
-  return (
-    <div>
-      <div className="flex items-center justify-center gap-2 mb-4">
-        <span className={\`text-sm \${billingPeriod === 'monthly' ? 'text-foreground' : 'text-muted-foreground'}\`}>
-          Mensuel
-        </span>
-        <button
-          onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'yearly' : 'monthly')}
-          className="relative inline-flex h-6 w-11 items-center rounded-full bg-border transition-colors"
-        >
-          <span
-            className={\`inline-block h-4 w-4 transform rounded-full bg-white transition-transform \${
-              billingPeriod === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-            }\`}
-          />
-        </button>
-        <span className={\`text-sm \${billingPeriod === 'yearly' ? 'text-foreground' : 'text-muted-foreground'}\`}>
-          Annuel
-        </span>
+<PricingTable
+  plans={plans}
+  billingPeriod={billingPeriod}
+  onPlanSelect={(planId) => console.log('Plan:', planId)}
+/>`}
+            </CodeBlock>
+          </div>
+        </div>
       </div>
-      <PricingTable
-        plans={plans}
-        billingPeriod={billingPeriod}
-        className="grid-cols-1"
-      />
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { PricingTable } from '@cosmic-ui/ui';
-import { useState } from 'react';
 
-export function MyPricingTable() {
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
-
-  const plans = [
-    {
-      id: 'starter',
-      name: 'Starter',
-      description: 'Parfait pour les projets personnels',
-      priceMonthly: 9,
-      priceYearly: 90,
-      currency: '€',
-      features: [
-        'Jusqu\\'à 5 projets',
-        '10GB de stockage',
-        'Support par email',
-        'API de base',
-        'Analytics de base',
-      ],
-      cta: {
-        label: 'Commencer',
-        onClick: () => console.log('Starter plan selected'),
-      },
-    },
-    {
-      id: 'professional',
-      name: 'Professional',
-      description: 'Idéal pour les équipes en croissance',
-      priceMonthly: 29,
-      priceYearly: 290,
-      currency: '€',
-      features: [
-        'Jusqu\\'à 25 projets',
-        '100GB de stockage',
-        'Support prioritaire',
-        'API avancée',
-        'Analytics avancées',
-        'Intégrations tierces',
-        'Collaboration en équipe',
-      ],
-      popular: true,
-      badge: 'Populaire',
-      cta: {
-        label: 'Essayer gratuitement',
-        onClick: () => console.log('Professional plan selected'),
-      },
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      description: 'Pour les grandes organisations',
-      priceMonthly: 99,
-      priceYearly: 990,
-      currency: '€',
-      features: [
-        'Projets illimités',
-        'Stockage illimité',
-        'Support 24/7',
-        'API complète',
-        'Analytics personnalisées',
-        'Intégrations personnalisées',
-        'Gestion des utilisateurs',
-        'Sécurité avancée',
-        'SLA garanti',
-      ],
-      cta: {
-        label: 'Nous contacter',
-        onClick: () => console.log('Enterprise plan selected'),
-      },
-    },
-  ];
-
-  return (
-    <div>
-      <div className="flex items-center justify-center gap-2 mb-4">
-        <span className={\`text-sm \${billingPeriod === 'monthly' ? 'text-foreground' : 'text-muted-foreground'}\`}>
-          Mensuel
-        </span>
-        <button
-          onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'yearly' : 'monthly')}
-          className="relative inline-flex h-6 w-11 items-center rounded-full bg-border transition-colors"
-        >
-          <span
-            className={\`inline-block h-4 w-4 transform rounded-full bg-white transition-transform \${
-              billingPeriod === 'yearly' ? 'translate-x-6' : 'translate-x-1'
-            }\`}
-          />
-        </button>
-        <span className={\`text-sm \${billingPeriod === 'yearly' ? 'text-foreground' : 'text-muted-foreground'}\`}>
-          Annuel
-        </span>
-      </div>
-      <PricingTable
-        plans={plans}
-        billingPeriod={billingPeriod}
-        className="grid-cols-1"
-      />
-    </div>
-  );
-}`}
-                </CodeBlock>
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Variants</h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Table avec plan populaire</h3>
+              <p className="text-muted-foreground">Table avec mise en évidence du plan recommandé.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <PricingTable
+                  plans={samplePlans}
+                  billingPeriod={billingPeriod}
+                  onPlanSelect={(planId) => console.log('Plan selected:', planId)}
+                  showPopularBadge
+                />
               </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant PricingTable est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
-            >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour créer un tableau de prix.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { PricingTable } from '@cosmic-ui/ui';
-
-const plans = [
-  {
-    id: 'basic',
-    name: 'Basique',
-    priceMonthly: 9,
-    currency: '€',
-    features: ['Fonctionnalités de base', 'Support email'],
-    cta: { label: 'Choisir', onClick: () => {} },
-  },
-  {
-    id: 'pro',
-    name: 'Pro',
-    priceMonthly: 29,
-    currency: '€',
-    features: ['Toutes les fonctionnalités', 'Support prioritaire'],
-    popular: true,
-    cta: { label: 'Choisir', onClick: () => {} },
-  },
-];
-
-<PricingTable
-  plans={plans}
-  billingPeriod="monthly"
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { PricingTable } from '@cosmic-ui/ui';
-
-const plans = [
-  {
-    id: 'basic',
-    name: 'Basique',
-    priceMonthly: 9,
-    currency: '€',
-    features: ['Fonctionnalités de base', 'Support email'],
-    cta: { label: 'Choisir', onClick: () => {} },
-  },
-  {
-    id: 'pro',
-    name: 'Pro',
-    priceMonthly: 29,
-    currency: '€',
-    features: ['Toutes les fonctionnalités', 'Support prioritaire'],
-    popular: true,
-    cta: { label: 'Choisir', onClick: () => {} },
-  },
-];
-
-<PricingTable
-  plans={plans}
-  billingPeriod="monthly"
-/>`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
             </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Plans simples
-                    </h3>
-                    <PricingTable
-                      plans={simplePlans}
-                      billingPeriod="monthly"
-                      className="grid-cols-2"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Plans avec badge
-                    </h3>
-                    <PricingTable
-                      plans={complexPlans}
-                      billingPeriod="monthly"
-                      className="grid-cols-3"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Plans simples
-<PricingTable
-  plans={[
-    {
-      id: 'basic',
-      name: 'Basique',
-      priceMonthly: 5,
-      currency: '€',
-      features: ['Fonctionnalités de base', 'Support email'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      priceMonthly: 15,
-      currency: '€',
-      features: ['Toutes les fonctionnalités', 'Support prioritaire'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-  ]}
-  billingPeriod="monthly"
-  className="grid-cols-2"
-/>
-
-// Plans avec badge populaire
-<PricingTable
-  plans={[
-    {
-      id: 'free',
-      name: 'Gratuit',
-      priceMonthly: 0,
-      currency: '€',
-      features: ['1 projet', '1GB de stockage'],
-      cta: { label: 'Commencer', onClick: () => {} },
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      priceMonthly: 19,
-      currency: '€',
-      features: ['10 projets', '50GB de stockage', 'Support'],
-      popular: true,
-      badge: 'Populaire',
-      cta: { label: 'Essayer', onClick: () => {} },
-    },
-  ]}
-  billingPeriod="monthly"
-/>
-
-// Facturation annuelle
-<PricingTable
+            <div>
+              <CodeBlock language="typescript" filePath="components/PopularPricingTable.tsx" showPackageManager={false}>
+{`export default function App\docs\components\pricingTable\page.tsxExample() {
+  return <PricingTable
   plans={plans}
-  billingPeriod="yearly"
-/>
+  billingPeriod={billingPeriod}
+  onPlanSelect={handlePlanSelect}
+  showPopularBadge
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// Grille personnalisée
-<PricingTable
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Table compacte</h3>
+              <p className="text-muted-foreground">Version compacte pour espaces restreints.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <PricingTable
+                  plans={samplePlans.slice(0, 2)}
+                  billingPeriod={billingPeriod}
+                  onPlanSelect={(planId) => console.log('Plan selected:', planId)}
+                  variant="compact"
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/CompactPricingTable.tsx" showPackageManager={false}>
+{`export default function App\docs\components\pricingTable\page.tsxExample() {
+  return <PricingTable
   plans={plans}
-  billingPeriod="monthly"
-  className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Plans simples
-<PricingTable
-  plans={[
-    {
-      id: 'basic',
-      name: 'Basique',
-      priceMonthly: 5,
-      currency: '€',
-      features: ['Fonctionnalités de base', 'Support email'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-    {
-      id: 'premium',
-      name: 'Premium',
-      priceMonthly: 15,
-      currency: '€',
-      features: ['Toutes les fonctionnalités', 'Support prioritaire'],
-      cta: { label: 'Choisir', onClick: () => {} },
-    },
-  ]}
-  billingPeriod="monthly"
-  className="grid-cols-2"
-/>
+  billingPeriod={billingPeriod}
+  onPlanSelect={handlePlanSelect}
+  variant="compact"
+/>;
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// Plans avec badge populaire
-<PricingTable
-  plans={[
-    {
-      id: 'free',
-      name: 'Gratuit',
-      priceMonthly: 0,
-      currency: '€',
-      features: ['1 projet', '1GB de stockage'],
-      cta: { label: 'Commencer', onClick: () => {} },
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      priceMonthly: 19,
-      currency: '€',
-      features: ['10 projets', '50GB de stockage', 'Support'],
-      popular: true,
-      badge: 'Populaire',
-      cta: { label: 'Essayer', onClick: () => {} },
-    },
-  ]}
-  billingPeriod="monthly"
-/>
-
-// Facturation annuelle
-<PricingTable
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">Table avec remise annuelle</h3>
+              <p className="text-muted-foreground">Affichage de la remise pour la facturation annuelle.</p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <PricingTable
+                  plans={samplePlans}
+                  billingPeriod={billingPeriod}
+                  onPlanSelect={(planId) => console.log('Plan selected:', planId)}
+                  showYearlyDiscount
+                  yearlyDiscountText="Économisez 20%"
+                />
+              </div>
+            </div>
+            <div>
+              <CodeBlock language="typescript" filePath="components/DiscountPricingTable.tsx" showPackageManager={false}>
+{`export default function App\docs\components\pricingTable\page.tsxExample() {
+  return <PricingTable
   plans={plans}
-  billingPeriod="yearly"
-/>
-
-// Grille personnalisée
-<PricingTable
-  plans={plans}
-  billingPeriod="monthly"
-  className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-/>`}
-                  </CodeBlock>
-                </div>
-              )}
+  billingPeriod={billingPeriod}
+  onPlanSelect={handlePlanSelect}
+  showYearlyDiscount
+  yearlyDiscountText="Économisez 20%"
+/>;
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">Référence API</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Prop</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Type</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Défaut</th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">plans</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Plan[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">[]</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Liste des plans tarifaires</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">billingPeriod</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'monthly' | 'yearly'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'monthly'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Période de facturation</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">onPlanSelect</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">(planId: string) => void</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">-</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Callback de sélection de plan</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showPopularBadge</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher le badge populaire</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">variant</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default' | 'compact'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">'default'</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Variante d'affichage</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">showYearlyDiscount</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">boolean</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">false</td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">Afficher la remise annuelle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>• Mettez en évidence le <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">plan recommandé</code></li>
+          <li>• Utilisez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">descriptions claires</code> pour chaque plan</li>
+          <li>• Proposez des <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">remises annuelles</code> attractives</li>
+          <li>• Limitez le nombre de <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">fonctionnalités</code> affichées</li>
+          <li>• Respectez les <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">guidelines d'accessibilité</code></li>
+        </ul>
       </div>
     </div>
   );

@@ -1,438 +1,531 @@
 'use client';
 
+import * as React from 'react';
 import { useState } from 'react';
-import { Sparkline } from '@cosmic-ui/ui';
-
-const CodeBlock = ({
-  children,
-  onCopy,
-}: {
-  children: string;
-  onCopy: () => void;
-}) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-4 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import { CodeBlock } from '../../../components/code-block';
+import { Sparkline } from 'cosmic-ui-mars';
+import { TrendingUp } from 'lucide-react';
 
 export default function SparklinePage() {
-  const [showCode, setShowCode] = useState(false);
-  const [showCodeVariants, setShowCodeVariants] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
-
-  const handleCopy = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const sampleData = [10, 25, 15, 30, 20, 35, 25, 40, 30, 45, 35, 50];
-  const salesData = [120, 150, 180, 200, 170, 220, 190, 250, 210, 280, 240, 300];
+  const sampleData = [65, 70, 80, 75, 85, 90, 95, 88, 92, 100, 105, 98];
   const userData = [80, 95, 110, 125, 105, 140, 120, 160, 135, 180, 150, 200];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h1 className="text-4xl font-bold">Sparkline</h1>
-          <button className="p-2 hover:bg-cosmic-border rounded-lg">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400-foreground mb-8">
-          Un composant de graphique sparkline pour afficher des tendances
-          compactes dans des tableaux ou des cartes.
-        </p>
-
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowCode(false)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                !showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Preview
-            </button>
-            <button
-              onClick={() => setShowCode(true)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                showCode
-                  ? 'bg-cosmic-primary text-white'
-                  : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-              }`}
-            >
-              Code
-            </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <TrendingUp className="w-6 h-6 text-primary" />
           </div>
+          <h1 className="text-4xl font-bold text-foreground">Sparkline</h1>
+        </div>
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Graphique miniature pour afficher des tendances de données de manière
+          compacte.
+        </p>
+      </div>
 
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Ventes</span>
-                    <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-                      +12.5%
-                    </span>
-                  </div>
-                  <Sparkline
-                    data={sampleData}
-                    width={200}
-                    height={40}
-                    stroke="#6366f1"
-                    strokeWidth={2}
-                    showDots={true}
-                    dotRadius={2}
-                  />
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Tendance des ventes
+                  </p>
+                  <Sparkline data={sampleData} width={200} height={50} />
                 </div>
               </div>
-            ) : (
-              <div className="w-full">
-                <CodeBlock
-                  onCopy={() =>
-                    handleCopy(
-                      `import { Sparkline } from '@cosmic-ui/ui';
-
-const data = [10, 25, 15, 30, 20, 35, 25, 40, 30, 45, 35, 50];
-
-export function MySparkline() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Ventes</span>
-        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-          +12.5%
-        </span>
-      </div>
-      <Sparkline
-        data={data}
-        width={200}
-        height={40}
-        stroke="#6366f1"
-        strokeWidth={2}
-        showDots={true}
-        dotRadius={2}
-      />
-    </div>
-  );
-}`,
-                      'main'
-                    )
-                  }
-                >
-                  {`import { Sparkline } from '@cosmic-ui/ui';
-
-const data = [10, 25, 15, 30, 20, 35, 25, 40, 30, 45, 35, 50];
-
-export function MySparkline() {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">Ventes</span>
-        <span className="text-sm text-gray-600 dark:text-gray-400-foreground">
-          +12.5%
-        </span>
-      </div>
-      <Sparkline
-        data={data}
-        width={200}
-        height={40}
-        stroke="#6366f1"
-        strokeWidth={2}
-        showDots={true}
-        dotRadius={2}
-      />
-    </div>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
+            </div>
           </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Le composant Sparkline est déjà inclus dans le package
-              @cosmic-ui/ui.
-            </p>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
             <CodeBlock
-              onCopy={() =>
-                handleCopy(`npm install @cosmic-ui/ui`, 'install')
-              }
+              language="typescript"
+              filePath="components/SparklineExample.tsx"
+              showPackageManager={false}
             >
-              {`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
+              {`import { Sparkline } from 'cosmic-ui-mars';
 
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Utilisation</h2>
-          <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <p className="text-gray-600 dark:text-gray-400-foreground mb-4">
-              Utilisez le composant pour afficher des tendances compactes.
-            </p>
-            <CodeBlock
-              onCopy={() =>
-                handleCopy(
-                  `import { Sparkline } from '@cosmic-ui/ui';
+const data = [65, 70, 80, 75, 85, 90, 95, 88, 92, 100, 105, 98];
 
-const data = [10, 25, 15, 30, 20, 35, 25, 40];
-
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#6366f1"
-  strokeWidth={2}
-  showDots={true}
-/>`,
-                  'usage'
-                )
-              }
-            >
-              {`import { Sparkline } from '@cosmic-ui/ui';
-
-const data = [10, 25, 15, 30, 20, 35, 25, 40];
-
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#6366f1"
-  strokeWidth={2}
-  showDots={true}
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
 />`}
             </CodeBlock>
           </div>
         </div>
+      </div>
 
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Variantes</h2>
-
-          {/* Variants Preview */}
-          <div className="mb-8">
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setShowCodeVariants(false)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  !showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Preview
-              </button>
-              <button
-                onClick={() => setShowCodeVariants(true)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                  showCodeVariants
-                    ? 'bg-cosmic-primary text-white'
-                    : 'bg-cosmic-border text-gray-900 dark:text-white hover:bg-cosmic-border/80'
-                }`}
-              >
-                Code
-              </button>
-            </div>
-
-            <div className="bg-cosmic-card border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-[450px] w-[500px] flex justify-start">
-              {!showCodeVariants ? (
-                <div className="p-4 w-full space-y-4">
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Variants
+        </h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Sparkline colorée
+              </h3>
+              <p className="text-muted-foreground">
+                Sparkline avec couleurs personnalisées.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
                   <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Sans points
-                    </h3>
-                    <Sparkline
-                      data={salesData}
-                      width={180}
-                      height={30}
-                      stroke="#22c55e"
-                      strokeWidth={2}
-                      showDots={false}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Avec points
-                    </h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Croissance positive (vert)
+                    </p>
                     <Sparkline
                       data={userData}
-                      width={180}
-                      height={30}
-                      stroke="#eab308"
-                      strokeWidth={2}
-                      showDots={true}
-                      dotRadius={3}
+                      width={200}
+                      height={50}
+                      color="#22c55e"
+                      fillColor="#22c55e20"
                     />
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium mb-2">
-                      Ligne fine
-                    </h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Décroissance (rouge)
+                    </p>
                     <Sparkline
-                      data={sampleData}
-                      width={180}
-                      height={30}
-                      stroke="#ef4444"
-                      strokeWidth={1}
-                      showDots={false}
+                      data={[100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45]}
+                      width={200}
+                      height={50}
+                      color="#ef4444"
+                      fillColor="#ef444420"
                     />
                   </div>
                 </div>
-              ) : (
-                <div className="w-full">
-                  <CodeBlock
-                    onCopy={() =>
-                      handleCopy(
-                        `// Sans points
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#22c55e"
-  strokeWidth={2}
-  showDots={false}
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/ColoredSparkline.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\sparkline\page.tsxExample() {
+  // Sparkline positive (vert)
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  color="#22c55e"
+  fillColor="#22c55e20"
 />
 
-// Avec points
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#eab308"
-  strokeWidth={2}
-  showDots={true}
-  dotRadius={3}
+// Sparkline négative (rouge)
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  color="#ef4444"
+  fillColor="#ef444420"
 />
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-// Ligne fine
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#ef4444"
-  strokeWidth={1}
-  showDots={false}
-/>
-
-// Avec padding personnalisé
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#6366f1"
-  strokeWidth={2}
-  showDots={true}
-  paddingX={10}
-  paddingY={5}
-/>`,
-                        'variants'
-                      )
-                    }
-                  >
-                    {`// Sans points
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#22c55e"
-  strokeWidth={2}
-  showDots={false}
-/>
-
-// Avec points
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#eab308"
-  strokeWidth={2}
-  showDots={true}
-  dotRadius={3}
-/>
-
-// Ligne fine
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#ef4444"
-  strokeWidth={1}
-  showDots={false}
-/>
-
-// Avec padding personnalisé
-<Sparkline
-  data={data}
-  width={200}
-  height={40}
-  stroke="#6366f1"
-  strokeWidth={2}
-  showDots={true}
-  paddingX={10}
-  paddingY={5}
-/>`}
-                  </CodeBlock>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Sparkline avec points
+              </h3>
+              <p className="text-muted-foreground">
+                Sparkline avec points de données visibles.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Avec tous les points
+                    </p>
+                    <Sparkline
+                      data={sampleData}
+                      width={200}
+                      height={50}
+                      showDots
+                      dotSize={3}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Avec point final uniquement
+                    </p>
+                    <Sparkline
+                      data={userData}
+                      width={200}
+                      height={50}
+                      showLastDot
+                      dotSize={4}
+                    />
+                  </div>
                 </div>
-              )}
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/DottedSparkline.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\sparkline\page.tsxExample() {
+  // Avec tous les points
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  showDots
+  dotSize={3}
+/>
+
+// Avec point final uniquement
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  showLastDot
+  dotSize={4}
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Sparkline avec remplissage
+              </h3>
+              <p className="text-muted-foreground">
+                Sparkline avec zone remplie sous la courbe.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Zone remplie
+                    </p>
+                    <Sparkline
+                      data={sampleData}
+                      width={200}
+                      height={50}
+                      filled
+                      fillColor="#6366f120"
+                      color="#6366f1"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Gradient de remplissage
+                    </p>
+                    <Sparkline
+                      data={userData}
+                      width={200}
+                      height={50}
+                      filled
+                      gradient
+                      color="#8b5cf6"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/FilledSparkline.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\sparkline\page.tsxExample() {
+  // Zone remplie simple
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  filled
+  fillColor="#6366f120"
+  color="#6366f1"
+/>
+
+// Avec gradient
+<Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  filled
+  gradient
+  color="#8b5cf6"
+/>
+}`}
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Sparkline avec animation
+              </h3>
+              <p className="text-muted-foreground">
+                Sparkline avec animation d'apparition.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Animation progressive
+                    </p>
+                    <Sparkline
+                      data={sampleData}
+                      width={200}
+                      height={50}
+                      animated
+                      animationDuration={2000}
+                      showLastDot
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/AnimatedSparkline.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\sparkline\page.tsxExample() {
+  return <Sparkline 
+  data={data} 
+  width={200} 
+  height={50} 
+  animated
+  animationDuration={2000}
+  showLastDot
+/>;
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Prop
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Type
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Défaut
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  data
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number[]
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  []
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Données à afficher
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  width
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  100
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Largeur du graphique
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  height
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  30
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Hauteur du graphique
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  color
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  string
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  '#3b82f6'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Couleur de la ligne
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  fillColor
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  string
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Couleur de remplissage
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  filled
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Remplir la zone
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  showDots
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Afficher tous les points
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  showLastDot
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Afficher le dernier point
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  animated
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Activer l'animation
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              couleurs appropriées
+            </code>{' '}
+            selon la tendance
+          </li>
+          <li>
+            • Gardez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              dimensions compactes
+            </code>{' '}
+            pour l'intégration
+          </li>
+          <li>
+            • Ajoutez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              points
+            </code>{' '}
+            pour mettre en évidence
+          </li>
+          <li>
+            • Utilisez le{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              remplissage
+            </code>{' '}
+            pour plus de visibilité
+          </li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

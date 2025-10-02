@@ -1,276 +1,420 @@
 'use client';
 
-import { useState } from 'react';
-import { ProgressBar } from '@cosmic-ui/ui';
-
-const CodeBlock = ({ children, onCopy }: { children: string; onCopy: () => void }) => {
-  return (
-    <div className="relative">
-      <pre className="bg-white dark:bg-black p-2 rounded-lg overflow-x-auto text-sm">
-        <code>{children}</code>
-      </pre>
-      <button
-        onClick={onCopy}
-        className="absolute top-2 right-2 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z" fill="currentColor"/>
-        </svg>
-      </button>
-    </div>
-  );
-};
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { CodeBlock } from '../../../components/code-block';
+import { ProgressBar } from 'cosmic-ui-mars';
+import { Activity } from 'lucide-react';
 
 export default function ProgressBarPage() {
-  const [showCode, setShowCode] = useState(false);
-  const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
+  const [progress, setProgress] = useState(0);
+  const [animatedProgress, setAnimatedProgress] = useState(0);
 
-  const copyToClipboard = (text: string, id: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStates(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedStates(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress(prev => (prev >= 100 ? 0 : prev + 10));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnimatedProgress(prev => (prev >= 100 ? 0 : prev + 5));
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-          <h1 className="text-3xl font-bold">Progress Bar</h1>
-          <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+    <div className="container max-w-6xl mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Activity className="w-6 h-6 text-primary" />
+          </div>
+          <h1 className="text-4xl font-bold text-foreground">ProgressBar</h1>
         </div>
-
-        {/* Summary */}
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          Le composant Progress Bar affiche la progression d'une tâche ou d'un processus, 
-          fournissant un feedback visuel clair sur l'avancement.
+        <p className="text-xl text-muted-foreground max-w-3xl">
+          Barre de progression pour indiquer l'avancement d'une tâche ou d'un
+          processus.
         </p>
+      </div>
 
-        {/* Main Preview */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xl font-semibold">Aperçu</h2>
-            <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-              <button
-                onClick={() => setShowCode(false)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
+      {/* Installation */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Installation
+        </h2>
+        <CodeBlock filePath="package.json">pnpm add cosmic-ui-mars</CodeBlock>
+      </div>
+
+      {/* Usage basique */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Usage basique
+        </h2>
+        <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-foreground">Exemple</h3>
+            <div className="p-6 bg-muted/30 rounded-lg border">
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Progression: {progress}%
+                  </p>
+                  <ProgressBar value={progress} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium mb-4 text-foreground">Code</h3>
+            <CodeBlock
+              language="typescript"
+              filePath="components/ProgressBarExample.tsx"
+              showPackageManager={false}
+            >
+              {`import { ProgressBar } from 'cosmic-ui-mars';
+import { useState, useEffect } from 'react';
+
+const [progress, setProgress] = useState(0);
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    setProgress(prev => prev >= 100 ? 0 : prev + 10);
+  }, 1000);
+  return () => clearInterval(timer);
+}, []);
+
+<ProgressBar value={progress} />`}
+            </CodeBlock>
+          </div>
+        </div>
+      </div>
+
+      {/* Variants */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Variants
+        </h2>
+        <div className="space-y-8">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Barre avec label
+              </h3>
+              <p className="text-muted-foreground">
+                Barre de progression avec texte d'indication.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <ProgressBar
+                    value={progress}
+                    showLabel
+                    label={`export default function App\docs\components\progressBar\page.tsxExample() {
+  ${progress}% terminé
+}`}
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/LabeledProgressBar.tsx"
+                showPackageManager={false}
               >
-                Aperçu
-              </button>
-              <button
-                onClick={() => setShowCode(true)}
-                className={`px-3 py-1 rounded text-sm transition-colors ${
-                  showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                }`}
-              >
-                Code
-              </button>
+                {`<ProgressBar
+  value={progress}
+  showLabel
+  label={\`\${progress}% terminé\`}
+/>`}
+              </CodeBlock>
             </div>
           </div>
 
-          <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-            {!showCode ? (
-              <div className="p-4 w-full">
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Barre colorée
+              </h3>
+              <p className="text-muted-foreground">
+                Barre avec différentes couleurs selon la valeur.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Progression: 65%</label>
-                    <ProgressBar value={65} ariaLabel="Progression du téléchargement" />
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Succès (vert)
+                    </p>
+                    <ProgressBar value={85} variant="success" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Attention (orange)
+                    </p>
+                    <ProgressBar value={60} variant="warning" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Erreur (rouge)
+                    </p>
+                    <ProgressBar value={30} variant="error" />
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="w-full bg-white dark:bg-black p-2 rounded">
-                <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Progression: 65%</label>
-        <ProgressBar value={65} ariaLabel="Progression du téléchargement" />
-      </div>
-    </div>
-  );
-}`, 'main')}>
-{`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Progression: 65%</label>
-        <ProgressBar value={65} ariaLabel="Progression du téléchargement" />
-      </div>
-    </div>
-  );
-}`}
-                </CodeBlock>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Installation */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Installation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard('npm install @cosmic-ui/ui', 'install')}>
-{`npm install @cosmic-ui/ui`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Utilisation</h2>
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg">
-            <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  const progress = 75; // Valeur entre 0 et 100
-
-  return (
-    <ProgressBar 
-      value={progress} 
-      ariaLabel="Progression de la tâche" 
-    />
-  );
-}`, 'usage')}>
-{`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  const progress = 75; // Valeur entre 0 et 100
-
-  return (
-    <ProgressBar 
-      value={progress} 
-      ariaLabel="Progression de la tâche" 
-    />
-  );
-}`}
-            </CodeBlock>
-          </div>
-        </div>
-
-        {/* Variants */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6">Variantes</h2>
-
-          {/* Different Values */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <h3 className="text-lg font-medium">Différentes valeurs</h3>
-              <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1">
-                <button
-                  onClick={() => setShowCode(false)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    !showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Aperçu
-                </button>
-                <button
-                  onClick={() => setShowCode(true)}
-                  className={`px-3 py-1 rounded text-sm transition-colors ${
-                    showCode ? 'bg-blue-600 text-white' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white'
-                  }`}
-                >
-                  Code
-                </button>
-              </div>
             </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/ColoredProgressBar.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\progressBar\page.tsxExample() {
+  <ProgressBar value={85} variant="success" />
+<ProgressBar value={60} variant="warning" />
+<ProgressBar value={30} variant="error" />
+}`}
+              </CodeBlock>
+            </div>
+          </div>
 
-            <div className="w-[500px] min-h-[450px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 p-2 flex justify-start">
-              {!showCode ? (
-                <div className="p-4 w-full">
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Début: 25%</label>
-                      <ProgressBar value={25} />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Milieu: 50%</label>
-                      <ProgressBar value={50} />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Presque fini: 90%</label>
-                      <ProgressBar value={90} />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Terminé: 100%</label>
-                      <ProgressBar value={100} />
-                    </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Barre animée
+              </h3>
+              <p className="text-muted-foreground">
+                Barre avec animation de progression fluide.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Animation: {animatedProgress}%
+                    </p>
+                    <ProgressBar value={animatedProgress} animated showLabel />
                   </div>
                 </div>
-              ) : (
-                <div className="w-full bg-white dark:bg-black p-2 rounded">
-                  <CodeBlock onCopy={() => copyToClipboard(`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Début: 25%</label>
-        <ProgressBar value={25} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Milieu: 50%</label>
-        <ProgressBar value={50} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Presque fini: 90%</label>
-        <ProgressBar value={90} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Terminé: 100%</label>
-        <ProgressBar value={100} />
-      </div>
-    </div>
-  );
-}`, 'different-values')}>
-{`import { ProgressBar } from '@cosmic-ui/ui';
-
-export default function MyComponent() {
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium mb-2">Début: 25%</label>
-        <ProgressBar value={25} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Milieu: 50%</label>
-        <ProgressBar value={50} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Presque fini: 90%</label>
-        <ProgressBar value={90} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Terminé: 100%</label>
-        <ProgressBar value={100} />
-      </div>
-    </div>
-  );
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/AnimatedProgressBar.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\progressBar\page.tsxExample() {
+  return <ProgressBar
+  value={progress}
+  animated
+  showLabel
+/>;
 }`}
-                  </CodeBlock>
+              </CodeBlock>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium text-foreground">
+                Barre avec tailles
+              </h3>
+              <p className="text-muted-foreground">
+                Différentes tailles de barres de progression.
+              </p>
+              <div className="p-6 bg-muted/30 rounded-lg border">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">Petite</p>
+                    <ProgressBar value={progress} size="sm" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Normale
+                    </p>
+                    <ProgressBar value={progress} size="md" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground mb-2">Grande</p>
+                    <ProgressBar value={progress} size="lg" />
+                  </div>
                 </div>
-              )}
+              </div>
+            </div>
+            <div>
+              <CodeBlock
+                language="typescript"
+                filePath="components/SizedProgressBar.tsx"
+                showPackageManager={false}
+              >
+                {`export default function App\docs\components\progressBar\page.tsxExample() {
+  <ProgressBar value={progress} size="sm" />
+<ProgressBar value={progress} size="md" />
+<ProgressBar value={progress} size="lg" />
+}`}
+              </CodeBlock>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Référence API */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-foreground">
+          Référence API
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-border rounded-lg">
+            <thead>
+              <tr className="bg-muted/50">
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Prop
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Type
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Défaut
+                </th>
+                <th className="border border-border px-4 py-3 text-left font-medium text-foreground">
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  value
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  number
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  0
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Valeur de progression (0-100)
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  variant
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'default' | 'success' | 'warning' | 'error'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'default'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Variante de couleur
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  size
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'sm' | 'md' | 'lg'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  'md'
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Taille de la barre
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  showLabel
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Afficher le label
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  label
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  string
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  -
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Texte du label personnalisé
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-4 py-3 font-mono text-sm">
+                  animated
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  boolean
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  false
+                </td>
+                <td className="border border-border px-4 py-3 text-sm text-muted-foreground">
+                  Activer l'animation
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Conseils d'utilisation */}
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">
+          💡 Conseils d'utilisation
+        </h3>
+        <ul className="text-blue-700 dark:text-blue-300 space-y-1 text-sm">
+          <li>
+            • Utilisez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              couleurs appropriées
+            </code>{' '}
+            selon le contexte
+          </li>
+          <li>
+            • Ajoutez des{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              labels informatifs
+            </code>{' '}
+            quand nécessaire
+          </li>
+          <li>
+            • Activez l'
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              animation
+            </code>{' '}
+            pour les transitions fluides
+          </li>
+          <li>
+            • Choisissez la{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              taille appropriée
+            </code>{' '}
+            au contexte
+          </li>
+          <li>
+            • Respectez les{' '}
+            <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">
+              guidelines d'accessibilité
+            </code>
+          </li>
+        </ul>
       </div>
     </div>
   );

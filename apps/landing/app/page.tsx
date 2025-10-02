@@ -42,31 +42,6 @@ export default function Home() {
 
   return (
     <main className="container max-w-[1400px] px-4 mx-auto">
-      {/* Work in Progress Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/50">
-              <svg className="h-4 w-4 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-amber-800 dark:text-amber-200">
-                Work in Progress
-              </h3>
-              <p className="text-xs text-amber-700 dark:text-amber-300">
-                Cette bibliothèque est en cours de développement. Certaines fonctionnalités peuvent être incomplètes.
-              </p>
-            </div>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 text-xs text-amber-600 dark:text-amber-400">
-            <div className="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></div>
-            <span>En développement actif</span>
-          </div>
-        </div>
-      </div>
-      
       <section className="py-24 text-center">
         <h1 className="mb-6 text-5xl font-bold tracking-tight">CosmicUI</h1>
         <p className="mx-auto mb-6 max-w-3xl text-lg text-muted-foreground">
@@ -74,9 +49,7 @@ export default function Home() {
           accessible, pour construire des applications SaaS rapidement.
         </p>
         <div className="mb-4 flex items-center justify-center gap-3">
-          <Button onClick={() => router.push('/docs')}>
-            Commencer
-          </Button>
+          <Button onClick={() => router.push('/docs')}>Commencer</Button>
           <Button variant="outline" onClick={() => setActive('examples')}>
             Voir les composants
           </Button>
@@ -1154,4 +1127,3 @@ function AuthPanel() {
     </div>
   );
 }
-
