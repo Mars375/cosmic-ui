@@ -22,10 +22,13 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           id={id}
           disabled={disabled}
           aria-labelledby={label ? labelId : undefined}
-          className={twMerge('relative h-6 w-11 rounded-full outline-none', className)}
+          className={twMerge(
+            'relative h-6 w-11 rounded-full outline-none bg-input data-[state=checked]:bg-primary transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+            className,
+          )}
           {...props}
         >
-          <RadixSwitch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full shadow-sm transition-transform data-[state=checked]:translate-x-[22px]" />
+          <RadixSwitch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full bg-background shadow-sm transition-transform data-[state=checked]:translate-x-[22px]" />
         </RadixSwitch.Root>
         {label ? (
           <label id={labelId} htmlFor={id} className="cursor-pointer select-none text-sm">

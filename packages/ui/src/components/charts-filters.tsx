@@ -49,8 +49,8 @@ export interface ChartsFiltersProps {
 }
 
 export function ChartsFilters({
-  charts,
-  filters,
+  charts = [],
+  filters = [],
   onFilterChange,
   onChartUpdate,
   className,

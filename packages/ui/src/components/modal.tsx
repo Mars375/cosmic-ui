@@ -145,7 +145,7 @@ const ModalRoot = ({ open, onOpenChange, children, options }: ModalRootProps) =>
           ref={contentRef}
           tabIndex={-1}
           className={twMerge(
-            'w-full max-w-lg rounded-lg border border-cosmic-border bg-cosmic-surface text-white shadow-2xl outline-none',
+            'w-full max-w-lg rounded-lg border border-border bg-background text-foreground shadow-2xl outline-none',
           )}
         >
           {showCloseButton && (
@@ -153,7 +153,7 @@ const ModalRoot = ({ open, onOpenChange, children, options }: ModalRootProps) =>
               type="button"
               aria-label="Close"
               onClick={() => onOpenChange?.(false)}
-              className="absolute right-3 top-3 h-8 w-8 rounded-md text-white/70 hover:text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cosmic-primary"
+              className="absolute right-3 top-3 h-8 w-8 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
             >
               ✕
             </button>
@@ -184,7 +184,7 @@ ModalTitle.displayName = 'ModalTitle';
 export interface ModalDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 export const ModalDescription = React.forwardRef<HTMLParagraphElement, ModalDescriptionProps>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={twMerge('text-sm text-cosmic-muted', className)} {...props} />
+    <p ref={ref} className={twMerge('text-sm text-muted-foreground', className)} {...props} />
   ),
 );
 ModalDescription.displayName = 'ModalDescription';

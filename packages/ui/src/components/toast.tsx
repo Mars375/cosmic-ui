@@ -10,7 +10,7 @@ export interface ToastRootProps extends React.ComponentPropsWithoutRef<typeof Ra
 export const ToastRoot = ({ className, ...props }: ToastRootProps) => (
   <RadixToast.Root
     className={twMerge(
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 w-80 rounded-md border border-cosmic-border bg-cosmic-surface p-3 text-sm text-white shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 w-80 rounded-md border border-border bg-card p-3 text-sm text-card-foreground shadow-lg',
       className,
     )}
     {...props}
@@ -25,7 +25,7 @@ export const ToastTitle = ({ className, ...props }: ToastTitleProps) => (
 export interface ToastDescriptionProps
   extends React.ComponentPropsWithoutRef<typeof RadixToast.Description> {}
 export const ToastDescription = ({ className, ...props }: ToastDescriptionProps) => (
-  <RadixToast.Description className={twMerge('text-white/80', className)} {...props} />
+  <RadixToast.Description className={twMerge('text-muted-foreground', className)} {...props} />
 );
 
 export interface ToastActionProps
@@ -33,7 +33,7 @@ export interface ToastActionProps
 export const ToastAction = ({ className, ...props }: ToastActionProps) => (
   <RadixToast.Action
     className={twMerge(
-      'ml-3 inline-flex items-center rounded-md border border-cosmic-border px-2 py-1 text-xs hover:bg-white/10',
+      'ml-3 inline-flex items-center rounded-md border border-border px-2 py-1 text-xs hover:bg-accent',
       className,
     )}
     {...props}
@@ -44,7 +44,7 @@ export interface ToastCloseProps extends React.ComponentPropsWithoutRef<typeof R
 export const ToastClose = ({ className, ...props }: ToastCloseProps) => (
   <RadixToast.Close
     className={twMerge(
-      'absolute right-2 top-2 rounded p-1 text-white/70 hover:bg-white/10 hover:text-white',
+      'absolute right-2 top-2 rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground',
       className,
     )}
     aria-label="Close"
@@ -69,4 +69,3 @@ export const ToastViewport = ({
 
 // Alias pour compatibilité
 export const Toast = ToastRoot;
-

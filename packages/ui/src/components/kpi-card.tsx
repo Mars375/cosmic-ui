@@ -19,10 +19,10 @@ export const KpiCard = React.forwardRef<HTMLDivElement, KpiCardProps>(
   ) => {
     const deltaColor =
       deltaDirection === 'up'
-        ? 'text-emerald-400'
+        ? 'text-emerald-500 dark:text-emerald-400'
         : deltaDirection === 'down'
-          ? 'text-red-400'
-          : 'text-white/70';
+          ? 'text-destructive'
+          : 'text-muted-foreground';
     const deltaPrefix = deltaDirection === 'up' ? '▲' : deltaDirection === 'down' ? '▼' : '•';
     const ariaDelta =
       delta != null
@@ -63,4 +63,3 @@ export const KpiCard = React.forwardRef<HTMLDivElement, KpiCardProps>(
   },
 );
 KpiCard.displayName = 'KpiCard';
-

@@ -14,11 +14,10 @@ export const PopoverContent = ({
     <RadixPopover.Content
       sideOffset={6}
       className={twMerge(
-        'z-[60] max-w-sm rounded-md border border-cosmic-border bg-cosmic-surface p-3 text-sm text-white shadow-xl',
+        'z-[60] max-w-sm rounded-md border border-border bg-popover p-3 text-sm text-popover-foreground shadow-xl',
         className,
       )}
       {...props}
     />
   </RadixPopover.Portal>
 );
-

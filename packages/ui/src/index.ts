@@ -1,4 +1,5 @@
 export * from './components/a11y-helpers';
+export * from './components/theme-provider';
 export * from './components/accordion';
 export * from './components/ai-assistant';
 export * from './components/alert';

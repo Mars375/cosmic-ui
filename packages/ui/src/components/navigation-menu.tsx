@@ -25,7 +25,7 @@ export interface NavigationMenuProps {
 }
 
 export function NavigationMenu({
-  items,
+  items = [],
   orientation = 'horizontal',
   variant = 'default',
   size = 'md',

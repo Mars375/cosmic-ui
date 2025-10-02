@@ -34,10 +34,11 @@ export function PieChart({
     const angle = (d.value / total) * 360;
     const endAngle = startAngle + angle;
     const largeArc = angle > 180 ? 1 : 0;
-    const x1 = cx + radius * Math.cos((Math.PI * startAngle) / 180);
-    const y1 = cy + radius * Math.sin((Math.PI * startAngle) / 180);
-    const x2 = cx + radius * Math.cos((Math.PI * endAngle) / 180);
-    const y2 = cy + radius * Math.sin((Math.PI * endAngle) / 180);
+    // Arrondir les coordonnées pour éviter les problèmes d'hydratation
+    const x1 = Math.round((cx + radius * Math.cos((Math.PI * startAngle) / 180)) * 1000) / 1000;
+    const y1 = Math.round((cy + radius * Math.sin((Math.PI * startAngle) / 180)) * 1000) / 1000;
+    const x2 = Math.round((cx + radius * Math.cos((Math.PI * endAngle) / 180)) * 1000) / 1000;
+    const y2 = Math.round((cy + radius * Math.sin((Math.PI * endAngle) / 180)) * 1000) / 1000;
     const path = `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
     startAngle = endAngle;
     return { path, color: d.color || ['#6366f1', '#22c55e', '#eab308', '#ef4444'][i % 4] };

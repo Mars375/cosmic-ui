@@ -54,7 +54,7 @@ export const Tabs = ({
   );
 };
 
-const listVariants = cva('inline-flex items-center gap-1 rounded-lg bg-cosmic-surface p-1', {
+const listVariants = cva('inline-flex items-center gap-1 rounded-lg bg-muted p-1', {
   variants: {
     orientation: {
       horizontal: 'flex-row',
@@ -88,7 +88,7 @@ export const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
 TabsList.displayName = 'TabsList';
 
 const triggerVariants = cva(
-  'inline-flex select-none items-center justify-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-white/80 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-cosmic-primary data-[state=active]:bg-cosmic-primary data-[state=active]:text-cosmic-primaryForeground hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed',
+  'inline-flex select-none items-center justify-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-muted-foreground outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring data-[state=active]:bg-background data-[state=active]:text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed',
   {
     variants: {
       size: {

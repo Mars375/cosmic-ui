@@ -48,7 +48,13 @@ export interface ChatWidgetProps {
 
 export function ChatWidget({
   messages,
-  agent,
+  agent = {
+    id: 'default-agent',
+    name: 'Assistant',
+    avatar: '',
+    status: 'online' as const,
+    role: 'Support',
+  },
   onSendMessage,
   onSendFile,
   className,

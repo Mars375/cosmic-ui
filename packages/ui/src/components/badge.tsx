@@ -4,11 +4,11 @@ import { twMerge } from 'tailwind-merge';
 export type BadgeVariant = 'default' | 'secondary' | 'success' | 'warning' | 'destructive';
 
 const styles: Record<BadgeVariant, string> = {
-  default: 'bg-white/10 text-white',
-  secondary: 'bg-cosmic-secondary text-black',
-  success: 'bg-emerald-600 text-white',
-  warning: 'bg-amber-600 text-black',
-  destructive: 'bg-red-600 text-white',
+  default: 'bg-muted text-muted-foreground',
+  secondary: 'bg-secondary text-secondary-foreground',
+  success: 'bg-green-500 text-white dark:bg-green-600 dark:text-white',
+  warning: 'bg-yellow-500 text-black dark:bg-yellow-600 dark:text-black',
+  destructive: 'bg-destructive text-destructive-foreground',
 };
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -27,4 +27,3 @@ export const Badge = ({ className, variant = 'default', ...props }: BadgeProps) 
     />
   );
 };
-

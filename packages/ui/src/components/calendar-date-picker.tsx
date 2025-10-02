@@ -22,12 +22,20 @@ export interface CalendarDatePickerProps {
   value?: Date | null;
   onChange?: (date: Date) => void;
   className?: string;
+  minYear?: number;
+  maxYear?: number;
+  showYearSelector?: boolean;
+  showMonthSelector?: boolean;
 }
 
 export const CalendarDatePicker = ({
   className,
   value,
   onChange,
+  minYear = 1900,
+  maxYear = 2100,
+  showYearSelector = true,
+  showMonthSelector = true,
   ...props
 }: CalendarDatePickerProps) => {
   const today = new Date();
@@ -53,26 +61,107 @@ export const CalendarDatePicker = ({
     a.getMonth() === b.getMonth() &&
     a.getDate() === b.getDate();
 
+  const currentYear = cursor.getFullYear();
+  const currentMonth = cursor.getMonth();
+
+  const handleYearChange = (year: number) => {
+    setCursor(new Date(year, currentMonth, 1));
+  };
+
+  const handleMonthChange = (month: number) => {
+    setCursor(new Date(currentYear, month, 1));
+  };
+
+  const generateYearOptions = () => {
+    const years = [];
+    for (let year = minYear; year <= maxYear; year++) {
+      years.push(year);
+    }
+    return years;
+  };
+
   return (
     <div className={twMerge('inline-block rounded-md p-3', className)} {...props}>
-      <div className="mb-2 flex items-center justify-between">
-        <button
-          className="rounded px-2 py-1 text-xs"
-          onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1))}
-          aria-label="Previous month"
-        >
-          ‹
-        </button>
-        <div className="text-sm font-medium">
-          {monthNames[cursor.getMonth()]} {cursor.getFullYear()}
+      {/* Navigation Header */}
+      <div className="mb-4 space-y-2">
+        {/* Year and Month Navigation */}
+        <div className="flex items-center justify-between">
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
+            onClick={() => setCursor(new Date(currentYear - 1, currentMonth, 1))}
+            disabled={currentYear <= minYear}
+            aria-label="Previous year"
+          >
+            ‹‹
+          </button>
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border hover:bg-accent hover:text-accent-foreground"
+            onClick={() => setCursor(new Date(currentYear, currentMonth - 1, 1))}
+            aria-label="Previous month"
+          >
+            ‹
+          </button>
+
+          <div className="flex items-center gap-2">
+            {showMonthSelector ? (
+              <select
+                value={currentMonth}
+                onChange={(e) => handleMonthChange(parseInt(e.target.value))}
+                className="rounded-md border border-border bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {monthNames.map((month, index) => (
+                  <option key={index} value={index}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <span className="text-sm font-medium">{monthNames[currentMonth]}</span>
+            )}
+
+            {showYearSelector ? (
+              <select
+                value={currentYear}
+                onChange={(e) => handleYearChange(parseInt(e.target.value))}
+                className="rounded-md border border-border bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {generateYearOptions().map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <span className="text-sm font-medium">{currentYear}</span>
+            )}
+          </div>
+
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border hover:bg-accent hover:text-accent-foreground"
+            onClick={() => setCursor(new Date(currentYear, currentMonth + 1, 1))}
+            aria-label="Next month"
+          >
+            ›
+          </button>
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-border hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
+            onClick={() => setCursor(new Date(currentYear + 1, currentMonth, 1))}
+            disabled={currentYear >= maxYear}
+            aria-label="Next year"
+          >
+            ››
+          </button>
         </div>
-        <button
-          className="rounded px-2 py-1 text-xs"
-          onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1))}
-          aria-label="Next month"
-        >
-          ›
-        </button>
+
+        {/* Quick Navigation */}
+        <div className="flex items-center justify-center gap-1">
+          <button
+            className="rounded-md px-2 py-1 text-xs hover:bg-accent hover:text-accent-foreground"
+            onClick={() => setCursor(today)}
+          >
+            Aujourd&apos;hui
+          </button>
+        </div>
       </div>
       <table className="w-full border-collapse text-center text-sm">
         <thead className="text-muted-foreground">
@@ -92,15 +181,21 @@ export const CalendarDatePicker = ({
                 const isSelected = value && isSameDay(date, value);
                 const isToday = isSameDay(date, today);
                 return (
-                  <td key={di} className="p-1">
+                  <td key={di} className="p-0.5">
                     <button
                       type="button"
                       className={twMerge(
-                        'h-8 w-8 rounded-md border text-center text-foreground',
+                        'h-8 w-8 rounded-md text-center text-sm transition-colors',
+                        'hover:bg-accent hover:text-accent-foreground',
+                        'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+                        inMonth ? 'text-foreground' : 'text-muted-foreground opacity-50',
+                        isSelected && 'bg-primary text-primary-foreground hover:bg-primary/90',
+                        isToday && !isSelected && 'bg-accent text-accent-foreground font-semibold',
                         className,
                       )}
                       aria-pressed={!!isSelected}
                       onClick={() => onChange?.(date)}
+                      disabled={!inMonth}
                     >
                       {date.getDate()}
                     </button>

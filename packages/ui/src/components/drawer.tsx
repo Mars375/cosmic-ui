@@ -39,8 +39,8 @@ export const DrawerContent = ({
       <DrawerOverlay />
       <RadixDialog.Content
         className={twMerge(
-          'fixed z-[60] bg-cosmic-surface p-4 text-white shadow-2xl outline-none',
-          'border border-cosmic-border',
+          'fixed z-[60] bg-background p-4 text-foreground shadow-2xl outline-none',
+          'border border-border',
           sideClasses[side],
           className,
         )}
@@ -76,4 +76,3 @@ export const DrawerDescription = ({
 }: React.ComponentPropsWithoutRef<typeof RadixDialog.Description>) => (
   <RadixDialog.Description className={twMerge('text-sm text-white/80', className)} {...props} />
 );
-

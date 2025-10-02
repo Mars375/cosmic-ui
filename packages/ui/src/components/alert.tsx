@@ -7,7 +7,7 @@ const Alert = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
       ref={ref}
       role="alert"
       className={twMerge(
-        'relative w-full rounded-lg border border-cosmic-border bg-cosmic-surface p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
+        'relative w-full rounded-lg border border-border bg-card p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground',
         className,
       )}
       {...props}
@@ -36,4 +36,3 @@ const AlertDescription = React.forwardRef<
 AlertDescription.displayName = 'AlertDescription';
 
 export { Alert, AlertTitle, AlertDescription };
-

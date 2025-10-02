@@ -18,13 +18,13 @@ const RadioGroupItem = React.forwardRef<
     <RadixRadioGroup.Item
       ref={ref}
       className={twMerge(
-        'aspect-square h-4 w-4 rounded-full border border-cosmic-border text-cosmic-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-cosmic-primary',
+        'aspect-square h-4 w-4 rounded-full border border-border text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary',
         className,
       )}
       {...props}
     >
       <RadixRadioGroup.Indicator className="flex items-center justify-center">
-        <div className="h-2.5 w-2.5 rounded-full bg-cosmic-primary" />
+        <div className="h-2.5 w-2.5 rounded-full bg-primary" />
       </RadixRadioGroup.Indicator>
     </RadixRadioGroup.Item>
   );

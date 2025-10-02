@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 
-const cardVariants = cva('relative rounded-lg', {
+const cardVariants = cva('relative rounded-lg bg-card text-card-foreground border border-border', {
   variants: {
     variant: {
       default: '',
@@ -56,7 +56,7 @@ CardTitle.displayName = 'CardTitle';
 export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 export const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={twMerge('text-sm text-cosmic-muted', className)} {...props} />
+    <p ref={ref} className={twMerge('text-sm text-muted-foreground', className)} {...props} />
   ),
 );
 CardDescription.displayName = 'CardDescription';
@@ -74,4 +74,3 @@ export const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   ),
 );
 CardFooter.displayName = 'CardFooter';
-

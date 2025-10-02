@@ -3,24 +3,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cosmic: {
-          primary: '#6C5CE7',
-          primaryForeground: '#ffffff',
-          secondary: '#00D1B2',
-          muted: '#A3AED0',
-          background: {
-            DEFAULT: '#0B1020',
-            light: '#ffffff',
-          },
-          surface: {
-            DEFAULT: '#0F1629',
-            light: '#f8fafc',
-          },
-          border: {
-            DEFAULT: '#1F2A44',
-            light: '#e2e8f0',
-          },
-        },
+        // Tokens adaptatifs - utilisent les variables CSS de l'app hôte
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: 'hsl(var(--card))',
+        'card-foreground': 'hsl(var(--card-foreground))',
+        popover: 'hsl(var(--popover))',
+        'popover-foreground': 'hsl(var(--popover-foreground))',
+        primary: 'hsl(var(--primary))',
+        'primary-foreground': 'hsl(var(--primary-foreground))',
+        secondary: 'hsl(var(--secondary))',
+        'secondary-foreground': 'hsl(var(--secondary-foreground))',
+        muted: 'hsl(var(--muted))',
+        'muted-foreground': 'hsl(var(--muted-foreground))',
+        accent: 'hsl(var(--accent))',
+        'accent-foreground': 'hsl(var(--accent-foreground))',
+        destructive: 'hsl(var(--destructive))',
+        'destructive-foreground': 'hsl(var(--destructive-foreground))',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
       borderRadius: {
         lg: '14px',

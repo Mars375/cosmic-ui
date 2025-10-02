@@ -11,7 +11,7 @@ export const Divider = ({ className, orientation = 'horizontal', ...props }: Div
       <span
         role="separator"
         aria-orientation="vertical"
-        className={twMerge('mx-2 inline-block h-5 w-px bg-cosmic-border', className)}
+        className={twMerge('mx-2 inline-block h-5 w-px bg-border', className)}
         {...(props as any)}
       />
     );
@@ -20,11 +20,10 @@ export const Divider = ({ className, orientation = 'horizontal', ...props }: Div
     <hr
       role="separator"
       aria-orientation="horizontal"
-      className={twMerge('my-3 h-px w-full border-0 bg-cosmic-border', className)}
+      className={twMerge('my-3 h-px w-full border-0 bg-border', className)}
       {...props}
     />
   );
 };
 
 Divider.displayName = 'Divider';
-

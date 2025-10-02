@@ -16,11 +16,10 @@ export const Skeleton = ({ className, rounded = 'md', ...props }: SkeletonProps)
   return (
     <div
       aria-hidden
-      className={twMerge('animate-pulse bg-white/10', roundMap[rounded], className)}
+      className={twMerge('animate-pulse bg-muted', roundMap[rounded], className)}
       {...props}
     />
   );
 };
 
 Skeleton.displayName = 'Skeleton';
-

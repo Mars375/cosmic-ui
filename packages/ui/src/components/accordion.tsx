@@ -1,8 +1,24 @@
 'use client';
 import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ChevronDownIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
+
+// ChevronDown SVG inline pour éviter les problèmes de types
+const ChevronDownIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+);
 
 const Accordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
@@ -18,7 +34,7 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={twMerge('border-b border-gray-200 dark:border-gray-700 last:border-b-0', className)}
+    className={twMerge('border-b border-border last:border-b-0', className)}
     {...props}
   />
 ));

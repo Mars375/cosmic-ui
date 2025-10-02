@@ -12,7 +12,7 @@ export const DropdownContent = ({
   <RadixDropdown.Portal>
     <RadixDropdown.Content
       className={twMerge(
-        'z-[60] min-w-40 rounded-md border border-cosmic-border bg-cosmic-surface p-1 text-sm text-white shadow-xl',
+        'z-[60] min-w-40 rounded-md border border-border bg-popover p-1 text-sm text-popover-foreground shadow-xl',
         className,
       )}
       align="start"
@@ -39,10 +39,7 @@ export const DropdownSeparator = ({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<typeof RadixDropdown.Separator>) => (
-  <RadixDropdown.Separator
-    className={twMerge('my-1 h-px bg-cosmic-border', className)}
-    {...props}
-  />
+  <RadixDropdown.Separator className={twMerge('my-1 h-px bg-border', className)} {...props} />
 );
 
 export const DropdownLabel = ({
@@ -54,4 +51,3 @@ export const DropdownLabel = ({
     {...props}
   />
 );
-

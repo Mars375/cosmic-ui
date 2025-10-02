@@ -20,11 +20,11 @@ export const Slider = ({ className, label, ...props }: SliderProps) => (
       className={twMerge('relative flex w-full touch-none select-none items-center', className)}
       {...props}
     >
-      <RadixSlider.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-white/10">
-        <RadixSlider.Range className="absolute h-full bg-cosmic-primary" />
+      <RadixSlider.Track className="relative h-1 w-full grow overflow-hidden rounded-full bg-muted">
+        <RadixSlider.Range className="absolute h-full bg-primary" />
       </RadixSlider.Track>
       <RadixSlider.Thumb
-        className="block h-4 w-4 rounded-full border border-cosmic-border bg-white"
+        className="block h-4 w-4 rounded-full border border-border bg-background"
         aria-label={label ?? 'Value'}
       />
     </RadixSlider.Root>
@@ -32,4 +32,3 @@ export const Slider = ({ className, label, ...props }: SliderProps) => (
 );
 
 Slider.displayName = 'Slider';
-

@@ -15,7 +15,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
     return (
       <div
         className={twMerge(
-          'inline-flex items-start gap-3 text-white',
+          'inline-flex items-start gap-3 text-foreground',
           disabled ? 'opacity-60' : undefined,
         )}
       >
@@ -26,12 +26,12 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
           aria-labelledby={label ? labelId : undefined}
           aria-describedby={description ? descriptionId : undefined}
           className={twMerge(
-            'peer flex h-5 w-5 items-center justify-center rounded-md border border-cosmic-border bg-cosmic-surface outline-none transition-colors focus-visible:ring-2 focus-visible:ring-cosmic-primary data-[state=checked]:bg-cosmic-primary data-[state=checked]:border-cosmic-primary',
+            'peer flex h-5 w-5 items-center justify-center rounded-md border border-border bg-background outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring data-[state=checked]:bg-primary data-[state=checked]:border-primary',
             className,
           )}
           {...props}
         >
-          <RadixCheckbox.Indicator className="text-cosmic-primaryForeground">
+          <RadixCheckbox.Indicator className="text-primary-foreground">
             <svg
               width="14"
               height="14"
@@ -58,7 +58,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
               </label>
             )}
             {description && (
-              <p id={descriptionId} className="mt-0.5 text-xs text-white/70">
+              <p id={descriptionId} className="mt-0.5 text-xs text-muted-foreground">
                 {description}
               </p>
             )}
@@ -69,4 +69,3 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
   },
 );
 Checkbox.displayName = 'Checkbox';
-
